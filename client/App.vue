@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav v-if="autenticado" class="navbar navbar-expand-lg navbar-dark">
                 <div style="width:70px;">
                     <img src="./LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>

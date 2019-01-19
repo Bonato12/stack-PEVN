@@ -12,7 +12,7 @@
     "dev": "concurrently --kill-others \"npm run start\" \"npm run dev-client\""
   },
   "dependencies": {
-    "@fortawesome/vue-fontawesome": "^0.1.4",
+    "@fortawesome/vue-fontawesome": "^0.1.5",
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
     "bootstrap-vue": "^2.0.0-rc.11",
