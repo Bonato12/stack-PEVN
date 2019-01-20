@@ -7,22 +7,22 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
-                            <router-link v-if="autenticado"  tag="li" class-active="active"   to="/HomeCliente">Clientes</router-link>
+                            <router-link   tag="li" class-active="active" id="cliente"   to="/HomeCliente">Clientes</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link v-if="autenticado"  tag="li" class-active="active"   to="/HomeProducto">Productos</router-link>
+                            <router-link  tag="li" class-active="active"   to="/HomeProducto">Productos</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link v-if="autenticado"  tag="li" class-active="active"   to="/HomeVenta">Ventas</router-link>
+                            <router-link  tag="li" class-active="active"   to="/HomeVenta">Ventas</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link v-if="autenticado"  tag="li" class-active="active"   to="/HomeArreglo">Arreglos</router-link>
+                            <router-link   tag="li" class-active="active"   to="/HomeArreglo">Arreglos</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link v-if="autenticado"  tag="li" class-active="active"   to="/HomeProovedor">Proveedores</router-link>
+                            <router-link   tag="li" class-active="active"   to="/HomeProovedor">Proveedores</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link v-if="autenticado"  tag="li" class-active="active"   to="/Login" v-on:click.native="logout()" replace>Salir</router-link>
+                            <router-link   tag="li" class-active="active"   to="/Login" v-on:click.native="logout()" replace>Salir</router-link>
                         </li>
                     </ul>
                 </div>

@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="d-flex justify-content-center h-100">
-        <div class="card" id="cliente">
+        <div class="card">
             <div class="card-header">
               <h3> Nuevo Cliente </h3>
             </div>
@@ -196,4 +196,9 @@ a {
 }
 
 
+#cliente:{
+  background-color: #fec400;
+  color: black;
+  height: 193%;
+}
 </style>

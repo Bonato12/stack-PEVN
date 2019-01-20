@@ -127,9 +127,10 @@ a {
   color: #42b983;
 }
 
-#table {
-	margin: 0 auto;
-	width: 500px;
+#cliente:{
+  background-color: red;
+  color: black;
+  height: 193%;
 }
 
 .card{

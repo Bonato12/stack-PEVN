@@ -109,8 +109,7 @@ export default {
             { headers: {
                 'Content-Type': 'application/json',
             }
-          }).then(this.cliente = new Cliente()).
-            then(this.$router.push('/Home')));
+          }).then(this.$router.push('/Home')));
        }
      });
 

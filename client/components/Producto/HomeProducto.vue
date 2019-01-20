@@ -40,7 +40,7 @@
             </tbody>
     </table>
     </br>
-    <router-link to="/NuevoProducto">Nuevo Producto</router-link>
+    <router-link to="/NuevoProducto" tag="button" class="btn btn-success">Nuevo Producto</router-link>
 </div>
   </div>
 </template>
