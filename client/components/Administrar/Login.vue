@@ -1,6 +1,10 @@
 <template>
-  <div id="login">
+  <div>
     <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
       	<div class="d-flex justify-content-center h-100">
       		<div class="card">
         			<div class="card-header">
@@ -83,7 +87,7 @@ body{
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+background-image: url('https://i0.wp.com/www.carrerasaludmental.com/wp-content/uploads/2017/12/At-the-Office-Mac-Apple-Wallpapers-Creative-Planning-2982192420.jpeg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -97,8 +101,8 @@ align-content: center;
 }
 
 .card{
-height: 370px;
-margin-top: 110px;
+height: auto;
+margin-top: 30px;
 margin-bottom: auto;
 width: 400px;
 background-color: rgba(0,0,0,0.5) !important;

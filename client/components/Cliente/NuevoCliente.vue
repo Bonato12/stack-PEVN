@@ -1,50 +1,63 @@
 <template>
-  <div id="app">
+  <div>
     <div class="container">
-        <br>
-        <h2> Cliente </h2>
-        <br>
-        <div class="row h-100 justify-content-center align-items-center">
-          <div class="col-md-5">
-          <div class="card">
+      <div class="d-flex justify-content-center h-100">
+        <div class="card" id="cliente">
+            <div class="card-header">
+              <h3> Nuevo Cliente </h3>
+            </div>
             <div class="card-body">
-              <form @submit.prevent="nuevoCliente">
-                <p v-if="errors.length">
-                    <ul>
-                      <li v-for="error in errors">
-                        <div class="alert alert-danger" role="alert">
-                            {{error}}
+                  <form @submit.prevent="nuevoCliente()">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                      </li>
-                    </ul>
-                </p>
-                <div class="form-group">
-                  <input required type="number"  v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
-                </div>
-                <div class="form-group">
-                  <input required type="number"  v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
-                </div>
-                 <button class="btn btn-primary btn-block">Guardar</button>
+                        <input required type="number" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input required  type="text" v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input required  type="text" v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input required type="text" v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input required type="number" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input required type="number" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                          <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar"  class="btn float-right login_btn">
+                    </div>
               </form>
-          </div>
+
+            </div>
         </div>
       </div>
-    </div>
   </div>
   </br>
   </div>
@@ -68,7 +81,6 @@ class Cliente {
 }
 
 export default {
-  name: 'app',
   created(){
       this.getCliente();
   },
@@ -139,25 +151,26 @@ export default {
 
 <style>
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
 
+.cliente{
+height: 510px;
+margin-top: 30px;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
 }
 
-
-
+/*
 form input:focus:invalid{
        border:2px solid red;
-       /* otras propiedades */
+
 }
 
 form input:valid{
        border:2px solid green;
-       /* otras propiedades */
+
    }
+*/
 
 h1, h2 {
   font-weight: normal;

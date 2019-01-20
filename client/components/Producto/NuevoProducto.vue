@@ -1,35 +1,52 @@
 <template>
-  <div id="app">
+  <div>
     <div class="container">
-        <br>
-        <h2> Producto </h2>
-        <br>
-        <div class="row h-100 justify-content-center align-items-center">
-          <div class="col-md-5">
-          <div class="card">
-            <div class="card-body">
-              <form @submit.prevent="nuevoProducto">
-                <div class="form-group">
-                  <input required type="text"  v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="producto.tipoProducto" class="form-control" placeholder="Tipo Producto">
-                </div>
-                <div class="form-group">
-                  <input required type="number"  v-model="producto.stock" class="form-control" placeholder="Stock">
-                </div>
-                <div class="form-group">
-                  <input required type="number"  v-model="producto.precio" class="form-control" placeholder="Precio">
-                </div>
-                 <button class="btn btn-primary btn-block">Guardar</button>
-              </form>
-          </div>
-        </div>
-      </div>
-    </div>
+        <div class="d-flex justify-content-center h-100">
+      		<div class="card">
+        			<div class="card-header">
+                <h3> Nuevo Producto </h3>
+        			</div>
+        			<div class="card-body" >
+            				<form @submit.prevent="nuevoProducto()">
+            					<div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text"><i class="fas fa-user"></i></span>
+              						</div>
+              						<input required type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
+            					</div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text"><i class="fas fa-user"></i></span>
+              						</div>
+              						<input required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion">
+            					</div>
+            					<div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text"><i class="fas fa-key"></i></span>
+              						</div>
+              						<input required type="text" v-model="producto.tipoProducto" class="form-control" placeholder="tipo de Producto">
+            					</div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text"><i class="fas fa-key"></i></span>
+              						</div>
+              						<input required type="number" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
+            					</div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text"><i class="fas fa-key"></i></span>
+              						</div>
+              						<input required type="number" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
+            					</div>
+            					<div class="form-group">
+            						  <input type="submit" value="Guardar"  class="btn float-right login_btn">
+            					</div>
+        				</form>
+                      <br>
+                      <br>
+        			</div>
+      		</div>
+      	</div>
   </div>
   </br>
   </div>
@@ -52,7 +69,6 @@ class Producto {
 }
 
 export default {
-  name: 'app',
   created(){
 
   },
@@ -92,13 +108,6 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-
-}
 
 h1, h2 {
   font-weight: normal;
@@ -122,4 +131,13 @@ a {
 	margin: 0 auto;
 	width: 500px;
 }
+
+.card{
+height: auto;
+margin-top: 30px;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
 </style>
