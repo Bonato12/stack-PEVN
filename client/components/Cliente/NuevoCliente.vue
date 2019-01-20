@@ -36,7 +36,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input required type="number" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
+                        <input required type="text" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -69,7 +69,7 @@ import axios from 'axios'
 
 class Cliente {
     constructor(id_cliente,dni,nombre,apellido,ciudad,direccion,telefono,mail){
-          this.id_cliente =   10,
+          this.id_cliente =   Number(new Date().getTime()),
           this.dni = dni,
           this.nombre = nombre,
           this.apellido = apellido,
