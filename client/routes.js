@@ -42,7 +42,7 @@ const rutas = new VueRouter({
             },
             {
               path: '/HomeProducto',
-              component: HomeProducto
+              component: HomeProducto,
             },
             {
               path:'/NuevoProducto',
@@ -64,9 +64,9 @@ rutas.beforeEach((to, from, next) => {
     let usuario = firebase.auth().currentUser;
     console.log(usuario);
     let autorizacion = to.matched.some(record => record.meta.autenticado);
-    if(to.path != '/Login') {
+    if(to.path != '/Login' && to.path != '/Registrar')  {
         if (autorizacion && !usuario){
-            next('/Login');
+            next(false);
         }else if(!autorizacion && usuario){
             next();
         }
