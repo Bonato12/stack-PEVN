@@ -10,31 +10,31 @@
             				<form @submit.prevent="nuevoProducto()">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"><i class="fas fa-user"></i></span>
+              							<span class="input-group-text"></span>
               						</div>
               						<input required type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"><i class="fas fa-user"></i></span>
+              							<span class="input-group-text"></span>
               						</div>
               						<input required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion">
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"><i class="fas fa-key"></i></span>
+              							<span class="input-group-text"></span>
               						</div>
               						<input required type="text" v-model="producto.tipoProducto" class="form-control" placeholder="tipo de Producto">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"><i class="fas fa-key"></i></span>
+              							<span class="input-group-text"></span>
               						</div>
               						<input required type="number" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"><i class="fas fa-key"></i></span>
+              							<span class="input-group-text"></span>
               						</div>
               						<input required type="number" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>

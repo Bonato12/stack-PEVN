@@ -12,7 +12,7 @@ import Vue from 'vue'
 import firebase from 'firebase'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
-
+Vue.use(firebase);
 
 
 const rutas = new VueRouter({
@@ -20,9 +20,6 @@ const rutas = new VueRouter({
             {
               path:'/Home',
               component:Home,
-              meta: {
-                autenticado: true
-              }
             },
             {
               path:'/Registrar',
@@ -31,9 +28,6 @@ const rutas = new VueRouter({
             {
               path:'/HomeCliente',
               component: HomeCliente,
-              meta: {
-               autenticado: true
-              }
             },
             {
               path:'/NuevoCliente',
@@ -65,22 +59,23 @@ const rutas = new VueRouter({
          ]
 })
 
-/*
+//rutas protegidas
 rutas.beforeEach((to, from, next) => {
     let usuario = firebase.auth().currentUser;
-    console.log(usuario)
+    console.log(usuario);
     let autorizacion = to.matched.some(record => record.meta.autenticado);
-    if (autorizacion && !usuario){
-        next('/Login');
-    }else if(!autorizacion && usuario){
-      next('/HomeProducto');
-      next('/HomeCliente');
-      next('/Home');
-    }else {
+    if(to.path != '/Login') {
+        if (autorizacion && !usuario){
+            next('/Login');
+        }else if(!autorizacion && usuario){
+            next();
+        }
+    }else{
       next();
     }
 })
 
-*/
+
+
 
 export default rutas;

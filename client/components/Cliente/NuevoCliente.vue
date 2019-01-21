@@ -10,43 +10,43 @@
                   <form @submit.prevent="nuevoCliente()">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                          <span class="input-group-text"></span>
                         </div>
                         <input required type="number" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-user"></i></span>
+                          <span class="input-group-text"></span>
                         </div>
                         <input required  type="text" v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-user"></i></span>
+                          <span class="input-group-text"></span>
                         </div>
                         <input required  type="text" v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                          <span class="input-group-text"></span>
                         </div>
                         <input required type="text" v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                          <span class="input-group-text"></span>
                         </div>
                         <input required type="text" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                          <span class="input-group-text"></span>
                         </div>
                         <input required type="number" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-key"></i></span>
+                          <span class="input-group-text"></span>
                         </div>
                           <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
                     </div>

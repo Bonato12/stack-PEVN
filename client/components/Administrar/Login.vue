@@ -32,17 +32,17 @@
         			</div>
         			<div class="card-footer">
             				<div class="d-flex justify-content-center links">
-                      <div class="form-group" style="float:center;">
+                      <div class="form-group">
                           <div class="d-flex justify-content-end social_icon">
                     					<span><i class="fab fa-facebook-square" v-on:click="loginFacebook()"></i></span>
                     					<span><i class="fab fa-google-plus-square" v-on:click="loginGoogle()"></i></span>
                   				</div>
                       </div>
             				</div>
-
-                      <div class="d-flex justify-content-center links">
+                    <div class="d-flex justify-content-center links">
                         No estas Registrado? <router-link  to="Registrar"> Registrar</router-link>
-                      </div>
+                    </div>
+
         			</div>
       		</div>
       	</div>

@@ -14,18 +14,6 @@ Vue.use(BootstrapVue);
 Vue.component('v-select', vSelect);
 Vue.use(firebase);
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faTwitter, faFacebook, faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
-
-
-library.add(faCoffee,faTwitter, faFacebook, faStackOverflow, faGithub );
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.config.productionTip = false
-
 
 // Initialize Firebase
   var config = {
@@ -37,6 +25,7 @@ Vue.config.productionTip = false
     messagingSenderId: "199930820105"
   };
   firebase.initializeApp(config);
+
 
 
 firebase.auth().onAuthStateChanged((user)=>{

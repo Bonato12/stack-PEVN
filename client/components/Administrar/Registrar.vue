@@ -34,7 +34,7 @@
             						  <input type="submit" value="registrar"  class="btn float-right login_btn">
             					</div>
                       <div class="form-group" style="float:left;">
-                        <router-link to="/Login">Volver a Login</router-link>
+                        <router-link to="/Login" style="color: #FFC312;">Volver a Login</router-link>
             					</div>
         				</form>
         			</div>
@@ -133,20 +133,13 @@ margin-left: 10px;
 color: #FFC312;
 }
 
-.social_icon span:hover{
-color: white;
-cursor: pointer;
-}
+
 
 .card-header h3{
 color: white;
 }
 
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
-}
+
 
 .input-group-prepend span{
 width: 50px;
