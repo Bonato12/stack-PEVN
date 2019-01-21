@@ -4,7 +4,6 @@
         <br>
         <br>
         <br>
-        <br>
       	<div class="d-flex justify-content-center h-100">
       		<div class="card">
         			<div class="card-header">
@@ -24,23 +23,26 @@
               						</div>
               						<input type="password" v-model="password" class="form-control" placeholder="password">
             					</div>
-            					<div class="form-group">
+                      <div class="form-group">
             						  <input type="submit" value="login"  class="btn float-right login_btn">
             					</div>
-        				</form>
+                    </form>
+
+
         			</div>
         			<div class="card-footer">
             				<div class="d-flex justify-content-center links">
-                    <button  v-on:click="loginFacebook()">
-                        <img src="./facebook-icon.png">
-                    </button>
-
-                        <img src="./google-icon.png" v-on:click="loginGoogle()">
-
+                      <div class="form-group" style="float:center;">
+                          <div class="d-flex justify-content-end social_icon">
+                    					<span><i class="fab fa-facebook-square" v-on:click="loginFacebook()"></i></span>
+                    					<span><i class="fab fa-google-plus-square" v-on:click="loginGoogle()"></i></span>
+                  				</div>
+                      </div>
             				</div>
-            				<div class="d-flex justify-content-center">
-                        <router-link to="Registrar">Registrar</router-link>
-            				</div>
+
+                      <div class="d-flex justify-content-center links">
+                        No estas Registrado? <router-link  to="Registrar"> Registrar</router-link>
+                      </div>
         			</div>
       		</div>
       	</div>
@@ -151,25 +153,8 @@ width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
-}
-
-.social_icon span:hover{
-color: white;
-cursor: pointer;
-}
-
 .card-header h3{
 color: white;
-}
-
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
 }
 
 .input-group-prepend span{
@@ -185,17 +170,6 @@ box-shadow: 0 0 0 0 !important;
 
 }
 
-.remember{
-color: white;
-}
-
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
-}
 
 .login_btn{
 color: black;
@@ -208,13 +182,18 @@ color: black;
 background-color: white;
 }
 
-.links{
-color: white;
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #FFC312;
 }
 
-.links a{
-margin-left: 4px;
+.social_icon span:hover{
+color: white;
+cursor: pointer;
 }
+
+
 
 
 </style>
