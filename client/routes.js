@@ -7,6 +7,7 @@ import HomeProducto from './components/Producto/HomeProducto'
 import NuevoProducto from './components/Producto/NuevoProducto.vue'
 import HomeVenta from './components/Venta/HomeVenta.vue'
 import NuevaVenta from './components/Venta/NuevaVenta.vue'
+import Registrar from './components/Administrar/Registrar.vue'
 import Vue from 'vue'
 import firebase from 'firebase'
 import VueRouter from 'vue-router'
@@ -22,6 +23,10 @@ const rutas = new VueRouter({
               meta: {
                 autenticado: true
               }
+            },
+            {
+              path:'/Registrar',
+              component:Registrar,
             },
             {
               path:'/HomeCliente',

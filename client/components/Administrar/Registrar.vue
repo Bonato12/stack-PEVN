@@ -11,35 +11,39 @@
                 <img src="./LogoTelnovo.png" class="input-group form-group" >
         			</div>
         			<div class="card-body">
-            				<form @submit.prevent="login()">
+            				<form @submit.prevent="registrar()">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-user"></i></span>
               						</div>
-              						<input  type="text" v-model="usuario" class="form-control" placeholder="username">
+              						<input  type="mail" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-key"></i></span>
               						</div>
-              						<input type="password" v-model="password" class="form-control" placeholder="password">
+              						<input type="password" v-model="password" class="form-control" placeholder="Ingrese Contraseña">
+            					</div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text"><i class="fas fa-key"></i></span>
+              						</div>
+                          <input type="password" v-model="password1" class="form-control" placeholder="Ingrese Otra Vez la Contraseña">
             					</div>
             					<div class="form-group">
-            						  <input type="submit" value="login"  class="btn float-right login_btn">
+            						  <input type="submit" value="registrar"  class="btn float-right login_btn">
+            					</div>
+                      <div class="form-group" style="float:left;">
+                        <router-link to="/Login">Volver a Login</router-link>
             					</div>
         				</form>
         			</div>
         			<div class="card-footer">
             				<div class="d-flex justify-content-center links">
-                    <button  v-on:click="loginFacebook()">
-                        <img src="./facebook-icon.png">
-                    </button>
-
-                        <img src="./google-icon.png" v-on:click="loginGoogle()">
 
             				</div>
             				<div class="d-flex justify-content-center">
-                        <router-link to="Registrar">Registrar</router-link>
+
             				</div>
         			</div>
       		</div>
@@ -61,7 +65,8 @@ export default {
   data () {
     return {
       usuario: '',
-      password: ''
+      password: '',
+      password1: ''
 
 		}
   },
@@ -69,51 +74,22 @@ export default {
 
   },
   methods: {
-    login(){
-        firebase.auth().signInWithEmailAndPassword(this.usuario,this.password)
-        .then((user)=> this.$router.replace('/Home'), (error)=>{
-          console.log(error);
-          this.$swal( 'Error!','Usuario y Password Incorrecta','error');
-        });
-    },
-    loginGoogle(){
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(function(result) {
-          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          // ...
-        }).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-        });
-    },
-    loginFacebook(){
-        var provider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(function(result) {
-          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          // ...
-        }).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-        });
+    registrar(){
+          if (this.password ==  this.password1){
+              firebase.auth().createUserWithEmailAndPassword(this.usuario,this.password).
+              then((user)=>{
+                  alert("Exitoso Registro");
+                  this.$router.replace('/Login');
+              })
+              .catch((error)=> {
+              console.log(error)
+              });
+          }else {
+            alert("REINTENTAR,Las Contraseñas no Coinciden");
+          }
+
     }
+
 }
 }
 </script>
