@@ -35,6 +35,7 @@ const rutas = new VueRouter({
             },
             {
               path:'/EditarCliente/:id',
+              name:'EditarCliente',
               component:Editar},
             {
               path:'/Login',

@@ -4,43 +4,34 @@
     <h2> Productos</h2>
     <br>
     <div class="container">
-    <table id="tabla"  class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        Modelo
-                    </th>
-                    <th>
-                        Tipo
-                    </th>
-                    <th>
-                      Precio
-                    </th>
-                    <th>
-                      Opciones
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in productos">
-                    <td>
-                        {{item.modelo}}
-                    </td>
-                    <td>
-                        {{item.tipoproducto}}
-                    </td>
-                    <td>
-                        {{item.precio}}
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" v-on:click="eliminarProducto(item.id_producto)" >Eliminar</button>
-                        <button class="btn btn-warning" >Modificar</button>
-                    </td>
-                </tr>
-            </tbody>
-    </table>
+      <vue-good-table
+          :columns="columns"
+          :rows="productos"
+          :search-options="{
+            enabled: true,
+            skipDiacritics: true,
+            placeholder: 'Buscar Producto',
+          }"
+          @on-row-click="onRowClick"
+          :pagination-options="{
+              enabled: true,
+              mode: 'records',
+              perPage: 5,
+              perPageDropdown: [3, 7, 9],
+              dropdownAllowAll: false,
+              setCurrentPage: 1,
+              nextLabel: 'Siguiente',
+              prevLabel: 'Anterior',
+              rowsPerPageLabel: 'Filas por paginas',
+              ofLabel: 'of',
+              pageLabel: 'page', // for 'pages' mode
+              allLabel: 'All',
+            }"
+            theme="nocturnal">
+     </vue-good-table>
     </br>
-    <router-link to="/NuevoProducto" tag="button" class="btn btn-success">Nuevo Producto</router-link>
+    </br>
+    <router-link to="/NuevoProducto" tag="button" class="btn btn-success" style="float:left;">Nuevo Producto</router-link>
 </div>
   </div>
 </template>
@@ -58,7 +49,32 @@ export default {
   data () {
     return {
       productos: [],
+      //field nombre del atributo en la Lista Producto
+      columns: [
+        {
+          label: 'Modelo',
+          field: 'modelo',
+        },
+        {
+          label: 'Descripcion',
+          field: 'descripcion',
+        },
+        {
+          label: 'TipoProducto',
+          field: 'tipoproducto',
 
+        },
+        {
+          label: 'Stock',
+          field: 'stock',
+          type: 'number',
+        },
+        {
+          label: 'Precio',
+          field: 'precio',
+          type: 'number',
+        },
+      ],
 		}
   },
   mounted(){
@@ -79,9 +95,36 @@ export default {
         this.getProducto();
       })
 
-    }
-
-
+    },
+    onRowClick(params) {
+      console.log(params.row.id_producto);
+      const swalWithBootstrapButtons = this.$swal.mixin({
+          confirmButtonClass: 'btn btn-danger',
+          cancelButtonClass: 'btn btn-warning',
+          buttonsStyling: false,
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Que Opcion Desea Hacer?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Eliminar',
+          cancelButtonText: 'Editar',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.value) {
+              axios.delete('http://localhost:3000/producto/'+params.row.id_producto).then((data)=>{
+                this.getProducto();
+              });
+            swalWithBootstrapButtons.fire(
+              'Eliminado',
+              'Ah sido Eliminado',
+              'success'
+            )
+          } else{
+            this.$router.push({ path: "/editarProducto/"+params.row.id_producto})
+          }
+        })
+      }
 }
 }
 </script>

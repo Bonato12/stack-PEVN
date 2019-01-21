@@ -4,41 +4,31 @@
     </br>
     <h2> Clientes</h2>
     </br>
-    <table id="tabla"  class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        DNI
-                    </th>
-                    <th>
-                        Nombre
-                    </th>
-                    <th>
-                      Apellido
-                    </th>
-                    <th>
-                      Opciones
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in datos">
-                    <td>
-                        {{item.dni}}
-                    </td>
-                    <td>
-                        {{item.nombre}}
-                    </td>
-                    <td>
-                        {{item.apellido}}
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" v-on:click="eliminarCliente(item.id_cliente)">Eliminar</button>
-                        <router-link :to="/editarCliente/+item.id_cliente" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
-                    </td>
-                </tr>
-            </tbody>
-    </table>
+    <vue-good-table
+        :columns="columns"
+        :rows="datos"
+        :search-options="{
+          enabled: true,
+          skipDiacritics: true,
+          placeholder: 'Buscar Cliente',
+        }"
+        @on-row-click="onRowClick"
+        :pagination-options="{
+            enabled: true,
+            mode: 'records',
+            perPage: 5,
+            perPageDropdown: [3, 7, 9],
+            dropdownAllowAll: false,
+            setCurrentPage: 1,
+            nextLabel: 'Siguiente',
+            prevLabel: 'Anterior',
+            rowsPerPageLabel: 'Filas por paginas',
+            ofLabel: 'of',
+            pageLabel: 'page', // for 'pages' mode
+            allLabel: 'All',
+          }"
+          theme="nocturnal">
+   </vue-good-table>
     </br>
     </br>
     </br>
@@ -62,6 +52,35 @@ export default {
   data () {
     return {
       datos: [],
+      columns: [
+        {
+          label: 'Dni',
+          field: 'dni',
+          type: 'number',
+        },
+        {
+          label: 'Nombre',
+          field: 'nombre',
+        },
+        {
+          label: 'Apellido',
+          field: 'apellido',
+
+        },
+        {
+          label: 'Ciudad',
+          field: 'ciudad',
+        },
+        {
+          label: 'Telefono',
+          field: 'telefono',
+
+        },
+        {
+          label: 'Mail',
+          field: 'mail',
+        },
+      ],
 
 		}
   },
@@ -80,11 +99,35 @@ export default {
                 this.getCliente();
           });
     },
-
-
-    editarCliente(id){
-      console.log(id);
-    }
+    onRowClick(params) {
+      console.log(params.row.id_cliente);
+      const swalWithBootstrapButtons = this.$swal.mixin({
+          confirmButtonClass: 'btn btn-danger',
+          cancelButtonClass: 'btn btn-warning',
+          buttonsStyling: false,
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Que Opcion Desea Hacer?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Eliminar',
+          cancelButtonText: 'Editar',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.value) {
+              axios.delete('http://localhost:3000/cliente/'+params.row.id_cliente).then((data)=>{
+                this.getProducto();
+              });
+            swalWithBootstrapButtons.fire(
+              'Eliminado',
+              'Ah sido Eliminado',
+              'success'
+            )
+          } else{
+            this.$router.push({ path: "/editarCliente/"+params.row.id_cliente})
+          }
+        })
+      }
 }
 }
 </script>
