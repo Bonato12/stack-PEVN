@@ -16,19 +16,19 @@
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-user"></i></span>
               						</div>
-              						<input  type="mail" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
+              						<input required  type="mail" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-key"></i></span>
               						</div>
-              						<input type="password" v-model="password" class="form-control" placeholder="Ingrese Contraseña">
+              						<input required type="password" v-model="password" class="form-control" placeholder="Ingrese Contraseña">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-key"></i></span>
               						</div>
-                          <input type="password" v-model="password1" class="form-control" placeholder="Ingrese Otra Vez la Contraseña">
+                          <input required type="password" v-model="password1" class="form-control" placeholder="Ingrese Otra Vez la Contraseña">
             					</div>
             					<div class="form-group">
             						  <input type="submit" value="registrar"  class="btn float-right login_btn">
