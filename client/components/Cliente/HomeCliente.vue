@@ -4,31 +4,34 @@
     </br>
     <h2> Clientes</h2>
     </br>
-    <vue-good-table
-        :columns="columns"
-        :rows="datos"
-        :search-options="{
-          enabled: true,
-          skipDiacritics: true,
-          placeholder: 'Buscar Cliente',
-        }"
-        @on-row-click="onRowClick"
-        :pagination-options="{
-            enabled: true,
-            mode: 'records',
-            perPage: 5,
-            perPageDropdown: [3, 7, 9],
-            dropdownAllowAll: false,
-            setCurrentPage: 1,
-            nextLabel: 'Siguiente',
-            prevLabel: 'Anterior',
-            rowsPerPageLabel: 'Filas por paginas',
-            ofLabel: 'of',
-            pageLabel: 'page', // for 'pages' mode
-            allLabel: 'All',
-          }"
-          theme="nocturnal">
-   </vue-good-table>
+    <div v-if="datos.length">
+        <vue-good-table
+            :columns="columns"
+            :rows="datos"
+            title="Ver Opciones y Detalles"
+            :search-options="{
+              enabled: true,
+              skipDiacritics: true,
+              placeholder: 'Buscar Cliente',
+            }"
+            @on-row-click="onRowClick"
+            :pagination-options="{
+                enabled: true,
+                mode: 'records',
+                perPage: 5,
+                perPageDropdown: [3, 7, 9],
+                dropdownAllowAll: false,
+                setCurrentPage: 1,
+                nextLabel: 'Siguiente',
+                prevLabel: 'Anterior',
+                rowsPerPageLabel: 'Filas por paginas',
+                ofLabel: 'of',
+                pageLabel: 'page', // for 'pages' mode
+                allLabel: 'All',
+              }"
+              theme="nocturnal">
+       </vue-good-table>
+   </div>
    <div style="color:black;">
         <b-modal ref="myModalRef" hide-footer title="Detalles">
           <div class="d-block text-center">
@@ -125,7 +128,11 @@ export default {
     eliminarCliente(id) {
           axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
                 this.getCliente();
-          });
+          }).then(this.$swal.fire(
+              'Eliminado!',
+              'Ha sido elimando',
+              'success'
+        )).then(this.hideModal());
     },
     onRowClick(params) {
         this.$refs.myModalRef.show()

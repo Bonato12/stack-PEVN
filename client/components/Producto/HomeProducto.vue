@@ -4,32 +4,35 @@
     <h2> Productos</h2>
     <br>
     <div class="container">
-      <vue-good-table
-          :columns="columns"
-          :rows="productos"
-          :search-options="{
-            enabled: true,
-            skipDiacritics: true,
-            placeholder: 'Buscar Producto',
-          }"
-          @on-row-click="onRowClick"
-          :pagination-options="{
-              enabled: true,
-              mode: 'records',
-              perPage: 5,
-              perPageDropdown: [3, 7, 9],
-              dropdownAllowAll: false,
-              setCurrentPage: 1,
-              nextLabel: 'Siguiente',
-              prevLabel: 'Anterior',
-              rowsPerPageLabel: 'Filas por paginas',
-              ofLabel: 'of',
-              pageLabel: 'page', // for 'pages' mode
-              allLabel: 'All',
-            }"
+      <div v-if="this.productos.length">
+          <vue-good-table
+              :columns="columns"
+              :rows="productos"
+              title="Ver Opciones y Detalles"
+              :search-options="{
+                enabled: true,
+                skipDiacritics: true,
+                placeholder: 'Buscar Producto',
+              }"
+              @on-row-click="onRowClick"
+              :pagination-options="{
+                  enabled: true,
+                  mode: 'records',
+                  perPage: 5,
+                  perPageDropdown: [3, 7, 9],
+                  dropdownAllowAll: false,
+                  setCurrentPage: 1,
+                  nextLabel: 'Siguiente',
+                  prevLabel: 'Anterior',
+                  rowsPerPageLabel: 'Filas por paginas',
+                  ofLabel: 'of',
+                  pageLabel: 'page', // for 'pages' mode
+                  allLabel: 'All',
+                }"
 
-            theme="nocturnal">
-     </vue-good-table>
+                theme="nocturnal">
+         </vue-good-table>
+     </div>
      <div style="color:black;">
           <b-modal ref="myModalRef" hide-footer title="Detalles">
             <div class="d-block text-center">
@@ -129,7 +132,11 @@ export default {
     eliminarProducto(idp){
       axios.delete('http://localhost:3000/producto/'+idp).then((data)=>{
         this.getProducto();
-      })
+      }).then(this.$swal.fire(
+          'Eliminado!',
+          'Ha sido elimando',
+          'success'
+    )).then(this.hideModal());
 
     },
     onRowClick(params) {
@@ -143,7 +150,7 @@ export default {
         this.precio = params.row.precio;
 
     },
-    hideModal () {
+    hideModal() {
         this.$refs.myModalRef.hide()
     }
 
