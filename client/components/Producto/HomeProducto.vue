@@ -27,9 +27,30 @@
               pageLabel: 'page', // for 'pages' mode
               allLabel: 'All',
             }"
+
             theme="nocturnal">
      </vue-good-table>
-    </br>
+     <div style="color:black;">
+          <b-modal ref="myModalRef" hide-footer title="Detalles">
+            <div class="d-block text-center">
+              <h4>ID:{{idp}}</h4>
+              <hr>
+              <h4>MODELO:{{modelo}}</h4>
+              <hr>
+              <h4>DESCRIPCION: {{descripcion}}</h4>
+              <hr>
+              <h4>TIPO PRODUCTO: {{tipoproducto}}</h4>
+              <hr>
+              <h4>STOCK: {{stock}}</h4>
+              <hr>
+              <h4>PRECIO: {{precio}}$</h4>
+              <hr>
+              <button class="btn btn-danger" v-on:click="eliminarProducto(idp)">Eliminar</button>
+              <router-link :to="/editarProducto/+idp" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
+            </div>
+            <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Cerrar</b-btn>
+          </b-modal>
+    </div>
     </br>
     <router-link to="/NuevoProducto" tag="button" class="btn btn-success" style="float:left;">Nuevo Producto</router-link>
 </div>
@@ -48,6 +69,13 @@ export default {
   },
   data () {
     return {
+      modalShow: false,
+      idp: '',
+      modelo: '',
+      descripcion:'',
+      tipoproducto:'',
+      stock:'',
+      precio: '',
       productos: [],
       //field nombre del atributo en la Lista Producto
       columns: [
@@ -62,6 +90,14 @@ export default {
         {
           label: 'TipoProducto',
           field: 'tipoproducto',
+          /*
+          filterOptions: {
+        	  enabled: true, // enable filter for this column
+            placeholder: 'Filtrar Todo', // placeholder for filter input
+            filterDropdownItems: ['Smartphone', 'Iphone'], // dropdown (with selected values) instead of text input
+            trigger: 'enter', //only trigger on enter not on keyup
+          },
+          */
 
         },
         {
@@ -97,34 +133,20 @@ export default {
 
     },
     onRowClick(params) {
-      console.log(params.row.id_producto);
-      const swalWithBootstrapButtons = this.$swal.mixin({
-          confirmButtonClass: 'btn btn-danger',
-          cancelButtonClass: 'btn btn-warning',
-          buttonsStyling: false,
-        })
-        swalWithBootstrapButtons.fire({
-          title: 'Que Opcion Desea Hacer?',
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Eliminar',
-          cancelButtonText: 'Editar',
-          reverseButtons: true
-        }).then((result) => {
-          if (result.value) {
-              axios.delete('http://localhost:3000/producto/'+params.row.id_producto).then((data)=>{
-                this.getProducto();
-              });
-            swalWithBootstrapButtons.fire(
-              'Eliminado',
-              'Ah sido Eliminado',
-              'success'
-            )
-          } else{
-            this.$router.push({ path: "/editarProducto/"+params.row.id_producto})
-          }
-        })
-      }
+        this.$refs.myModalRef.show()
+        console.log(params);
+        this.idp = params.row.id_producto;
+        this.modelo = params.row.modelo;
+        this.descripcion = params.row.descripcion;
+        this.tipoproducto = params.row.tipoproducto;
+        this.stock = params.row.stock;
+        this.precio = params.row.precio;
+
+    },
+    hideModal () {
+        this.$refs.myModalRef.hide()
+    }
+
 }
 }
 </script>

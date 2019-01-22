@@ -73,10 +73,15 @@ export default {
   methods: {
     login(){
         firebase.auth().signInWithEmailAndPassword(this.usuario,this.password)
-        .then((user)=> this.$router.replace('/Home'), (error)=>{
-          console.log(error);
-          this.$swal( 'Error!','Usuario y Password Incorrecta','error');
+        .then((user)=>{
+          this.$router.replace('/Home');
+        })
+        .catch((error)=>{
+            console.log(error);
+            this.$swal( 'Error!','Usuario y Password Incorrecta','error');
         });
+
+
     },
     loginGoogle(){
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -115,7 +120,8 @@ export default {
           var credential = error.credential;
           // ...
         });
-    }
+    },
+
 }
 }
 </script>

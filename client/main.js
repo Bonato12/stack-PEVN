@@ -29,6 +29,9 @@ Vue.use(firebase);
   };
   firebase.initializeApp(config);
 
+  Vue.component('modal', {
+    template: '#modal-template'
+  })
 
 
 firebase.auth().onAuthStateChanged((user)=>{

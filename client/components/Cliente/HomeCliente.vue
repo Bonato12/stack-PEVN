@@ -29,6 +29,30 @@
           }"
           theme="nocturnal">
    </vue-good-table>
+   <div style="color:black;">
+        <b-modal ref="myModalRef" hide-footer title="Detalles">
+          <div class="d-block text-center">
+            <h4>ID:{{idc}}</h4>
+            <hr>
+            <h4>DNI:{{dni}}</h4>
+            <hr>
+            <h4>NOMBRE: {{nombre}}</h4>
+            <hr>
+            <h4>APELLIDO: {{apellido}}</h4>
+            <hr>
+            <h4>CIUDAD: {{ciudad}}</h4>
+            <hr>
+            <h4>DIRECCION: {{direccion}}</h4>
+            <hr>
+            <h4>TELEFONO: {{telefono}}</h4>
+            <hr>
+            <h4>MAIL: {{mail}}</h4>
+            <button class="btn btn-danger" v-on:click="eliminarCliente(idc)">Eliminar</button>
+            <router-link :to="/editarCliente/+idc" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
+          </div>
+          <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Cerrar</b-btn>
+        </b-modal>
+    </div>
     </br>
     </br>
     </br>
@@ -51,6 +75,14 @@ export default {
   },
   data () {
     return {
+      idc: '',
+      dni: '',
+      nombre:'',
+      apellido:'',
+      ciudad:'',
+      direccion:'',
+      telefono:'',
+      mail:'',
       datos: [],
       columns: [
         {
@@ -66,10 +98,6 @@ export default {
           label: 'Apellido',
           field: 'apellido',
 
-        },
-        {
-          label: 'Ciudad',
-          field: 'ciudad',
         },
         {
           label: 'Telefono',
@@ -100,34 +128,20 @@ export default {
           });
     },
     onRowClick(params) {
-      console.log(params.row.id_cliente);
-      const swalWithBootstrapButtons = this.$swal.mixin({
-          confirmButtonClass: 'btn btn-danger',
-          cancelButtonClass: 'btn btn-warning',
-          buttonsStyling: false,
-        })
-        swalWithBootstrapButtons.fire({
-          title: 'Que Opcion Desea Hacer?',
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Eliminar',
-          cancelButtonText: 'Editar',
-          reverseButtons: true
-        }).then((result) => {
-          if (result.value) {
-              axios.delete('http://localhost:3000/cliente/'+params.row.id_cliente).then((data)=>{
-                this.getProducto();
-              });
-            swalWithBootstrapButtons.fire(
-              'Eliminado',
-              'Ah sido Eliminado',
-              'success'
-            )
-          } else{
-            this.$router.push({ path: "/editarCliente/"+params.row.id_cliente})
-          }
-        })
-      }
+        this.$refs.myModalRef.show()
+        console.log(params);
+        this.idc = params.row.id_cliente;
+        this.dni = params.row.dni;
+        this.nombre = params.row.nombre;
+        this.apellido = params.row.apellido;
+        this.ciudad = params.row.ciudad;
+        this.direccion = params.row.direccion;
+        this.telefono = params.row.telefono;
+        this.mail = params.row.mail;
+    },
+    hideModal () {
+        this.$refs.myModalRef.hide()
+    }
 }
 }
 </script>
