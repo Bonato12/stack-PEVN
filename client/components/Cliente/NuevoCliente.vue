@@ -69,7 +69,7 @@ import axios from 'axios'
 
 class Cliente {
     constructor(id_cliente,dni,nombre,apellido,ciudad,direccion,telefono,mail){
-          this.id_cliente =   Number(new Date().getTime()),
+          this.id_cliente =  id_cliente,
           this.dni = dni,
           this.nombre = nombre,
           this.apellido = apellido,
@@ -87,7 +87,6 @@ export default {
   data () {
     return {
       datos: [],
-      errors: [],
       cliente: new Cliente
 		}
   },
@@ -106,8 +105,6 @@ export default {
     });
     },
     nuevoCliente(){
-        if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.ciudad && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
-        this.errors = [];
         console.log(this.cliente);
         axios.post('http://localhost:3000/cliente',
         this.cliente, // the data to posthttp://localhost:3000/cliente
@@ -115,38 +112,13 @@ export default {
           'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
           'Content-Type': 'application/json',
         },
-        }).then(this.$swal( 'Exito!','Nuevo Cliente Añadido!','success'))
-          .then(this.getCliente());
+        }).then(this.cliente = new Cliente()).then(this.$swal( 'Exito!','Nuevo Cliente Añadido!','success'));
+        }
 
-      }
-      else{
-        this.errors = [];
-        if (!this.cliente.dni){
-        this.errors.push('DNI Requerido');
-        }
-        if (!this.cliente.nombre){
-        this.errors.push('Nombre Requerido');
-        }
-        if (!this.cliente.apellido){
-          this.errors.push('Apellido Requerido');
-        }
-        if (!this.cliente.ciudad){
-          this.errors.push('Ciudad Requerida');
-        }
-        if (!this.cliente.direccion){
-          this.errors.push('Direccion Requerida');
-        }
-        if (!this.cliente.telefono){
-          this.errors.push('Telefono Requerido');
-        }
-        if (!this.cliente.mail){
-          this.errors.push('Mail Requerido');
-        }
-      }
     }
 
 }
-}
+
 </script>
 
 <style>

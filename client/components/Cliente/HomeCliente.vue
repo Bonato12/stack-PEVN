@@ -122,7 +122,7 @@ export default {
     getCliente(){
     axios.get('http://localhost:3000/cliente').then((response) =>{
       this.datos = response.data;
-      console.log(this.datos);
+      //console.log(this.datos);
     });
   },
     eliminarCliente(id) {

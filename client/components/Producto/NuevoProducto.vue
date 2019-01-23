@@ -79,15 +79,9 @@ export default {
 		}
   },
   mounted(){
-    /*
-    axios.get('http://localhost:3000/cliente').then((response) =>{
-      this.datos = response.data;
-      console.log(this.datos);
-    });
-    */
+
   },
   methods: {
-
     nuevoProducto(){
         console.log(this.producto);
         axios.post('http://localhost:3000/producto',
@@ -96,11 +90,9 @@ export default {
           'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
           'Content-Type': 'application/json',
         },
-      }).then(this.$swal( 'Exito!',
-                          'Nuevo Producto Añadido!',
-                          'success'));
+      }).then(this.producto = new Producto()).then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'));
 
-      }
+        }
 
 
 }

@@ -33,6 +33,14 @@ export default {
 
 <style>
 
+body{
+background-image: url('https://i0.wp.com/www.carrerasaludmental.com/wp-content/uploads/2017/12/At-the-Office-Mac-Apple-Wallpapers-Creative-Planning-2982192420.jpeg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+
+}
+
 h1, h2 {
   font-weight: normal;
 }

@@ -124,7 +124,7 @@ export default {
       console.log(this.productos)
       axios.get('http://localhost:3000/producto').then(response=>{
           this.productos = response.data;
-          console.log(this.productos);
+          //console.log(this.productos);
       }).catch((error)=>{
         console.log(error);
       })
