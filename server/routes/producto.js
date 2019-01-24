@@ -25,41 +25,48 @@ const conexionDB = {
 
 
   router.route('/producto').get((req,res)=>{
-    //client.connect();
-    pool.query("SELECT * FROM producto").then((response)=> {
+    pool.query("SELECT  * FROM producto").then((response)=> {
     console.log(response.rows);
     res.json(response.rows);
     //res.end();
-    //client.end();
   }).catch((error)=>{
       console.log(error);
-      //client.end();
     })
   }).post((req, res)=> {
       console.log("PETICION POST");
       console.log(req.body);
-      //client.connect();
       pool.query("INSERT INTO producto(modelo,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5)",[req.body.modelo,req.body.descripcion,req.body.tipoProducto,
       req.body.stock,req.body.precio]).then(response=>{
-      res.json(response.rows);
-      //client.end();
+        console.log(response);
       }).catch(error =>{
         console.log(error);
-        //client.end();
       })
   });
 
-  router.route('/producto/:id_producto').delete((req,res)=>{
-    console.log(req.params.id_producto);
-    //client.connect();
-    pool.query("DELETE FROM producto WHERE id_producto=($1)",[req.params.id_producto]).then(response=>{
-    res.json(response.rows);
-    //client.end();
-    }).catch(error =>{
-      console.log(error);
-      //client.end();
-    })
-  })
+  router.route('/producto/:id_producto').get((req,res)=>{
+          pool.query('SELECT * FROM producto WHERE id_producto=($1)', [req.params.id_producto]).then(response=> {
+              res.json(response.rows);
+          }).catch(error =>{
+              console.log(error);
+          });
+  }).delete((req,res)=>{
+          console.log(req.params.id_producto);
+          pool.query("DELETE FROM producto WHERE id_producto=($1)",[req.params.id_producto]).then(response=>{
+              res.json(response.rows);
+          }).catch(error =>{
+              console.log(error);
+          });
+  }).put((req,res)=>{
+          console.log("PETICION UPDATE")
+          console.log(req.params.id);
+          pool.query("UPDATE producto SET modelo=($1), descripcion=($2), tipoProducto=($3), stock=($4), precio=($5) WHERE id_producto=($6)",[req.body.modelo,req.body.descripcion,req.body.tipoProducto,
+              req.body.stock,req.body.precio, req.params.id_producto]).then((response)=>{
+              console.log(response);
+              res.json(response.rows);
+          }).catch((error)=>{
+              console.log(error);
+          })
+  });
 
 
   //Importamos CORS para poder utilizar Axios en Vue js

@@ -58,7 +58,6 @@ export default {
     }
   },
   methods: {
-
     logout(){
       firebase.auth().signOut().then(function() {
         this.$router.replace('/Login');

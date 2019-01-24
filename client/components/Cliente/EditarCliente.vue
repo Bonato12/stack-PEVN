@@ -74,18 +74,8 @@ export default {
     rellenarCliente(){
        console.log(this.idc);
        axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
-         this.datos = response.data;
-         console.log(this.datos);
-         for (var item in this.datos){
-           var dni = this.datos[item].dni;
-           var nombre = this.datos[item].nombre;
-           var apellido = this.datos[item].apellido;
-           var ciudad = this.datos[item].ciudad;
-           var direccion = this.datos[item].direccion;
-           var telefono = this.datos[item].telefono;
-           var mail = this.datos[item].mail;
-         }
-         this.cliente = new Cliente(this.idc,dni,nombre,apellido,ciudad,direccion,telefono,mail);
+         console.log(response.data);
+         this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
      });
    },
 
@@ -109,9 +99,9 @@ export default {
             { headers: {
                 'Content-Type': 'application/json',
             }
-          }).then(this.$router.push('/Home')));
-       }
-     });
+          }))
+        }
+     })
 
  }
 }

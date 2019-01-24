@@ -91,10 +91,7 @@ export default {
 		}
   },
   mounted(){
-    axios.get('http://localhost:3000/cliente').then((response) =>{
-      this.datos = response.data;
-      console.log(this.datos);
-    });
+
 
   },
   methods: {
@@ -158,14 +155,8 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
 
-#table {
-	margin: 0 auto;
-	width: 500px;
-}
+
 
 
 #cliente:{

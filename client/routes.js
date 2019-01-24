@@ -1,8 +1,9 @@
 import HomeCliente from './components/Cliente/HomeCliente.vue'
 import NuevoCliente from './components/Cliente/NuevoCliente.vue'
+import EditarCliente from './components/Cliente/EditarCliente.vue'
 import Login from './components/Administrar/Login.vue'
 import Home from './components/Administrar/Home.vue'
-import Editar from './components/Cliente/EditarCliente.vue'
+import EditarProducto from './components/Producto/EditarProducto.vue'
 import HomeProducto from './components/Producto/HomeProducto'
 import NuevoProducto from './components/Producto/NuevoProducto.vue'
 import HomeVenta from './components/Venta/HomeVenta.vue'
@@ -36,7 +37,7 @@ const rutas = new VueRouter({
             {
               path:'/EditarCliente/:id',
               name:'EditarCliente',
-              component:Editar},
+              component:EditarCliente},
             {
               path:'/Login',
               component:Login
@@ -48,6 +49,10 @@ const rutas = new VueRouter({
             {
               path:'/NuevoProducto',
               component: NuevoProducto
+            },
+            {
+              path:'/EditarProducto/:id',
+              component:EditarProducto
             },
             {
               path:'/HomeVenta',
