@@ -4,47 +4,35 @@
       <br>
       <h2>Ventas</h2>
       <br>
-      <table id="tabla"  class="table table-striped table-bordered">
-              <thead>
-                  <tr>
-                      <th>
-                        Nombre
-                      </th>
-                      <th>
-                        Apellido
-                      </th>
-                      <th>
-                        Modelo
-                      </th>
-                      <th>
-                        Fecha
-                      </th>
-                      <th>
-                        Opciones
-                      </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr v-for="item in venta">
-                      <td>
-                          {{item.nombre}}
-                      </td>
-                      <td>
-                          {{item.apellido}}
-                      </td>
-                      <td>
-                          {{item.modelo}}
-                      </td>
-                      <td>
-                          {{item.fecha}}
-                      </td>
-                      <td>
-                          <button class="btn btn-danger" v-on:click="borrarVenta(item.id_venta)" >Eliminar</button>
-                          <button class="btn btn-warning" >Editar</button>
-                      </td>
-                  </tr>
-              </tbody>
-      </table>
+      <div v-if="this.ventas.length">
+          <vue-good-table
+              :columns="columns"
+              :rows="ventas"
+              title="Ver Opciones y Detalles"
+              :search-options="{
+                enabled: true,
+                skipDiacritics: true,
+                placeholder: 'Buscar Producto',
+              }"
+              @on-row-click=""
+              :pagination-options="{
+                  enabled: true,
+                  mode: 'records',
+                  perPage: 5,
+                  perPageDropdown: [3, 7, 9],
+                  dropdownAllowAll: false,
+                  setCurrentPage: 1,
+                  nextLabel: 'Siguiente',
+                  prevLabel: 'Anterior',
+                  rowsPerPageLabel: 'Filas por paginas',
+                  ofLabel: 'of',
+                  pageLabel: 'page', // for 'pages' mode
+                  allLabel: 'All',
+                }"
+
+                theme="nocturnal">
+         </vue-good-table>
+     </div>
       </br>
         <router-link to="/NuevaVenta" tag="button" class="btn btn-success" style="float: left;">Nueva Venta</router-link>
     </div>
@@ -74,7 +62,29 @@ export default {
   },
   data () {
     return {
-      venta: []
+      ventas: [],
+      columns: [
+        {
+          label: 'Nombre',
+          field: 'nombre',
+        },
+        {
+          label: 'Apellido',
+          field: 'apellido',
+        },
+        {
+          label: 'Modelo',
+          field: 'modelo',
+        },
+        {
+          label: 'Fecha',
+          field: 'fecha',
+        },
+        {
+          label: 'Precio',
+          field: 'precio',
+        }
+      ],
 		}
   },
   computed:{
@@ -85,13 +95,16 @@ export default {
   methods: {
     getVenta(){
     axios.get('http://localhost:3000/venta').then((response) =>{
-      this.venta = response.data;
-      console.log(this.venta);
+      this.ventas = response.data;
+      console.log(this.ventas);
     });
     },
     borrarVenta(id){
       console.log(id);
-      axios.delete('http://localhost:3000/venta/' + id).then(this.getVenta);
+      axios.delete('http://localhost:3000/venta/' + id).then((data)=>{
+        console.log(data)
+        this.getVenta()
+      });
     }
 }
 }

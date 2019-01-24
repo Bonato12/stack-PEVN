@@ -1,33 +1,35 @@
 <template>
   <div id="app">
     <div class="container">
-        </br>
-        <h2> Venta</h2>
-        </br>
-        <div style="background-color: rgba(0,0,0,0.2);">
-          <div class="row h-100 justify-content-center">
-            <div class="col-md-5">
-                <form @submit.prevent="nuevaVenta()">
-                  <h3> Ingrese Cliente </h3>
-                  <v-select style="background-color: white;" v-model="clienteSelected" label="dni" :options="this.cliente"></v-select>
-                  <br>
-                  <h3>{{clienteSelected.nombre}} {{clienteSelected.apellido}}</h3>
-                  <h3> Ingrese Producto </h3>
-                  <v-select style="background-color: white;" v-model="productoSelected" label="modelo" :options="this.producto"></v-select>
-                  <br>
-                  <h3>{{productoSelected.modelo}} {{productoSelected.precio}}</h3>
-                  <h3>Precio:</h3>
-                  <p v-if="calcular">{{calcular}}</p>
-                  <button class="btn btn-primary btn-block">Guardar</button>
-                </form>
-            </br>
-            </br>
-            </br>
-            </div>
-          </div>
+          <div class="d-flex justify-content-center h-100">
+        		<div class="card">
+          			<div class="card-header">
+                  <h3> Nueva Venta </h3>
+          			</div>
+          			<div class="card-body">
+              				<form @submit.prevent="nuevaVenta()">
+                        <div class="form-group">
+                            <v-select placeholder="Ingrese Cliente" v-model="clienteSelected" label="dni" :options="this.cliente"></v-select>
+                        </div>
+                        <div class="form-group">
+                              {{clienteSelected.nombre}} {{clienteSelected.apellido}}
+                        </div>
+                        <div class="form-group">
+                            <v-select placeholder="Producto" v-model="productoSelected" label="modelo" :options="this.producto"></v-select>
+                        </div>
+                        <div class="form-group">
+                              {{productoSelected.modelo}} {{productoSelected.descripcion}} {{productoSelected.precio}}
+                        </div>
+              					<div class="form-group">
+              						  <input type="submit" value="Guardar"  class="btn float-right login_btn">
+              					</div>
+          				</form>
+          			</div>
+        		</div>
         </div>
+        <br>
         <router-link to="/NuevoCliente" tag="button" class="btn btn-success" style="float: left;"  >Nuevo Cliente</router-link>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -93,6 +95,7 @@ export default {
                   id_venta: Number(new Date().getTime()),
                   id_cliente: this.clienteSelected.id_cliente,
                   id_producto: this.productoSelected.id_producto,
+                  precio: this.productoSelected.precio,
                   fecha: new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
               },
               {
@@ -109,13 +112,6 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: white;
-}
 
 
 h1, h2 {
@@ -136,8 +132,19 @@ a {
   color: #42b983;
 }
 
+/*
 #formulario{
   background-color: rgba(0,0,0,0.8);
+}
+*/
+
+.card{
+height: auto;
+margin-top: 30px;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,1) !important;
+color: white;
 }
 
 

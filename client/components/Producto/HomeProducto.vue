@@ -54,7 +54,7 @@
             <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Cerrar</b-btn>
           </b-modal>
     </div>
-    </br>
+    <br>
     <router-link to="/NuevoProducto" tag="button" class="btn btn-success" style="float:left;">Nuevo Producto</router-link>
 </div>
   </div>

@@ -4,6 +4,9 @@
         <div class="row h-100 justify-content-center align-items-center">
           <div class="col-md-5">
           <div class="card">
+            <div class="card-header">
+              <h3> Editar Cliente </h3>
+            </div>
             <div class="card-body">
               <form @submit.prevent="editarCliente()">
                 <div class="form-group">
@@ -27,7 +30,9 @@
                 <div class="form-group">
                   <input required type="text"  v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
                 </div>
-                 <button class="btn btn-primary btn-block">Modificar</button>
+                <div class="form-group">
+                    <input type="submit" value="Modificar"  class="btn float-right login_btn">
+                </div>
               </form>
           </div>
         </div>
@@ -109,26 +114,10 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-}
 
 h1, h2 {
   font-weight: normal;
 }
-
-form input:focus:invalid{
-       border:2px solid red;
-       /* otras propiedades */
-}
-
-form input:valid{
-       border:2px solid green;
-       /* otras propiedades */
-   }
 
 ul {
   list-style-type: none;
@@ -140,12 +129,7 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
 
-#table {
-	margin: 0 auto;
-	width: 500px;
-}
+
+
 </style>

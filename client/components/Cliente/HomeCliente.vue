@@ -57,8 +57,6 @@
         </b-modal>
     </div>
     </br>
-    </br>
-    </br>
     <router-link to="/NuevoCliente" tag="button" class="btn btn-success" style="float: left;"  >Nuevo Cliente</router-link>
     </div>
   </div>

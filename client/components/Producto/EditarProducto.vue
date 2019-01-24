@@ -4,6 +4,9 @@
         <div class="row h-100 justify-content-center align-items-center">
           <div class="col-md-5">
           <div class="card">
+            <div class="card-header">
+              <h3> Editar Producto </h3>
+            </div>
             <div class="card-body">
               <form @submit.prevent="editarProducto()">
                   <div class="input-group form-group">
@@ -37,7 +40,7 @@
                       <input required type="number" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
                   </div>
                   <div class="form-group">
-                      <input type="submit" value="Guardar"  class="btn float-right login_btn">
+                      <input type="submit" value="Modificar"  class="btn float-right login_btn">
                   </div>
               </form>
           </div>
@@ -130,15 +133,6 @@ h1, h2 {
   font-weight: normal;
 }
 
-form input:focus:invalid{
-       border:2px solid red;
-       /* otras propiedades */
-}
-
-form input:valid{
-       border:2px solid green;
-       /* otras propiedades */
-   }
 
 ul {
   list-style-type: none;
