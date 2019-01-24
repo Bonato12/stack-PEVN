@@ -38,7 +38,7 @@ import firebase from 'firebase'
 export default {
   name: 'app',
   created(){
-
+    this.control();
   },
   data () {
     return {
@@ -47,17 +47,21 @@ export default {
     }
   },
   mounted(){
-    let usuario = firebase.auth().currentUser;
-    console.log(usuario);
-    if (usuario != null){
-        this.autenticado = true;
-        this.$router.push('/Home');
-    }
-    else {
-      this.$router.push('/Login');
-    }
+
+
   },
   methods: {
+    control(){
+      let usuario = firebase.auth().currentUser;
+      console.log(usuario);
+      if (usuario != null){
+          this.autenticado = true;
+          this.$router.push('/Home');
+      }
+      else {
+        this.$router.push('/Login');
+      }
+    },
     logout(){
       firebase.auth().signOut().then(function() {
         this.$router.replace('/Login');

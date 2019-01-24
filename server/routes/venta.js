@@ -25,13 +25,13 @@ const conexionDB = {
   }).post((req,res)=>{
       console.log("PETICION POST");
       console.log(req.body);
-      var client = new pg.Client(conexionDB);
-      client.connect();
-      client.query("INSERT INTO venta VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.id_cliente,req.body.id_producto,req.body.fecha]).then(response=>{
-      client.end()
+      var cliente = new pg.Client(conexionDB);
+      cliente.connect();
+      cliente.query("INSERT INTO venta VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.id_cliente,req.body.id_producto,req.body.fecha]).then(response=>{
+      cliente.end();
       }).catch(error=>{
         console.log(error);
-        client.end();
+        cliente.end();
       })
   });
 

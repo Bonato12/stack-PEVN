@@ -50,10 +50,10 @@
             <h4>TELEFONO: {{telefono}}</h4>
             <hr>
             <h4>MAIL: {{mail}}</h4>
+            <hr>
             <button class="btn btn-danger" v-on:click="eliminarCliente(idc)">Eliminar</button>
             <router-link :to="/editarCliente/+idc" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
           </div>
-          <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Cerrar</b-btn>
         </b-modal>
     </div>
     </br>

@@ -14,7 +14,7 @@
                 skipDiacritics: true,
                 placeholder: 'Buscar Producto',
               }"
-              @on-row-click=""
+              @on-row-click="onRowClick"
               :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -32,9 +32,19 @@
 
                 theme="nocturnal">
          </vue-good-table>
+         <div style="color:black;">
+              <b-modal ref="myModalRef" hide-footer title="Detalles">
+                  <div class="d-block text-center">
+                      <h4>ID:{{idv}}</h4>
+                        <hr>
+                      <button class="btn btn-danger" v-on:click="eliminarVenta(idv)">Eliminar</button>
+                      <router-link :to="/editarVenta/+idv" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
+                  </div>
+              </b-modal>
+        </div>
      </div>
-      </br>
-        <router-link to="/NuevaVenta" tag="button" class="btn btn-success" style="float: left;">Nueva Venta</router-link>
+    </br>
+    <router-link to="/NuevaVenta" tag="button" class="btn btn-success" style="float: left;">Nueva Venta</router-link>
     </div>
   </div>
 </template>
@@ -62,6 +72,8 @@ export default {
   },
   data () {
     return {
+      idv:'',
+      modalShow: false,
       ventas: [],
       columns: [
         {
@@ -99,13 +111,25 @@ export default {
       console.log(this.ventas);
     });
     },
-    borrarVenta(id){
+    eliminarVenta(id){
       console.log(id);
-      axios.delete('http://localhost:3000/venta/' + id).then((data)=>{
+      this.idv = id;
+      axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
         console.log(data)
         this.getVenta()
       });
+    },
+    onRowClick(params) {
+        this.$refs.myModalRef.show()
+        console.log(params);
+        this.idv = params.row.id_venta;
+
+    },
+    hideModal() {
+        this.$refs.myModalRef.hide()
     }
+
+
 }
 }
 </script>

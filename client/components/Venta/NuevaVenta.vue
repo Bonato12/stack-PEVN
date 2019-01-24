@@ -101,7 +101,7 @@ export default {
                   'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
                   'Content-Type': 'application/json'
                 }
-              }).then(console.log('Hecho'))
+              }).then(this.clienteSelected = '', this.productoSelected = '').then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'))
 
   }
 

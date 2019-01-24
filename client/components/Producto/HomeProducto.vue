@@ -51,7 +51,6 @@
               <button class="btn btn-danger" v-on:click="eliminarProducto(idp)">Eliminar</button>
               <router-link :to="/editarProducto/+idp" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
             </div>
-            <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Cerrar</b-btn>
           </b-modal>
     </div>
     <br>
