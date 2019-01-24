@@ -5,11 +5,31 @@ Node.js y Express.js Para Backend.
 PostgreSQL Para la Base de Datos Relacional.
 Firebase Para la Autentificaciones.
 
+Capturas de Pantalla
+
+Login
+![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/login.png)
+
+Home Cliente
+![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/homecliente.png)
+
+Formulario
+![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/formulario.png)
+
+Alert
+![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/sweetalert.png)
+
+Detalles
+![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/detalles.png)
+
+
+
+
 ## Build Setup
 
 ``` bash
 
-![alt text](https://images.unsplash.com/photo-1533613220915-609f661a6fe1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80)
+
 
 # install dependencies
 
