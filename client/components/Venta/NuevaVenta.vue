@@ -9,7 +9,7 @@
           			<div class="card-body">
               				<form @submit.prevent="nuevaVenta()">
                         <div class="form-group">
-                            <v-select placeholder="Ingrese Cliente" v-model="clienteSelected" label="dni" :options="this.cliente"></v-select>
+                            <v-select  placeholder="Ingrese Cliente" v-model="clienteSelected" label="dni" :options="this.cliente"></v-select>
                         </div>
                         <div class="form-group">
                               {{clienteSelected.nombre}} {{clienteSelected.apellido}}
@@ -28,7 +28,6 @@
         		</div>
         </div>
         <br>
-        <router-link to="/NuevoCliente" tag="button" class="btn btn-success" style="float: left;"  >Nuevo Cliente</router-link>
       </div>
   </div>
 </template>
@@ -95,7 +94,6 @@ export default {
                   id_venta: Number(new Date().getTime()),
                   id_cliente: this.clienteSelected.id_cliente,
                   id_producto: this.productoSelected.id_producto,
-                  precio: this.productoSelected.precio,
                   fecha: new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
               },
               {

@@ -15,7 +15,7 @@ const conexionDB = {
     console.log("PETICION GET");
     var client = new pg.Client(conexionDB);
     client.connect();
-    client.query('SELECT cl.nombre, cl.apellido, pr.modelo, vt.fecha, vt.id_venta FROM cliente cl, producto pr, venta vt WHERE cl.id_cliente = vt.id_cliente AND pr.id_producto= vt.id_producto').then(response=>{
+    client.query('SELECT cl.nombre, cl.apellido, pr.modelo, pr.precio, vt.fecha, vt.id_venta FROM cliente cl, producto pr, venta vt WHERE cl.id_cliente = vt.id_cliente AND pr.id_producto= vt.id_producto').then(response=>{
     res.json(response.rows);
     client.end()
     }).catch(error=>{
