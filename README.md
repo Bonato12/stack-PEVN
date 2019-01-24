@@ -9,6 +9,8 @@ Firebase Para la Autentificaciones.
 
 ``` bash
 
+![Alt text](background.png?raw=true "Title")
+
 # install dependencies
 
 npm install
