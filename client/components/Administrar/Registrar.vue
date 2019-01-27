@@ -22,13 +22,13 @@
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-key"></i></span>
               						</div>
-              						<input required type="password" v-model="password" class="form-control" placeholder="Ingrese Contraseña">
+              						<input  type="password" v-model="password" class="form-control" placeholder="Ingrese Contraseña" pattern=".{6,}"   required title="Debe tener 6 Caracteres como Minimo">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-key"></i></span>
               						</div>
-                          <input required type="password" v-model="password1" class="form-control" placeholder="Ingrese Otra Vez la Contraseña">
+                          <input  type="password" v-model="password1" class="form-control" placeholder="Ingrese Otra Vez la Contraseña" pattern=".{6,}"   required title="Debe tener 6 Caracteres como Minimo">
             					</div>
             					<div class="form-group">
             						  <input type="submit" value="registrar"  class="btn float-right login_btn">
@@ -77,15 +77,25 @@ export default {
     registrar(){
           if (this.password ==  this.password1){
               firebase.auth().createUserWithEmailAndPassword(this.usuario,this.password).
-              then((user)=>{
-                  alert("Exitoso Registro");
-                  this.$router.replace('/Login');
+              then((response)=>{
+                    console.log(response);
+                    alert("Exitoso Registro");
+                    this.$router.replace('/Login');
               })
               .catch((error)=> {
-              console.log(error)
+              console.log(error);
+              this.$swal.fire({
+                  type: 'error',
+                  title: 'Error',
+                  text: error,
+                });
               });
           }else {
-            alert("REINTENTAR,Las Contraseñas no Coinciden");
+            this.$swal.fire({
+                type: 'error',
+                title: 'Error',
+                text: 'Las Contraseñas no Coinciden',
+              });
           }
 
     }
