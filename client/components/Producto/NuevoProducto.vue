@@ -10,31 +10,34 @@
             				<form @submit.prevent="nuevoProducto()">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"></span>
+              							<span class="input-group-text">Modelo</span>
               						</div>
               						<input required type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"></span>
+              							<span class="input-group-text">Descripcion</span>
               						</div>
-              						<input required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion">
+              						<textarea required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"></span>
+              							<span class="input-group-text">Tipo Producto</span>
               						</div>
-              						<input required type="text" v-model="producto.tipoProducto" class="form-control" placeholder="tipo de Producto">
-            					</div>
+                          <select required class="form-control" v-model="producto.tipoProducto">
+                            <option disabled>Elige un Tipo Producto</option>
+                            <option v-for="item in tipoProductos">{{ item.name }}</option>
+                         </select>
+                      </div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"></span>
+              							<span class="input-group-text">Stock</span>
               						</div>
               						<input required type="number" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text"></span>
+              							<span class="input-group-text">Precio</span>
               						</div>
               						<input required type="number" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
@@ -76,13 +79,21 @@ export default {
     return {
       datos: [],
       producto:  new Producto(),
+      tipoProductos : [{name:"Celular"},
+                       {name:"Tablet"},
+                       {name:"Accesorio"},
+                       {name:"Televisor"},
+                       {name:"Laptop"},
+                       {name:"Otros"}],
 		}
+
   },
   mounted(){
 
   },
   methods: {
     nuevoProducto(){
+
         console.log(this.producto);
         axios.post('http://localhost:3000/producto',
         this.producto, // the data to posthttp://localhost:3000/producto
@@ -125,12 +136,18 @@ a {
   height: 193%;
 }
 
+input-group-prepend span{
+width: auto;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
 .card{
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 400px;
+width: 410px;
 background-color: rgba(0,0,0,0.5) !important;
 }
-
 </style>
