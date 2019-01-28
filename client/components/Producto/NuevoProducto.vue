@@ -42,7 +42,7 @@
               						<input required type="number" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
             					<div class="form-group">
-            						  <input type="submit" value="Guardar"  class="btn float-right login_btn">
+            						  <input type="submit" value="Guardar"  class="btn float-right nuevoProducto_btn">
             					</div>
         				</form>
                       <br>
@@ -112,6 +112,21 @@ export default {
 
 <style>
 
+.card{
+height: auto;
+margin-top: 30px;
+margin-bottom: auto;
+width: 410px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+input-group-prepend span{
+width: auto;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
 h1, h2 {
   font-weight: normal;
 }
@@ -130,24 +145,17 @@ a {
   color: #42b983;
 }
 
-#cliente:{
-  background-color: red;
-  color: black;
-  height: 193%;
-}
-
-input-group-prepend span{
-width: auto;
-background-color: #FFC312;
+.nuevoProducto_btn{
 color: black;
-border:0 !important;
+background-color: #FFC312;
+width: 100px;
 }
 
-.card{
-height: auto;
-margin-top: 30px;
-margin-bottom: auto;
-width: 410px;
-background-color: rgba(0,0,0,0.5) !important;
+.nuevoProducto_btn:hover{
+color: black;
+background-color: white;
 }
+
+
+
 </style>

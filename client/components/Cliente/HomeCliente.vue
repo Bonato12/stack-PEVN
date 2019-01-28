@@ -153,10 +153,11 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  font-family: 'Numans', sans-serif;
+  color: white;
 }
 
 
@@ -177,10 +178,5 @@ li {
 a {
   color: #42b983;
 }
-
-#tabla{
-   background-color: rgba(0,0,0,0.8);
-}
-
 
 </style>

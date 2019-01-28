@@ -163,6 +163,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  font-family: 'Numans', sans-serif;
+  color: white;
 }
 
 h1, h2 {
@@ -183,8 +185,4 @@ a {
   color: #42b983;
 }
 
-#table {
-	margin: 0 auto;
-	width: 500px;
-}
 </style>

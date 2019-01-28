@@ -2,7 +2,7 @@
   <div id="app">
         <nav v-if="autenticado" class="navbar navbar-expand-lg navbar-dark">
                 <div style="width:70px;">
-                    <img src="./LogoTelnovo.png" style="height:50px; width:150px; float:left;">
+                    <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav mx-auto">
@@ -77,12 +77,13 @@ export default {
 </script>
 
 <style>
-body{
-    background-repeat: no-repeat;
-   background-attachment: fixed;
-   background-position: center;
-    color: white;
-  }
+html,body{
+background-image: url('https://i0.wp.com/www.carrerasaludmental.com/wp-content/uploads/2017/12/At-the-Office-Mac-Apple-Wallpapers-Creative-Planning-2982192420.jpeg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
 
   .navbar{background:#222222;}
   .nav-item::after{content:'';display:block;width:0px;height:2px;background:#fec400;transition: 0.2s;}
