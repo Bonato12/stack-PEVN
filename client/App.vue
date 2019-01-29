@@ -4,7 +4,7 @@
                 <div style="width:70px;">
                     <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>
-                <div class="collapse navbar-collapse">
+                <div class="navbar-collapse">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
                             <router-link   tag="li" class-active="active" id="cliente"   to="/HomeCliente">Clientes</router-link>
@@ -21,10 +21,12 @@
                         <li class="nav-item">
                             <router-link   tag="li" class-active="active"   to="/HomeProovedor">Proveedores</router-link>
                         </li>
-                        <li class="nav-item">
-                            <router-link   tag="li" class-active="active"   to="/Login" v-on:click.native="logout()" replace>Salir</router-link>
-                        </li>
                     </ul>
+                    <div>
+                        <li style="float:right; ">
+                            <router-link   tag="li" class="fas fa-sign-out-alt fa-3x" style="color:#FFC312;"  to="/Login" v-on:click.native="logout()" title="Salir"></router-link>
+                        </li>
+                    </div>
                 </div>
             </nav>
         <router-view></router-view>
@@ -85,30 +87,30 @@ height: 100%;
 font-family: 'Numans', sans-serif;
 }
 
-  .navbar{background:#222222;}
-  .nav-item::after{content:'';display:block;width:0px;height:2px;background:#fec400;transition: 0.2s;}
-  .nav-item:hover::after{width:100%;}
-  .nav-link{padding:15px 5px;transition:0.2s;}
+.navbar{background:#222222;}
+.nav-item::after{content:'';display:block;width:0px;height:2px;background:#fec400;transition: 0.2s;}
+.nav-item:hover::after{width:100%;}
+.nav-link{padding:15px 5px;transition:0.2s;}
 
 
 
-   nav li.router-link-active {
-     background-color: #fec400;
-     color: black;
-     height: 193%;
-   }
+nav li.router-link-active {
+    background-color: #fec400;
+    color: black;
+    height: 193%;
+}
 
 
+nav li{
+    color: white;
+    padding: 2px 1px 2px 1px;
+}
 
-   nav li{
-     color: white;
-     padding: 2px 1px 2px 1px;
-
-   }
-
-   nav{
+nav{
      height: 75px;
-   }
+}
+
+
 
 
 </style>

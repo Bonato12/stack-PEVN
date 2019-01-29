@@ -38,7 +38,7 @@ background-image: url('https://i0.wp.com/www.carrerasaludmental.com/wp-content/u
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
-
+font-family: 'Numans', sans-serif;
 }
 
 h1, h2 {
@@ -54,11 +54,5 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-
-
-
-
-
-
 
 </style>

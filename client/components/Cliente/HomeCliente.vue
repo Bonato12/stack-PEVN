@@ -160,7 +160,6 @@ export default {
   color: white;
 }
 
-
 h1, h2 {
   font-weight: normal;
 }
