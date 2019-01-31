@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="Cliente">
     <div class="container">
     </br>
     <h2> Clientes</h2>
@@ -36,28 +36,36 @@
         <b-modal ref="myModalRef" hide-footer title="Detalles">
           <div class="d-block text-center">
             <h4>ID:{{idc}}</h4>
-            <hr>
+              <hr>
             <h4>DNI:{{dni}}</h4>
-            <hr>
+              <hr>
             <h4>NOMBRE: {{nombre}}</h4>
-            <hr>
+              <hr>
             <h4>APELLIDO: {{apellido}}</h4>
-            <hr>
+              <hr>
             <h4>CIUDAD: {{ciudad}}</h4>
-            <hr>
+              <hr>
             <h4>DIRECCION: {{direccion}}</h4>
-            <hr>
+              <hr>
             <h4>TELEFONO: {{telefono}}</h4>
-            <hr>
+              <hr>
             <h4>MAIL: {{mail}}</h4>
-            <hr>
-            <button class="btn btn-danger" v-on:click="eliminarCliente(idc)">Eliminar</button>
-            <router-link :to="/editarCliente/+idc" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
+              <hr>
+            <button class="btn btn-danger" v-on:click="eliminarCliente(idc)" title="Eliminar Cliente">
+                <i class="fas fa-trash fa-2x">
+
+                </i>
+            </button>
+            <router-link :to="/EditarCliente/+idc"  class="btn btn-warning" tag="button" title="Editar Cliente">
+                <i class="fas fa-edit fa-2x">
+
+                </i>
+            </router-link>
           </div>
         </b-modal>
     </div>
     </br>
-    <router-link to="/NuevoCliente" tag="button" class="btn btn-success" style="float: left;"  >Nuevo Cliente</router-link>
+    <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn btn-success" style="float: left;"  >Nuevo Cliente</router-link>
     </div>
   </div>
 </template>
@@ -68,7 +76,7 @@ import axios from 'axios'
 
 
 export default {
-  name: 'app',
+  name: 'Cliente',
   created(){
 
       this.getCliente();
@@ -177,5 +185,7 @@ li {
 a {
   color: #42b983;
 }
+
+
 
 </style>

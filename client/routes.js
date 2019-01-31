@@ -17,6 +17,7 @@ Vue.use(firebase);
 
 
 const rutas = new VueRouter({
+
             routes: [
             {
               path:'/Home',
@@ -31,12 +32,11 @@ const rutas = new VueRouter({
               component: HomeCliente,
             },
             {
-              path:'/NuevoCliente',
+              path:'/HomeCliente/NuevoCliente',
               component: NuevoCliente
             },
             {
               path:'/EditarCliente/:id',
-              name:'EditarCliente',
               component:EditarCliente},
             {
               path:'/Login',
@@ -47,7 +47,7 @@ const rutas = new VueRouter({
               component: HomeProducto,
             },
             {
-              path:'/NuevoProducto',
+              path:'/HomeProducto/NuevoProducto',
               component: NuevoProducto
             },
             {

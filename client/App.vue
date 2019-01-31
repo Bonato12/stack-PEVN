@@ -7,19 +7,19 @@
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
-                            <router-link   tag="li" class-active="active" id="cliente"   to="/HomeCliente">Clientes</router-link>
+                            <router-link   tag="li" active-class="activo" id="cliente"   to="/HomeCliente">Clientes</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  tag="li" class-active="active"   to="/HomeProducto">Productos</router-link>
+                            <router-link  tag="li" active-class="activo"   to="/HomeProducto">Productos</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  tag="li" class-active="active"   to="/HomeVenta">Ventas</router-link>
+                            <router-link  tag="li" active-class="activo"   to="/HomeVenta">Ventas</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link   tag="li" class-active="active"   to="/HomeArreglo">Arreglos</router-link>
+                            <router-link   tag="li"active-class="activo"   to="/HomeArreglo">Arreglos</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link   tag="li" class-active="active"   to="/HomeProovedor">Proveedores</router-link>
+                            <router-link   tag="li" active-class="activo"   to="/HomeProovedor">Proveedores</router-link>
                         </li>
                     </ul>
                     <div>
@@ -94,7 +94,7 @@ font-family: 'Numans', sans-serif;
 
 
 
-nav li.router-link-active {
+.activo{
     background-color: #fec400;
     color: black;
     height: 193%;
@@ -109,8 +109,5 @@ nav li{
 nav{
      height: 75px;
 }
-
-
-
 
 </style>

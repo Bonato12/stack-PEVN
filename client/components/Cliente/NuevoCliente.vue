@@ -12,7 +12,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
+                        <input required type="number" min="0" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -42,7 +42,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required type="number" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
+                        <input required type="number" min="0" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -51,7 +51,7 @@
                           <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Guardar"  class="btn float-right login_btn">
+                        <input type="submit" value="Guardar"  class="btn float-right cliente_btn">
                     </div>
               </form>
 
@@ -121,13 +121,7 @@ export default {
 <style>
 
 
-.cliente{
-height: 510px;
-margin-top: 30px;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
-}
+
 
 /*
 form input:focus:invalid{
@@ -171,9 +165,15 @@ width: 410px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-#cliente:{
-  background-color: #fec400;
-  color: black;
-  height: 193%;
+.cliente_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
 }
+
+.cliente_btn:hover{
+color: black;
+background-color: white;
+}
+
 </style>

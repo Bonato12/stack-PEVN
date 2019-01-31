@@ -33,12 +33,21 @@ export default {
 
 <style>
 
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
 body{
 background-image: url('https://i0.wp.com/www.carrerasaludmental.com/wp-content/uploads/2017/12/At-the-Office-Mac-Apple-Wallpapers-Creative-Planning-2982192420.jpeg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
-font-family: 'Numans', sans-serif;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  font-family: 'Numans', sans-serif;
+  color: white;
 }
 
 h1, h2 {

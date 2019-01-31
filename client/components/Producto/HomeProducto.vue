@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <br>
     <h2> Productos</h2>
     <br>
@@ -48,13 +48,21 @@
               <hr>
               <h4>PRECIO: {{precio}}$</h4>
               <hr>
-              <button class="btn btn-danger" v-on:click="eliminarProducto(idp)">Eliminar</button>
-              <router-link :to="/editarProducto/+idp" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
+              <button class="btn btn-danger" v-on:click="eliminarProducto(idp)" title="Eliminar Producto">
+                    <i class="fas fa-trash fa-2x">
+
+                    </i>
+              </button>
+              <router-link :to="/editarProducto/+idp" active-class="activo" class="btn btn-warning" tag="button" title="Editar Producto" >
+                  <i class="far fa-edit fa-2x">
+
+                  </i>
+              </router-link>
             </div>
           </b-modal>
     </div>
     <br>
-    <router-link to="/NuevoProducto" tag="button" class="btn btn-success" style="float:left;">Nuevo Producto</router-link>
+    <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn btn-success" style="float:left;">Nuevo Producto</router-link>
 </div>
   </div>
 </template>
@@ -65,7 +73,6 @@ import axios from 'axios'
 
 
 export default {
-  name: 'app',
   created(){
     this.getProducto()
   },
@@ -158,7 +165,7 @@ export default {
 </script>
 
 <style>
-#app {
+#HomeProducto{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -184,5 +191,6 @@ li {
 a {
   color: #42b983;
 }
+
 
 </style>

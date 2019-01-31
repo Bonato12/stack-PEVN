@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="HomeVenta">
     <div class="container">
       <br>
       <h2>Ventas</h2>
@@ -65,7 +65,7 @@ class Venta{
 */
 
 export default {
-  name: 'app',
+  name: 'HomeVenta',
   created(){
     this.getVenta();
 
@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style>
-#app {
+#HomeVenta {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -33,13 +33,13 @@
               						<div class="input-group-prepend">
               							<span class="input-group-text">Stock</span>
               						</div>
-              						<input required type="number" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
+              						<input required type="number" min="0" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Precio</span>
               						</div>
-              						<input required type="number" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
+              						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
             					<div class="form-group">
             						  <input type="submit" value="Guardar"  class="btn float-right nuevoProducto_btn">
@@ -111,22 +111,6 @@ export default {
 </script>
 
 <style>
-
-.card{
-height: auto;
-margin-top: 30px;
-margin-bottom: auto;
-width: 410px;
-background-color: rgba(0,0,0,0.5) !important;
-}
-
-input-group-prepend span{
-width: auto;
-background-color: #FFC312;
-color: black;
-border:0 !important;
-}
-
 h1, h2 {
   font-weight: normal;
 }
@@ -141,8 +125,19 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
+.input-group-prepend span{
+width: auto;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+.card{
+height: auto;
+margin-top: 30px;
+margin-bottom: auto;
+width: 410px;
+background-color: rgba(0,0,0,0.5) !important;
 }
 
 .nuevoProducto_btn{
@@ -156,6 +151,11 @@ color: black;
 background-color: white;
 }
 
+.activo{
+    background-color: #fec400;
+    color: black;
+    height: 193%;
+}
 
 
 </style>

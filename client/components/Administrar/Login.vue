@@ -40,7 +40,8 @@
                       </div>
             				</div>
                     <div class="d-flex justify-content-center links">
-                        No estas Registrado? <router-link  to="Registrar"> Registrar</router-link>
+                        <div style="color:white;"> No estas Registrado?</div>
+                        <router-link  to="Registrar" tag="a" style="color: #FFC312;"><i style="margin-left:10px;"></i>Registrar</router-link>
                     </div>
 
         			</div>

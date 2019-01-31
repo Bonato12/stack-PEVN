@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="NuevaVenta">
     <div class="container">
           <div class="d-flex justify-content-center h-100">
-        		<div class="card">
+        		<div class="card" id="card">
           			<div class="card-header">
                   <h3> Nueva Venta </h3>
           			</div>
@@ -48,7 +48,7 @@ class Venta{
 */
 
 export default {
-  name: 'app',
+  name: 'NuevaVenta',
   created(){
 
       this.getCliente();
@@ -101,7 +101,7 @@ export default {
                   'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
                   'Content-Type': 'application/json'
                 }
-              }).then(this.clienteSelected = '', this.productoSelected = '').then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'))
+              }).then(this.clienteSelected = '', this.productoSelected = '').then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'));
 
   }
 
@@ -130,13 +130,9 @@ a {
   color: #42b983;
 }
 
-/*
-#formulario{
-  background-color: rgba(0,0,0,0.8);
-}
-*/
 
-.card{
+
+#card{
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
