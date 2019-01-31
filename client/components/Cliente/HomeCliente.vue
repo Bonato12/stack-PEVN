@@ -34,7 +34,7 @@
    </div>
    <div style="color:black;">
         <b-modal ref="myModalRef" hide-footer title="Detalles">
-          <div class="d-block text-center">
+          <div class="d-block text-center;">
             <h4>ID:{{idc}}</h4>
               <hr>
             <h4>DNI:{{dni}}</h4>
