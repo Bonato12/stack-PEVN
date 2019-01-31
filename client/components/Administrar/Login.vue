@@ -139,17 +139,18 @@ body{
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('https://i0.wp.com/www.carrerasaludmental.com/wp-content/uploads/2017/12/At-the-Office-Mac-Apple-Wallpapers-Creative-Planning-2982192420.jpeg');
+background-image: url('./background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
 font-family: 'Numans', sans-serif;
+background-color: #0C94F5;
+background-blend-mode:multiply;
 }
 
 .container{
 height: 100%;
-align-content: center;
-
+align-content: center
 }
 
 .card{

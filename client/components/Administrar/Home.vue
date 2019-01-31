@@ -36,10 +36,12 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 body{
-background-image: url('https://i0.wp.com/www.carrerasaludmental.com/wp-content/uploads/2017/12/At-the-Office-Mac-Apple-Wallpapers-Creative-Planning-2982192420.jpeg');
+background-image: url('./background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
+background-color: #0C94F5;
+background-blend-mode: multiply;
 }
 
 #app {

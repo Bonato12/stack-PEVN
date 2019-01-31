@@ -80,11 +80,14 @@ export default {
 
 <style>
 html,body{
-background-image: url('https://i0.wp.com/www.carrerasaludmental.com/wp-content/uploads/2017/12/At-the-Office-Mac-Apple-Wallpapers-Creative-Planning-2982192420.jpeg');
+background-image: url('https://wallpapers-house.com/data/out/12/wallpaper2you_517787.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
 font-family: 'Numans', sans-serif;
+background-color: #0C94F5;
+background-blend-mode: multiply;
+
 }
 
 .navbar{background:#222222;}
