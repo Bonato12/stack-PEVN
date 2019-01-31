@@ -8,31 +8,52 @@
               <h3> Editar Cliente </h3>
             </div>
             <div class="card-body">
-              <form @submit.prevent="editarCliente()">
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
-                </div>
-                <div class="form-group">
-                  <input required type="text"  v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Modificar"  class="btn float-right login_btn">
-                </div>
+                  <form @submit.prevent="editarCliente()">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Dni</span>
+                        </div>
+                        <input required type="number" min="0" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Nombre</span>
+                        </div>
+                        <input required  type="text" v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Apellido</span>
+                        </div>
+                        <input required  type="text" v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Ciudad</span>
+                        </div>
+                        <input required type="text" v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Direccion</span>
+                        </div>
+                        <input required type="text" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Telefono</span>
+                        </div>
+                        <input required type="number" min="0" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Mail</span>
+                        </div>
+                          <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Modificar"  class="btn float-right cliente_btn">
+                    </div>
               </form>
           </div>
         </div>
@@ -129,7 +150,20 @@ li {
   margin: 0 10px;
 }
 
+.input-group-prepend span{
+width: auto;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
 
+.card{
+height: auto;
+margin-top: 30px;
+margin-bottom: auto;
+width: 410px;
+background-color: rgba(0,0,0,0.5) !important;
+}
 
 
 </style>

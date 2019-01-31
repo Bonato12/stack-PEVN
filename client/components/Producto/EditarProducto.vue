@@ -8,40 +8,43 @@
               <h3> Editar Producto </h3>
             </div>
             <div class="card-body">
-              <form @submit.prevent="editarProducto()">
-                  <div class="input-group form-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"></span>
-                      </div>
-                      <input required type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
-                  </div>
-                  <div class="input-group form-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"></span>
-                      </div>
-                      <input required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion">
-                  </div>
-                  <div class="input-group form-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"></span>
-                      </div>
-                      <input required type="text" v-model="producto.tipoProducto" class="form-control" placeholder="tipo de Producto">
-                  </div>
-                  <div class="input-group form-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"></span>
-                      </div>
-                      <input required type="number" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
-                  </div>
-                  <div class="input-group form-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"></span>
-                      </div>
-                      <input required type="number" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
-                  </div>
-                  <div class="form-group">
-                      <input type="submit" value="Modificar"  class="btn float-right login_btn">
-                  </div>
+                  <form @submit.prevent="editarProducto()">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Modelo</span>
+                        </div>
+                        <input required type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Descripcion</span>
+                        </div>
+                        <textarea required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Tipo Producto</span>
+                        </div>
+                        <select required class="form-control" v-model="producto.tipoProducto">
+                          <option disabled>Elige un Tipo Producto</option>
+                          <option v-for="item in tipoProductos">{{ item.name }}</option>
+                       </select>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Stock</span>
+                        </div>
+                        <input required type="number" min="0" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Precio</span>
+                        </div>
+                        <input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Modificar"  class="btn float-right nuevoProducto_btn">
+                    </div>
               </form>
           </div>
         </div>
