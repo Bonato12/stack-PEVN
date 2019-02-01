@@ -7,7 +7,7 @@
               <h3> Nuevo Cliente </h3>
             </div>
             <div class="card-body">
-                  <form @submit.prevent="nuevoCliente()">
+                  <form @submit.prevent="nuevoCliente()" class="simple-form">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
@@ -48,7 +48,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Mail</span>
                         </div>
-                          <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
+                          <input required type="email" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Guardar"  class="btn float-right cliente_btn">
@@ -120,20 +120,54 @@ export default {
 
 <style>
 
+@keyframes jello {
+  11.1% {
+    transform: none
+  }
+  22.2% {
+    transform: skewX(-12.5deg) skewY(-12.5deg)
+  }
+  33.3% {
+    transform: skewX(6.25deg) skewY(6.25deg)
+  }
+  44.4% {
+    transform: skewX(-3.125deg) skewY(-3.125deg)
+  }
+  55.5% {
+    transform: skewX(1.5625deg) skewY(1.5625deg)
+  }
+  66.6% {
+    transform: skewX(-0.78125deg) skewY(-0.78125deg)
+  }
+  77.7% {
+    transform: skewX(0.390625deg) skewY(0.390625deg)
+  }
+  88.8% {
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg)
+  }
+  100% {
+    transform: none
+  }
+}
 
 
 
-/*
 form input:focus:invalid{
-       border:2px solid red;
+    background: url('invalid.png') no-repeat 95% 50%;
+    animation: jello 1s;
+}
+
+
+form input:required:focus:valid{
+
+  background: url('valid.png') no-repeat 95% 50%;
+  color: white;
 
 }
 
-form input:valid{
-       border:2px solid green;
 
-   }
-*/
+
+
 
 h1, h2 {
   font-weight: normal;
@@ -174,6 +208,14 @@ width: 100px;
 .cliente_btn:hover{
 color: black;
 background-color: white;
+}
+
+/*Sirve para desabilitar las flechas en los inputs numer*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 </style>
