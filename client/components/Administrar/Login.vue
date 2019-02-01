@@ -127,15 +127,7 @@ export default {
 }
 </script>
 
-<style>
-/*
-body{
-  background-image: url('./TELNOVO.png');
-  background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
-*/
+<style scoped>
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{

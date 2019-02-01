@@ -80,7 +80,7 @@ export default {
 
 <style>
 html,body{
-background-image: url('https://wallpapers-house.com/data/out/12/wallpaper2you_517787.jpg');
+background-image: url('./components/Administrar/background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;

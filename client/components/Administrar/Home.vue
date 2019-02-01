@@ -44,13 +44,6 @@ background-color: #0C94F5;
 background-blend-mode: multiply;
 }
 
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  font-family: 'Numans', sans-serif;
-  color: white;
-}
 
 h1, h2 {
   font-weight: normal;
