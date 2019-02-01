@@ -154,14 +154,15 @@ export default {
 
 form input:focus:invalid{
     background: url('invalid.png') no-repeat 95% 50%;
-    animation: jello 1s;
+    /*animation: jello 1s;*/
+    background-color: white;
 }
 
 
 form input:required:focus:valid{
 
   background: url('valid.png') no-repeat 95% 50%;
-  color: white;
+  background-color: white;
 
 }
 
