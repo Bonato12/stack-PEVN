@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-center h-100">
       		<div class="card">
         			<div class="card-header">
-                <h3> Nuevo Producto </h3>
+                <h3 style="text-align:center; color:white;"> Nuevo Producto </h3>
         			</div>
         			<div class="card-body" >
             				<form @submit.prevent="nuevoProducto()">
@@ -93,8 +93,7 @@ export default {
   },
   methods: {
     nuevoProducto(){
-
-        console.log(this.producto);
+        //console.log(this.producto);
         axios.post('http://localhost:3000/producto',
         this.producto, // the data to posthttp://localhost:3000/producto
         { headers: {
@@ -110,7 +109,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+
 h1, h2 {
   font-weight: normal;
 }
@@ -124,6 +125,7 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
+
 
 .input-group-prepend span{
 width: auto;
@@ -151,11 +153,54 @@ color: black;
 background-color: white;
 }
 
-.activo{
-    background-color: #fec400;
-    color: black;
-    height: 193%;
+/*Sirve para desabilitar las flechas en los inputs numer*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+
+form select:focus:invalid{
+    background: url('invalid.png') no-repeat 95% 50%;
+    background-color: white;
+}
+
+form select:required:focus:valid{
+
+  background: url('valid.png') no-repeat 95% 50%;
+  background-color: white;
+
+}
+
+
+form input:focus:invalid{
+    background: url('invalid.png') no-repeat 95% 50%;
+    background-color: white;
+}
+
+
+form input:required:focus:valid{
+
+  background: url('valid.png') no-repeat 95% 50%;
+  background-color: white;
+
+}
+
+form textarea:focus:invalid{
+    background: url('invalid.png') no-repeat 95% 50%;
+    background-color: white;
+}
+
+
+form textarea:required:focus:valid{
+
+  background: url('valid.png') no-repeat 95% 50%;
+  background-color: white;
+
+}
+
+
 
 
 </style>

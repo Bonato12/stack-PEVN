@@ -68,7 +68,7 @@ const rutas = new VueRouter({
 //rutas protegidas
 rutas.beforeEach((to, from, next) => {
     let usuario = firebase.auth().currentUser;
-    console.log(usuario);
+    //console.log(usuario);
     let autorizacion = to.matched.some(record => record.meta.autenticado);
     if(to.path != '/Login' && to.path != '/Registrar')  {
         if (autorizacion && !usuario){

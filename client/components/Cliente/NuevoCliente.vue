@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-center h-100">
         <div class="card">
             <div class="card-header">
-              <h3> Nuevo Cliente </h3>
+              <h3 style="text-align:center; color:white;"> Nuevo Cliente </h3>
             </div>
             <div class="card-body">
                   <form @submit.prevent="nuevoCliente()" class="simple-form">
@@ -118,8 +118,9 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
+/*
 @keyframes jello {
   11.1% {
     transform: none
@@ -150,6 +151,7 @@ export default {
   }
 }
 
+*/
 
 
 form input:focus:invalid{
@@ -165,9 +167,6 @@ form input:required:focus:valid{
   background-color: white;
 
 }
-
-
-
 
 
 h1, h2 {
