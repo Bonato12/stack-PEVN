@@ -165,5 +165,38 @@ width: 410px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
+.cliente_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+}
+
+.cliente_btn:hover{
+color: black;
+background-color: white;
+}
+
+/*Sirve para desabilitar las flechas en los inputs numer*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+form input:focus:invalid{
+    background: url('invalid.png') no-repeat 95% 50%;
+    /*animation: jello 1s;*/
+    background-color: white;
+}
+
+
+form input:required:focus:valid{
+
+  background: url('valid.png') no-repeat 95% 50%;
+  background-color: white;
+
+}
+
 
 </style>
