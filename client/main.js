@@ -10,6 +10,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import vSelect from 'vue-select'
 import VueGoodTablePlugin from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css'
+import {store} from './store.js';
 
 Vue.use(VueGoodTablePlugin);
 Vue.use(VueSweetalert2);
@@ -38,6 +39,7 @@ firebase.auth().onAuthStateChanged((user)=>{
   new Vue({
     el: '#app',
     router: rutas,
+    store,
     render: h => h(App)
   })
 });

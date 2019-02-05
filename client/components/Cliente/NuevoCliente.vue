@@ -102,14 +102,18 @@ export default {
     });
     },
     nuevoCliente(){
-        console.log(this.cliente);
-        axios.post('http://localhost:3000/cliente',
-        this.cliente, // the data to posthttp://localhost:3000/cliente
-        { headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
-          'Content-Type': 'application/json',
-        },
-        }).then(this.cliente = new Cliente()).then(this.$swal( 'Exito!','Nuevo Cliente Añadido!','success'));
+            if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.ciudad && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
+              console.log(this.cliente);
+              axios.post('http://localhost:3000/cliente',
+              this.cliente, // the data to posthttp://localhost:3000/cliente
+              { headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
+                'Content-Type': 'application/json',
+              },
+              }).then(this.cliente = new Cliente()).then(this.$swal( 'Exito!','Nuevo Cliente Añadido!','success'));
+            }else{
+              this.$swal( 'Error!','Completar los Campos Vacios!','error')
+            }
         }
 
     }

@@ -56,6 +56,7 @@
 
 import axios from 'axios'
 import firebase from 'firebase'
+import {mapMutations} from 'vuex'
 
 export default {
   created(){
@@ -73,15 +74,18 @@ export default {
   },
   methods: {
     login(){
-        firebase.auth().signInWithEmailAndPassword(this.usuario,this.password)
-        .then((user)=>{
-          this.$router.replace('/Home');
-        })
-        .catch((error)=>{
-            console.log(error);
-            this.$swal( 'Error!','Usuario y Password Incorrecta','error');
-        });
-
+        if (this.usuario && this.usuario){
+            firebase.auth().signInWithEmailAndPassword(this.usuario,this.password)
+            .then((user)=>{
+              this.$router.replace('/Home');
+            })
+            .catch((error)=>{
+                console.log(error);
+                this.$swal( 'Error!','Usuario y Password Incorrecta','error');
+            });
+        }else{
+          this.$swal( 'Error!','Completa los Campos Vacios','error');
+        }
 
     },
     loginGoogle(){
@@ -193,8 +197,5 @@ color: #FFC312;
 color: white;
 cursor: pointer;
 }
-
-
-
 
 </style>

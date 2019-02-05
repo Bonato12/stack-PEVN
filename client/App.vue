@@ -36,7 +36,7 @@
 <script>
 
 import firebase from 'firebase'
-
+import {mapMutations} from 'vuex'
 export default {
   name: 'app',
   created(){

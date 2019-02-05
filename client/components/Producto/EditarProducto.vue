@@ -5,7 +5,7 @@
           <div class="col-md-5">
           <div class="card">
             <div class="card-header">
-              <h3> Editar Producto </h3>
+              <h3 style="color:white; text-align:center"> Editar Producto </h3>
             </div>
             <div class="card-body">
                   <form @submit.prevent="editarProducto()">
@@ -43,7 +43,7 @@
                         <input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Modificar"  class="btn float-right nuevoProducto_btn">
+                        <input type="submit" value="Modificar"  class="btn float-right editarProducto_btn">
                     </div>
               </form>
           </div>
@@ -61,7 +61,7 @@ import axios from 'axios'
 
 class Producto {
     constructor(id_producto,modelo,descripcion,tipoProducto,stock,precio){
-          this.id_producto =   Number(new Date().getTime()),
+          this.id_producto =   id_producto,
           this.modelo = modelo,
           this.descripcion = descripcion,
           this.tipoProducto = tipoProducto,
@@ -82,8 +82,14 @@ export default {
       idc: this.$route.params.id,
       datos: [],
       producto:  new Producto(),
-		}
-  },
+      tipoProductos : [{name:"Celular"},
+                       {name:"Tablet"},
+                       {name:"Accesorio"},
+                       {name:"Televisor"},
+                       {name:"Laptop"},
+                       {name:"Otros"}]
+		         }
+	},
   mounted(){
 
   },
@@ -125,11 +131,30 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+.input-group-prepend span{
+width: auto;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+.card{
+height: auto;
+margin-top: 30px;
+margin-bottom: auto;
+width: 410px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.editarProducto_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+}
+
+.editarProducto_btn:hover{
+color: black;
+background-color: white;
 }
 
 h1, h2 {
@@ -151,8 +176,22 @@ a {
   color: #42b983;
 }
 
-#table {
-	margin: 0 auto;
-	width: 500px;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+
+form select:focus:invalid{
+    background: url('invalid.png') no-repeat 95% 50%;
+    background-color: white;
+}
+
+form select:required:focus:valid{
+
+  background: url('valid.png') no-repeat 95% 50%;
+  background-color: white;
+}
+
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <br>
-    <h2> Productos</h2>
-    <br>
     <div class="container">
+    <br>
+    <h2 style="color:white; text-align:center;"> Productos</h2>
+    <br>
       <div v-if="this.productos.length">
           <vue-good-table
               :columns="columns"

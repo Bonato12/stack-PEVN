@@ -61,7 +61,7 @@ import axios from 'axios'
 
 class Producto {
     constructor(id_producto,modelo,descripcion,tipoProducto,stock,precio){
-          this.id_producto =   Number(new Date().getTime()),
+          this.id_producto =   id_producto,
           this.modelo = modelo,
           this.descripcion = descripcion,
           this.tipoProducto = tipoProducto,
@@ -93,14 +93,18 @@ export default {
   },
   methods: {
     nuevoProducto(){
-        //console.log(this.producto);
-        axios.post('http://localhost:3000/producto',
-        this.producto, // the data to posthttp://localhost:3000/producto
-        { headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
-          'Content-Type': 'application/json',
-        },
-      }).then(this.producto = new Producto()).then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'));
+            if (this.producto.modelo && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
+                  console.log(this.producto);
+                  axios.post('http://localhost:3000/producto',
+                  this.producto, // the data to posthttp://localhost:3000/producto
+                  { headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
+                    'Content-Type': 'application/json',
+                  },
+                }).then(this.producto = new Producto()).then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'));
+            }else{
+                this.$swal( 'Error!','Completar Los Campos Vacios!','error');
+            }
 
         }
 
