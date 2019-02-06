@@ -4,54 +4,54 @@
       <div class="d-flex justify-content-center h-100">
         <div class="card">
             <div class="card-header">
-              <h3> Nuevo Cliente </h3>
+              <h3> Proveedor </h3>
             </div>
             <div class="card-body">
-                  <form @submit.prevent="nuevoCliente()">
+                  <form @submit.prevent="">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number" min="0" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
+                        <input required type="number" min="0" v-model="" class="form-control" placeholder="Ingrese Dni">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Nombre</span>
                         </div>
-                        <input required  type="text" v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
+                        <input required  type="text" v-model="" class="form-control" placeholder="Ingrese Nombre">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Apellido</span>
                         </div>
-                        <input required  type="text" v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Ciudad</span>
-                        </div>
-                        <input required type="text" v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
+                        <input required  type="text" v-model="" class="form-control" placeholder="Ingrese Apellido">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Direccion</span>
                         </div>
-                        <input required type="text" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
+                        <input required type="text" v-model="" class="form-control" placeholder="Ingrese Direccion">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required type="number" min="0" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
+                        <input required type="number" min="0" v-model="" class="form-control" placeholder="Ingrese Telefono">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Mail</span>
                         </div>
-                          <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
+                          <input required type="text" v-model="" class="form-control" placeholder="Ingrese Mail">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Descripcion</span>
+                        </div>
+                          <input required type="text" v-model="" class="form-control" placeholder="Ingrese Mail">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Guardar"  class="btn float-right cliente_btn">
+                        <input type="submit" value="Guardar"  class="btn float-right proveedor_btn">
                     </div>
               </form>
 
@@ -67,27 +67,27 @@
 
 import axios from 'axios'
 
-class Cliente {
-    constructor(id_cliente,dni,nombre,apellido,ciudad,direccion,telefono,mail){
+class Proveedor {
+    constructor(id_proveedor,dni,nombre,apellido,direccion,telefono,mail,descripcion){
           this.id_cliente =  id_cliente,
           this.dni = dni,
           this.nombre = nombre,
           this.apellido = apellido,
-          this.ciudad = ciudad,
           this.direccion = direccion,
           this.telefono = telefono,
-          this.mail = mail
+          this.mail = mail,
+          this.descripcion = descripcion
     }
 }
 
 export default {
   created(){
-      this.getCliente();
+
   },
   data () {
     return {
       datos: [],
-      cliente: new Cliente
+      proveedor: new Proveedor
 		}
   },
   mounted(){
@@ -95,22 +95,6 @@ export default {
 
   },
   methods: {
-    getCliente(){
-    axios.get('http://localhost:3000/cliente').then((response) =>{
-      this.datos = response.data;
-      console.log(this.datos);
-    });
-    },
-    nuevoCliente(){
-        console.log(this.cliente);
-        axios.post('http://localhost:3000/cliente',
-        this.cliente, // the data to posthttp://localhost:3000/cliente
-        { headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
-          'Content-Type': 'application/json',
-        },
-        }).then(this.cliente = new Cliente()).then(this.$swal( 'Exito!','Nuevo Cliente Añadido!','success'));
-        }
 
     }
 
