@@ -6,7 +6,7 @@
             <div class="card-header">
               <h3 style="text-align:center; color:white;"> Nuevo Cliente </h3>
             </div>
-            <div class="card-body">
+            <div class="card-body animated fadeInDown">
                   <form @submit.prevent="nuevoCliente()" class="simple-form">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">

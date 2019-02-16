@@ -4,7 +4,7 @@
         <br>
         <br>
         <br>
-      	<div class="d-flex justify-content-center h-100">
+      	<div class="d-flex justify-content-center h-100 animated fadeIn">
       		<div class="card">
         			<div class="card-header">
                 <img src="./LogoTelnovo.png" class="input-group form-group" >

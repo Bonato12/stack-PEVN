@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-        <nav v-if="autenticado" class="navbar navbar-expand-lg" style="background-color: rgba(0,0,0,0.7)" >
+        <nav v-if="autenticado" class="navbar navbar-expand-lg animated fadeInDown" style="background-color: rgba(0,0,0,0.7)" >
                 <div style="width:70px;">
                     <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>
@@ -24,7 +24,7 @@
                     </ul>
                     <div>
                         <li style="float:right; ">
-                            <router-link   tag="li" class="fas fa-sign-out-alt fa-3x" style="color:#FFC312;"  to="/Login" v-on:click.native="logout()" title="Salir"></router-link>
+                            <router-link   tag="li" class="fas fa-sign-out-alt fa-3x animated" style="color:#FFC312;"  to="/Login" v-on:click.native="logout()" title="Salir"></router-link>
                         </li>
                     </div>
                 </div>

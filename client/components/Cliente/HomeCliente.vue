@@ -2,9 +2,9 @@
   <div id="Cliente">
     <div class="container">
     </br>
-    <h2> Clientes</h2>
+    <h2 class="animated heartBeat"> Clientes</h2>
     </br>
-    <div v-if="datos.length">
+    <div v-if="datos.length" class="animated zoomIn">
         <vue-good-table
             :columns="columns"
             :rows="datos"
@@ -32,7 +32,7 @@
               theme="nocturnal">
        </vue-good-table>
    </div>
-   <div style="color:black;">
+   <div style="color:black;" >
         <b-modal ref="myModalRef" hide-footer title="Detalles">
           <div class="d-block text-center;">
             <h4>ID:{{idc}}</h4>

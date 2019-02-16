@@ -51,7 +51,7 @@ const conexionDB = {
           });
   }).delete((req,res)=>{
           console.log(req.params.id_producto);
-          pool.query("DELETE FROM producto WHERE id_producto=($1)",[req.params.id_producto]).then(response=>{
+          pool.query("DELETE FROM producto WHERE id_producto=($0)",[req.params.id_producto]).then(response=>{
               res.json(response.rows);
           }).catch(error =>{
               console.log(error);

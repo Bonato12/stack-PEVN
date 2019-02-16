@@ -4,7 +4,7 @@
       <br>
       <h2>Ventas</h2>
       <br>
-      <div v-if="this.ventas.length">
+      <div v-if="this.ventas.length" class="animated zoomIn">
           <vue-good-table
               :columns="columns"
               :rows="ventas"
