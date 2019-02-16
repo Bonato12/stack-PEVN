@@ -2,7 +2,7 @@
   <div id="HomeVenta">
     <div class="container">
       <br>
-      <h2>Ventas</h2>
+      <h2 class="animated fadeIn">Ventas</h2>
       <br>
       <div v-if="this.ventas.length" class="animated zoomIn">
           <vue-good-table
