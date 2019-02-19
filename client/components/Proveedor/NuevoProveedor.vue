@@ -55,6 +55,10 @@
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                         </button>
+                        <router-link to="/HomeProveedor" tag="button" class="btn flaot-right" style="background:white; margin-left:182px;">
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
                     </div>
               </form>
             </div>
