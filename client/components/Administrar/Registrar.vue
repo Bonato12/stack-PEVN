@@ -31,9 +31,11 @@
                           <input  type="password" v-model="password1" class="form-control" placeholder="Ingrese Otra Vez la Contraseña" pattern=".{6,}"   required title="Debe tener 6 Caracteres como Minimo">
             					</div>
             					<div class="form-group">
-            						  <input type="submit" value="registrar"  class="btn float-right login_btn">
+                          <button type="submit" class="btn float-right login_btn" title="Registrar">
+                                <i class="fas fa-user-plus fa-2x"></i>
+                          </button>
             					</div>
-                      <div class="form-group" style="float:left;">
+                      <div class="form-group" style="float:left; padding-top:16px;">
                         <router-link to="/Login" style="color: #FFC312;">Volver a Login</router-link>
             					</div>
         				</form>
