@@ -134,7 +134,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .input-group-prepend span{
 width: auto;
 background-color: #FFC312;

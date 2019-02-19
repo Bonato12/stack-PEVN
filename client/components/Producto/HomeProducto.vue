@@ -62,7 +62,7 @@
           </b-modal>
     </div>
     <br>
-    <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn buttonProducto" style="float:left;">
+    <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn buttonProducto" title="Ir a Nuevo Producto" style="float:left;">
       <i class="fas fa-plus-circle fa-1x">
 
       </i>
@@ -174,7 +174,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #HomeProducto{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

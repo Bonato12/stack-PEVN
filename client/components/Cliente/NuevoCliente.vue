@@ -51,11 +51,11 @@
                           <input required type="email" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn float-right cliente_btn">
+                        <button type="submit" class="btn float-right cliente_btn" title="Guardar Cliente">
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                         </button>
-                        <router-link to="/HomeCliente" tag="button" class="btn flaot-right" style="background:white; margin-left:182px;">
+                        <router-link to="/HomeCliente" tag="button" class="btn" title="Volver a HomeCliente" style="background:white; margin-left:182px;">
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>
@@ -213,7 +213,6 @@ background-color: rgba(0,0,0,0.5) !important;
 .cliente_btn{
 color: black;
 background-color: #FFC312;
-vertical-align: middle;
 }
 
 .cliente_btn:hover{
