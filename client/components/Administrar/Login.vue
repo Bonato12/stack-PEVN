@@ -15,17 +15,18 @@
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-user"></i></span>
               						</div>
-              						<input required type="text" v-model="usuario" class="form-control" placeholder="username">
+              						<input required type="text" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-key"></i></span>
               						</div>
-              						<input required type="password" v-model="password" class="form-control" placeholder="password">
+              						<input required type="password" v-model="password" class="form-control" placeholder="Ingrese Password">
             					</div>
                       <div class="form-group">
                           <button type="submit" class="btn float-right login_btn" title="Login">
-                                <i class="fas fa-sign-in-alt fa-2x"></i>
+                                <i class="fas fa-sign-in-alt fa-1x"></i>
+                                Login
                           </button>
             					</div>
                     </form>

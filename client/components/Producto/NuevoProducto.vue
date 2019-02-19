@@ -42,7 +42,10 @@
               						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
             					<div class="form-group">
-            						  <input type="submit" value="Guardar"  class="btn float-right nuevoProducto_btn">
+                          <button type="submit" class="btn float-right nuevoProducto_btn" >
+                              <i class="far fa-save fa-1x"></i>
+                              Guardar
+                          </button>
             					</div>
         				</form>
                       <br>
@@ -149,7 +152,6 @@ background-color: rgba(0,0,0,0.5) !important;
 .nuevoProducto_btn{
 color: black;
 background-color: #FFC312;
-width: 100px;
 }
 
 .nuevoProducto_btn:hover{

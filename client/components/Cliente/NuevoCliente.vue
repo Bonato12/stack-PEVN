@@ -51,7 +51,10 @@
                           <input required type="email" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Guardar"  class="btn float-right cliente_btn">
+                        <button type="submit" class="btn float-right cliente_btn">
+                              <i class="far fa-save fa-1x"></i>
+                              Guardar
+                        </button>
                     </div>
               </form>
 
@@ -206,7 +209,7 @@ background-color: rgba(0,0,0,0.5) !important;
 .cliente_btn{
 color: black;
 background-color: #FFC312;
-width: 100px;
+vertical-align: middle;
 }
 
 .cliente_btn:hover{
