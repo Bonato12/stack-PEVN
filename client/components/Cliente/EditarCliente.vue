@@ -52,7 +52,11 @@
                           <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Modificar"  class="btn float-right cliente_btn">
+                        <input type="submit" value="Modificar"  class="btn float-right clientebtn">
+                        <router-link to="/HomeCliente" tag="button" class="btn flaot-right" style="background:white; margin-left:195px;">
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
                     </div>
               </form>
           </div>
@@ -134,7 +138,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 h1, h2 {
   font-weight: normal;
@@ -161,17 +165,17 @@ border:0 !important;
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 410px;
+width: 450px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-.cliente_btn{
+.clientebtn{
 color: black;
 background-color: #FFC312;
 width: 100px;
 }
 
-.cliente_btn:hover{
+.clientebtn:hover{
 color: black;
 background-color: white;
 }

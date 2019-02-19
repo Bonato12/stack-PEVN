@@ -44,6 +44,10 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Modificar"  class="btn float-right editarProducto_btn">
+                        <router-link to="/HomeProducto" tag="button" class="btn flaot-right" style="background:white; margin-left:195px;">
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
                     </div>
               </form>
           </div>
@@ -142,7 +146,7 @@ border:0 !important;
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 410px;
+width: 450px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
