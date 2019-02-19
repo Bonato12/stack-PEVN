@@ -62,7 +62,14 @@
           </b-modal>
     </div>
     <br>
-    <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn btn-success" style="float:left;">Nuevo Producto</router-link>
+    <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn buttonProducto" style="float:left;">
+      <i class="fas fa-plus-circle fa-1x">
+
+      </i>
+      Nuevo Producto
+    </router-link>
+
+
 </div>
   </div>
 </template>
@@ -192,5 +199,8 @@ a {
   color: #42b983;
 }
 
+.buttonProducto{
+  background-color: #fec400;
+}
 
 </style>

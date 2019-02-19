@@ -44,7 +44,12 @@
         </div>
      </div>
     </br>
-    <router-link to="/NuevaVenta" tag="button" class="btn btn-success boton" style="float: left;">Nueva Venta</router-link>
+    <router-link to="/NuevaVenta" tag="button" class="btn botonVenta" style="float: left;">
+      <i class="fas fa-plus-circle fa-1x">
+
+      </i>
+      Nueva Venta
+    </router-link>
     </div>
   </div>
 </template>
@@ -166,8 +171,8 @@ a {
   background-color: rgba(0,0,0,0.8);
 }
 
-.boton{
-  margin-top: 180px;
+.botonVenta{
+  background-color: #fec400;
 }
 
 

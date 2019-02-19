@@ -24,7 +24,11 @@
               						<input required type="password" v-model="password" class="form-control" placeholder="password">
             					</div>
                       <div class="form-group">
-            						  <input type="submit" value="login"  class="btn float-right login_btn">
+                          <button type="submit" class="btn float-right login_btn">
+
+                          <i class="fas fa-sign-in-alt fa-1x"></i>
+                          login
+                          </button>
             					</div>
                     </form>
 

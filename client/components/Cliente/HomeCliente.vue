@@ -65,7 +65,12 @@
         </b-modal>
     </div>
     </br>
-    <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn btn-success" style="float: left;"  >Nuevo Cliente</router-link>
+    <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn buttonCliente" style="float: left;"  >
+        <i class="fas fa-plus-circle fa-1x">
+
+        </i>
+        Nuevo Cliente
+    </router-link>
     </div>
   </div>
 </template>
@@ -186,5 +191,9 @@ a {
   color: #42b983;
 }
 
+.buttonCliente{
+  background-color: #fec400;
+
+}
 
 </style>
