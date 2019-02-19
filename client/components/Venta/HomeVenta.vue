@@ -175,5 +175,9 @@ a {
   background-color: #fec400;
 }
 
+.botonVenta:hover{
+  background-color: white;
+}
+
 
 </style>
