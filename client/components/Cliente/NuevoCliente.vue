@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <div class="d-flex justify-content-center h-100">
+      <div class="d-flex justify-content-center">
         <div class="card">
             <div class="card-header">
               <h3 style="text-align:center; color:white;"> Nuevo Cliente </h3>

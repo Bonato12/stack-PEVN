@@ -5,33 +5,36 @@
           <h2 style="text-align:center; color:white;"> Proveedores </h2>
       </br>
       <vue-good-table
-          :columns="columns"
-          :rows="datos"
-          title="Ver Opciones y Detalles"
-          :search-options="{
-            enabled: true,
-            skipDiacritics: true,
-            placeholder: 'Buscar Cliente',
-          }"
-          @on-row-click="onRowClick"
-          :pagination-options="{
+            :columns="columns"
+            :rows="datos"
+            title="Ver Opciones y Detalles"
+            :search-options="{
               enabled: true,
-              mode: 'records',
-              perPage: 5,
-              perPageDropdown: [3, 7, 9],
-              dropdownAllowAll: false,
-              setCurrentPage: 1,
-              nextLabel: 'Siguiente',
-              prevLabel: 'Anterior',
-              rowsPerPageLabel: 'Filas por paginas',
-              ofLabel: 'of',
-              pageLabel: 'page', // for 'pages' mode
-              allLabel: 'All',
+              skipDiacritics: true,
+              placeholder: 'Buscar Cliente',
             }"
-            theme="default">
+            @on-row-click="onRowClick"
+            :pagination-options="{
+                enabled: true,
+                mode: 'records',
+                perPage: 5,
+                perPageDropdown: [3, 7, 9],
+                dropdownAllowAll: false,
+                setCurrentPage: 1,
+                nextLabel: 'Siguiente',
+                prevLabel: 'Anterior',
+                rowsPerPageLabel: 'Filas por paginas',
+                ofLabel: 'of',
+                pageLabel: 'page', // for 'pages' mode
+                allLabel: 'All',
+              }"
+              theme="default">
      </vue-good-table>
       </br>
-      <router-link tag="button" to="/NuevoProveedor" class="btn buttonProveedor">NuevoProveedor</router-link>
+      <router-link tag="button" to="/NuevoProveedor" class="btn buttonProveedor">
+            <i class="fas fa-plus-circle fa-1x"></i>
+            Nuevo Proveedor
+      </router-link>
     </div>
   </div>
 </template>

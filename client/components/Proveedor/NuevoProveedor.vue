@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="container">
-      <div class="d-flex justify-content-center h-100">
+      <div class="d-flex justify-content-center">
         <div class="card">
             <div class="card-header">
               <h3 style="text-align:center; color:white; "> Proveedor </h3>
             </div>
-            <div class="card-body">
+            <div class="card-body animated fadeInDown">
                   <form>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -51,14 +51,15 @@
                           <input required type="text"  class="form-control" placeholder="Ingrese Descripcion">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Guardar"  class="btn float-right proveedor_btn">
+                        <button type="submit" class="btn float-right buttonProveedor">
+                              <i class="far fa-save fa-1x"></i>
+                              Guardar
+                        </button>
                     </div>
               </form>
-
             </div>
         </div>
       </div>
-    -->
   </div>
   </br>
   </div>
@@ -161,5 +162,25 @@ color: black;
 background-color: white;
 }
 
+form input:focus:invalid{
+    background: url('invalid.png') no-repeat 95% 50%;
+    /*animation: jello 1s;*/
+    background-color: white;
+}
+
+
+form input:required:focus:valid{
+
+  background: url('valid.png') no-repeat 95% 50%;
+  background-color: white;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
 
 </style>
