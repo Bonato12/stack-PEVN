@@ -202,7 +202,7 @@ border:0 !important;
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 410px;
+width: 450px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 

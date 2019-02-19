@@ -19,7 +19,7 @@
                             <router-link   tag="li"active-class="activo"   to="/HomeArreglo">Arreglos</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link   tag="li" active-class="activo"   to="/HomeProovedor">Proveedores</router-link>
+                            <router-link   tag="li" active-class="activo"   to="/HomeProveedor">Proveedores</router-link>
                         </li>
                     </ul>
                     <div>

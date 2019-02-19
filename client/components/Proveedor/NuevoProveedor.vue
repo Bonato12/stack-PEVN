@@ -4,51 +4,51 @@
       <div class="d-flex justify-content-center h-100">
         <div class="card">
             <div class="card-header">
-              <h3> Proveedor </h3>
+              <h3 style="text-align:center; color:white; "> Proveedor </h3>
             </div>
             <div class="card-body">
-                  <form @submit.prevent="">
+                  <form>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number" min="0" v-model="" class="form-control" placeholder="Ingrese Dni">
+                        <input required type="number" min="0"  class="form-control" placeholder="Ingrese Dni">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Nombre</span>
                         </div>
-                        <input required  type="text" v-model="" class="form-control" placeholder="Ingrese Nombre">
+                        <input required  type="text"  class="form-control" placeholder="Ingrese Nombre">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Apellido</span>
                         </div>
-                        <input required  type="text" v-model="" class="form-control" placeholder="Ingrese Apellido">
+                        <input required  type="text"  class="form-control" placeholder="Ingrese Apellido">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Direccion</span>
                         </div>
-                        <input required type="text" v-model="" class="form-control" placeholder="Ingrese Direccion">
+                        <input required type="text"  class="form-control" placeholder="Ingrese Direccion">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required type="number" min="0" v-model="" class="form-control" placeholder="Ingrese Telefono">
+                        <input required type="number" min="0"  class="form-control" placeholder="Ingrese Telefono">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Mail</span>
                         </div>
-                          <input required type="text" v-model="" class="form-control" placeholder="Ingrese Mail">
+                          <input required type="text"  class="form-control" placeholder="Ingrese Mail">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Descripcion</span>
                         </div>
-                          <input required type="text" v-model="" class="form-control" placeholder="Ingrese Mail">
+                          <input required type="text"  class="form-control" placeholder="Ingrese Descripcion">
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Guardar"  class="btn float-right proveedor_btn">
@@ -58,6 +58,7 @@
             </div>
         </div>
       </div>
+    -->
   </div>
   </br>
   </div>
@@ -145,19 +146,20 @@ border:0 !important;
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 410px;
+width: 450px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-.cliente_btn{
+.proveedor_btn{
 color: black;
 background-color: #FFC312;
 width: 100px;
 }
 
-.cliente_btn:hover{
+.proveedor_btn:hover{
 color: black;
 background-color: white;
 }
+
 
 </style>
