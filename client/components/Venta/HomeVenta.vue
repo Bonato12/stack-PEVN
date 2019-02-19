@@ -50,6 +50,9 @@
       </i>
       Nueva Venta
     </router-link>
+    <button type="button" class="btn botonVenta" style="float:right;">
+        <i class="fas fa-download"></i>
+    </button>
     </div>
   </div>
 </template>

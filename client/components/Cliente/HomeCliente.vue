@@ -66,11 +66,12 @@
     </div>
     </br>
     <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn buttonCliente" style="float: left;"  >
-        <i class="fas fa-plus-circle fa-1x">
-
-        </i>
+        <i class="fas fa-plus-circle fa-1x"></i>
         Nuevo Cliente
     </router-link>
+    <button type="button" class="btn buttonCliente" style="float:right;">
+        <i class="fas fa-download"></i>
+    </button>
     </div>
   </div>
 </template>

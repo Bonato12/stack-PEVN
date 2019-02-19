@@ -68,6 +68,9 @@
       </i>
       Nuevo Producto
     </router-link>
+    <button type="button" class="btn buttonProducto" style="float:right;">
+        <i class="fas fa-download"></i>
+    </button>
 
 
 </div>
