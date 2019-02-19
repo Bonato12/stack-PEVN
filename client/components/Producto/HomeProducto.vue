@@ -30,7 +30,7 @@
                   allLabel: 'All',
                 }"
 
-                theme="nocturnal">
+                theme="default">
          </vue-good-table>
      </div>
      <div style="color:black;">
