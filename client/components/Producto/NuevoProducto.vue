@@ -42,7 +42,7 @@
               						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
             					<div class="form-group">
-                          <button type="submit" class="btn float-right nuevoProducto_btn" title="Guardar Producto" >
+                          <button type="submit" class="btn float-right nuevoProducto_btn" title="Guardar Producto">
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                           </button>
@@ -146,7 +146,7 @@ border:0 !important;
 }
 
 .card{
-height: auto;
+height: 460px;
 margin-top: 30px;
 margin-bottom: auto;
 width: 450px;
