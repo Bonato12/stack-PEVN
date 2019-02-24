@@ -4,7 +4,7 @@
                 <div style="width:70px;">
                     <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>
-                <div class="navbar-collapse">
+                <div class="navbar-collapse" style="margin-left:150px;">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
                             <router-link   tag="li" active-class="activo" id="cliente"   to="/HomeCliente">Clientes</router-link>
@@ -16,27 +16,23 @@
                             <router-link  tag="li" active-class="activo"   to="/HomeVenta">Ventas</router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link  tag="li" active-class="activo"   to="/HomeCompra">Compras</router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link   tag="li"active-class="activo"   to="/HomeArreglo">Arreglos</router-link>
                         </li>
                         <li class="nav-item">
                             <router-link   tag="li" active-class="activo"   to="/HomeProveedor">Proveedores</router-link>
                         </li>
                     </ul>
-                    <!--
-                    <div>
-                        <li style="float:right; ">
-                            <router-link   tag="li" class="fas fa-sign-out-alt fa-3x animated" style="color:#FFC312;"  to="/Login" v-on:click.native="logout()" title="Salir"></router-link>
-                        </li>
-                    </div>
-                  -->
-                  <div class="dropdown">
-                      <button class="dropbtn">{{ user }}</button>
-                      <div class="dropdown-content">
-                        <router-link   tag="a" style="black"  to="/Login" v-on:click.native="logout()" title="Salir">
-                              <i class="fas fa-sign-out-alt"></i>
-                              Salir
-                        </router-link>
-                      </div>
+                    <div class="dropdown">
+                       <button class="dropbtn">{{ user }}</button>
+                       <div class="dropdown-content">
+                         <router-link   tag="a" style="black"  to="/Login" v-on:click.native="logout()" title="Salir">
+                               <i class="fas fa-sign-out-alt"></i>
+                               Salir
+                         </router-link>
+                       </div>
                     </div>
                 </div>
             </nav>
@@ -158,7 +154,9 @@ nav{
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: rgba(0,0,0,0.7);}
+.dropdown-content a:hover {
+  
+}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -167,7 +165,7 @@ nav{
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-  background-color: rgba(0,0,0,0.7);
+
 }
 
 </style>
