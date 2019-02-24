@@ -22,10 +22,21 @@
                             <router-link   tag="li" active-class="activo"   to="/HomeProveedor">Proveedores</router-link>
                         </li>
                     </ul>
+                    <!--
                     <div>
                         <li style="float:right; ">
                             <router-link   tag="li" class="fas fa-sign-out-alt fa-3x animated" style="color:#FFC312;"  to="/Login" v-on:click.native="logout()" title="Salir"></router-link>
                         </li>
+                    </div>
+                  -->
+                  <div class="dropdown">
+                      <button class="dropbtn">{{ user }}</button>
+                      <div class="dropdown-content">
+                        <router-link   tag="a" style="black"  to="/Login" v-on:click.native="logout()" title="Salir">
+                              <i class="fas fa-sign-out-alt"></i>
+                              Salir
+                        </router-link>
+                      </div>
                     </div>
                 </div>
             </nav>
@@ -45,7 +56,7 @@ export default {
   data () {
     return {
       autenticado: false,
-
+      user: ''
     }
   },
   mounted(){
@@ -54,8 +65,10 @@ export default {
   },
   methods: {
     control(){
+
       let usuario = firebase.auth().currentUser;
-      console.log(usuario);
+      this.user = usuario.email
+      console.log(usuario.email);
       if (usuario != null){
           this.autenticado = true;
           this.$router.push('/Home');
@@ -111,6 +124,50 @@ nav li{
 
 nav{
      height: 75px;
+}
+
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  background-color: rgba(0,0,0,0.7);
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: rgba(0,0,0,0.7);}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: rgba(0,0,0,0.7);
 }
 
 </style>

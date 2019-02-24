@@ -116,7 +116,6 @@ export default {
       direccion:'',
       telefono:'',
       mail:'',
-      email: '',
       datos: [],
       cliente:  new Cliente(),
       columns: [
