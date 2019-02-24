@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var nodemailer = require('nodemailer');
-const clienteController = require('./controller/cliente');
+const clienteController = require('../controller/cliente');
 
 
 router.get('/cliente', clienteController.listaclientes);
