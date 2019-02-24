@@ -7,7 +7,7 @@
             <div class="card-header">
               <h3 style="color:white; text-align:center"> Editar Producto </h3>
             </div>
-            <div class="card-body">
+            <div class="card-body animated fadeInDown">
                   <form @submit.prevent="editarProducto()">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">

@@ -7,7 +7,7 @@
             <div class="card-header">
               <h3> Editar Cliente </h3>
             </div>
-            <div class="card-body">
+            <div class="card-body animated fadeInDown">
                   <form @submit.prevent="editarCliente()">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">

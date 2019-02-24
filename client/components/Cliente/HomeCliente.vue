@@ -61,6 +61,11 @@
 
                 </i>
             </router-link>
+            <button class="btn btn-success" v-on:click="enviarMail()" title="Enviar Mail">
+                <i class="fas fa-envelope fa-2x">
+
+                </i>
+            </button>
           </div>
         </b-modal>
     </div>
@@ -80,6 +85,19 @@
 
 import axios from 'axios'
 
+class Cliente {
+    constructor(id_cliente,dni,nombre,apellido,ciudad,direccion,telefono,mail){
+          this.id_cliente = id_cliente
+          this.dni = dni,
+          this.nombre = nombre,
+          this.apellido = apellido,
+          this.ciudad = ciudad,
+          this.direccion = direccion,
+          this.telefono = telefono,
+          this.mail = mail
+    }
+}
+
 
 export default {
   name: 'Cliente',
@@ -98,7 +116,9 @@ export default {
       direccion:'',
       telefono:'',
       mail:'',
+      email: '',
       datos: [],
+      cliente:  new Cliente(),
       columns: [
         {
           label: 'Dni',
@@ -145,6 +165,16 @@ export default {
               'Ha sido elimando',
               'success'
         )).then(this.hideModal());
+    },
+    enviarMail() {
+      axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
+        this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+        axios.post('http://localhost:3000/email',
+        this.cliente
+      )});
+
+
+
     },
     onRowClick(params) {
         this.$refs.myModalRef.show()
