@@ -155,7 +155,7 @@ nav{
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-  
+
 }
 
 /* Show the dropdown menu on hover */
