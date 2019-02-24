@@ -33,43 +33,6 @@
        </vue-good-table>
    </div>
    <div style="color:black;" >
-        <!--
-        <b-modal ref="myModalRef" size="lg" hide-footer title="Detalles">
-          <div class="d-block text-center;">
-            <h4>ID:{{idc}}</h4>
-              <hr>
-            <h4>DNI:{{dni}}</h4>
-              <hr>
-            <h4>NOMBRE: {{nombre}}</h4>
-              <hr>
-            <h4>APELLIDO: {{apellido}}</h4>
-              <hr>
-            <h4>CIUDAD: {{ciudad}}</h4>
-              <hr>
-            <h4>DIRECCION: {{direccion}}</h4>
-              <hr>
-            <h4>TELEFONO: {{telefono}}</h4>
-              <hr>
-            <h4>MAIL: {{mail}}</h4>
-              <hr>
-            <button class="btn btn-danger" v-on:click="eliminarCliente(idc)" title="Eliminar Cliente">
-                <i class="fas fa-trash fa-2x">
-
-                </i>
-            </button>
-            <router-link :to="/EditarCliente/+idc"  class="btn btn-warning" tag="button" title="Editar Cliente">
-                <i class="fas fa-edit fa-2x">
-
-                </i>
-            </router-link>
-            <button class="btn btn-success" v-on:click="enviarMail()" title="Enviar Mail">
-                <i class="fas fa-envelope fa-2x">
-
-                </i>
-            </button>
-          </div>
-        </b-modal>
-      -->
         <b-modal
             title="Detalle Cliente"
             :header-bg-variant="headerBgVariant"

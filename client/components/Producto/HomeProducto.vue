@@ -34,32 +34,62 @@
          </vue-good-table>
      </div>
      <div style="color:black;">
-          <b-modal ref="myModalRef" hide-footer title="Detalles">
-            <div class="d-block text-center">
-              <h4>ID:{{idp}}</h4>
-              <hr>
-              <h4>MODELO:{{modelo}}</h4>
-              <hr>
-              <h4>DESCRIPCION: {{descripcion}}</h4>
-              <hr>
-              <h4>TIPO PRODUCTO: {{tipoproducto}}</h4>
-              <hr>
-              <h4>STOCK: {{stock}}</h4>
-              <hr>
-              <h4>PRECIO: {{precio}}$</h4>
-              <hr>
-              <button class="btn btn-danger" v-on:click="eliminarProducto(idp)" title="Eliminar Producto">
-                    <i class="fas fa-trash fa-2x">
-
-                    </i>
-              </button>
-              <router-link :to="/editarProducto/+idp" active-class="activo" class="btn btn-warning" tag="button" title="Editar Producto" >
-                  <i class="far fa-edit fa-2x">
-
-                  </i>
-              </router-link>
-            </div>
-          </b-modal>
+       <b-modal
+           ref="myModalRef"
+           title="Detalle Cliente"
+           :header-bg-variant="headerBgVariant"
+           :header-text-variant="headerTextVariant"
+           :body-bg-variant="bodyBgVariant"
+           :body-text-variant="bodyTextVariant"
+           :footer-bg-variant="footerBgVariant"
+           :footer-text-variant="footerTextVariant"
+            size="lg"
+     >
+     <b-container fluid>
+           <b-row class="mb-1">
+             <b-col cols="3">ID:</b-col>
+               <b-col>{{idp}}</b-col>
+           </b-row>
+           <hr>
+           <b-row class="mb-1">
+             <b-col cols="3">Modelo:</b-col>
+               <b-col>{{modelo}}</b-col>
+           </b-row>
+           <hr>
+           <b-row class="mb-1">
+             <b-col cols="3">Descripcion:</b-col>
+               <b-col>{{descripcion}}</b-col>
+           </b-row>
+           <hr>
+           <b-row class="mb-1">
+             <b-col cols="3">TipoProducto:</b-col>
+               <b-col>{{ tipoproducto }}</b-col>
+           </b-row>
+           <hr>
+           <b-row class="mb-1">
+             <b-col cols="3">Stock:</b-col>
+               <b-col>{{ stock }}</b-col>
+           </b-row>
+           <hr>
+           <b-row class="mb-1">
+             <b-col cols="3">Precio:</b-col>
+               <b-col>{{ precio }}</b-col>
+           </b-row>
+     </b-container>
+     <div slot="modal-footer" class="w-100">
+       <p class="float-left">Opciones</p>
+       <div style="float:right;">
+           <button class="btn btn-danger" v-on:click="eliminarProducto(idp)" title="Eliminar Producto">
+                 <i class="fas fa-trash fa-1x"></i>
+                 Eliminar
+           </button>
+           <router-link :to="/editarProducto/+idp" active-class="activo" class="btn" style="background-color:yellow;" tag="button" title="Editar Producto" >
+               <i class="far fa-edit fa-1x"></i>
+               Editar
+           </router-link>
+     </div>
+     </div>
+   </b-modal>
     </div>
     <br>
     <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn buttonProducto" title="Ir a Nuevo Producto" style="float:left;">
@@ -88,6 +118,13 @@ export default {
   },
   data () {
     return {
+      variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
+        headerBgVariant: 'dark',
+        headerTextVariant: 'light',
+        bodyBgVariant: 'light',
+        bodyTextVariant: 'dark',
+        footerBgVariant: 'warning',
+        footerTextVariant: 'dark',
       modalShow: false,
       idp: '',
       modelo: '',
