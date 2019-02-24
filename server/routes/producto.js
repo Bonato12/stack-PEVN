@@ -9,11 +9,7 @@ router.get('/producto/:id_producto',productoController.getidproducto);
 router.delete('/producto/:id_producto',productoController.deleteproducto);
 router.put('/producto/:id_producto',productoController.updateproducto);
 
-
-//Importamos CORS para poder utilizar Axios en Vue js
 const cors = require('cors');
 app.use(cors());
-
-
 
 module.exports = router;
