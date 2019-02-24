@@ -33,7 +33,8 @@
        </vue-good-table>
    </div>
    <div style="color:black;" >
-        <b-modal ref="myModalRef" hide-footer title="Detalles">
+        <!--
+        <b-modal ref="myModalRef" size="lg" hide-footer title="Detalles">
           <div class="d-block text-center;">
             <h4>ID:{{idc}}</h4>
               <hr>
@@ -68,6 +69,83 @@
             </button>
           </div>
         </b-modal>
+      -->
+        <b-modal
+            title="Detalle Cliente"
+            :header-bg-variant="headerBgVariant"
+            :header-text-variant="headerTextVariant"
+            :body-bg-variant="bodyBgVariant"
+            :body-text-variant="bodyTextVariant"
+            :footer-bg-variant="footerBgVariant"
+            :footer-text-variant="footerTextVariant"
+             size="lg"
+             ref="myModalRef"
+      >
+      <b-container fluid>
+            <b-row class="mb-1">
+              <b-col cols="3">ID:</b-col>
+                <b-col>{{idc}}</b-col>
+            </b-row>
+            <hr>
+            <b-row class="mb-1">
+              <b-col cols="3">Dni:</b-col>
+                <b-col>{{dni}}</b-col>
+            </b-row>
+            <hr>
+            <b-row class="mb-1">
+              <b-col cols="3">Nombre:</b-col>
+                <b-col>{{nombre}}</b-col>
+            </b-row>
+            <hr>
+            <b-row class="mb-1">
+              <b-col cols="3">Apellido:</b-col>
+                <b-col>{{apellido}}</b-col>
+            </b-row>
+            <hr>
+            <b-row class="mb-1">
+              <b-col cols="3">Ciudad:</b-col>
+                <b-col>{{ciudad}}</b-col>
+            </b-row>
+            <hr>
+            <b-row class="mb-1">
+              <b-col cols="3">Direccion:</b-col>
+                <b-col>{{direccion}}</b-col>
+            </b-row>
+            <hr>
+            <b-row class="mb-1">
+              <b-col cols="3">Telefono:</b-col>
+                <b-col>{{telefono}}</b-col>
+            </b-row>
+            <hr>
+            <b-row class="mb-1">
+              <b-col cols="3">Mail:</b-col>
+                <b-col>{{mail}}</b-col>
+            </b-row>
+      </b-container>
+      <div slot="modal-footer" class="w-100">
+        <p class="float-left">Opciones</p>
+        <div style="float:right;">
+            <button class="btn btn-danger" v-on:click="eliminarCliente(idc)" title="Eliminar Cliente">
+                <i class="fas fa-trash fa-1x">
+
+                </i>
+                Eliminar
+            </button>
+            <router-link :to="/EditarCliente/+idc"  class="btn" style="background-color:yellow;" tag="button" title="Editar Cliente">
+                <i class="fas fa-edit fa-1x">
+
+                </i>
+                Editar
+            </router-link>
+            <button class="btn btn-success" v-on:click="enviarMail()" title="Enviar Mail">
+                <i class="fas fa-envelope fa-1x">
+
+                </i>
+                Enviar Mail
+            </button>
+      </div>
+      </div>
+    </b-modal>
     </div>
     </br>
     <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn buttonCliente" style="float: left;"  >
@@ -108,6 +186,13 @@ export default {
   },
   data () {
     return {
+      variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
+        headerBgVariant: 'dark',
+        headerTextVariant: 'light',
+        bodyBgVariant: 'light',
+        bodyTextVariant: 'dark',
+        footerBgVariant: 'warning',
+        footerTextVariant: 'dark',
       idc: '',
       dni: '',
       nombre:'',
