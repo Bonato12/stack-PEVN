@@ -3,42 +3,14 @@ var router = express.Router();
 var app = express();
 var pg = require('pg');
 var nodemailer = require('nodemailer');
+const clienteController = require('./controller/cliente');
 
 
 
-//configuramos postgres con el usuario contraseña y la bd que queremos usar
-
-const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'postgres',
-  host: '127.0.0.1',
-  database: 'Telnovo',
-  password: '1234',
-  port: 5432,
-})
+router.get('/cliente', clienteController.listaclientes);
+router.post('/cliente',clienteController.addcliente);
 
 
-//Realizamos peticiones GET POST DELETE PUT
-
-router.route('/cliente').get((req,res)=>{
-      pool.query("SELECT * FROM cliente").then(response=> {
-        console.log(response.rows)
-        //Muestra los resultados en forma de JSON en nuestro HTML
-        res.json(response.rows);
-      }).catch(error =>{
-        console.log(error);
-      })
-    });
-
-router.route('/cliente').post((req, res)=> {
-      console.log("Peticion POST");
-      pool.query("INSERT INTO cliente(dni,nombre,apellido,ciudad,direccion,telefono,mail) VALUES($1,$2,$3,$4,$5,$6,$7)",[req.body.dni,req.body.nombre,req.body.apellido,
-      req.body.ciudad,req.body.direccion,req.body.telefono,req.body.mail]).then(response=> {
-        console.log(response);
-      }).catch(error =>{
-        console.log(error);
-      })
-  });
 
   router.route('/cliente/:id_cliente').get((req,res)=>{
        pool.query('SELECT * FROM cliente WHERE id_cliente=($1)', [req.params.id_cliente])

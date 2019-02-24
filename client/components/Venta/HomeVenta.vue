@@ -137,10 +137,7 @@ export default {
     hideModal() {
         this.$refs.myModalRef.hide()
     },
-    listar(){
 
-      this.lista.push(this.productoSelected);
-    }
 
 
 }
