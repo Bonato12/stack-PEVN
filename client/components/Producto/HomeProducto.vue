@@ -36,7 +36,7 @@
      <div style="color:black;">
        <b-modal
            ref="myModalRef"
-           title="Detalle Cliente"
+           title="Detalle Producto"
            :header-bg-variant="headerBgVariant"
            :header-text-variant="headerTextVariant"
            :body-bg-variant="bodyBgVariant"

@@ -81,6 +81,7 @@ export default {
   data () {
     return {
       idv:'',
+      lista: [],
       modalShow: false,
       ventas: [],
       columns: [
@@ -135,6 +136,10 @@ export default {
     },
     hideModal() {
         this.$refs.myModalRef.hide()
+    },
+    listar(){
+
+      this.lista.push(this.productoSelected);
     }
 
 
@@ -172,6 +177,7 @@ a {
 
 #formulario{
   background-color: rgba(0,0,0,0.8);
+  width: 450px;
 }
 
 .botonVenta{

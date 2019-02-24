@@ -4,29 +4,41 @@
           <div class="d-flex justify-content-center h-100">
         		<div class="card" id="card">
           			<div class="card-header">
-                  <h3> Nueva Venta </h3>
+                  <h3 style="text-alig:center; color:black;"> Nueva Venta </h3>
           			</div>
           			<div class="card-body">
               				<form @submit.prevent="nuevaVenta()">
-                        <div class="form-group">
-                            <v-select  placeholder="Ingrese Cliente" v-model="clienteSelected" label="dni" :options="this.cliente"></v-select>
+                        <div class="form-group" style="width:70px;">
+                          <v-select :options="cliente" label="dni" style="width:400px;" v-model="clienteSelected">
+                            <template slot="option" slot-scope="option">
+                                <span class="fa" :class="option.icon"></span>
+                                {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
+                            </template>
+                          </v-select>
                         </div>
-                        <div class="form-group">
-                              {{clienteSelected.nombre}} {{clienteSelected.apellido}}
-                        </div>
-                        <div class="form-group">
-                            <v-select placeholder="Producto" v-model="productoSelected" label="modelo" :options="this.producto"></v-select>
-                        </div>
-                        <div class="form-group">
-                              {{productoSelected.modelo}} {{productoSelected.descripcion}} {{productoSelected.precio}}
-                        </div>
+                          <div class="form-group" style="width:70px;">
+                            <v-select v-on:change="listar()" :options="producto" label="modelo" style="width:400px;" v-model="productoSelected">
+                              <template slot="option" slot-scope="option">
+                                  <span class="fa" :class="option.icon"></span>
+                                  {{ option.modelo }} {{ option.precio }}
+                              </template>
+                            </v-select>
+                          </div>
+                          <div class="form-group" style="color:black;">
+                            <ul>
+                              <li v-for="item in lista">
+                                <h3>{{ item.modelo }}</h3>
+                              </li>
+                            </ul>
+                          </div>
               					<div class="form-group">
               						  <input type="submit" value="Guardar"  class="btn float-right login_btn">
               					</div>
           				</form>
           			</div>
         		</div>
-        </div>
+            </div>
+          </div>
         <br>
       </div>
   </div>
@@ -58,12 +70,35 @@ export default {
   data () {
     return {
       cliente: [],
+      lista: [],
       producto: [],
       clienteSelected: '',
       productoSelected: '',
       //venta: new Venta()
       id_venta: '',
-      fecha: ''
+      fecha: '',
+      options: [
+      {
+          title: 'Read the Docs',
+          icon: 'fa-book',
+          url: 'https://codeclimate.com/github/sagalbot/vue-select'
+        },
+        {
+          title: 'View on GitHub',
+          icon: 'fa-github',
+          url: 'https://codeclimate.com/github/sagalbot/vue-select'
+        },
+        {
+          title: 'View on NPM',
+          icon: 'fa-database',
+          url: 'https://codeclimate.com/github/sagalbot/vue-select'
+        },
+        {
+          title: 'View Codepen Examples',
+          icon: 'fa-pencil',
+          url: 'https://codeclimate.com/github/sagalbot/vue-select'
+        }
+    ]
 		}
   },
   computed:{
@@ -103,6 +138,9 @@ export default {
                 }
               }).then(this.clienteSelected = '', this.productoSelected = '').then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'));
 
+  },
+  listar(){
+    this.lista.push(this.productoSelected);
   }
 
 }
@@ -136,8 +174,7 @@ a {
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,1) !important;
+width: 450px;
 color: white;
 }
 
