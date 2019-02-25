@@ -56,7 +56,7 @@ const pool = new Pool({
         },
         updateproveedor(req,res){
               console.log("Peticion UPDATE");
-              pool.query("UPDATE proveedor SET dni=($1), nombre=($2), apellido=($3), ciudad=($4), direccion=($5), telefono=($6), mail=($7) WHERE id_cliente=($8)", [req.body.dni, req.body.nombre, req.body.apellido,req.body.ciudad,req.body.direccion,req.body.telefono,req.body.mail,req.params.id_cliente]).then(response=> {
+              pool.query("UPDATE proveedor SET dni=($1), nombre=($2), apellido=($3), ciudad=($4), direccion=($5), telefono=($6), mail=($7) WHERE id_proveedor=($8)", [req.body.dni, req.body.nombre, req.body.apellido,req.body.ciudad,req.body.direccion,req.body.telefono,req.body.mail,req.params.id_cliente]).then(response=> {
               console.log(response.rows)
               res.json(response.rows);
               }).catch(error =>{

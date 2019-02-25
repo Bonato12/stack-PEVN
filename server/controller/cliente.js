@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
-var nodemailer = require('nodemailer');
-
 
 
 //configuramos postgres con el usuario contraseña y la bd que queremos usar

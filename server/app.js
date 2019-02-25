@@ -9,6 +9,7 @@ var clienteRouter = require('./routes/cliente');
 var productoRouter = require('./routes/producto');
 var ventaRouter = require('./routes/venta');
 var mailRouter = require('./routes/mail');
+var adminRouter = require('./routes/administrar');
 
 
 var app = express();
@@ -29,6 +30,7 @@ app.use('/', clienteRouter);
 app.use('/', productoRouter);
 app.use('/', ventaRouter);
 app.use('/', mailRouter);
+app.use('/', adminRouter);
 
 
 // catch 404 and forward to error handler
