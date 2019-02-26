@@ -89,7 +89,6 @@ export default {
         }else{
           this.$swal( 'Error!','Completa los Campos Vacios','error');
         }
-
     },
     loginGoogle(){
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -129,6 +128,8 @@ export default {
           // ...
         });
     },
+
+
 
 
 }

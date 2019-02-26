@@ -93,6 +93,11 @@ export default {
                   text: error,
                 });
               });
+              axios.post('http://localhost:3000/usuario',
+              {
+              usuario: this.usuario,
+              contraseña: this.password
+              })
           }else {
             this.$swal.fire({
                 type: 'error',

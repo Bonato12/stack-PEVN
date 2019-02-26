@@ -16,8 +16,8 @@ const conexionDB = {
 
   const Pool = require('pg').Pool
   const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
+    user: 'telnovo',
+    host: '127.0.0.1',
     database: 'Telnovo',
     password: '1234',
     port: 5432,

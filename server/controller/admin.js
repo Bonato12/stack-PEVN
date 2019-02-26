@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
-const Pool = require('pg').Pool
+const Pool = require('pg').Pool;
 
 
 
@@ -19,7 +19,7 @@ const pool = new Pool({
 module.exports = {
   addusuario(req, res){
         console.log("Peticion POST");
-        pool.query("INSERT INTO usuario(mail,contraseña) VALUES($1,$2)",[req.body.mail,req.body.contraseña]).then(response=>{
+        pool.query("INSERT INTO usuario(mail,contraseña) VALUES($1,$2)",[req.body.usuario,req.body.contraseña]).then(response=>{
           console.log(response);
         }).catch((error) =>{
           console.log(error);

@@ -14,7 +14,7 @@
               skipDiacritics: true,
               placeholder: 'Buscar Cliente',
             }"
-            @on-row-click="onRowClick"
+              @on-row-click="onRowClick"
             :pagination-options="{
                 enabled: true,
                 mode: 'records',
@@ -115,8 +115,9 @@
         <i class="fas fa-plus-circle fa-1x"></i>
         Nuevo Cliente
     </router-link>
-    <button type="button" class="btn buttonCliente" style="float:right;">
+    <button type="button" class="btn buttonCliente" v-on:click="exportarPdf()" style="float:right;">
         <i class="fas fa-download"></i>
+        Exportar Pdf
     </button>
     </div>
   </div>
@@ -125,6 +126,8 @@
 <script>
 
 import axios from 'axios'
+import jsPDF from 'jspdf';
+
 
 class Cliente {
     constructor(id_cliente,dni,nombre,apellido,ciudad,direccion,telefono,mail){
@@ -145,6 +148,7 @@ export default {
   created(){
 
       this.getCliente();
+
 
   },
   data () {
@@ -219,10 +223,13 @@ export default {
         axios.post('http://localhost:3000/email',
         this.cliente
       )});
-
-
-
     },
+    exportarPdf(){
+        var doc = new jsPDF()
+        doc.text('Hello world!', 10, 10)
+        doc.save('a4.pdf');
+      },
+
     onRowClick(params) {
         this.$refs.myModalRef.show()
         console.log(params);

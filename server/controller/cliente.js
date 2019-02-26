@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
+var pdf = require('pdfkit');
+var fs = require('fs');
 
 
 //configuramos postgres con el usuario contraseña y la bd que queremos usar
@@ -19,6 +21,13 @@ const pool = new Pool({
 //Realizamos peticiones GET POST DELETE PUT
 
   module.exports = {
+
+          listapdf(req,res){
+            console.log(req.body);
+
+          },
+
+
           listaclientes(req,res){
           pool.query("SELECT * FROM cliente").then(response=> {
             console.log(response.rows)
