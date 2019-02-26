@@ -8,6 +8,7 @@ var fs = require('fs');
 
 //configuramos postgres con el usuario contraseña y la bd que queremos usar
 
+
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
@@ -22,10 +23,7 @@ const pool = new Pool({
 
   module.exports = {
 
-          listapdf(req,res){
-            console.log(req.body);
 
-          },
 
 
           listaclientes(req,res){

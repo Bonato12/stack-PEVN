@@ -116,7 +116,7 @@
         Nuevo Cliente
     </router-link>
     <button type="button" class="btn buttonCliente" v-on:click="exportarPdf()" style="float:right;">
-        <i class="fas fa-download"></i>
+        <i class="fa fa-file-pdf" aria-hidden="true"></i>
         Exportar Pdf
     </button>
     </div>
