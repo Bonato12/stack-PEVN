@@ -115,10 +115,16 @@
         <i class="fas fa-plus-circle fa-1x"></i>
         Nuevo Cliente
     </router-link>
-    <button type="button" class="btn buttonCliente" v-on:click="exportarPdf()" style="float:right;">
+    <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
         <i class="fa fa-file-pdf" aria-hidden="true"></i>
         Exportar Pdf
     </button>
+    <button type="button" class="btn btn-success" style="margin-left:600px;" v-on:click="onexport">
+      <i class="fa fa-file-excel" aria-hidden="true"></i>
+        Exportar Excel
+    </button>
+
+
     </div>
   </div>
 </template>
@@ -126,12 +132,10 @@
 <script>
 
 import axios from 'axios'
-
-//import jsPDF from 'jspdf';
-//import autoTable from 'jspdf-autotable'
-
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import XLSX from 'xlsx'
+
 
 
 class Cliente {
@@ -199,9 +203,8 @@ export default {
           label: 'Mail',
           field: 'mail',
         },
-      ],
-
-		}
+       ]
+      }
   },
   mounted(){
 
@@ -255,6 +258,13 @@ export default {
     },
     hideModal () {
         this.$refs.myModalRef.hide()
+    },
+    onexport () {
+      var pokemonWS = XLSX.utils.json_to_sheet(this.datos)
+      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      XLSX.utils.book_append_sheet(wb, pokemonWS, this.datos)
+      // export Excel file
+      XLSX.writeFile(wb, 'book.xlsx')
     }
 }
 }

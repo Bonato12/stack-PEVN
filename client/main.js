@@ -11,7 +11,6 @@ import vSelect from 'vue-select'
 import VueGoodTablePlugin from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css'
 import {store} from './store.js';
-
 Vue.use(VueGoodTablePlugin);
 Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue);
