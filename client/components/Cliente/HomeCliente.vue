@@ -126,7 +126,12 @@
 <script>
 
 import axios from 'axios'
-import jsPDF from 'jspdf';
+
+//import jsPDF from 'jspdf';
+//import autoTable from 'jspdf-autotable'
+
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 
 class Cliente {
@@ -225,8 +230,14 @@ export default {
       )});
     },
     exportarPdf(){
+        var columnas = [
+          {title: "DNI", dataKey:"dni"},
+          {title: "NOMBRE", dataKey:"nombre"},
+          {title: "APELLIDO", dataKey:"apellido"},
+          {title: "CIUDAD", dataKey:"ciudad"}
+        ]
         var doc = new jsPDF()
-        doc.text('Hello world!', 10, 10)
+        doc.autoTable(columnas,this.datos)
         doc.save('a4.pdf');
       },
 
