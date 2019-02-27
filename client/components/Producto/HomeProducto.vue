@@ -55,6 +55,10 @@
              <b-col cols="3">Modelo:</b-col>
                <b-col>{{modelo}}</b-col>
            </b-row>
+           <b-row class="mb-1">
+             <b-col cols="3">Marca:</b-col>
+               <b-col>{{ marca }}</b-col>
+           </b-row>
            <hr>
            <b-row class="mb-1">
              <b-col cols="3">Descripcion:</b-col>
@@ -139,6 +143,7 @@ export default {
       modalShow: false,
       idp: '',
       modelo: '',
+      marca: '',
       descripcion:'',
       tipoproducto:'',
       stock:'',
@@ -149,6 +154,10 @@ export default {
         {
           label: 'Modelo',
           field: 'modelo',
+        },
+        {
+          label: 'Marca',
+          field: 'marca',
         },
         {
           label: 'Descripcion',
@@ -208,6 +217,7 @@ export default {
         console.log(params);
         this.idp = params.row.id_producto;
         this.modelo = params.row.modelo;
+        this.marca = params.row.marca;
         this.descripcion = params.row.descripcion;
         this.tipoproducto = params.row.tipoproducto;
         this.stock = params.row.stock;
@@ -219,10 +229,13 @@ export default {
     },
     exportarPdf(){
         var columnas = [
-          {title: "DNI", dataKey:"dni"},
-          {title: "NOMBRE", dataKey:"nombre"},
-          {title: "APELLIDO", dataKey:"apellido"},
-          {title: "CIUDAD", dataKey:"ciudad"}
+          {title: "MODELO", dataKey:"modelo"},
+          {title: "MARCA", dataKey:"marca"},
+          {title: "DESCRIPCION", dataKey:"descripcion"},
+          {title: "TIPOPRODUCTO", dataKey:"tipoproducto"},
+          {title: "STOCK", dataKey:"stock"},
+          {title: "PRECIO", dataKey:"precio"}
+
           ]
         var doc = new jsPDF();
         doc.autoTable(columnas,this.productos);

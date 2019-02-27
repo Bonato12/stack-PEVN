@@ -19,7 +19,7 @@ module.exports = {
   addproductos(req, res){
       console.log("PETICION POST");
       console.log(req.body);
-      pool.query("INSERT INTO producto(modelo,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5)",[req.body.modelo,req.body.descripcion,req.body.tipoProducto,
+      pool.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
       req.body.stock,req.body.precio]).then(response=>{
         console.log(response);
       }).catch(error =>{
@@ -46,7 +46,7 @@ module.exports = {
   updateproducto(req,res){
           console.log("PETICION UPDATE")
           console.log(req.params.id);
-          pool.query("UPDATE producto SET modelo=($1), descripcion=($2), tipoProducto=($3), stock=($4), precio=($5) WHERE id_producto=($6)",[req.body.modelo,req.body.descripcion,req.body.tipoProducto,
+          pool.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipoProducto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
               req.body.stock,req.body.precio, req.params.id_producto]).then((response)=>{
               console.log(response);
               res.json(response.rows);

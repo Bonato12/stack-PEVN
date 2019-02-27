@@ -16,6 +16,12 @@
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
+              							<span class="input-group-text">Marca</span>
+              						</div>
+              						<input required type="text" v-model="producto.marca" class="form-control" placeholder="Ingrese Marca">
+            					</div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
               							<span class="input-group-text">Descripcion</span>
               						</div>
               						<textarea required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
@@ -67,9 +73,10 @@
 import axios from 'axios'
 
 class Producto {
-    constructor(id_producto,modelo,descripcion,tipoProducto,stock,precio){
+    constructor(id_producto,modelo,marca,descripcion,tipoProducto,stock,precio){
           this.id_producto =   id_producto,
           this.modelo = modelo,
+          this.modelo = marca,
           this.descripcion = descripcion,
           this.tipoProducto = tipoProducto,
           this.stock = stock,

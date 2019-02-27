@@ -17,6 +17,12 @@
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
+                          <span class="input-group-text">Marca</span>
+                        </div>
+                        <input required type="text" v-model="producto.marca" class="form-control" placeholder="Ingrese Modelo">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
                           <span class="input-group-text">Descripcion</span>
                         </div>
                         <textarea required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
@@ -64,9 +70,10 @@
 import axios from 'axios'
 
 class Producto {
-    constructor(id_producto,modelo,descripcion,tipoProducto,stock,precio){
+    constructor(id_producto,modelo,marca,descripcion,tipoProducto,stock,precio){
           this.id_producto =   id_producto,
           this.modelo = modelo,
+          this.marca = marca,
           this.descripcion = descripcion,
           this.tipoProducto = tipoProducto,
           this.stock = stock,
@@ -83,7 +90,7 @@ export default {
   },
   data () {
     return {
-      idc: this.$route.params.id,
+      idp: this.$route.params.id,
       datos: [],
       producto:  new Producto(),
       tipoProductos : [{name:"Celular"},
@@ -99,9 +106,9 @@ export default {
   },
   methods: {
     rellenarProducto(){
-       axios.get('http://localhost:3000/producto/'+this.idc).then((response) =>{
+       axios.get('http://localhost:3000/producto/'+this.idp).then((response) =>{
          console.log(response.data);
-         this.producto = new Producto(this.idc,response.data[0].modelo,response.data[0].descripcion,response.data[0].tipoproducto,response.data[0].stock,response.data[0].precio);
+         this.producto = new Producto(this.idp,response.data[0].modelo,response.data[0].marca,response.data[0].descripcion,response.data[0].tipoproducto,response.data[0].stock,response.data[0].precio);
      })
    },
 
@@ -120,7 +127,7 @@ export default {
          'Editado!',
          'El Producto ha sido Editado!',
          'success'
-       ).then(axios.put('http://localhost:3000/producto/'+ this.idc,
+       ).then(axios.put('http://localhost:3000/producto/'+ this.idp,
             this.producto,
             { headers: {
                 'Content-Type': 'application/json',
