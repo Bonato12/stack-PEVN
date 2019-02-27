@@ -102,7 +102,7 @@
       </i>
       Nuevo Producto
     </router-link>
-    <button type="button" class="btn btn-danger"  style="float:right;">
+    <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
         <i class="fa fa-file-pdf" aria-hidden="true"></i>
         Exportar Pdf
     </button>
@@ -125,6 +125,9 @@
 <script>
 
 import axios from 'axios'
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import XLSX from 'xlsx'
 
 
 export default {
@@ -239,7 +242,7 @@ export default {
           ]
         var doc = new jsPDF();
         doc.autoTable(columnas,this.productos);
-        doc.save('clientes.pdf');
+        doc.save('productos.pdf');
       },
       exportarXls() {
         var productos = XLSX.utils.json_to_sheet(this.productos);

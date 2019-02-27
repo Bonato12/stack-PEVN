@@ -107,7 +107,7 @@
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Proveedor
       </router-link>
-      <button type="button" class="btn btn-danger"  style="float:right;">
+      <button type="button" class="btn btn-danger" v-on:click="exportarPdf()"  style="float:right;">
           <i class="fa fa-file-pdf" aria-hidden="true"></i>
           Exportar Pdf
       </button>
@@ -128,6 +128,9 @@
 <script>
 
 import axios from 'axios'
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import XLSX from 'xlsx'
 
 
 export default {
@@ -209,7 +212,6 @@ export default {
         {title: "DNI", dataKey:"dni"},
         {title: "NOMBRE", dataKey:"nombre"},
         {title: "APELLIDO", dataKey:"apellido"},
-        {title: "DIRECCION", dataKey:"direccion"},
         {title: "TELEFONO", dataKey:"telefono"},
         {title: "MAIL", dataKey:"mail"},
         {title: "DESCRIPCION", dataKey:"descripcion"}
@@ -223,7 +225,7 @@ export default {
       var proveedores = XLSX.utils.json_to_sheet(this.datos)
       var wb = XLSX.utils.book_new() // make Workbook of Excel
       XLSX.utils.book_append_sheet(wb, proveedores, this.datos);
-      XLSX.writeFile(wb, 'productos.xlsx');
+      XLSX.writeFile(wb, 'proveedores.xlsx');
     },
     exportarCsv() {
       var proveedores = XLSX.utils.json_to_sheet(this.datos)

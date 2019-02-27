@@ -52,7 +52,14 @@
                         <input required type="text" v-model="proveedor.descripcion" class="form-control" placeholder="Ingrese Ciudad">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Modificar"  class="btn float-right cliente_btn">
+                        <button type="submit" class="btn float-right buttonProveedor">
+                              <i class="far fa-save fa-1x"></i>
+                              Modificar
+                        </button>
+                        <router-link to="/HomeProveedor" tag="button" class="btn flaot-right" style="background:white; margin-left:175px;">
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
                     </div>
               </form>
           </div>

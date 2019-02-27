@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     nuevoProducto(){
-            if (this.producto.modelo && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
+            if (this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
                   console.log(this.producto);
                   axios.post('http://localhost:3000/producto',
                   this.producto, // the data to posthttp://localhost:3000/producto
