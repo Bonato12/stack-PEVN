@@ -98,9 +98,20 @@
       </i>
       Nuevo Producto
     </router-link>
-    <button type="button" class="btn buttonProducto" style="float:right;">
-        <i class="fas fa-download"></i>
+    <button type="button" class="btn btn-danger"  style="float:right;">
+        <i class="fa fa-file-pdf" aria-hidden="true"></i>
+        Exportar Pdf
     </button>
+    <div style="margin-left:630px;">
+        <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+          <i class="fa fa-file-excel" aria-hidden="true"></i>
+            Exportar Excel
+        </button>
+        <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+          <i class="fa fa-file-csv" aria-hidden="true"></i>
+            Exportar Csv
+        </button>
+    </div>
 
 
 </div>
@@ -205,7 +216,31 @@ export default {
     },
     hideModal() {
         this.$refs.myModalRef.hide()
-    }
+    },
+    exportarPdf(){
+        var columnas = [
+          {title: "DNI", dataKey:"dni"},
+          {title: "NOMBRE", dataKey:"nombre"},
+          {title: "APELLIDO", dataKey:"apellido"},
+          {title: "CIUDAD", dataKey:"ciudad"}
+          ]
+        var doc = new jsPDF();
+        doc.autoTable(columnas,this.productos);
+        doc.save('clientes.pdf');
+      },
+      exportarXls() {
+        var productos = XLSX.utils.json_to_sheet(this.productos);
+        var wb = XLSX.utils.book_new(); // make Workbook of Excel
+        XLSX.utils.book_append_sheet(wb, productos, this.productos);
+        XLSX.writeFile(wb, 'productos.xlsx');
+      },
+      exportarCsv() {
+        var productos = XLSX.utils.json_to_sheet(this.productos);
+        var wb = XLSX.utils.book_new(); // make Workbook of Excel
+        XLSX.utils.book_append_sheet(wb, productos, this.productos);
+        XLSX.writeFile(wb, 'productos.csv');
+      }
+
 
 }
 }

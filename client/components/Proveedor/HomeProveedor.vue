@@ -35,6 +35,20 @@
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Proveedor
       </router-link>
+      <button type="button" class="btn btn-danger"  style="float:right;">
+          <i class="fa fa-file-pdf" aria-hidden="true"></i>
+          Exportar Pdf
+      </button>
+      <div style="margin-left:630px;">
+          <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+            <i class="fa fa-file-excel" aria-hidden="true"></i>
+              Exportar Excel
+          </button>
+          <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+            <i class="fa fa-file-csv" aria-hidden="true"></i>
+              Exportar Csv
+          </button>
+      </div>
     </div>
   </div>
 </template>
@@ -89,7 +103,30 @@ export default {
       this.datos = response.data;
       //console.table(this.datos);
     });
-  }
+  },
+  exportarPdf(){
+      var columnas = [
+        {title: "DNI", dataKey:"dni"},
+        {title: "NOMBRE", dataKey:"nombre"},
+        {title: "APELLIDO", dataKey:"apellido"},
+        {title: "CIUDAD", dataKey:"ciudad"}
+        ]
+      var doc = new jsPDF()
+      doc.autoTable(columnas,this.datos)
+      doc.save('proveedores.pdf');
+    },
+    exportarXls() {
+      var proveedores = XLSX.utils.json_to_sheet(this.datos)
+      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      XLSX.utils.book_append_sheet(wb, proveedores, this.datos);
+      XLSX.writeFile(wb, 'productos.xlsx');
+    },
+    exportarCsv() {
+      var proveedores = XLSX.utils.json_to_sheet(this.datos)
+      var wb = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, proveedores, this.datos)
+      XLSX.writeFile(wb, 'proveedores.csv');
+    }
   }
 }
 </script>

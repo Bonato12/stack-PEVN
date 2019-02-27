@@ -4,7 +4,6 @@ var app = express();
 var pool = require('../database');
 
 
-
   module.exports = {
           listaproveedores(req,res){
           pool.query("SELECT * FROM proveedores").then(response=> {
