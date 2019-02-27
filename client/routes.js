@@ -10,6 +10,7 @@ import HomeVenta from './components/Venta/HomeVenta.vue'
 import NuevaVenta from './components/Venta/NuevaVenta.vue'
 import HomeProveedor from './components/Proveedor/HomeProveedor.vue'
 import NuevoProveedor from './components/Proveedor/NuevoProveedor.vue'
+import EditarProveedor from './components/Proveedor/EditarProveedor.vue'
 import Registrar from './components/Administrar/Registrar.vue'
 import Vue from 'vue'
 import firebase from 'firebase'
@@ -65,8 +66,8 @@ const rutas = new VueRouter({
               component: NuevoProveedor
             },
             {
-              path: '/NuevoProveedor',
-              component: NuevoProveedor
+              path: '/EditarProveedor/:id',
+              component: EditarProveedor
             },
             {
               path:'/HomeVenta',

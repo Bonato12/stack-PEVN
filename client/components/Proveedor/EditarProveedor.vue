@@ -5,51 +5,51 @@
           <div class="col-md-5">
           <div class="card">
             <div class="card-header">
-              <h3> Editar Cliente </h3>
+              <h3 style="text-align:center; color:white;"> Editar Proveedor </h3>
             </div>
             <div class="card-body">
-                  <form @submit.prevent="editarCliente()">
+                  <form @submit.prevent="editarProveedor()">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number" min="0" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
+                        <input required type="number" min="0" v-model="proveedor.dni" class="form-control" placeholder="Ingrese Dni">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Nombre</span>
                         </div>
-                        <input required  type="text" v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
+                        <input required  type="text" v-model="proveedor.nombre" class="form-control" placeholder="Ingrese Nombre">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Apellido</span>
                         </div>
-                        <input required  type="text" v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Ciudad</span>
-                        </div>
-                        <input required type="text" v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
+                        <input required  type="text" v-model="proveedor.apellido" class="form-control" placeholder="Ingrese Apellido">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Direccion</span>
                         </div>
-                        <input required type="text" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
+                        <input required type="text" v-model="proveedor.direccion" class="form-control" placeholder="Ingrese Direccion">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required type="number" min="0" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
+                        <input required type="number" min="0" v-model="proveedor.telefono" class="form-control" placeholder="Ingrese Telefono">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Mail</span>
                         </div>
-                          <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
+                          <input required type="text" v-model="proveedor.mail" class="form-control" placeholder="Ingrese Mail">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Descripcion</span>
+                        </div>
+                        <input required type="text" v-model="proveedor.descripcion" class="form-control" placeholder="Ingrese Ciudad">
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Modificar"  class="btn float-right cliente_btn">
@@ -68,68 +68,67 @@
 
 import axios from 'axios'
 
-class Cliente {
-    constructor(id_cliente,dni,nombre,apellido,ciudad,direccion,telefono,mail){
-          this.id_cliente = id_cliente
+class Proveedor {
+    constructor(id_proveedor,dni,nombre,apellido,direccion,telefono,mail,descripcion){
+          this.id_proveedor =  id_proveedor,
           this.dni = dni,
           this.nombre = nombre,
           this.apellido = apellido,
-          this.ciudad = ciudad,
           this.direccion = direccion,
           this.telefono = telefono,
-          this.mail = mail
+          this.mail = mail,
+          this.descripcion = descripcion
     }
 }
 
 export default {
   name: 'app',
   created(){
-    this.rellenarCliente();
+    this.rellenarProveedor();
   },
   data () {
     return {
-      idc: this.$route.params.id,
+      idp: this.$route.params.id,
       datos: [],
-      cliente:  new Cliente(),
+      proveedor:  new Proveedor(),
 		}
   },
   mounted(){
 
   },
   methods: {
-    rellenarCliente(){
-       console.log(this.idc);
-       axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
+    rellenarProveedor(){
+       console.log(this.idp);
+       axios.get('http://localhost:3000/proveedor/'+this.idp).then((response) =>{
          console.log(response.data);
-         this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+         this.proveedor = new Proveedor(this.idp,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail,response.data[0].descripcion);
      });
    },
 
-   editarCliente(){
-     this.$swal({
-     title: 'Seguro que desea Editar?',
-     text: "No podra recuperar los datos!",
-     type: 'warning',
-     showCancelButton: true,
-     confirmButtonColor: '#3085d6',
-     cancelButtonColor: '#d33',
-     confirmButtonText: 'Si, Editar'
-     }).then((result) => {
-     if (result.value) {
-       this.$swal(
-         'Editado!',
-         'El Cliente ha sido Editado!',
-         'success'
-       ).then(axios.put('http://localhost:3000/cliente/'+ this.idc,
-            this.cliente,
-            { headers: {
-                'Content-Type': 'application/json',
-            }
-          }))
-        }
-     })
-
- }
+     editarProveedor(){
+           this.$swal({
+           title: 'Seguro que desea Editar?',
+           text: "No podra recuperar los datos!",
+           type: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#3085d6',
+           cancelButtonColor: '#d33',
+           confirmButtonText: 'Si, Editar'
+           }).then((result) => {
+           if (result.value) {
+             this.$swal(
+               'Editado!',
+               'El Proveedor ha sido Editado!',
+               'success'
+             ).then(axios.put('http://localhost:3000/proveedor/'+ this.idp,
+                  this.proveedor,
+                  { headers: {
+                      'Content-Type': 'application/json',
+                  }
+                }))
+              }
+           })
+   }
 }
 }
 </script>

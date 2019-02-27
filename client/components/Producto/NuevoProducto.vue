@@ -153,7 +153,7 @@ border:0 !important;
 }
 
 .card{
-height: 460px;
+height: 510px;
 margin-top: 30px;
 margin-bottom: auto;
 width: 450px;
