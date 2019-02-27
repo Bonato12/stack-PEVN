@@ -81,6 +81,10 @@ export default {
             firebase.auth().signInWithEmailAndPassword(this.usuario,this.password)
             .then((user)=>{
               this.$router.replace('/Home');
+              axios.post('http://localhost:3000/usuario',
+              {
+              uss: this.usuario  
+              })
 
             })
             .catch((error)=>{
