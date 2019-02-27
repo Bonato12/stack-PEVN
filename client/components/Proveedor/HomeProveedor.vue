@@ -4,35 +4,37 @@
       </br>
           <h2 style="text-align:center; color:white;"> Proveedores </h2>
       </br>
-      <vue-good-table
-            :columns="columns"
-            :rows="datos"
-            title="Ver Opciones y Detalles"
-            :search-options="{
-              enabled: true,
-              skipDiacritics: true,
-              placeholder: 'Buscar Cliente',
-            }"
-            @on-row-click="onRowClick"
-            :pagination-options="{
-                enabled: true,
-                mode: 'records',
-                perPage: 5,
-                perPageDropdown: [3, 7, 9],
-                dropdownAllowAll: false,
-                setCurrentPage: 1,
-                nextLabel: 'Siguiente',
-                prevLabel: 'Anterior',
-                rowsPerPageLabel: 'Filas por paginas',
-                ofLabel: 'of',
-                pageLabel: 'page', // for 'pages' mode
-                allLabel: 'All',
-              }"
-              theme="default">
-     </vue-good-table>
+      <div v-if="datos.length" class="animated zoomIn">
+          <vue-good-table
+                :columns="columns"
+                :rows="datos"
+                title="Ver Opciones y Detalles"
+                :search-options="{
+                  enabled: true,
+                  skipDiacritics: true,
+                  placeholder: 'Buscar Proveedor',
+                }"
+                @on-row-click="detalle"
+                :pagination-options="{
+                    enabled: true,
+                    mode: 'records',
+                    perPage: 5,
+                    perPageDropdown: [3, 7, 9],
+                    dropdownAllowAll: false,
+                    setCurrentPage: 1,
+                    nextLabel: 'Siguiente',
+                    prevLabel: 'Anterior',
+                    rowsPerPageLabel: 'Filas por paginas',
+                    ofLabel: 'of',
+                    pageLabel: 'page', // for 'pages' mode
+                    allLabel: 'All',
+                  }"
+                  theme="default">
+         </vue-good-table>
+     </div>
      <div style="color:black;" >
           <b-modal
-              title="Detalle Cliente"
+              title="Detalle Proveedor"
               :header-bg-variant="headerBgVariant"
               :header-text-variant="headerTextVariant"
               :body-bg-variant="bodyBgVariant"
@@ -83,6 +85,21 @@
                   <b-col>{{ descripcion }}</b-col>
               </b-row>
         </b-container>
+        <div slot="modal-footer" class="w-100">
+          <p class="float-left">Opciones</p>
+          <div style="float:right;">
+              <button class="btn btn-danger" v-on:click="eliminarProveedor(idp)" title="Eliminar Proveedor">
+                  <i class="fas fa-trash fa-1x">
+                  </i>
+                  Eliminar
+              </button>
+              <router-link :to="/EditarProveedor/+idp"  class="btn" style="background-color:yellow;" tag="button" title="Editar Proveedor">
+                  <i class="fas fa-edit fa-1x">
+                  </i>
+                  Editar
+              </router-link>
+        </div>
+      </div>
       </b-modal>
     </div>
       </br>
@@ -120,6 +137,13 @@ export default {
   },
   data () {
     return {
+      variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
+      headerBgVariant: 'dark',
+      headerTextVariant: 'light',
+      bodyBgVariant: 'light',
+      bodyTextVariant: 'dark',
+      footerBgVariant: 'warning',
+      footerTextVariant: 'dark',
       idp: '',
       dni: '',
       nombre:'',
@@ -171,6 +195,15 @@ export default {
       //console.table(this.datos);
     });
   },
+  eliminarProveedor(id) {
+        axios.delete('http://localhost:3000/proveedor/' + id).then((data)=>{
+              this.getProveedor();
+        }).then(this.$swal.fire(
+            'Eliminado!',
+            'Ha sido elimando',
+            'success'
+      )).then(this.hideDetalle());
+  },
   exportarPdf(){
       var columnas = [
         {title: "DNI", dataKey:"dni"},
@@ -198,7 +231,7 @@ export default {
       XLSX.utils.book_append_sheet(wb, proveedores, this.datos)
       XLSX.writeFile(wb, 'proveedores.csv');
     },
-    onRowClick(params) {
+    detalle(params) {
         this.$refs.myModalRef.show()
         console.log(params);
         this.idp = params.row.id_proveedor;
@@ -210,7 +243,7 @@ export default {
         this.mail = params.row.mail;
         this.descripcion = params.row.descripcion;
     },
-    hideModal () {
+    hideDetalle() {
         this.$refs.myModalRef.hide()
     },
 
