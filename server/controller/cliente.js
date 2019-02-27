@@ -2,13 +2,12 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
-var pdf = require('pdfkit');
-var fs = require('fs');
+var pool = require('../database');
 
 
 //configuramos postgres con el usuario contraseña y la bd que queremos usar
 
-
+/*
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
@@ -17,7 +16,7 @@ const pool = new Pool({
   password: '1234',
   port: 5432,
 })
-
+*/
 
 //Realizamos peticiones GET POST DELETE PUT
 

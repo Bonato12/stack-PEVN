@@ -267,7 +267,7 @@ export default {
       var clientes = XLSX.utils.json_to_sheet(this.datos)
       var wb = XLSX.utils.book_new() // make Workbook of Excel
       XLSX.utils.book_append_sheet(wb, clientes, this.datos)
-      XLSX.writeFile(wb, 'clientes.xls');
+      XLSX.writeFile(wb, 'clientes.xlsx');
     },
     exportarCsv() {
       var clientes = XLSX.utils.json_to_sheet(this.datos)

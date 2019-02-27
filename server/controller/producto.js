@@ -1,27 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
-var pg = require('pg');
-//configuramos postgres con el usuario contraseña y la bd que queremos usar
-/*
-const conexionDB = {
-  user: 'postgres',
-  host: 'localhost',
-  database: 'Telnovo',
-  password: '1234',
-  port: 5432,
-}
-*/
-  //var client = new pg.Client(conexionDB);
-
-  const Pool = require('pg').Pool
-  const pool = new Pool({
-    user: 'telnovo',
-    host: '127.0.0.1',
-    database: 'Telnovo',
-    password: '1234',
-    port: 5432,
-  })
+var pool = require('../database');
 
 
 module.exports = {
