@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-center">
         <div class="card">
             <div class="card-header">
-              <h3 style="text-align:center; color:white; "> Proveedor </h3>
+              <h3 style="text-align:center; color:white; ">Nuevo Proveedor </h3>
             </div>
             <div class="card-body animated fadeInDown">
                   <form @submit.prevent="nuevoProveedor()">

@@ -62,7 +62,7 @@ const rutas = new VueRouter({
               component: HomeProveedor,
             },
             {
-              path: '/NuevoProveedor',
+              path: '/HomeProveedor/NuevoProveedor',
               component: NuevoProveedor
             },
             {

@@ -16,7 +16,7 @@
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-user"></i></span>
               						</div>
-              						<input required  type="mail" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
+              						<input required  type="email" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">

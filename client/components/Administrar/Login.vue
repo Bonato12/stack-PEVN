@@ -15,7 +15,7 @@
               						<div class="input-group-prepend">
               							<span class="input-group-text"><i class="fas fa-user"></i></span>
               						</div>
-              						<input required type="text" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
+              						<input required type="email" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
@@ -83,7 +83,7 @@ export default {
               this.$router.replace('/Home');
               axios.post('http://localhost:3000/usuario',
               {
-              uss: this.usuario  
+              uss: this.usuario
               })
 
             })

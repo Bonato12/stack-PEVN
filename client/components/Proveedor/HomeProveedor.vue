@@ -103,7 +103,7 @@
       </b-modal>
     </div>
       </br>
-      <router-link tag="button" to="/NuevoProveedor" class="btn buttonProveedor">
+      <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn buttonProveedor">
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Proveedor
       </router-link>
