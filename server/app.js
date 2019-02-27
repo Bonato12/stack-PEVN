@@ -9,6 +9,8 @@ var clienteRouter = require('./routes/cliente');
 var productoRouter = require('./routes/producto');
 var ventaRouter = require('./routes/venta');
 var mailRouter = require('./routes/mail');
+var proveedorRouter = require('./routes/proveedor');
+
 //var adminRouter = require('./database');
 
 
@@ -31,6 +33,8 @@ app.use('/', clienteRouter);
 app.use('/', productoRouter);
 app.use('/', ventaRouter);
 app.use('/', mailRouter);
+app.use('/', proveedorRouter);
+
 //app.use('/',adminRouter);
 
 

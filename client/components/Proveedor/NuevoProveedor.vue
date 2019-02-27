@@ -7,48 +7,48 @@
               <h3 style="text-align:center; color:white; "> Proveedor </h3>
             </div>
             <div class="card-body animated fadeInDown">
-                  <form>
+                  <form @submit.prevent="nuevoProveedor()">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number" min="0"  class="form-control" placeholder="Ingrese Dni">
+                        <input required type="number" min="0"  v-model="proveedor.dni"  class="form-control" placeholder="Ingrese Dni">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Nombre</span>
                         </div>
-                        <input required  type="text"  class="form-control" placeholder="Ingrese Nombre">
+                        <input required  type="text" v-model="proveedor.nombre"   class="form-control" placeholder="Ingrese Nombre">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Apellido</span>
                         </div>
-                        <input required  type="text"  class="form-control" placeholder="Ingrese Apellido">
+                        <input required  type="text" v-model="proveedor.apellido"   class="form-control" placeholder="Ingrese Apellido">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Direccion</span>
                         </div>
-                        <input required type="text"  class="form-control" placeholder="Ingrese Direccion">
+                        <input required type="text" v-model="proveedor.direccion"   class="form-control" placeholder="Ingrese Direccion">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required type="number" min="0"  class="form-control" placeholder="Ingrese Telefono">
+                        <input required type="number" min="0" v-model="proveedor.telefono"   class="form-control" placeholder="Ingrese Telefono">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Mail</span>
                         </div>
-                          <input required type="text"  class="form-control" placeholder="Ingrese Mail">
+                          <input required type="email" v-model="proveedor.mail"   class="form-control" placeholder="Ingrese Mail">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Descripcion</span>
                         </div>
-                          <input required type="text"  class="form-control" placeholder="Ingrese Descripcion">
+                          <input required type="text" v-model="proveedor.descripcion" class="form-control" placeholder="Ingrese Descripcion">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn float-right buttonProveedor">
@@ -75,7 +75,7 @@ import axios from 'axios'
 
 class Proveedor {
     constructor(id_proveedor,dni,nombre,apellido,direccion,telefono,mail,descripcion){
-          this.id_cliente =  id_cliente,
+          this.id_proveedor =  id_proveedor,
           this.dni = dni,
           this.nombre = nombre,
           this.apellido = apellido,
@@ -101,6 +101,20 @@ export default {
 
   },
   methods: {
+    nuevoProveedor(){
+            if (this.proveedor.dni && this.proveedor.nombre && this.proveedor.apellido && this.proveedor.direccion && this.proveedor.telefono && this.proveedor.mail && this.proveedor.descripcion){
+              console.log(this.proveedor);
+              axios.post('http://localhost:3000/proveedor',
+              this.proveedor, // the data to posthttp://localhost:3000/cliente
+              { headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000/proveedor',
+                'Content-Type': 'application/json',
+              },
+            }).then(this.proveedor = new Proveedor()).then(this.$swal( 'Exito!','Nuevo Proveedor Añadido!','success'));
+            }else{
+              this.$swal( 'Error!','Completar los Campos Vacios!','error')
+            }
+        }
 
     }
 

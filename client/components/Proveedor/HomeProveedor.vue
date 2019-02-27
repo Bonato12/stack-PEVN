@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     getCliente(){
-    axios.get('http://localhost:3000/cliente').then((response) =>{
+    axios.get('http://localhost:3000/proveedor').then((response) =>{
       this.datos = response.data;
       //console.table(this.datos);
     });
@@ -109,7 +109,9 @@ export default {
         {title: "DNI", dataKey:"dni"},
         {title: "NOMBRE", dataKey:"nombre"},
         {title: "APELLIDO", dataKey:"apellido"},
-        {title: "CIUDAD", dataKey:"ciudad"}
+        {title: "DIRECCION", dataKey:"direccion"},
+        {title: "DESCRIPCION", dataKey:"descripcion"}
+
         ]
       var doc = new jsPDF()
       doc.autoTable(columnas,this.datos)
