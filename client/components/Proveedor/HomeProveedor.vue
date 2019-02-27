@@ -30,6 +30,61 @@
               }"
               theme="default">
      </vue-good-table>
+     <div style="color:black;" >
+          <b-modal
+              title="Detalle Cliente"
+              :header-bg-variant="headerBgVariant"
+              :header-text-variant="headerTextVariant"
+              :body-bg-variant="bodyBgVariant"
+              :body-text-variant="bodyTextVariant"
+              :footer-bg-variant="footerBgVariant"
+              :footer-text-variant="footerTextVariant"
+               size="lg"
+               ref="myModalRef"
+        >
+        <b-container fluid>
+              <b-row class="mb-1">
+                <b-col cols="3">ID:</b-col>
+                  <b-col>{{idp}}</b-col>
+              </b-row>
+              <hr>
+              <b-row class="mb-1">
+                <b-col cols="3">Dni:</b-col>
+                  <b-col>{{dni}}</b-col>
+              </b-row>
+              <hr>
+              <b-row class="mb-1">
+                <b-col cols="3">Nombre:</b-col>
+                  <b-col>{{nombre}}</b-col>
+              </b-row>
+              <hr>
+              <b-row class="mb-1">
+                <b-col cols="3">Apellido:</b-col>
+                  <b-col>{{apellido}}</b-col>
+              </b-row>
+              <hr>
+              <b-row class="mb-1">
+                <b-col cols="3">Direccion:</b-col>
+                  <b-col>{{direccion}}</b-col>
+              </b-row>
+              <hr>
+              <b-row class="mb-1">
+                <b-col cols="3">Telefono:</b-col>
+                  <b-col>{{telefono}}</b-col>
+              </b-row>
+              <hr>
+              <b-row class="mb-1">
+                <b-col cols="3">Mail:</b-col>
+                  <b-col>{{mail}}</b-col>
+              </b-row>
+              <hr>
+              <b-row class="mb-1">
+                <b-col cols="3">Descripcion:</b-col>
+                  <b-col>{{ descripcion }}</b-col>
+              </b-row>
+        </b-container>
+      </b-modal>
+    </div>
       </br>
       <router-link tag="button" to="/NuevoProveedor" class="btn buttonProveedor">
             <i class="fas fa-plus-circle fa-1x"></i>
@@ -61,10 +116,18 @@ import axios from 'axios'
 export default {
   name: 'Cliente',
   created(){
-    this.getCliente();
+    this.getProveedor();
   },
   data () {
     return {
+      idp: '',
+      dni: '',
+      nombre:'',
+      apellido:'',
+      direccion:'',
+      telefono:'',
+      mail:'',
+      descripcion: '',
       datos: [],
       columns: [
         {
@@ -90,6 +153,10 @@ export default {
           label: 'Mail',
           field: 'mail',
         },
+        {
+          label: 'Descripcion',
+          field: 'descripcion',
+        },
       ],
 
 		}
@@ -98,7 +165,7 @@ export default {
 
   },
   methods: {
-    getCliente(){
+    getProveedor(){
     axios.get('http://localhost:3000/proveedor').then((response) =>{
       this.datos = response.data;
       //console.table(this.datos);
@@ -110,11 +177,13 @@ export default {
         {title: "NOMBRE", dataKey:"nombre"},
         {title: "APELLIDO", dataKey:"apellido"},
         {title: "DIRECCION", dataKey:"direccion"},
+        {title: "TELEFONO", dataKey:"telefono"},
+        {title: "MAIL", dataKey:"mail"},
         {title: "DESCRIPCION", dataKey:"descripcion"}
 
         ]
       var doc = new jsPDF()
-      doc.autoTable(columnas,this.datos)
+      doc.autoTable(columnas,this.datos);
       doc.save('proveedores.pdf');
     },
     exportarXls() {
@@ -128,7 +197,26 @@ export default {
       var wb = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(wb, proveedores, this.datos)
       XLSX.writeFile(wb, 'proveedores.csv');
-    }
+    },
+    onRowClick(params) {
+        this.$refs.myModalRef.show()
+        console.log(params);
+        this.idp = params.row.id_proveedor;
+        this.dni = params.row.dni;
+        this.nombre = params.row.nombre;
+        this.apellido = params.row.apellido;
+        this.direccion = params.row.direccion;
+        this.telefono = params.row.telefono;
+        this.mail = params.row.mail;
+        this.descripcion = params.row.descripcion;
+    },
+    hideModal () {
+        this.$refs.myModalRef.hide()
+    },
+
+
+
+
   }
 }
 </script>

@@ -6,7 +6,7 @@ var pool = require('../database');
 
   module.exports = {
           listaproveedores(req,res){
-          pool.query("SELECT * FROM proveedores").then(response=> {
+          pool.query("SELECT * FROM proveedor").then(response=> {
             console.log(response.rows)
             //Muestra los resultados en forma de JSON en nuestro HTML
             res.json(response.rows);
