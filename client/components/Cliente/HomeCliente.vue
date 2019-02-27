@@ -119,12 +119,16 @@
         <i class="fa fa-file-pdf" aria-hidden="true"></i>
         Exportar Pdf
     </button>
-    <button type="button" class="btn btn-success" style="margin-left:600px;" v-on:click="onexport">
-      <i class="fa fa-file-excel" aria-hidden="true"></i>
-        Exportar Excel
-    </button>
-
-
+    <div style="margin-left:630px;">
+        <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+          <i class="fa fa-file-excel" aria-hidden="true"></i>
+            Exportar Excel
+        </button>
+        <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+          <i class="fa fa-file-csv" aria-hidden="true"></i>
+            Exportar Csv
+        </button>
+    </div>
     </div>
   </div>
 </template>
@@ -238,10 +242,10 @@ export default {
           {title: "NOMBRE", dataKey:"nombre"},
           {title: "APELLIDO", dataKey:"apellido"},
           {title: "CIUDAD", dataKey:"ciudad"}
-        ]
+          ]
         var doc = new jsPDF()
         doc.autoTable(columnas,this.datos)
-        doc.save('a4.pdf');
+        doc.save('clientes.pdf');
       },
 
     onRowClick(params) {
@@ -259,12 +263,17 @@ export default {
     hideModal () {
         this.$refs.myModalRef.hide()
     },
-    onexport () {
-      var pokemonWS = XLSX.utils.json_to_sheet(this.datos)
+    exportarXls() {
+      var clientes = XLSX.utils.json_to_sheet(this.datos)
       var wb = XLSX.utils.book_new() // make Workbook of Excel
-      XLSX.utils.book_append_sheet(wb, pokemonWS, this.datos)
-      // export Excel file
-      XLSX.writeFile(wb, 'book.xlsx')
+      XLSX.utils.book_append_sheet(wb, clientes, this.datos)
+      XLSX.writeFile(wb, 'clientes.xls');
+    },
+    exportarCsv() {
+      var clientes = XLSX.utils.json_to_sheet(this.datos)
+      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      XLSX.utils.book_append_sheet(wb, clientes, this.datos)
+      XLSX.writeFile(wb, 'clientes.csv');
     }
 }
 }
