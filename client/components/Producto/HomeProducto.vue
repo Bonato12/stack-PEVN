@@ -169,14 +169,14 @@ export default {
         {
           label: 'TipoProducto',
           field: 'tipoproducto',
-          /*
+
           filterOptions: {
         	  enabled: true, // enable filter for this column
             placeholder: 'Filtrar Todo', // placeholder for filter input
             filterDropdownItems: ['Smartphone', 'Iphone'], // dropdown (with selected values) instead of text input
             trigger: 'enter', //only trigger on enter not on keyup
           },
-          */
+          
 
         },
         {

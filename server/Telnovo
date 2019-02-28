@@ -1,0 +1,66 @@
+CREATE TABLE usuario(
+	id_usuario SERIAL NOT NULL,
+	mail VARCHAR(30) NOT NULL,
+	contraseña VARCHAR(30) NOT NULL,
+	CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario)
+);
+
+
+CREATE TABLE cliente(
+	id_cliente BIGINT NOT NULL,
+	dni INTEGER NOT NULL,
+	nombre VARCHAR(30) NOT NULL,
+	apellido VARCHAR(30) NOT NULL,
+	ciudad VARCHAR(30) NOT NULL,
+	direccion VARCHAR(30) NOT NULL,
+	telefono VARCHAR(30) NOT NULL,
+	mail VARCHAR(30) NOT NULL,
+	CONSTRAINT pk_id_cliente PRIMARY KEY (id_cliente)
+);
+
+
+CREATE TABLE proveedor(
+	id_proveedor SERIAL NOT NULL,
+	dni INTEGER NOT NULL,
+	nombre VARCHAR(30) NOT NULL,
+	apellido VARCHAR(30) NOT NULL,
+	direccion VARCHAR(30) NOT NULL,
+	telefono VARCHAR(30) NOT NULL,
+	mail VARCHAR(30) NOT NULL,
+	descripcion VARCHAR(30) NOT NULL,
+	CONSTRAINT pk_id_proveedor PRIMARY KEY (id_proveedor)
+);
+
+SELECT * FROM proveedor;
+
+
+CREATE TABLE producto(
+	id_producto SERIAL NOT NULL,
+	modelo VARCHAR(30) NOT NULL,
+	marca VARCHAR(30) NOT NULL,
+	descripcion VARCHAR(30) NOT NULL,
+	tipoProducto VARCHAR(30) NOT NULL,
+	stock INTEGER NOT NULL,
+	precio INTEGER NOT NULL,
+	CONSTRAINT pk_id_producto PRIMARY KEY(id_producto)
+);
+
+CREATE TABLE venta(
+	id_venta SERIAL NOT NULL,
+	id_cliente BIGINT NOT NULL,
+	id_producto BIGINT NOT NULL,
+	fecha DATE NOT NULL,
+	CONSTRAINT pk_id_venta PRIMARY KEY(id_venta),
+	CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente),
+	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
+);
+
+INSERT INTO venta VALUES(1,2,3,'20/12/2018');
+
+INSERT INTO cliente VALUES(3,39261832,'Sebastian','Bonato','Herrera','CLSN','3442507780','sebabonato12@gmail.com');
+
+INSERT INTO producto VALUES(1,'Iphone X','Celular',50000);
+INSERT INTO producto VALUES(2,'Samsung J7','Celular',50000);
+INSERT INTO producto VALUES(3,'Samsung S6','Celular',50000);
+
+INSERT INTO  venta VALUES(1,120,3,'24/01/2009');
