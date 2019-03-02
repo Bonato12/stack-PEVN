@@ -176,7 +176,7 @@ export default {
             filterDropdownItems: ['Smartphone', 'Iphone'], // dropdown (with selected values) instead of text input
             trigger: 'enter', //only trigger on enter not on keyup
           },
-          
+
 
         },
         {
@@ -240,21 +240,27 @@ export default {
           {title: "PRECIO", dataKey:"precio"}
 
           ]
+        var fecha = new Date();
+        var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
         var doc = new jsPDF();
         doc.autoTable(columnas,this.productos);
-        doc.save('productos.pdf');
+        doc.save(now+'-productos.pdf');
       },
       exportarXls() {
+        var fecha = new Date();
+        var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
         var productos = XLSX.utils.json_to_sheet(this.productos);
         var wb = XLSX.utils.book_new(); // make Workbook of Excel
         XLSX.utils.book_append_sheet(wb, productos, this.productos);
-        XLSX.writeFile(wb, 'productos.xlsx');
+        XLSX.writeFile(wb,now+'-productos.xlsx');
       },
       exportarCsv() {
+        var fecha = new Date();
+        var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
         var productos = XLSX.utils.json_to_sheet(this.productos);
         var wb = XLSX.utils.book_new(); // make Workbook of Excel
         XLSX.utils.book_append_sheet(wb, productos, this.productos);
-        XLSX.writeFile(wb, 'productos.csv');
+        XLSX.writeFile(wb,now+'-productos.csv');
       }
 
 
