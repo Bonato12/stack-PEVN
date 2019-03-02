@@ -243,9 +243,11 @@ export default {
           {title: "APELLIDO", dataKey:"apellido"},
           {title: "CIUDAD", dataKey:"ciudad"}
           ]
+        var fecha = new Date();
+        var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
         var doc = new jsPDF()
         doc.autoTable(columnas,this.datos)
-        doc.save('clientes.pdf');
+        doc.save(now+'-clientes.pdf');
       },
 
     onRowClick(params) {
@@ -264,16 +266,20 @@ export default {
         this.$refs.myModalRef.hide()
     },
     exportarXls() {
+      var fecha = new Date();
+      var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
       var clientes = XLSX.utils.json_to_sheet(this.datos)
       var wb = XLSX.utils.book_new() // make Workbook of Excel
       XLSX.utils.book_append_sheet(wb, clientes, this.datos)
-      XLSX.writeFile(wb, 'clientes.xlsx');
+      XLSX.writeFile(wb,now+'-clientes.xlsx');
     },
     exportarCsv() {
+      var fecha = new Date();
+      var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
       var clientes = XLSX.utils.json_to_sheet(this.datos)
       var wb = XLSX.utils.book_new() // make Workbook of Excel
       XLSX.utils.book_append_sheet(wb, clientes, this.datos)
-      XLSX.writeFile(wb, 'clientes.csv');
+      XLSX.writeFile(wb,now+'-clientes.csv');
     }
 }
 }
