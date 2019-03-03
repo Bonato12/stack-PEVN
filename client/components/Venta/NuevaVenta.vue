@@ -98,14 +98,17 @@ export default {
     getProducto(){
       axios.get('http://localhost:3000/producto').then(response=>{
         this.producto = response.data;
+        console.log(response.data.stock)
       });
     },
   nuevaVenta(){
     console.log(this.clienteSelected);
+    console.log(this.productoSelected);
     this.venta.id_cliente = this.clienteSelected.id_cliente;
     this.venta.id_producto= this.productoSelected.id_producto;
     this.venta.precio= this.productoSelected.precio;
-
+    var id = this.venta.id_producto= this.productoSelected.id_producto;
+    var stock = this.productoSelected.stock;
     axios.post('http://localhost:3000/venta',
                 this.venta,
               {
@@ -113,13 +116,18 @@ export default {
                   'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
                   'Content-Type': 'application/json'
                 }
-              }).then(this.clienteSelected = '', this.productoSelected = '').then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'));
+              }).then(axios.put('http://localhost:3000/productoStock/'+ id,
+                   {
+                   stock: (stock) - 1
+                 },
+                   { headers: {
+                       'Content-Type': 'application/json',
+                   }
+                 }));
+        }
+      }
+    }
 
-  },
-
-
-}
-}
 </script>
 
 <style scoped>
