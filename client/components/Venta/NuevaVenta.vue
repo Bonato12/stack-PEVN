@@ -86,11 +86,12 @@ import Multiselect from 'vue-multiselect'
 
 
 class Venta{
-    constructor(id_venta,id_cliente,id_producto,fecha,precio){
+    constructor(id_venta,id_cliente,id_producto,fecha,cantidad,precio){
       this.id_venta =  id_venta,
       this.id_cliente = id_cliente,
       this.id_producto = id_producto,
-      this.fecha = new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
+      this.fecha = new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear(),
+      this.cantidad = cantidad,
       this.precio = precio
     }
 }
@@ -148,7 +149,8 @@ export default {
     console.log(this.productoSelected);
     this.venta.id_cliente = this.clienteSelected.id_cliente;
     this.venta.id_producto= this.productoSelected.id_producto;
-    this.venta.precio= this.productoSelected.precio;
+    this.venta.cantidad = this.num;
+    this.venta.precio= (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
     var id = this.venta.id_producto= this.productoSelected.id_producto;
     var stock = this.productoSelected.stock;
     axios.post('http://localhost:3000/venta',
@@ -160,7 +162,7 @@ export default {
                 }
               }).then(axios.put('http://localhost:3000/productoStock/'+ id,
                    {
-                   stock: (stock) - 1
+                   stock: (stock) - this.num
                  },
                    { headers: {
                        'Content-Type': 'application/json',
