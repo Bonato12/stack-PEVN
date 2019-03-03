@@ -44,16 +44,27 @@
         </div>
      </div>
     </br>
-    <router-link to="/NuevaVenta" tag="button" class="btn botonVenta" style="float: left;">
-      <i class="fas fa-plus-circle fa-1x">
+        <router-link to="/NuevaVenta" tag="button" class="btn botonVenta" style="float: left;">
+          <i class="fas fa-plus-circle fa-1x">
 
-      </i>
-      Nueva Venta
-    </router-link>
-    <button type="button" class="btn botonVenta" style="float:right;">
-        <i class="fas fa-download"></i>
-    </button>
-    </div>
+          </i>
+          Nueva Venta
+        </router-link>
+        <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
+            <i class="fa fa-file-pdf" aria-hidden="true"></i>
+            Exportar Pdf
+        </button>
+        <div style="margin-left:630px;">
+            <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+              <i class="fa fa-file-excel" aria-hidden="true"></i>
+                Exportar Excel
+            </button>
+            <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+              <i class="fa fa-file-csv" aria-hidden="true"></i>
+                Exportar Csv
+            </button>
+        </div>
+  </div>
   </div>
 </template>
 
