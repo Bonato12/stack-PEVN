@@ -51,16 +51,16 @@
 
 import axios from 'axios'
 
-/*
 class Venta{
     constructor(id_venta,id_cliente,id_producto,fecha){
-      this.id_venta =  Number(new Date().getTime()),
+      this.id_venta =  id_venta,
       this.id_cliente = id_cliente,
       this.id_producto = id_producto,
-      this.fecha = fecha
+      this.fecha = fecha,
+      this.precio = precio
     }
 }
-*/
+
 
 export default {
   name: 'NuevaVenta',
@@ -76,32 +76,7 @@ export default {
       lista: [],
       producto: [],
       clienteSelected: '',
-      productoSelected: '',
-      //venta: new Venta()
-      id_venta: '',
-      fecha: '',
-      options: [
-      {
-          title: 'Read the Docs',
-          icon: 'fa-book',
-          url: 'https://codeclimate.com/github/sagalbot/vue-select'
-        },
-        {
-          title: 'View on GitHub',
-          icon: 'fa-github',
-          url: 'https://codeclimate.com/github/sagalbot/vue-select'
-        },
-        {
-          title: 'View on NPM',
-          icon: 'fa-database',
-          url: 'https://codeclimate.com/github/sagalbot/vue-select'
-        },
-        {
-          title: 'View Codepen Examples',
-          icon: 'fa-pencil',
-          url: 'https://codeclimate.com/github/sagalbot/vue-select'
-        }
-    ]
+      productoSelected: ''
 		}
   },
   computed:{
