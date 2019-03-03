@@ -11,7 +11,7 @@
                         <div class="input-group form-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text">Cliente</span>
-                            <v-select :options="cliente"  label="dni" style="width:320px; background-color: white;" v-model="clienteSelected">
+                            <v-select :options="cliente" label="dni"  v-model="clienteSelected" style="width:320px; background-color: white;">
                               <template slot="option" slot-scope="option">
                                   <span class="fa" :class="option.icon"></span>
                                   {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
@@ -22,7 +22,7 @@
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text">Producto</span>
-                                <v-select  :options="producto" label="modelo" style="width:303px; background-color: white;" v-model="productoSelected">
+                                <v-select  :options="producto" label="modelo"  v-model="productoSelected" style="width:303px; background-color: white;">
                                   <template slot="option" slot-scope="option">
                                       <span class="fa" :class="option.icon"></span>
                                       {{ option.modelo }} {{ option.precio }}
@@ -57,7 +57,7 @@ class Venta{
       this.id_cliente = id_cliente,
       this.id_producto = id_producto,
       this.fecha = new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
-      this.precio = precio
+      this.precio = '9000'
     }
 }
 
@@ -76,8 +76,8 @@ export default {
       cliente: [],
       lista: [],
       producto: [],
-      clienteSelected: '',
-      productoSelected: ''
+      productoSelected: '',
+      clienteSelected: ''
 		}
   },
   computed:{
@@ -102,7 +102,9 @@ export default {
     },
   nuevaVenta(){
     console.log(this.clienteSelected);
-    console.log(this.productoSelected);
+    this.venta.id_cliente = this.clienteSelected.id_cliente;
+    this.venta.id_producto= this.productoSelected.id_producto;
+
     axios.post('http://localhost:3000/venta',
                 this.venta,
               {
