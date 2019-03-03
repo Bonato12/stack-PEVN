@@ -60,6 +60,12 @@
                               </b-input-group>
                            </div>
                         </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Total</span>
+                            </div>
+                            <input required type="number" min="0"  v-model="venta.precio"  class="form-control">
+                        </div>
                         <br>
               					<div class="form-group">
               						  <input type="submit" value="Guardar"  class="btn float-right venta_btn">
@@ -150,7 +156,7 @@ export default {
     this.venta.id_cliente = this.clienteSelected.id_cliente;
     this.venta.id_producto= this.productoSelected.id_producto;
     this.venta.cantidad = this.num;
-    this.venta.precio= (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
+    this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
     var id = this.venta.id_producto= this.productoSelected.id_producto;
     var stock = this.productoSelected.stock;
     axios.post('http://localhost:3000/venta',
@@ -174,12 +180,17 @@ export default {
       },
       increment() {
       this.num++;
+      if(this.productoSelected.precio){
+      this.venta.precio = this.productoSelected.precio * this.num;
+      }
     },
     decrement() {
       if (this.num === 1) {
         alert("Negative quantity not allowed");
       } else {
         this.num--;
+        this.venta.precio = this.productoSelected.precio * this.num;
+
       }
     }
 
