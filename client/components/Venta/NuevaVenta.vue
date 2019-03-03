@@ -43,13 +43,32 @@
                                 </v-select>
                             </div>
                         </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Cantidad</span>
+                              <b-input-group>
+                                <b-form-input type="number" min="0.00"  :value="num" v-model="num" />
+
+                                <b-input-group-append>
+                                  <b-button  variant="info" style="background-color: #FFC312;" @click="decrement()">
+                                      <i class="fas fa-minus"></i>
+                                  </b-button>
+                                  <b-button  variant="info"   @click="increment()">
+                                      <i class="fas fa-plus"></i>
+                                  </b-button>
+                                </b-input-group-append>
+                              </b-input-group>
+                           </div>
+                        </div>
+                        <br>
               					<div class="form-group">
               						  <input type="submit" value="Guardar"  class="btn float-right venta_btn">
+                            <router-link to="/HomeProveedor" tag="button" class="btn" style="background:white; margin-left:202px;">
+                                <i class="fas fa-arrow-left"></i>
+                                  Volver
+                            </router-link>
               					</div>
-                        <router-link to="/HomeProveedor" tag="button" class="btn" style="background:white; margin-left:202px;">
-                            <i class="fas fa-arrow-left"></i>
-                              Volver
-                        </router-link>
+
           				</form>
           			</div>
         		</div>
@@ -99,7 +118,8 @@ export default {
       	{	language: 'JavaScript', library: 'Vue.js' },
         { language: 'JavaScript', library: 'Vue-Multiselect' },
         { language: 'JavaScript', library: 'Vuelidate' }
-      ]
+      ],
+      num: 1
 		}
   },
   computed:{
@@ -149,9 +169,20 @@ export default {
         },
         customLabel (option) {
     return `${option.dni}-${option.nombre} - ${option.apellido}`
-  }
+      },
+      increment() {
+      this.num++;
+    },
+    decrement() {
+      if (this.num === 1) {
+        alert("Negative quantity not allowed");
+      } else {
+        this.num--;
       }
     }
+
+  }
+}
 
 </script>
 
