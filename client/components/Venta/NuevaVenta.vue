@@ -8,6 +8,19 @@
           			</div>
           			<div class="card-body">
               				<form @submit.prevent="nuevaVenta()">
+                        <!--
+                        <div>
+                            <multiselect
+                              v-model="value"
+                              :options="cliente"
+                              :multiple="true"
+                              track-by="library"
+                              :custom-label="customLabel"
+                              >
+                            </multiselect>
+                            <pre>{{ value }}</pre>
+                        </div>
+                      -->
                         <div class="input-group form-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text">Cliente</span>
@@ -25,7 +38,7 @@
                                 <v-select  :options="producto" label="modelo"  v-model="productoSelected" style="width:303px; background-color: white;">
                                   <template slot="option" slot-scope="option">
                                       <span class="fa" :class="option.icon"></span>
-                                      {{ option.modelo }} {{ option.precio }}
+                                    {{ option.marca }} {{ option.modelo }} {{ option.precio }}
                                   </template>
                                 </v-select>
                             </div>
@@ -50,6 +63,8 @@
 <script>
 
 import axios from 'axios'
+import Multiselect from 'vue-multiselect'
+
 
 class Venta{
     constructor(id_venta,id_cliente,id_producto,fecha,precio){
@@ -64,6 +79,7 @@ class Venta{
 
 export default {
   name: 'NuevaVenta',
+  components: { Multiselect },
   created(){
 
       this.getCliente();
@@ -77,7 +93,13 @@ export default {
       lista: [],
       producto: [],
       productoSelected: '',
-      clienteSelected: ''
+      clienteSelected: '',
+      value: '',
+    	options: [
+      	{	language: 'JavaScript', library: 'Vue.js' },
+        { language: 'JavaScript', library: 'Vue-Multiselect' },
+        { language: 'JavaScript', library: 'Vuelidate' }
+      ]
 		}
   },
   computed:{
@@ -124,7 +146,10 @@ export default {
                        'Content-Type': 'application/json',
                    }
                  }));
-        }
+        },
+        customLabel (option) {
+    return `${option.dni}-${option.nombre} - ${option.apellido}`
+  }
       }
     }
 
