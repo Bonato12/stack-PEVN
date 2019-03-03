@@ -4,36 +4,39 @@
           <div class="d-flex justify-content-center h-100">
         		<div class="card" id="card">
           			<div class="card-header">
-                  <h3 style="text-alig:center; color:black;"> Nueva Venta </h3>
+                  <h3 style="text-align:center; color:white;"> Nueva Venta </h3>
           			</div>
           			<div class="card-body">
               				<form @submit.prevent="nuevaVenta()">
-                        <div class="form-group" style="width:70px;">
-                          <v-select :options="cliente" label="dni" style="width:400px;" v-model="clienteSelected">
-                            <template slot="option" slot-scope="option">
-                                <span class="fa" :class="option.icon"></span>
-                                {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
-                            </template>
-                          </v-select>
-                        </div>
-                          <div class="form-group" style="width:70px;">
-                            <v-select v-on:change="listar()" :options="producto" label="modelo" style="width:400px;" v-model="productoSelected">
+                        <div class="input-group form-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">Cliente</span>
+                            <v-select :options="cliente" tag="input"  label="dni" style="width:320px; background-color: white;" v-model="clienteSelected">
                               <template slot="option" slot-scope="option">
                                   <span class="fa" :class="option.icon"></span>
-                                  {{ option.modelo }} {{ option.precio }}
+                                  {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
                               </template>
                             </v-select>
                           </div>
-                          <div class="form-group" style="color:black;">
-                            <ul>
-                              <li v-for="item in lista">
-                                <h3>{{ item.modelo }}</h3>
-                              </li>
-                            </ul>
-                          </div>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Producto</span>
+                                <v-select  :options="producto" label="modelo" style="width:303px; background-color: white;" v-model="productoSelected">
+                                  <template slot="option" slot-scope="option">
+                                      <span class="fa" :class="option.icon"></span>
+                                      {{ option.modelo }} {{ option.precio }}
+                                  </template>
+                                </v-select>
+                            </div>
+                        </div>
               					<div class="form-group">
-              						  <input type="submit" value="Guardar"  class="btn float-right login_btn">
+              						  <input type="submit" value="Guardar"  class="btn float-right venta_btn">
               					</div>
+                        <router-link to="/HomeProveedor" tag="button" class="btn" style="background:white; margin-left:202px;">
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
           				</form>
           			</div>
         		</div>
@@ -147,7 +150,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 
 h1, h2 {
@@ -176,7 +179,27 @@ margin-top: 30px;
 margin-bottom: auto;
 width: 450px;
 color: white;
+background-color: rgba(0,0,0,0.5) !important;
+
 }
 
+
+.venta_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+}
+
+.venta_btn:hover{
+color: black;
+background-color: white;
+}
+
+.input-group-prepend span{
+width: auto;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
 
 </style>
