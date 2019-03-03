@@ -57,7 +57,7 @@ class Venta{
       this.id_cliente = id_cliente,
       this.id_producto = id_producto,
       this.fecha = new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
-      this.precio = '9000'
+      this.precio = precio
     }
 }
 
@@ -104,6 +104,7 @@ export default {
     console.log(this.clienteSelected);
     this.venta.id_cliente = this.clienteSelected.id_cliente;
     this.venta.id_producto= this.productoSelected.id_producto;
+    this.venta.precio= this.productoSelected.precio;
 
     axios.post('http://localhost:3000/venta',
                 this.venta,
