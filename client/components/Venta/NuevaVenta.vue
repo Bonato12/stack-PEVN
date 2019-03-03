@@ -116,9 +116,7 @@ export default {
               }).then(this.clienteSelected = '', this.productoSelected = '').then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'));
 
   },
-  listar(){
-    this.lista.push(this.productoSelected);
-  }
+
 
 }
 }

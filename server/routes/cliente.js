@@ -4,11 +4,11 @@ var app = express();
 var nodemailer = require('nodemailer');
 const clienteController = require('../controller/cliente');
 
-router.get('/cliente', clienteController.listaclientes);
-router.post('/cliente',clienteController.addcliente);
-router.get('/cliente/:id_cliente',clienteController.getidcliente);
-router.delete('/cliente/:id_cliente',clienteController.deletecliente);
-router.put('/cliente/:id_cliente',clienteController.updatecliente);
+router.get('/cliente', clienteController.getCliente);
+router.post('/cliente',clienteController.postCliente);
+router.get('/cliente/:id_cliente',clienteController.getIdCliente);
+router.delete('/cliente/:id_cliente',clienteController.deleteCliente);
+router.put('/cliente/:id_cliente',clienteController.updateCliente);
 
 const cors = require('cors');
 app.use(cors());

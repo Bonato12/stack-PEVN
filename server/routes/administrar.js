@@ -5,7 +5,7 @@ var nodemailer = require('nodemailer');
 const adminController = require('../controller/admin');
 
 
-router.post('/usuario',adminController.addusuario);
+router.post('/usuario',adminController.postUsuario);
 
 
 const cors = require('cors');

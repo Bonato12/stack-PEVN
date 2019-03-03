@@ -3,11 +3,11 @@ var router = express.Router();
 var app = express();
 const productoController = require('../controller/producto');
 
-router.get('/producto', productoController.listarproductos);
-router.post('/producto',productoController.addproductos);
-router.get('/producto/:id_producto',productoController.getidproducto);
-router.delete('/producto/:id_producto',productoController.deleteproducto);
-router.put('/producto/:id_producto',productoController.updateproducto);
+router.get('/producto', productoController.getProducto);
+router.post('/producto',productoController.postProducto);
+router.get('/producto/:id_producto',productoController.getIdProducto);
+router.delete('/producto/:id_producto',productoController.deleteProducto);
+router.put('/producto/:id_producto',productoController.updateProducto);
 
 const cors = require('cors');
 app.use(cors());

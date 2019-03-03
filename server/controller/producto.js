@@ -6,7 +6,7 @@ var pool = require('../database');
 
 module.exports = {
 
-        listarproductos(req,res){
+        getProducto(req,res){
           pool.query("SELECT  * FROM producto").then((response)=> {
           console.log(response.rows);
           res.json(response.rows);
@@ -16,7 +16,7 @@ module.exports = {
           })
         },
 
-  addproductos(req, res){
+      postProducto(req, res){
       console.log("PETICION POST");
       console.log(req.body);
       pool.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
@@ -27,7 +27,7 @@ module.exports = {
       })
     },
 
-   getidproducto(req,res){
+   getIdProducto(req,res){
           pool.query('SELECT * FROM producto WHERE id_producto=($1)', [req.params.id_producto]).then(response=> {
               res.json(response.rows);
           }).catch(error =>{
@@ -35,7 +35,7 @@ module.exports = {
           });
     },
 
-  deleteproducto(req,res){
+  deleteProducto(req,res){
           console.log(req.params.id_producto);
           pool.query("DELETE FROM producto WHERE id_producto=($1)",[req.params.id_producto]).then(response=>{
               res.json(response.rows);
@@ -43,7 +43,7 @@ module.exports = {
               console.log(error);
           });
         },
-  updateproducto(req,res){
+  updateProducto(req,res){
           console.log("PETICION UPDATE")
           console.log(req.params.id);
           pool.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipoProducto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,

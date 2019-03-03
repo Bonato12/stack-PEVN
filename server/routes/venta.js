@@ -3,8 +3,8 @@ var router = express.Router();
 var app = express();
 const ventaController = require('../controller/venta');
 
-router.get('/venta', ventaController.listaventas);
-router.post('/venta',ventaController.addventas);
+router.get('/venta', ventaController.getVenta);
+router.post('/venta',ventaController.postVenta);
 
 
 /*
