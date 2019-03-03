@@ -11,7 +11,7 @@
                         <div class="input-group form-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text">Cliente</span>
-                            <v-select :options="cliente" tag="input"  label="dni" style="width:320px; background-color: white;" v-model="clienteSelected">
+                            <v-select :options="cliente"  label="dni" style="width:320px; background-color: white;" v-model="clienteSelected">
                               <template slot="option" slot-scope="option">
                                   <span class="fa" :class="option.icon"></span>
                                   {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
@@ -56,7 +56,7 @@ class Venta{
       this.id_venta =  id_venta,
       this.id_cliente = id_cliente,
       this.id_producto = id_producto,
-      this.fecha = fecha,
+      this.fecha = new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
       this.precio = precio
     }
 }
@@ -72,6 +72,7 @@ export default {
   },
   data () {
     return {
+      venta: new Venta(),
       cliente: [],
       lista: [],
       producto: [],
@@ -103,12 +104,7 @@ export default {
     console.log(this.clienteSelected);
     console.log(this.productoSelected);
     axios.post('http://localhost:3000/venta',
-                {
-                  id_venta: Number(new Date().getTime()),
-                  id_cliente: this.clienteSelected.id_cliente,
-                  id_producto: this.productoSelected.id_producto,
-                  fecha: new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear()
-              },
+                this.venta,
               {
                 headers: {
                   'Access-Control-Allow-Origin': 'http://localhost:3000/venta',

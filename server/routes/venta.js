@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
-var pg = require('pg');
-//configuramos postgres con el usuario contraseña y la bd que queremos usar
+const ventaController = require('../controller/venta');
+
+router.get('/venta', ventaController.listaventas);
+router.post('/venta',ventaController.addventas);
+
+
+/*
 const conexionDB = {
   user: 'postgres',
   host: 'localhost',
@@ -10,6 +15,7 @@ const conexionDB = {
   password: '1234',
   port: 5432,
 }
+
 
   router.route('/venta').get((req,res)=>{
     console.log("PETICION GET");
@@ -54,6 +60,9 @@ const conexionDB = {
   const cors = require('cors');
   app.use(cors());
 
+*/
 
+const cors = require('cors');
+app.use(cors());
 
 module.exports = router;
