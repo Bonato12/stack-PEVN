@@ -84,11 +84,11 @@
      <div slot="modal-footer" class="w-100">
        <p class="float-left">Opciones</p>
        <div style="float:right;">
-           <button class="btn btn-danger" v-on:click="eliminarProducto(idp)" title="Eliminar Producto">
+           <button class="btn btn-danger" v-on:click="eliminarProducto(producto.id_producto)" title="Eliminar Producto">
                  <i class="fas fa-trash fa-1x"></i>
                  Eliminar
            </button>
-           <router-link :to="/editarProducto/+idp" active-class="activo" class="btn" style="background-color:yellow;" tag="button" title="Editar Producto" >
+           <router-link :to="/editarProducto/+producto.id_producto" active-class="activo" class="btn" style="background-color:yellow;" tag="button" title="Editar Producto" >
                <i class="far fa-edit fa-1x"></i>
                Editar
            </router-link>
@@ -201,8 +201,8 @@ export default {
         console.log(error);
       })
     },
-    eliminarProducto(idp){
-      axios.delete('http://localhost:3000/producto/'+idp).then((data)=>{
+    eliminarProducto(id){
+      axios.delete('http://localhost:3000/producto/'+id).then((data)=>{
         this.getProducto();
       }).then(this.$swal.fire(
           'Eliminado!',

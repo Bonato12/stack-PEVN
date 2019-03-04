@@ -88,13 +88,13 @@
       <div slot="modal-footer" class="w-100">
         <p class="float-left">Opciones</p>
         <div style="float:right;">
-            <button class="btn btn-danger" v-on:click="eliminarCliente(idc)" title="Eliminar Cliente">
+            <button class="btn btn-danger" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
                 <i class="fas fa-trash fa-1x">
 
                 </i>
                 Eliminar
             </button>
-            <router-link :to="/EditarCliente/+idc"  class="btn" style="background-color:yellow;" tag="button" title="Editar Cliente">
+            <router-link :to="/EditarCliente/+cliente.id_cliente"  class="btn" style="background-color:yellow;" tag="button" title="Editar Cliente">
                 <i class="fas fa-edit fa-1x">
 
                 </i>
@@ -140,7 +140,6 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import Cliente from '../../models/Cliente';
-
 export default {
   name: 'Cliente',
   created(){
@@ -204,8 +203,8 @@ export default {
         )).then(this.hideModal());
     },
     enviarMail() {
-      axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
-        this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+      axios.get('http://localhost:3000/cliente/'+this.cliente.id_cliente).then((response) =>{
+        this.cliente = new Cliente(this.cliente.id_cliente,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
         axios.post('http://localhost:3000/email',
         this.cliente
       )});
