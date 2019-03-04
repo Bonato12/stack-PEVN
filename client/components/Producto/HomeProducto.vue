@@ -48,36 +48,37 @@
      <b-container fluid>
            <b-row class="mb-1">
              <b-col cols="3">ID:</b-col>
-               <b-col>{{idp}}</b-col>
+               <b-col>{{producto.id_producto}}</b-col>
            </b-row>
            <hr>
            <b-row class="mb-1">
              <b-col cols="3">Modelo:</b-col>
-               <b-col>{{modelo}}</b-col>
+               <b-col>{{producto.modelo}}</b-col>
            </b-row>
+           <hr>
            <b-row class="mb-1">
              <b-col cols="3">Marca:</b-col>
-               <b-col>{{ marca }}</b-col>
+               <b-col>{{ producto.marca }}</b-col>
            </b-row>
            <hr>
            <b-row class="mb-1">
              <b-col cols="3">Descripcion:</b-col>
-               <b-col>{{descripcion}}</b-col>
+               <b-col>{{producto.descripcion}}</b-col>
            </b-row>
            <hr>
            <b-row class="mb-1">
              <b-col cols="3">TipoProducto:</b-col>
-               <b-col>{{ tipoproducto }}</b-col>
+               <b-col>{{ producto.tipoproducto }}</b-col>
            </b-row>
            <hr>
            <b-row class="mb-1">
              <b-col cols="3">Stock:</b-col>
-               <b-col>{{ stock }}</b-col>
+               <b-col>{{ producto.stock }}</b-col>
            </b-row>
            <hr>
            <b-row class="mb-1">
              <b-col cols="3">Precio:</b-col>
-               <b-col>{{ precio }}</b-col>
+               <b-col>{{ producto.precio }}</b-col>
            </b-row>
      </b-container>
      <div slot="modal-footer" class="w-100">
@@ -145,13 +146,7 @@ export default {
         footerBgVariant: 'warning',
         footerTextVariant: 'dark',
       modalShow: false,
-      idp: '',
-      modelo: '',
-      marca: '',
-      descripcion:'',
-      tipoproducto:'',
-      stock:'',
-      precio: '',
+      producto: new Producto(),
       productos: [],
       //field nombre del atributo en la Lista Producto
       columns: [
@@ -219,13 +214,13 @@ export default {
     onRowClick(params) {
         this.$refs.myModalRef.show()
         console.log(params);
-        this.idp = params.row.id_producto;
-        this.modelo = params.row.modelo;
-        this.marca = params.row.marca;
-        this.descripcion = params.row.descripcion;
-        this.tipoproducto = params.row.tipoproducto;
-        this.stock = params.row.stock;
-        this.precio = params.row.precio;
+        this.producto.id_producto = params.row.id_producto;
+        this.producto.modelo = params.row.modelo;
+        this.producto.marca = params.row.marca;
+        this.producto.descripcion = params.row.descripcion;
+        this.producto.tipoproducto = params.row.tipoproducto;
+        this.producto.stock = params.row.stock;
+        this.producto.precio = params.row.precio;
 
     },
     hideModal() {

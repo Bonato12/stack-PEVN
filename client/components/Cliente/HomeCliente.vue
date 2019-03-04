@@ -47,42 +47,42 @@
       <b-container fluid>
             <b-row class="mb-1">
               <b-col cols="3">ID:</b-col>
-                <b-col>{{idc}}</b-col>
+                <b-col>{{cliente.id_cliente}}</b-col>
             </b-row>
             <hr>
             <b-row class="mb-1">
               <b-col cols="3">Dni:</b-col>
-                <b-col>{{dni}}</b-col>
+                <b-col>{{cliente.dni}}</b-col>
             </b-row>
             <hr>
             <b-row class="mb-1">
               <b-col cols="3">Nombre:</b-col>
-                <b-col>{{nombre}}</b-col>
+                <b-col>{{cliente.nombre}}</b-col>
             </b-row>
             <hr>
             <b-row class="mb-1">
               <b-col cols="3">Apellido:</b-col>
-                <b-col>{{apellido}}</b-col>
+                <b-col>{{cliente.apellido}}</b-col>
             </b-row>
             <hr>
             <b-row class="mb-1">
               <b-col cols="3">Ciudad:</b-col>
-                <b-col>{{ciudad}}</b-col>
+                <b-col>{{cliente.ciudad}}</b-col>
             </b-row>
             <hr>
             <b-row class="mb-1">
               <b-col cols="3">Direccion:</b-col>
-                <b-col>{{direccion}}</b-col>
+                <b-col>{{cliente.direccion}}</b-col>
             </b-row>
             <hr>
             <b-row class="mb-1">
               <b-col cols="3">Telefono:</b-col>
-                <b-col>{{telefono}}</b-col>
+                <b-col>{{cliente.telefono}}</b-col>
             </b-row>
             <hr>
             <b-row class="mb-1">
               <b-col cols="3">Mail:</b-col>
-                <b-col>{{mail}}</b-col>
+                <b-col>{{cliente.mail}}</b-col>
             </b-row>
       </b-container>
       <div slot="modal-footer" class="w-100">
@@ -155,14 +155,6 @@ export default {
         bodyTextVariant: 'dark',
         footerBgVariant: 'warning',
         footerTextVariant: 'dark',
-        idc: '',
-        dni: '',
-        nombre:'',
-        apellido:'',
-        ciudad:'',
-        direccion:'',
-        telefono:'',
-        mail:'',
       datos: [],
       cliente:  new Cliente(),
       columns: [
@@ -246,14 +238,14 @@ export default {
     onRowClick(params) {
         this.$refs.myModalRef.show()
         console.log(params);
-        this.idc = params.row.id_cliente;
-        this.dni = params.row.dni;
-        this.nombre = params.row.nombre;
-        this.apellido = params.row.apellido;
-        this.ciudad = params.row.ciudad;
-        this.direccion = params.row.direccion;
-        this.telefono = params.row.telefono;
-        this.mail = params.row.mail;
+        this.cliente.id_cliente = params.row.id_cliente;
+        this.cliente.dni = params.row.dni;
+        this.cliente.nombre = params.row.nombre;
+        this.cliente.apellido = params.row.apellido;
+        this.cliente.ciudad = params.row.ciudad;
+        this.cliente.direccion = params.row.direccion;
+        this.cliente.telefono = params.row.telefono;
+        this.cliente.mail = params.row.mail;
     },
     hideModal () {
         this.$refs.myModalRef.hide()
