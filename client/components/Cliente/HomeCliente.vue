@@ -139,30 +139,12 @@ import axios from 'axios'
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
-
-
-
-class Cliente {
-    constructor(id_cliente,dni,nombre,apellido,ciudad,direccion,telefono,mail){
-          this.id_cliente = id_cliente
-          this.dni = dni,
-          this.nombre = nombre,
-          this.apellido = apellido,
-          this.ciudad = ciudad,
-          this.direccion = direccion,
-          this.telefono = telefono,
-          this.mail = mail
-    }
-}
-
+import Cliente from '../../models/Cliente';
 
 export default {
   name: 'Cliente',
   created(){
-
       this.getCliente();
-
-
   },
   data () {
     return {

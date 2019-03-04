@@ -125,6 +125,7 @@
 <script>
 
 import axios from 'axios'
+import Producto from '../../models/Producto';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
