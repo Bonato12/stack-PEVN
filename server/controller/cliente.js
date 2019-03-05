@@ -3,7 +3,6 @@ var router = express.Router();
 var app = express();
 var pg = require('pg');
 var pool = require('../database');
-var pool = require('../database');
 
 
 //Realizamos peticiones GET POST DELETE PUT
