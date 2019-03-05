@@ -140,16 +140,12 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import Cliente from '../../models/Cliente';
-import Tabla from './Tabla'
 import imgData from '../../assets/imagenPDF';
 
 export default {
   name: 'Cliente',
   created(){
         this.getCliente();
-  },
-  components: {
-    Tabla
   },
   data () {
     return {

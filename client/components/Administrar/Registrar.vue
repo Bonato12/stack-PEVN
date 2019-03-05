@@ -8,7 +8,7 @@
       	<div class="d-flex justify-content-center h-100">
       		<div class="card">
         			<div class="card-header">
-                <img src="./LogoTelnovo.png" class="input-group form-group" >
+                <img src="../../assets/LogoTelnovo.png" class="input-group form-group" >
         			</div>
         			<div class="card-body">
             				<form @submit.prevent="registrar()">

@@ -178,15 +178,13 @@ input::-webkit-inner-spin-button {
 }
 
 form input:focus:invalid{
-    background: url('invalid.png') no-repeat 95% 50%;
-    /*animation: jello 1s;*/
+    background: url('http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/32/red-ok-icon.png') no-repeat 95% 50%;
     background-color: white;
 }
 
 
 form input:required:focus:valid{
-
-  background: url('valid.png') no-repeat 95% 50%;
+  background: url('http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/32/green-ok-icon.png') no-repeat 95% 50%;
   background-color: white;
 
 }
