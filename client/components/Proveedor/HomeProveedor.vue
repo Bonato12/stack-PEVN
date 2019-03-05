@@ -14,7 +14,7 @@
                   skipDiacritics: true,
                   placeholder: 'Buscar Proveedor',
                 }"
-                @on-row-click="detalle"
+                @on-row-click="detalleProveedor"
                 :pagination-options="{
                     enabled: true,
                     mode: 'records',
@@ -47,53 +47,53 @@
         <b-container fluid>
               <b-row class="mb-1">
                 <b-col cols="3">ID:</b-col>
-                  <b-col>{{idp}}</b-col>
+                  <b-col>{{proveedor.id_proveedor}}</b-col>
               </b-row>
               <hr>
               <b-row class="mb-1">
                 <b-col cols="3">Dni:</b-col>
-                  <b-col>{{dni}}</b-col>
+                  <b-col>{{proveedor.dni}}</b-col>
               </b-row>
               <hr>
               <b-row class="mb-1">
                 <b-col cols="3">Nombre:</b-col>
-                  <b-col>{{nombre}}</b-col>
+                  <b-col>{{proveedor.nombre}}</b-col>
               </b-row>
               <hr>
               <b-row class="mb-1">
                 <b-col cols="3">Apellido:</b-col>
-                  <b-col>{{apellido}}</b-col>
+                  <b-col>{{proveedor.apellido}}</b-col>
               </b-row>
               <hr>
               <b-row class="mb-1">
                 <b-col cols="3">Direccion:</b-col>
-                  <b-col>{{direccion}}</b-col>
+                  <b-col>{{proveedor.direccion}}</b-col>
               </b-row>
               <hr>
               <b-row class="mb-1">
                 <b-col cols="3">Telefono:</b-col>
-                  <b-col>{{telefono}}</b-col>
+                  <b-col>{{proveedor.telefono}}</b-col>
               </b-row>
               <hr>
               <b-row class="mb-1">
                 <b-col cols="3">Mail:</b-col>
-                  <b-col>{{mail}}</b-col>
+                  <b-col>{{proveedor.mail}}</b-col>
               </b-row>
               <hr>
               <b-row class="mb-1">
                 <b-col cols="3">Descripcion:</b-col>
-                  <b-col>{{ descripcion }}</b-col>
+                  <b-col>{{ proveedor.descripcion }}</b-col>
               </b-row>
         </b-container>
         <div slot="modal-footer" class="w-100">
           <p class="float-left">Opciones</p>
           <div style="float:right;">
-              <button class="btn btn-danger" v-on:click="eliminarProveedor(idp)" title="Eliminar Proveedor">
+              <button class="btn btn-danger" v-on:click="eliminarProveedor(proveedor.id_proveedor)" title="Eliminar Proveedor">
                   <i class="fas fa-trash fa-1x">
                   </i>
                   Eliminar
               </button>
-              <router-link :to="/EditarProveedor/+idp"  class="btn" style="background-color:yellow;" tag="button" title="Editar Proveedor">
+              <router-link :to="/EditarProveedor/+proveedor.id_proveedor"  class="btn" style="background-color:yellow;" tag="button" title="Editar Proveedor">
                   <i class="fas fa-edit fa-1x">
                   </i>
                   Editar
@@ -148,13 +148,7 @@ export default {
       footerBgVariant: 'warning',
       footerTextVariant: 'dark',
       idp: '',
-      dni: '',
-      nombre:'',
-      apellido:'',
-      direccion:'',
-      telefono:'',
-      mail:'',
-      descripcion: '',
+      proveedor: new Proveedor(),
       datos: [],
       columns: [
         {
@@ -195,7 +189,6 @@ export default {
     getProveedor(){
     axios.get('http://localhost:3000/proveedor').then((response) =>{
       this.datos = response.data;
-      //console.table(this.datos);
     });
   },
   eliminarProveedor(id) {
@@ -243,17 +236,17 @@ export default {
       XLSX.utils.book_append_sheet(wb, proveedores, this.datos)
       XLSX.writeFile(wb, 'proveedores.csv');
     },
-    detalle(params) {
+    detalleProveedor(params) {
         this.$refs.myModalRef.show()
         console.log(params);
-        this.idp = params.row.id_proveedor;
-        this.dni = params.row.dni;
-        this.nombre = params.row.nombre;
-        this.apellido = params.row.apellido;
-        this.direccion = params.row.direccion;
-        this.telefono = params.row.telefono;
-        this.mail = params.row.mail;
-        this.descripcion = params.row.descripcion;
+        this.proveedor.id_proveedor = params.row.id_proveedor;
+        this.proveedor.dni = params.row.dni;
+        this.proveedor.nombre = params.row.nombre;
+        this.proveedor.apellido = params.row.apellido;
+        this.proveedor.direccion = params.row.direccion;
+        this.proveedor.telefono = params.row.telefono;
+        this.proveedor.mail = params.row.mail;
+        this.proveedor.descripcion = params.row.descripcion;
     },
     hideDetalle() {
         this.$refs.myModalRef.hide()

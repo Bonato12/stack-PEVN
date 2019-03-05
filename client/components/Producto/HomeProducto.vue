@@ -9,20 +9,22 @@
                 enabled: true,
                 skipDiacritics: true,
                 placeholder: 'Buscar Producto',
-              }" @on-row-click="onRowClick" :pagination-options="{
-                  enabled: true,
-                  mode: 'records',
-                  perPage: 5,
-                  perPageDropdown: [3, 7, 9],
-                  dropdownAllowAll: false,
-                  setCurrentPage: 1,
-                  nextLabel: 'Siguiente',
-                  prevLabel: 'Anterior',
-                  rowsPerPageLabel: 'Filas por paginas',
-                  ofLabel: 'of',
-                  pageLabel: 'page', // for 'pages' mode
-                  allLabel: 'All',
-                }" theme="default">
+              }" @on-row-click="detalleProducto" 
+                  :pagination-options="{
+                    enabled: true,
+                    mode: 'records',
+                    perPage: 5,
+                    perPageDropdown: [3, 7, 9],
+                    dropdownAllowAll: false,
+                    setCurrentPage: 1,
+                    nextLabel: 'Siguiente',
+                    prevLabel: 'Anterior',
+                    rowsPerPageLabel: 'Filas por paginas',
+                    ofLabel: 'of',
+                    pageLabel: 'page', // for 'pages' mode
+                    allLabel: 'All',
+                    }"
+                theme="default">
       </vue-good-table>
     </div>
     <div style="color:black;">
@@ -192,16 +194,16 @@ export default {
       )).then(this.hideModal());
 
     },
-    onRowClick(params) {
-      this.$refs.myModalRef.show()
-      console.log(params);
-      this.producto.id_producto = params.row.id_producto;
-      this.producto.modelo = params.row.modelo;
-      this.producto.marca = params.row.marca;
-      this.producto.descripcion = params.row.descripcion;
-      this.producto.tipoproducto = params.row.tipoproducto;
-      this.producto.stock = params.row.stock;
-      this.producto.precio = params.row.precio;
+    detalleProducto(params) {
+        this.$refs.myModalRef.show()
+        console.log(params);
+        this.producto.id_producto = params.row.id_producto;
+        this.producto.modelo = params.row.modelo;
+        this.producto.marca = params.row.marca;
+        this.producto.descripcion = params.row.descripcion;
+        this.producto.tipoproducto = params.row.tipoproducto;
+        this.producto.stock = params.row.stock;
+        this.producto.precio = params.row.precio;
 
     },
     hideModal() {

@@ -71,6 +71,8 @@
 <script>
 
 import axios from 'axios'
+import imgData from '../../assets/imagenPDF';
+
 
 /*
 class Venta{

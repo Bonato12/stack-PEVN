@@ -56,7 +56,7 @@
                               <i class="far fa-save fa-1x"></i>
                               Modificar
                         </button>
-                        <router-link to="/HomeProveedor" tag="button" class="btn flaot-right" style="background:white; margin-left:175px;">
+                        <router-link to="/HomeProveedor" tag="button" class="btn" style="background:white; margin-left:128px;">
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>

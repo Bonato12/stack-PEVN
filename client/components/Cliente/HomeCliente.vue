@@ -14,7 +14,7 @@
                   skipDiacritics: true,
                   placeholder: 'Buscar Cliente',
               }"
-              @on-row-click="onRowClick"
+              @on-row-click="detalleCliente"
               :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -143,11 +143,10 @@ import Cliente from '../../models/Cliente';
 import Tabla from './Tabla'
 import imgData from '../../assets/imagenPDF';
 
-
 export default {
   name: 'Cliente',
   created(){
-      this.getCliente();
+        this.getCliente();
   },
   components: {
     Tabla
@@ -194,12 +193,13 @@ export default {
 
   },
   methods: {
+
     getCliente(){
-    axios.get('http://localhost:3000/cliente').then((response) =>{
-      this.datos = response.data;
-      //console.table(this.datos);
-    });
-  },
+        axios.get('http://localhost:3000/cliente').then((response) =>{
+          this.datos = response.data;
+          //console.table(this.datos);
+        });
+    },
     eliminarCliente(id) {
           axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
                 this.getCliente();
@@ -240,7 +240,7 @@ export default {
         doc.save(now+'-clientes.pdf');
       },
 
-    onRowClick(params) {
+    detalleCliente(params) {
         this.$refs.myModalRef.show()
         console.log(params);
         this.cliente.id_cliente = params.row.id_cliente;
@@ -252,7 +252,7 @@ export default {
         this.cliente.telefono = params.row.telefono;
         this.cliente.mail = params.row.mail;
     },
-    hideModal () {
+    hideModal() {
         this.$refs.myModalRef.hide()
     },
     exportarXls() {
