@@ -71,19 +71,7 @@
 <script>
 
 import axios from 'axios'
-import imgData from '../../assets/imagenPDF';
-
-
-/*
-class Venta{
-    constructor(id_venta,id_cliente,id_producto,fecha){
-      this.id_venta =  Number(new Date().getTime()),
-      this.id_cliente = id_cliente,
-      this.id_producto = id_producto,
-      this.fecha = fecha
-    }
-}
-*/
+import { imgData } from '../../assets/imagenPDF';
 
 export default {
   name: 'HomeVenta',

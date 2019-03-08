@@ -9,7 +9,7 @@
                 enabled: true,
                 skipDiacritics: true,
                 placeholder: 'Buscar Producto',
-              }" @on-row-click="detalleProducto" 
+              }" @on-row-click="detalleProducto"
                   :pagination-options="{
                     enabled: true,
                     mode: 'records',
@@ -114,7 +114,8 @@ import Producto from '../../models/Producto';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
-import imgData from '../../assets/imagenPDF';
+import { imgData } from '../../assets/imagenPDF';
+
 
 export default {
   created() {
