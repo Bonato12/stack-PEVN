@@ -32,7 +32,7 @@
               						</div>
                           <select required class="form-control" v-model="producto.tipoProducto">
                             <option disabled>Elige un Tipo Producto</option>
-                            <option v-for="item in tipoProductos">{{ item.name }}</option>
+                            <option  v-for="item in tipoProductos">{{ item.name }}</option>
                          </select>
                       </div>
                       <div class="input-group form-group">

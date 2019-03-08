@@ -149,39 +149,43 @@ export default {
     this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
     var id = this.venta.id_producto= this.productoSelected.id_producto;
     var stock = this.productoSelected.stock;
-    axios.post('http://localhost:3000/venta',
-                this.venta,
-              {
-                headers: {
-                  'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
-                  'Content-Type': 'application/json'
-                }
-              }).then(axios.put('http://localhost:3000/productoStock/'+ id,
-                   {
-                   stock: (stock) - this.num
-                 },
-                   { headers: {
-                       'Content-Type': 'application/json',
-                   }
-                 }));
-        },
-        customLabel (option) {
-    return `${option.dni}-${option.nombre} - ${option.apellido}`
+    if (this.venta.id_cliente &&  this.venta.id_producto &&  this.venta.cantidad &&  this.venta.precio ) {
+        axios.post('http://localhost:3000/venta',
+                    this.venta,
+                  {
+                    headers: {
+                      'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
+                      'Content-Type': 'application/json'
+                    }
+                  }).then(axios.put('http://localhost:3000/productoStock/'+ id,
+                       {
+                       stock: (stock) - this.num
+                     },
+                       { headers: {
+                           'Content-Type': 'application/json',
+                       }
+                     }));
+      }else {
+        alert("Completar Los Campos");
+            }
       },
+        customLabel (option) {
+          return `${option.dni}-${option.nombre} - ${option.apellido}`
+            },
       increment() {
-      this.num++;
-      if(this.productoSelected.precio){
-      this.venta.precio = this.productoSelected.precio * this.num;
-      }
+          this.num++;
+          if(this.productoSelected.precio){
+          this.venta.precio = this.productoSelected.precio * this.num;
+          }
     },
     decrement() {
-      if (this.num === 1) {
-        alert("Negative quantity not allowed");
-      } else {
-        this.num--;
-        this.venta.precio = this.productoSelected.precio * this.num;
+        if (this.num === 1) {
+          alert("Negative quantity not allowed");
+        } else {
+          this.num--;
+          this.venta.precio = this.productoSelected.precio * this.num;
 
-      }
+        }
     }
 
   }
