@@ -116,17 +116,17 @@ export default {
   },
   methods: {
     getVenta(){
-    axios.get('http://localhost:3000/venta').then((response) =>{
-      this.ventas = response.data;
-      console.log(this.ventas);
-    });
+        axios.get('http://localhost:3000/venta').then((response) =>{
+          this.ventas = response.data;
+          console.log(this.ventas);
+        });
     },
     eliminarVenta(id){
-      console.log(id);
-      this.idv = id;
-      axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
-        console.log(data)
-        this.getVenta()
+        console.log(id);
+        this.idv = id;
+        axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
+          console.log(data)
+          this.getVenta()
       });
     },
     onRowClick(params) {

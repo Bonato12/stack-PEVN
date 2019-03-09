@@ -238,14 +238,16 @@ export default {
 
       ]
       var doc = new jsPDF();
-      doc.addImage(imgData, 'JPEG', 15, 5, 60, 50);
-      doc.text(100, 25, 'Listado de Productos');
       var fecha = new Date();
       var now = fecha.getDate() + '-' + fecha.getMonth() + '-' + fecha.getFullYear() + ':' + fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
+      doc.addImage(imgData, 'JPEG', 15, 5, 80, 40);
+      doc.text(15, 60, 'Listado Productos');
+      doc.text(15, 70, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
+      doc.text(65, 70, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
       doc.autoTable(columnas, this.productos, {
         theme: 'grid',
         margin: {
-          top: 65
+          top: 75
         }
       });
       doc.save(now + '-productos.pdf');

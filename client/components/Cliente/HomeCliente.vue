@@ -142,8 +142,6 @@ import XLSX from 'xlsx'
 import Cliente from '../../models/Cliente';
 import { imgData } from '../../assets/imagenPDF';
 
-
-
 export default {
   name: 'Cliente',
   created(){
@@ -222,17 +220,16 @@ export default {
           {title: "CIUDAD", dataKey:"ciudad"}
           ]
         var doc = new jsPDF();
-        doc.addImage(imgData, 'JPEG', 15, 5, 60, 50);
-        doc.text(100, 25, 'Listado de Clientes');
         var fecha = new Date();
-        doc.text(100, 35, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
-        doc.text(100, 45, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
-
         var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+        doc.addImage(imgData, 'JPEG', 15, 5, 80, 40);
+        doc.text(15,60,'Lista Clientes')
+        doc.text(15, 70, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
+        doc.text(65, 70, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
         doc.autoTable(columnas,this.datos, {
         				theme : 'grid',
         				margin : {
-        					top : 65
+        					top : 75
         				}
               });
         doc.save(now+'-clientes.pdf');
