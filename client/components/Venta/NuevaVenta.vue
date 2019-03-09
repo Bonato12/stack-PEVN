@@ -48,7 +48,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Cantidad</span>
                               <b-input-group>
-                                <b-form-input type="number" min="0.00" max="10.00"  v-model="num" style="width:225px;"/>
+                                <b-form-input class="form-control form-control-lg" type="number" min="0.00" max="10.00"  v-model="num" style="width:225px;"/>
 
                                 <b-input-group-append>
                                   <b-button  variant="info" style="background-color: #FFC312;" @click="decrement()">
@@ -65,7 +65,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Total</span>
                             </div>
-                            <input required type="number" min="0"  v-model="venta.precio"  class="form-control">
+                            <input required type="number" min="0"  v-model="venta.precio"  class="form-control form-control-lg">
                         </div>
                         <div class="input-group form-group">
                             <button class="btn btn-success" v-on:click="guardarLista()" title="Añadir al Carrito">
@@ -132,12 +132,6 @@ export default {
       producto: [],
       productoSelected: '',
       clienteSelected: '',
-      value: '',
-    	options: [
-      	{	language: 'JavaScript', library: 'Vue.js' },
-        { language: 'JavaScript', library: 'Vue-Multiselect' },
-        { language: 'JavaScript', library: 'Vuelidate' }
-      ],
       num: '',
       numCarrito: '',
       Lista: [
@@ -167,8 +161,11 @@ export default {
       });
     },
     guardarLista(){
-      if (this.numCarrito ===  4){
-          alert("Limite de Productos para comprar");
+      if (this.numCarrito ==  4){
+          this.$swal.fire({
+            type: 'warning',
+            text: 'Limite de Productos Permitidos'
+          });
           }else {
             this.numCarrito++;
             this.venta.id_cliente = this.clienteSelected;
@@ -178,6 +175,7 @@ export default {
             this.Lista.push(this.venta);
             console.log(this.Lista);
             this.venta = new Venta();
+            this.num = '';
 
           }
     },
@@ -205,27 +203,9 @@ export default {
                      }));
                 }
 
-  /*
-      axios.post('http://localhost:3000/venta',
-                  value[key],
-                {
-                  headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
-                    'Content-Type': 'application/json'
-                  }
-                });
-*/
-
     },
+    /*
   nuevaVenta(){
-    console.log(this.clienteSelected);
-    console.log(this.productoSelected);
-    this.venta.id_cliente = this.clienteSelected.id_cliente;
-    this.venta.id_producto= this.productoSelected.id_producto;
-    this.venta.cantidad = this.num;
-    this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
-    var id = this.venta.id_producto= this.productoSelected.id_producto;
-    var stock = this.productoSelected.stock;
     if (this.venta.id_cliente &&  this.venta.id_producto &&  this.venta.cantidad &&  this.venta.precio ) {
         axios.post('http://localhost:3000/venta',
                     this.venta,
@@ -246,13 +226,17 @@ export default {
         alert("Completar Los Campos");
             }
       },
+      */
         customLabel (option) {
           return `${option.dni}-${option.nombre} - ${option.apellido}`
             },
       increment() {
           if(this.productoSelected.precio){
-          if (this.num ===  this.productoSelected.stock){
-              alert("Limite de Stock");
+          if (this.num ==  this.productoSelected.stock){
+              this.$swal.fire({
+                type: 'warning',
+                text: 'Limite de Stock'
+              });
               }else {
                 this.num++;
                 this.venta.precio = this.productoSelected.precio * this.num;
@@ -262,8 +246,11 @@ export default {
 
     },
     decrement() {
-        if (this.num === 1) {
-          alert("Negative quantity not allowed");
+        if (this.num == 1) {
+          this.$swal.fire({
+            type: 'warning',
+            text: 'La Cantidad debe ser al menos de 1.'
+          });
         } else {
           this.num--;
           this.venta.precio = this.productoSelected.precio * this.num;
@@ -272,10 +259,8 @@ export default {
     },
     borrar(item){
       console.log(item);
-      //this.Lista.splice(item.id_producto, 1);
-      console.log(this.Lista.splice(item.id,1));
+      this.Lista.splice((item.id), 1);
     }
-
   }
 }
 
