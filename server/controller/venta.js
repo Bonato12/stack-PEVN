@@ -21,7 +21,7 @@ var pool = require('../database');
 
         postVenta(req, res){
               console.log("Peticion POST");
-              pool.query("INSERT INTO venta(id_cliente,id_producto,fecha,cantidad,precio) VALUES($1,$2,$3,$4,$5)",[req.body.id_cliente,req.body.id_producto,req.body.fecha,
+              pool.query("INSERT INTO venta(id_cliente,id_producto,fecha,cantidad,precio) VALUES($1,$2,$3,$4,$5)",[req.body.id_cliente.id_cliente,req.body.id_producto.id_producto,req.body.fecha,
               req.body.cantidad ,req.body.precio]).then(response=> {
                 console.log(response);
               }).catch((error) =>{
