@@ -7,10 +7,11 @@
                   <h3 style="text-align:center; color:white;"> Nueva Venta </h3>
           			</div>
           			<div class="card-body">
-              				<form @submit.prevent="nuevaVenta()">
+              				<form>
                         <!--
                         <div>
                             <multiselect
+                             ""@submit.prevent="nuevaVenta()"
                               v-model="value"
                               :options="cliente"
                               :multiple="true"
@@ -47,7 +48,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Cantidad</span>
                               <b-input-group>
-                                <b-form-input type="number" min="0.00"  :value="num" v-model="num" />
+                                <b-form-input type="number" min="0.00" max="10.00"  v-model="num" />
 
                                 <b-input-group-append>
                                   <b-button  variant="info" style="background-color: #FFC312;" @click="decrement()">
@@ -65,16 +66,21 @@
                               <span class="input-group-text">Total</span>
                             </div>
                             <input required type="number" min="0"  v-model="venta.precio"  class="form-control">
+                        <div class="input-group form-group">
+                            <button class="btn btn-success" v-on:click="guardarLista()" title="Añadir al Carrito">
+                                <i class="fas fa-cart-plus"></i>
+
+                            </button>
+                        </div>
                         </div>
                         <br>
               					<div class="form-group">
-              						  <input type="submit" value="Guardar"  class="btn float-right venta_btn">
+              						  <input  value="Guardar" v-on:click="Ciclar()"   class="btn float-right venta_btn">
                             <router-link to="/HomeProveedor" tag="button" class="btn" style="background:white; margin-left:202px;">
                                 <i class="fas fa-arrow-left"></i>
                                   Volver
                             </router-link>
               					</div>
-
           				</form>
           			</div>
         		</div>
@@ -106,7 +112,7 @@ export default {
     return {
       venta: new Venta(),
       cliente: [],
-      lista: [],
+      Lista: [],
       producto: [],
       productoSelected: '',
       clienteSelected: '',
@@ -116,29 +122,73 @@ export default {
         { language: 'JavaScript', library: 'Vue-Multiselect' },
         { language: 'JavaScript', library: 'Vuelidate' }
       ],
-      num: 1
+      num: '',
+      Lista: [
+          {id_cliente:'120', id_producto:'15', cantidad: '2', fecha: '12/09/2019', precio: '4000'},
+          {id_cliente:'174', id_producto:'17', cantidad: '1', fecha: '12/09/2019', precio: '8000'}
+      ]
 		}
   },
   computed:{
-      calcular(){
-      var precio = this.productoSelected.precio * 3;
-      return precio;
-      }
-    },
+
+  },
   mounted(){
 
   },
   methods: {
     getCliente(){
-    axios.get('http://localhost:3000/cliente').then((response) =>{
-      this.cliente = response.data;
-    });
-  },
+      axios.get('http://localhost:3000/cliente').then((response) =>{
+        this.cliente = response.data;
+      });
+    },
     getProducto(){
       axios.get('http://localhost:3000/producto').then(response=>{
         this.producto = response.data;
         console.log(response.data.stock)
       });
+    },
+    guardarLista(){
+      this.venta.id_cliente = this.clienteSelected.id_cliente;
+      this.venta.id_producto= this.productoSelected.id_producto;
+      this.venta.cantidad = this.num;
+      this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
+      var stock = this.productoSelected.stock;
+      this.Lista.push(this.venta);
+    },
+    Ciclar(){
+      //Cicla la Lista de Objetos y las envia al Servidor
+      console.log(this.Lista);
+      for (var i = 0; i < this.Lista.length; i++) {
+        console.log(this.Lista[i].id_producto);
+        axios.post('http://localhost:3000/venta',
+                    this.Lista[i],
+                  {
+                    headers: {
+                      'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
+                      'Content-Type': 'application/json'
+                    }
+                  }).then(
+                    axios.put('http://localhost:3000/productoStock/'+ this.Lista[i].id_producto,
+                       {
+                       stock: this.Lista[i].cantidad
+                     },
+                       { headers: {
+                           'Content-Type': 'application/json',
+                       }
+                     }));
+                }
+
+  /*
+      axios.post('http://localhost:3000/venta',
+                  value[key],
+                {
+                  headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
+                    'Content-Type': 'application/json'
+                  }
+                });
+*/
+
     },
   nuevaVenta(){
     console.log(this.clienteSelected);
@@ -173,10 +223,16 @@ export default {
           return `${option.dni}-${option.nombre} - ${option.apellido}`
             },
       increment() {
-          this.num++;
           if(this.productoSelected.precio){
-          this.venta.precio = this.productoSelected.precio * this.num;
+          if (this.num ===  this.productoSelected.stock){
+              alert("Limite de Stock");
+              }else {
+                this.num++;
+                this.venta.precio = this.productoSelected.precio * this.num;
+              }
           }
+
+
     },
     decrement() {
         if (this.num === 1) {

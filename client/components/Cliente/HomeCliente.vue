@@ -157,6 +157,7 @@ export default {
         footerBgVariant: 'warning',
         footerTextVariant: 'dark',
         datos: [],
+        Lista: [],
         cliente:  new Cliente(),
         columns: [
         {
@@ -265,7 +266,8 @@ export default {
       var wb = XLSX.utils.book_new() // make Workbook of Excel
       XLSX.utils.book_append_sheet(wb, clientes, this.datos)
       XLSX.writeFile(wb,now+'-clientes.csv');
-    }
+    },
+
 }
 }
 </script>

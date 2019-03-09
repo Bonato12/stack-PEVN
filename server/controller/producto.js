@@ -58,7 +58,7 @@ module.exports = {
         updateProductoStock(req,res){
                 console.log("PETICION UPDATE")
                 console.log(req.params.id);
-                pool.query("UPDATE producto SET stock=($1) WHERE id_producto=($2)",[req.body.stock,req.params.id_producto]).then((response)=>{
+                pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.stock,req.params.id_producto]).then((response)=>{
                     console.log(response);
                     res.json(response.rows);
                 }).catch((error)=>{
