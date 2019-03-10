@@ -115,7 +115,7 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
-
+import { alertSucess } from '../../assets/sweetAlert.js';
 
 export default {
   created() {
@@ -188,11 +188,7 @@ export default {
     eliminarProducto(id) {
       axios.delete('http://localhost:3000/producto/' + id).then((data) => {
         this.getProducto();
-      }).then(this.$swal.fire(
-        'Eliminado!',
-        'Ha sido elimando',
-        'success'
-      )).then(this.hideModal());
+      }).then(alertSucess()).then(this.hideModal());
 
     },
     detalleProducto(params) {

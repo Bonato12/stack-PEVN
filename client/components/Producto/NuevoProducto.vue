@@ -71,6 +71,7 @@
 <script>
 
 import axios from 'axios'
+import { alertSucessProducto } from '../../assets/sweetAlert.js'
 import Producto from '../../models/Producto';
 
 export default {
@@ -103,7 +104,7 @@ export default {
                     'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
                     'Content-Type': 'application/json',
                   },
-                }).then(this.producto = new Producto()).then(this.$swal( 'Exito!','Nuevo Producto Añadido!','success'));
+                }).then(this.producto = new Producto()).then(alertSucessProducto());
             }else{
                 this.$swal( 'Error!','Completar Los Campos Vacios!','error');
             }

@@ -34,6 +34,7 @@
     "nodemailer": "^5.1.1",
     "pdfkit": "^0.9.0",
     "pg": "^7.8.1",
+    "sweetalert2": "^8.2.6",
     "vue": "^2.6.7",
     "vue-good-table": "^2.16.2",
     "vue-json-excel": "^0.2.98",
