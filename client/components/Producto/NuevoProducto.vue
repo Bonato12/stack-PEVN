@@ -166,25 +166,28 @@ input::-webkit-inner-spin-button {
 form select:focus:invalid{
     background: url('http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/32/red-ok-icon.png') no-repeat 95% 50%;
     background-color: white;
+
 }
 
 form select:required:focus:valid{
   background: url('http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/32/green-ok-icon.png') no-repeat 95% 50%;
   background-color: white;
 
+
 }
 
 
 form input:focus:invalid{
-    background: url('http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/32/red-ok-icon.png') no-repeat 95% 50%;
+    background: url('../../assets/invalid.png') no-repeat 95% 50%;
     background-color: white;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
 
 
 form input:required:focus:valid{
-  background: url('http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/32/green-ok-icon.png') no-repeat 95% 50%;
+  background: url('../../assets/valid.png') no-repeat 95% 50%;
   background-color: white;
-
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);
 }
 
 form textarea:focus:invalid{
