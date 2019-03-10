@@ -158,14 +158,17 @@ background-color: white;
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
     background-color: white;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
 
 
 form input:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
   background-color: white;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);
+}
+
+.form-control {
+    border: 0;
+    box-shadow: none;
 }
 
 input::-webkit-outer-spin-button,

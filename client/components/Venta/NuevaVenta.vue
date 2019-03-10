@@ -30,7 +30,7 @@
                                   </v-select>
                               </div>
                           </div>
-                          <div class="input-group form-group" >
+                          <div v-if="productoSelected" class="input-group form-group" >
                               <div class="input-group-prepend">
                                 <span class="input-group-text">Cantidad</span>
                                 <b-input-group>
@@ -47,7 +47,7 @@
                                 </b-input-group>
                              </div>
                           </div>
-                          <div class="input-group form-group" style="width:403px;">
+                          <div v-if="productoSelected" class="input-group form-group" style="width:403px;">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">Total</span>
                               </div>
@@ -145,15 +145,17 @@ export default {
       if (this.numCarrito ==  4){
             alertWarningLimite();
       }else {
-            this.numCarrito++;
-            this.venta.cliente = this.clienteSelected;
-            this.venta.producto= this.productoSelected;
-            this.venta.cantidad = this.num;
-            this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
-            this.Lista.push(this.venta);
-            console.log(this.Lista);
-            this.venta = new Venta();
-            this.num = '';
+            if(this.clienteSelected && this.productoSelected){
+                this.numCarrito++;
+                this.venta.cliente = this.clienteSelected;
+                this.venta.producto= this.productoSelected;
+                this.venta.cantidad = this.num;
+                this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
+                this.Lista.push(this.venta);
+                console.log(this.Lista);
+                this.venta = new Venta();
+                this.num = '';
+            }
       }
     },
     nuevaVenta(){
@@ -256,6 +258,11 @@ width: auto;
 background-color: #FFC312;
 color: black;
 border:0 !important;
+}
+
+.form-control {
+    border: 0;
+    box-shadow: none;
 }
 
 </style>

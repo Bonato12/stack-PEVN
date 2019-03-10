@@ -7,7 +7,7 @@
               <h3 style="text-align:center; color:white;"> Nuevo Cliente </h3>
             </div>
             <div class="card-body animated fadeInDown">
-                  <form @submit.prevent="nuevoCliente()" class="simple-form">
+                  <form @submit.prevent="nuevoCliente()">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
@@ -117,15 +117,14 @@ export default {
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
     background-color: white;
-    border-color: rgba(200, 0, 0, 0.6);
-  /*  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(200, 0, 0, 0.6);*/
+    /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);*/
 }
 
 
 form input:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
   background-color: white;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);
+/*  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);*/
 }
 
 
@@ -168,6 +167,12 @@ background-color: #FFC312;
 color: black;
 background-color: white;
 }
+
+.form-control {
+    border: 0;
+    box-shadow: none;
+}
+
 
 /*Sirve para desabilitar las flechas en los inputs numer*/
 input::-webkit-outer-spin-button,

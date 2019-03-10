@@ -104,16 +104,12 @@ export default {
          });
       },
       editarCliente(){
-         alertEdit().then((result) => {
-            if (result.value) {
-            alertEditSucessCliente().then(axios.put('http://localhost:3000/cliente/'+ this.idc,
-               this.cliente,
-               { headers: {
+          axios.put('http://localhost:3000/cliente/'+ this.idc,
+              this.cliente,
+              { headers: {
                 'Content-Type': 'application/json',
-               }
-               }))
-           }
-         })
+              }
+          }).then(alertEditSucessCliente());
       }
   }
 }
@@ -167,14 +163,18 @@ input::-webkit-inner-spin-button {
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
     background-color: white;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
 
 
 form input:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
   background-color: white;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);
 }
+
+.form-control {
+    border: 0;
+    box-shadow: none;
+}
+
 
 </style>

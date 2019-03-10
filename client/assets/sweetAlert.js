@@ -37,7 +37,7 @@ export function alertWarningLimiteOne(){
 }
 
 export function alertEdit(){
-  Swal({
+  Swal.fire({
   title: 'Seguro que desea Editar?',
   text: "No podra recuperar los datos!",
   type: 'warning',
@@ -53,7 +53,7 @@ export function alertEditSucessProveedor(){
 }
 
 export function alertEditSucessProducto(){
-  Swal.fire('Editado!','El Cliente ha sido Editado!','success');
+  Swal.fire('Editado!','El Producto ha sido Editado!','success');
 }
 
 export function alertEditSucessCliente(){
