@@ -127,7 +127,11 @@ export default {
         axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
           console.log(data)
           this.getVenta()
-      });
+        }).then(this.$swal.fire(
+          'Eliminado!',
+          'Ha sido elimando',
+          'success'
+        )).then(this.hideModal());
     },
     onRowClick(params) {
         this.$refs.myModalRef.show()
