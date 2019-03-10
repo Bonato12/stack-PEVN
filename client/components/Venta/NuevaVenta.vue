@@ -8,20 +8,6 @@
           			</div>
           			<div class="card-body">
               				<form>
-                        <!--
-                        <div>
-                            <multiselect
-                             ""@submit.prevent="nuevaVenta()"
-                              v-model="value"
-                              :options="cliente"
-                              :multiple="true"
-                              track-by="library"
-                              :custom-label="customLabel"
-                              >
-                            </multiselect>
-                            <pre>{{ value }}</pre>
-                        </div>
-                      -->
                         <div class="input-group form-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text">Cliente</span>
@@ -88,7 +74,7 @@
                       <div class="container">
                         <div class="row">
                           <div class="col animated fadeIn">
-                            <h3>{{item.id_producto.marca}} {{item.id_producto.modelo}}</h3>
+                            <h3>{{item.producto.marca}} {{item.producto.modelo}}</h3>
                             <button v-on:click="borrar(item)" class="btn btn-danger" style="float:right; margin-top: -40px;">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
@@ -157,7 +143,6 @@ export default {
     getProducto(){
       axios.get('http://localhost:3000/producto').then(response=>{
         this.producto = response.data;
-        console.log(response.data.stock)
       });
     },
     guardarLista(){
@@ -168,8 +153,8 @@ export default {
           });
           }else {
             this.numCarrito++;
-            this.venta.id_cliente = this.clienteSelected;
-            this.venta.id_producto= this.productoSelected;
+            this.venta.cliente = this.clienteSelected;
+            this.venta.producto= this.productoSelected;
             this.venta.cantidad = this.num;
             this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
             this.Lista.push(this.venta);
@@ -183,7 +168,6 @@ export default {
       //Cicla la Lista de Objetos y las envia al Servidor
       console.log(this.Lista);
       for (var i = 0; i < this.Lista.length; i++) {
-        console.log(this.Lista[i].id_producto);
         axios.post('http://localhost:3000/venta',
                     this.Lista[i],
                   {
@@ -192,10 +176,10 @@ export default {
                       'Content-Type': 'application/json'
                     }
                   }).then(
-                    axios.put('http://localhost:3000/productoStock/'+ this.Lista[i].id_producto.id_producto,
+                    axios.put('http://localhost:3000/productoStock/'+ this.Lista[i].producto.id_producto,
                        {
                        stock: this.Lista[i].cantidad,
-                       id_producto: this.Lista[i].id_producto.id_producto
+                       id_producto: this.Lista[i].producto.id_producto
                      },
                        { headers: {
                            'Content-Type': 'application/json',
@@ -227,9 +211,7 @@ export default {
             }
       },
       */
-        customLabel (option) {
-          return `${option.dni}-${option.nombre} - ${option.apellido}`
-            },
+
       increment() {
           if(this.productoSelected.precio){
           if (this.num ==  this.productoSelected.stock){
