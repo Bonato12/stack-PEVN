@@ -85,7 +85,6 @@ export default {
   data () {
     return {
       idp: this.$route.params.id,
-      datos: [],
       proveedor:  new Proveedor(),
 		}
   },

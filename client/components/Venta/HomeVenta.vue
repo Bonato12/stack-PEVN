@@ -36,8 +36,11 @@
               <b-modal ref="myModalRef" hide-footer title="Detalles">
                   <div class="d-block text-center">
                       <h4>ID:{{idv}}</h4>
-                        <hr>
-                      <button class="btn btn-danger" v-on:click="eliminarVenta(idv)">Eliminar</button>
+                      <hr>
+                      <button class="btn btn-danger" v-on:click="eliminarVenta(idv)">
+                        <i class="fas fa-trash-alt"></i>
+                        Eliminar
+                      </button>
                       <router-link :to="/editarVenta/+idv" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
                   </div>
               </b-modal>
@@ -45,9 +48,7 @@
      </div>
     </br>
         <router-link to="/NuevaVenta" tag="button" class="btn botonVenta" style="float: left;">
-          <i class="fas fa-plus-circle fa-1x">
-
-          </i>
+          <i class="fas fa-plus-circle fa-1x"></i>
           Nueva Venta
         </router-link>
         <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">

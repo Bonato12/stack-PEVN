@@ -79,7 +79,6 @@ export default {
   },
   data () {
     return {
-      datos: [],
       producto:  new Producto(),
       tipoProductos : [{name:"Celular"},
                        {name:"Tablet"},
@@ -109,7 +108,7 @@ export default {
             }
 
         }
-}
+  }
 }
 </script>
 

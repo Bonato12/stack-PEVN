@@ -89,8 +89,7 @@
           <p class="float-left">Opciones</p>
           <div style="float:right;">
               <button class="btn btn-danger" v-on:click="eliminarProveedor(proveedor.id_proveedor)" title="Eliminar Proveedor">
-                  <i class="fas fa-trash fa-1x">
-                  </i>
+                  <i class="fas fa-trash-alt"></i>
                   Eliminar
               </button>
               <router-link :to="/EditarProveedor/+proveedor.id_proveedor"  class="btn" style="background-color:yellow;" tag="button" title="Editar Proveedor">

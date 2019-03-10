@@ -80,7 +80,6 @@ export default {
   data () {
     return {
       idp: this.$route.params.id,
-      datos: [],
       producto:  new Producto(),
       tipoProductos : [{name:"Celular"},
                        {name:"Tablet"},
@@ -94,27 +93,25 @@ export default {
 
   },
   methods: {
-    rellenarProducto(){
-       axios.get('http://localhost:3000/producto/'+this.idp).then((response) =>{
-         console.log(response.data);
-         this.producto = new Producto(this.idp,response.data[0].modelo,response.data[0].marca,response.data[0].descripcion,response.data[0].tipoproducto,response.data[0].stock,response.data[0].precio);
-     })
-   },
-
-   editarProducto(){
-     alertEdit().then((result) => {
-       if (result.value) {
-         alertEditSucessProducto().then(axios.put('http://localhost:3000/producto/'+ this.idp,
-            this.producto,
-            { headers: {
+      rellenarProducto(){
+         axios.get('http://localhost:3000/producto/'+this.idp).then((response) =>{
+           console.log(response.data);
+           this.producto = new Producto(this.idp,response.data[0].modelo,response.data[0].marca,response.data[0].descripcion,response.data[0].tipoproducto,response.data[0].stock,response.data[0].precio);
+         })
+      },
+      editarProducto(){
+         alertEdit().then((result) => {
+            if (result.value) {
+               alertEditSucessProducto().then(axios.put('http://localhost:3000/producto/'+ this.idp,
+               this.producto,
+               { headers: {
                 'Content-Type': 'application/json',
+               }
+               }));
             }
-            }));
-       }
-     });
-
- }
-}
+         });
+      }
+   }
 }
 </script>
 

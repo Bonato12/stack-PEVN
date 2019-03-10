@@ -89,21 +89,15 @@
         <p class="float-left">Opciones</p>
         <div style="float:right;">
             <button class="btn btn-danger" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
-                <i class="fas fa-trash fa-1x">
-
-                </i>
+                <i class="fas fa-trash-alt"></i>
                 Eliminar
             </button>
             <router-link :to="/EditarCliente/+cliente.id_cliente"  class="btn" style="background-color:yellow;" tag="button" title="Editar Cliente">
-                <i class="fas fa-edit fa-1x">
-
-                </i>
+                <i class="fas fa-edit fa-1x"></i>
                 Editar
             </router-link>
             <button class="btn btn-success" v-on:click="enviarMail()" title="Enviar Mail">
-                <i class="fas fa-envelope fa-1x">
-
-                </i>
+                <i class="fas fa-envelope fa-1x"></i>
                 Enviar Mail
             </button>
       </div>

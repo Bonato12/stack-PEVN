@@ -70,7 +70,7 @@
           <p class="float-left">Opciones</p>
           <div style="float:right;">
             <button class="btn btn-danger" v-on:click="eliminarProducto(producto.id_producto)" title="Eliminar Producto">
-              <i class="fas fa-trash fa-1x"></i>
+              <i class="fas fa-trash-alt"></i>
               Eliminar
             </button>
             <router-link :to="/editarProducto/+producto.id_producto" active-class="activo" class="btn" style="background-color:yellow;" tag="button" title="Editar Producto">

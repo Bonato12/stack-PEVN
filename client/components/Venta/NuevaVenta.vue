@@ -98,7 +98,7 @@
 import axios from 'axios'
 import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-
+import { alertSucessVenta} from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 
 export default {
@@ -177,20 +177,14 @@ export default {
                            'Content-Type': 'application/json',
                        }
                      }));
-                }
-        this.$swal( 'Exito!','Nueva Venta Realizada!','success');
-        this.lista = [];
-        this.clienteSelected = '';
-        this.productoSelected = '';
-        this.venta = new Venta();
+      }
+      alertSucessVenta();
+      this.lista = [];
+      this.clienteSelected = '';
+      this.productoSelected = '';
+      this.venta = new Venta();
 
     },
-    /*
-  nuevaVenta(){
-    if (this.venta.id_cliente &&  this.venta.id_producto &&  this.venta.cantidad &&  this.venta.precio ) {
-
-      */
-
     increment(){
           if(this.productoSelected.precio){
               if (this.num ==  this.productoSelected.stock){

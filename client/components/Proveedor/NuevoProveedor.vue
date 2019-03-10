@@ -82,8 +82,7 @@ export default {
   },
   data () {
     return {
-      datos: [],
-      proveedor: new Proveedor
+      proveedor: new Proveedor()
 		}
   },
   mounted(){
