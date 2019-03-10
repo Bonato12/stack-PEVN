@@ -133,7 +133,7 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
-
+import { alertSucessDelete } from '../../assets/sweetAlert.js';
 
 export default {
   created(){
@@ -188,18 +188,14 @@ export default {
   },
   methods: {
     getProveedor(){
-    axios.get('http://localhost:3000/proveedor').then((response) =>{
-      this.datos = response.data;
-    });
+        axios.get('http://localhost:3000/proveedor').then((response) =>{
+          this.datos = response.data;
+        });
   },
   eliminarProveedor(id) {
         axios.delete('http://localhost:3000/proveedor/' + id).then((data)=>{
               this.getProveedor();
-        }).then(this.$swal.fire(
-            'Eliminado!',
-            'Ha sido elimando',
-            'success'
-      )).then(this.hideDetalle());
+        }).then(alertSucessDelete()).then(this.hideDetalle());
   },
   exportarPdf(){
       var columnas = [

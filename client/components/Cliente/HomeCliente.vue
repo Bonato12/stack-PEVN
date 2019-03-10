@@ -141,6 +141,8 @@ import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import Cliente from '../../models/Cliente';
 import { imgData } from '../../assets/imagenPDF';
+import { alertSucessDelete } from '../../assets/sweetAlert.js';
+
 
 export default {
   name: 'Cliente',
@@ -198,20 +200,16 @@ export default {
         });
     },
     eliminarCliente(id) {
-          axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
-                this.getCliente();
-          }).then(this.$swal.fire(
-              'Eliminado!',
-              'Ha sido elimando',
-              'success'
-        )).then(this.hideModal());
+        axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
+          this.getCliente();
+        }).then(alertSucessDelete()).then(this.hideModal());
     },
     enviarMail() {
-      axios.get('http://localhost:3000/cliente/'+this.cliente.id_cliente).then((response) =>{
-        this.cliente = new Cliente(this.cliente.id_cliente,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
-        axios.post('http://localhost:3000/email',
-        this.cliente
-      )});
+        axios.get('http://localhost:3000/cliente/'+this.cliente.id_cliente).then((response) =>{
+          this.cliente = new Cliente(this.cliente.id_cliente,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+          axios.post('http://localhost:3000/email',
+            this.cliente
+          )});
     },
     exportarPdf(){
         var columnas = [

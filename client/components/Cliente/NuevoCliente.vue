@@ -73,6 +73,7 @@
 <script>
 
 import axios from 'axios'
+import { alertSucessCliente,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import Cliente from '../../models/Cliente';
 
 export default {
@@ -91,10 +92,10 @@ export default {
   },
   methods: {
     getCliente(){
-    axios.get('http://localhost:3000/cliente').then((response) =>{
-      this.datos = response.data;
-      console.log(this.datos);
-    });
+      axios.get('http://localhost:3000/cliente').then((response) =>{
+        this.datos = response.data;
+        console.log(this.datos);
+      });
     },
     nuevoCliente(){
             if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.ciudad && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
@@ -105,9 +106,9 @@ export default {
                 'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
                 'Content-Type': 'application/json',
               },
-              }).then(this.cliente = new Cliente()).then(this.$swal( 'Exito!','Nuevo Cliente Añadido!','success'));
+              }).then(this.cliente = new Cliente()).then(alertSucessCliente());
             }else{
-              this.$swal( 'Error!','Completar los Campos Vacios!','error')
+              alertCompletarCampos();
             }
         }
 
@@ -181,5 +182,4 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
-
 </style>

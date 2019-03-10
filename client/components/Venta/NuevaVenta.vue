@@ -62,7 +62,7 @@
                       <br>
               				<div class="form-group">
               						<input v-on:click="nuevaVenta()" value="Guardar" class="btn float-right venta_btn">
-                          <router-link to="/HomeProveedor" tag="button" class="btn" style="background:white; margin-left:702px;">
+                          <router-link to="/HomeVenta" tag="button" class="btn" style="background:white; margin-left:702px;">
                               <i class="fas fa-arrow-left"></i>
                                   Volver
                           </router-link>
@@ -96,6 +96,9 @@
 <script>
 
 import axios from 'axios'
+import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
+
 import Venta from '../../models/Venta';
 
 export default {
@@ -140,11 +143,8 @@ export default {
     },
     guardarLista(){
       if (this.numCarrito ==  4){
-          this.$swal.fire({
-            type: 'warning',
-            text: 'Limite de Productos Permitidos'
-          });
-          }else {
+            alertWarningLimite();
+      }else {
             this.numCarrito++;
             this.venta.cliente = this.clienteSelected;
             this.venta.producto= this.productoSelected;
@@ -154,8 +154,7 @@ export default {
             console.log(this.Lista);
             this.venta = new Venta();
             this.num = '';
-
-          }
+      }
     },
     nuevaVenta(){
       //Cicla la Lista de Objetos y las envia al Servidor
@@ -192,34 +191,28 @@ export default {
 
       */
 
-      increment() {
+    increment(){
           if(this.productoSelected.precio){
-          if (this.num ==  this.productoSelected.stock){
-              this.$swal.fire({
-                type: 'warning',
-                text: 'Limite de Stock'
-              });
-              }else {
-                this.num++;
-                this.venta.precio = this.productoSelected.precio * this.num;
+              if (this.num ==  this.productoSelected.stock){
+                  alertWarningLimiteStock();
+              }else{
+                  this.num++;
+                  this.venta.precio = this.productoSelected.precio * this.num;
               }
           }
-
-
     },
     decrement() {
-        if (this.num == 1) {
-          this.$swal.fire({
-            type: 'warning',
-            text: 'La Cantidad debe ser al menos de 1.'
-          });
-        } else {
-          this.num--;
-          this.venta.precio = this.productoSelected.precio * this.num;
-
-        }
+      if(this.productoSelected){
+          if (this.num == 1) {
+            alertWarningLimiteOne();
+          } else {
+            this.num--;
+            this.venta.precio = this.productoSelected.precio * this.num;
+          }
+      }
     },
     borrar(item){
+      this.numCarrito--;
       console.log(item);
       this.Lista.splice((item.id), 1);
     }

@@ -68,6 +68,7 @@
 <script>
 
 import axios from 'axios'
+import { alertEdit,alertEditSucessProveedor } from '../../assets/sweetAlert.js';
 import Producto from '../../models/Producto';
 
 
@@ -101,26 +102,14 @@ export default {
    },
 
    editarProducto(){
-     this.$swal({
-     title: 'Seguro que desea Editar?',
-     text: "No podra recuperar los datos!",
-     type: 'warning',
-     showCancelButton: true,
-     confirmButtonColor: '#3085d6',
-     cancelButtonColor: '#d33',
-     confirmButtonText: 'Si, Editar'
-     }).then((result) => {
-     if (result.value) {
-       this.$swal(
-         'Editado!',
-         'El Producto ha sido Editado!',
-         'success'
-       ).then(axios.put('http://localhost:3000/producto/'+ this.idp,
+     alertEdit().then((result) => {
+       if (result.value) {
+         alertEditSucessProducto().then(axios.put('http://localhost:3000/producto/'+ this.idp,
             this.producto,
             { headers: {
                 'Content-Type': 'application/json',
             }
-          }));
+            }));
        }
      });
 
@@ -158,12 +147,6 @@ background-color: white;
 
 h1, h2 {
   font-weight: normal;
-}
-
-
-ul {
-  list-style-type: none;
-  padding: 0;
 }
 
 li {

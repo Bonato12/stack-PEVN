@@ -72,6 +72,7 @@
 
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
+import { alertSucessDelete } from '../../assets/sweetAlert.js';
 
 export default {
   name: 'HomeVenta',
@@ -127,11 +128,7 @@ export default {
         axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
           console.log(data)
           this.getVenta()
-        }).then(this.$swal.fire(
-          'Eliminado!',
-          'Ha sido elimando',
-          'success'
-        )).then(this.hideModal());
+        }).then(alertSucessDelete()).then(this.hideModal());
     },
     onRowClick(params) {
         this.$refs.myModalRef.show()

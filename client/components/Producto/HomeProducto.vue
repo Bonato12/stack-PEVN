@@ -115,7 +115,7 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucess } from '../../assets/sweetAlert.js';
+import { alertSucessDelete } from '../../assets/sweetAlert.js';
 
 export default {
   created() {
@@ -180,7 +180,6 @@ export default {
       console.log(this.productos)
       axios.get('http://localhost:3000/producto').then(response => {
         this.productos = response.data;
-        //console.table(this.productos);
       }).catch((error) => {
         console.log(error);
       })
@@ -188,7 +187,7 @@ export default {
     eliminarProducto(id) {
       axios.delete('http://localhost:3000/producto/' + id).then((data) => {
         this.getProducto();
-      }).then(alertSucess()).then(this.hideModal());
+      }).then(alertSucessDelete()).then(this.hideModal());
 
     },
     detalleProducto(params) {

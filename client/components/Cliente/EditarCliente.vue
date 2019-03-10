@@ -71,6 +71,7 @@
 <script>
 
 import axios from 'axios'
+import { alertEdit,alertEditSucessCliente } from '../../assets/sweetAlert.js';
 import Cliente from '../../models/Cliente';
 
 
@@ -90,39 +91,25 @@ export default {
 
   },
   methods: {
-    rellenarCliente(){
-       console.log(this.idc);
-       axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
-         console.log(response.data);
-         this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
-     });
-   },
-
-   editarCliente(){
-     this.$swal({
-     title: 'Seguro que desea Editar?',
-     text: "No podra recuperar los datos!",
-     type: 'warning',
-     showCancelButton: true,
-     confirmButtonColor: '#3085d6',
-     cancelButtonColor: '#d33',
-     confirmButtonText: 'Si, Editar'
-     }).then((result) => {
-     if (result.value) {
-       this.$swal(
-         'Editado!',
-         'El Cliente ha sido Editado!',
-         'success'
-       ).then(axios.put('http://localhost:3000/cliente/'+ this.idc,
-            this.cliente,
-            { headers: {
+      rellenarCliente(){
+         console.log(this.idc);
+         axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
+           console.log(response.data);
+           this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+         });
+      },
+      editarCliente(){
+         alertEdit().then((result) => {
+            if (result.value) {
+            alertEditSucessCliente().then(axios.put('http://localhost:3000/cliente/'+ this.idc,
+               this.cliente,
+               { headers: {
                 'Content-Type': 'application/json',
-            }
-          }))
-        }
-     })
-
- }
+               }
+               }))
+           }
+         })
+       }
 }
 }
 </script>
@@ -131,11 +118,6 @@ export default {
 
 h1, h2 {
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
 }
 
 li {

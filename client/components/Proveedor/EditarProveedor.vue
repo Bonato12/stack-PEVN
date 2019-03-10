@@ -75,7 +75,7 @@
 
 import axios from 'axios'
 import Proveedor from '../../models/Proveedor';
-
+import { alertEdit,alertEditSucessProveedor } from '../../assets/sweetAlert.js';
 
 export default {
   name: 'app',
@@ -93,30 +93,17 @@ export default {
 
   },
   methods: {
-    rellenarProveedor(){
-       console.log(this.idp);
-       axios.get('http://localhost:3000/proveedor/'+this.idp).then((response) =>{
-         console.log(response.data);
-         this.proveedor = new Proveedor(this.idp,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail,response.data[0].descripcion);
-     });
-   },
-
-     editarProveedor(){
-           this.$swal({
-           title: 'Seguro que desea Editar?',
-           text: "No podra recuperar los datos!",
-           type: 'warning',
-           showCancelButton: true,
-           confirmButtonColor: '#3085d6',
-           cancelButtonColor: '#d33',
-           confirmButtonText: 'Si, Editar'
-           }).then((result) => {
+      rellenarProveedor(){
+        console.log(this.idp);
+        axios.get('http://localhost:3000/proveedor/'+this.idp).then((response) =>{
+          console.log(response.data);
+          this.proveedor = new Proveedor(this.idp,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail,response.data[0].descripcion);
+        });
+      },
+      editarProveedor(){
+           alertEdit().then((result) => {
            if (result.value) {
-             this.$swal(
-               'Editado!',
-               'El Proveedor ha sido Editado!',
-               'success'
-             ).then(axios.put('http://localhost:3000/proveedor/'+ this.idp,
+             alertEditSucessProveedor().then(axios.put('http://localhost:3000/proveedor/'+ this.idp,
                   this.proveedor,
                   { headers: {
                       'Content-Type': 'application/json',
@@ -124,7 +111,7 @@ export default {
                 }))
               }
            })
-   }
+      }
 }
 }
 </script>
@@ -145,11 +132,6 @@ form input:required:focus:valid{
 
 h1, h2 {
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
 }
 
 li {

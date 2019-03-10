@@ -72,6 +72,7 @@
 <script>
 
 import axios from 'axios'
+import { alertSucessProveedor,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import Proveedor from '../../models/Proveedor';
 
 
@@ -99,9 +100,9 @@ export default {
                 'Access-Control-Allow-Origin': 'http://localhost:3000/proveedor',
                 'Content-Type': 'application/json',
               },
-            }).then(this.proveedor = new Proveedor()).then(this.$swal( 'Exito!','Nuevo Proveedor Añadido!','success'));
+              }).then(this.proveedor = new Proveedor()).then(alertSucessProveedor());
             }else{
-              this.$swal( 'Error!','Completar los Campos Vacios!','error')
+                alertCompletarCampos();
             }
         }
 

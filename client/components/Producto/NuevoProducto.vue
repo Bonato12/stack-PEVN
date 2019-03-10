@@ -69,9 +69,8 @@
 </template>
 
 <script>
-
 import axios from 'axios'
-import { alertSucessProducto } from '../../assets/sweetAlert.js'
+import { alertSucessProducto,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import Producto from '../../models/Producto';
 
 export default {
@@ -96,7 +95,7 @@ export default {
   },
   methods: {
     nuevoProducto(){
-            if (this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
+            if(this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
                   console.log(this.producto);
                   axios.post('http://localhost:3000/producto',
                   this.producto, // the data to posthttp://localhost:3000/producto
@@ -104,14 +103,12 @@ export default {
                     'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
                     'Content-Type': 'application/json',
                   },
-                }).then(this.producto = new Producto()).then(alertSucessProducto());
+                  }).then(this.producto = new Producto()).then(alertSucessProducto());
             }else{
-                this.$swal( 'Error!','Completar Los Campos Vacios!','error');
+                alertCompletarCampos();
             }
 
         }
-
-
 }
 }
 </script>
