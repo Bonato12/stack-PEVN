@@ -1,13 +1,12 @@
 <template>
   <div id="NuevaVenta">
     <div class="container">
-          <div class="d-flex justify-content-center h-100">
-        		<div class="card" id="card">
+          <div style="float:center;">
           			<div class="card-header">
                   <h3 style="text-align:center; color:white;"> Nueva Venta </h3>
           			</div>
-          			<div class="card-body animated fadeInDown">
-              				<form>
+          			<div class="animated fadeInDown" id="card" style="float:left;  width:500px;">
+              				<form style="margin-left: 50px; margin-top:30px;">
                           <div class="input-group form-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text">Cliente</span>
@@ -61,36 +60,41 @@
                       </form>
                       <br>
               				<div class="form-group">
-              						<input v-on:click="nuevaVenta()" value="Guardar" class="btn float-right venta_btn">
-                          <router-link to="/HomeVenta" tag="button" class="btn" style="background:white; margin-left:702px;">
+              						<input v-on:click="nuevaVenta()" value="Guardar" class="btn venta_btn">
+                          <router-link to="/HomeVenta" tag="button" class="btn" style="background:white; margin-left:90px;">
                               <i class="fas fa-arrow-left"></i>
                                   Volver
                           </router-link>
               				</div>
-                  <div style="margin-left:500px; margin-top:-360px;">
-                  <ul class="list-group">
-                    <li v-for="item in this.Lista">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col animated fadeIn">
-                            <h3>{{item.producto.marca}} {{item.producto.modelo}}</h3>
-                            <button v-on:click="borrar(item)" class="btn btn-danger" style="float:right; margin-top: -40px;">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                            <br>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
                   </div>
-          			</div>
+                  <div class="animated fadeIn" style="float:right; width:500px;">
+                            <table class="table table-dark">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Modelo</th>
+                                  <th scope="col">Cantidad</th>
+                                  <th scope="col">Precio</th>
+                                  <th scope="col">Opciones</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr v-for="item in this.Lista">
+                                  <th>{{item.producto.modelo}}</th>
+                                  <td>{{item.cantidad}}</td>
+                                  <td>{{item.precio}}</td>
+                                  <td>
+                                      <button v-on:click="borrar(item)" class="btn btn-danger">
+                                          <i class="fas fa-trash-alt"></i>
+                                      </button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                      </div>
+                    </div>
         		</div>
-            </div>
-          </div>
-        <br>
       </div>
-  </div>
+
 </template>
 
 <script>
@@ -137,7 +141,7 @@ export default {
       });
     },
     getProducto(){
-      axios.get('http://localhost:3000/producto').then(response=>{
+      axios.get('http://localhost:3000/productoStock').then(response=>{
         this.producto = response.data;
       });
     },
@@ -153,6 +157,8 @@ export default {
                 this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
                 this.Lista.push(this.venta);
                 console.log(this.Lista);
+                this.producto[0].stock = this.productoSelected.stock - this.num;
+                console.log("El Stock de ahora es:"+this.producto[0].stock);
                 this.venta = new Venta();
                 this.num = '';
                 this.productoSelected = '';
@@ -182,7 +188,7 @@ export default {
                      }));
       }
       alertSucessVenta();
-      this.lista = [];
+      this.Lista = [];
       this.clienteSelected = '';
       this.productoSelected = '';
       this.venta = new Venta();
@@ -233,11 +239,7 @@ a {
 
 
 #card{
-height: auto;
-margin-top: 30px;
-margin-bottom: auto;
-width: 950px;
-color: white;
+
 background-color: rgba(0,0,0,0.5) !important;
 
 }
@@ -247,6 +249,7 @@ background-color: rgba(0,0,0,0.5) !important;
 color: black;
 background-color: #FFC312;
 width: 100px;
+margin-left: 290px;
 }
 
 .venta_btn:hover{

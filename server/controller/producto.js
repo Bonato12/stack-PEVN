@@ -16,6 +16,16 @@ module.exports = {
           })
         },
 
+        getProductoStock(req,res){
+          pool.query("SELECT  * FROM producto WHERE stock >= 1").then((response)=> {
+          console.log(response.rows);
+          res.json(response.rows);
+          //res.end();
+        }).catch((error)=>{
+            console.log(error);
+          })
+        },
+
       postProducto(req, res){
       console.log("PETICION POST");
       console.log(req.body);
