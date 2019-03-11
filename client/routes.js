@@ -12,6 +12,7 @@ import HomeProveedor from './components/Proveedor/HomeProveedor.vue'
 import NuevoProveedor from './components/Proveedor/NuevoProveedor.vue'
 import EditarProveedor from './components/Proveedor/EditarProveedor.vue'
 import Registrar from './components/Administrar/Registrar.vue'
+import NotFound from './components/Administrar/error404.vue'
 import Vue from 'vue'
 import firebase from 'firebase'
 import VueRouter from 'vue-router'
@@ -76,6 +77,10 @@ const rutas = new VueRouter({
             {
               path:'/NuevaVenta',
               component: NuevaVenta
+            },
+            {
+              path: '*',
+              component: NotFound,
             }
          ]
 })
@@ -84,7 +89,7 @@ const rutas = new VueRouter({
 rutas.beforeEach((to, from, next) => {
         let usuario = firebase.auth().currentUser;
         let autorizacion = to.matched.some(record => record.meta.autenticado);
-        if(to.path != '/Login' && to.path != '/Registrar')  {
+        if(to.path != '/Login' && to.path != '/Registrar' && to.path != '*')  {
             if (autorizacion && !usuario){
                 next(false);
             }else if(!autorizacion && usuario){

@@ -265,6 +265,17 @@ export default {
 </script>
 
 <style>
+
+html,body{
+background-image: url('../Administrar/background.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+background-color: #0C94F5;
+background-blend-mode: multiply;
+}
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

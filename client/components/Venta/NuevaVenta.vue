@@ -145,7 +145,7 @@ export default {
       if (this.numCarrito ==  4){
             alertWarningLimite();
       }else {
-            if(this.clienteSelected && this.productoSelected){
+            if(this.clienteSelected && this.productoSelected && this.num && this.venta.precio){
                 this.numCarrito++;
                 this.venta.cliente = this.clienteSelected;
                 this.venta.producto= this.productoSelected;
@@ -155,6 +155,7 @@ export default {
                 console.log(this.Lista);
                 this.venta = new Venta();
                 this.num = '';
+                this.productoSelected = '';
             }
       }
     },
