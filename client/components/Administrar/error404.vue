@@ -1,7 +1,8 @@
 <template>
   <div id="app404">
       <h1 style="text-align:center; color:black;">.</h1>
-      <h2 style="text-align:center; color:white;"> ERROR 404 PAGINA NO ENCONTRADA </h2>
+      <h2 style="text-align:center; color:white;"> ERROR 404 </h2>
+      <h3 style="text-align:center; color:white;"> PAGINA NO ENCONTRADA</h3>
   </br>
   </div>
 </template>
