@@ -33,31 +33,28 @@
                 theme="default">
          </vue-good-table>
          <div style="color:black;">
-              <b-modal ref="myModalRef" hide-footer title="Detalles">
-                <li v-for="item in this.ventasProducto">
-                <b-container fluid>
-                  <b-row class="mb-1">
-                    <b-col cols="3">ID:</b-col>
-                    <b-col>{{item.id_venta}}</b-col>
-                  </b-row>
-                  <hr>
-                  <b-row class="mb-1">
-                    <b-col cols="3">Producto</b-col>
-                    <b-col>{{item.id_producto}}</b-col>
-                  </b-row>
-                  <hr>
-                  <b-row class="mb-1">
-                    <b-col cols="3">Cantidad</b-col>
-                    <b-col>{{ item.cantidad }}</b-col>
-                  </b-row>
-                  <hr>
-                  <b-row class="mb-1">
-                    <b-col cols="3">Precio</b-col>
-                    <b-col>{{item.precio}}</b-col>
-                  </b-row>
-                  <hr>
-                </b-container>
-              </li>
+              <b-modal ref="myModalRef" hide-footer title="Detalles Venta">
+
+              <table class="table table-dark">
+                    <thead>
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Id_Venta</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Producto</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr v-for="item in this.ventasProducto">
+                            <th scope="row">{{item.id_ventaproducto}}</th>
+                            <td scope="row">{{item.id_venta}}</td>
+                            <td scope="row">{{item.modelo}}</td>
+                            <td scope="row"> {{item.cantidad}}</td>
+                            <td scope="row">{{item.precio}}</td>
+                          </tr>
+                    </tbody>
+              </table>
               </b-modal>
         </div>
      </div>
