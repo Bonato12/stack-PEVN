@@ -10,13 +10,13 @@ var pool = require('../database');
   module.exports = {
 
           getCliente(req,res){
-          pool.query("SELECT * FROM cliente").then(response=> {
-            console.log(response.rows)
-            //Muestra los resultados en forma de JSON en nuestro HTML
-            res.json(response.rows);
-          }).catch(error =>{
-            console.log(error);
-          })
+              pool.query("SELECT * FROM cliente").then(response=> {
+                console.log(response.rows)
+                //Muestra los resultados en forma de JSON en nuestro HTML
+                res.json(response.rows);
+              }).catch(error =>{
+                console.log(error);
+              })
         },
 
         postCliente(req, res){

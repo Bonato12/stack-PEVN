@@ -11,7 +11,7 @@ var ventaRouter = require('./routes/venta');
 var mailRouter = require('./routes/mail');
 var proveedorRouter = require('./routes/proveedor');
 var adminRouter = require('./routes/administrar');
-
+var ventaProductoRouter =require('./routes/ventaProducto');
 
 
 var app = express();
@@ -34,6 +34,7 @@ app.use('/', ventaRouter);
 app.use('/', mailRouter);
 app.use('/', proveedorRouter);
 app.use('/', adminRouter);
+app.use('/', ventaProductoRouter);
 
 
 //app.use('/',adminRouter);

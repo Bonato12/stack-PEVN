@@ -34,15 +34,30 @@
          </vue-good-table>
          <div style="color:black;">
               <b-modal ref="myModalRef" hide-footer title="Detalles">
-                  <div class="d-block text-center">
-                      <h4>ID:{{idv}}</h4>
-                      <hr>
-                      <button class="btn btn-danger" v-on:click="eliminarVenta(idv)">
-                        <i class="fas fa-trash-alt"></i>
-                        Eliminar
-                      </button>
-                      <router-link :to="/editarVenta/+idv" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
-                  </div>
+                <li v-for="item in this.ventasProducto">
+                <b-container fluid>
+                  <b-row class="mb-1">
+                    <b-col cols="3">ID:</b-col>
+                    <b-col>{{item.id_venta}}</b-col>
+                  </b-row>
+                  <hr>
+                  <b-row class="mb-1">
+                    <b-col cols="3">Producto</b-col>
+                    <b-col>{{item.id_producto}}</b-col>
+                  </b-row>
+                  <hr>
+                  <b-row class="mb-1">
+                    <b-col cols="3">Cantidad</b-col>
+                    <b-col>{{ item.cantidad }}</b-col>
+                  </b-row>
+                  <hr>
+                  <b-row class="mb-1">
+                    <b-col cols="3">Precio</b-col>
+                    <b-col>{{item.precio}}</b-col>
+                  </b-row>
+                  <hr>
+                </b-container>
+              </li>
               </b-modal>
         </div>
      </div>
@@ -79,7 +94,6 @@ export default {
   name: 'HomeVenta',
   created(){
     this.getVenta();
-
   },
   data () {
     return {
@@ -87,6 +101,7 @@ export default {
       lista: [],
       modalShow: false,
       ventas: [],
+      ventasProducto: [],
       columns: [
         {
           label: 'Nombre',
@@ -97,16 +112,12 @@ export default {
           field: 'apellido',
         },
         {
-          label: 'Modelo',
-          field: 'modelo',
-        },
-        {
           label: 'Fecha',
           field: 'fecha',
         },
         {
-          label: 'Precio',
-          field: 'precio',
+          label: 'Total',
+          field: 'total',
         }
       ],
 		}
@@ -123,6 +134,8 @@ export default {
           console.log(this.ventas);
         });
     },
+
+
     eliminarVenta(id){
         console.log(id);
         this.idv = id;
@@ -133,8 +146,12 @@ export default {
     },
     onRowClick(params) {
         this.$refs.myModalRef.show()
-        console.log(params);
-        this.idv = params.row.id_venta;
+        console.log(params.row);
+            axios.get('http://localhost:3000/ventaProducto/'+ params.row.id_venta).then((response) =>{
+              this.ventasProducto = response.data;
+              console.log(this.ventasProducto);
+            });
+
 
     },
     hideModal() {

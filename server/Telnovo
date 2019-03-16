@@ -47,13 +47,24 @@ CREATE TABLE producto(
 
 CREATE TABLE venta(
 	id_venta SERIAL NOT NULL,
-	id_cliente BIGINT NOT NULL,
-	id_producto BIGINT NOT NULL,
+	id_cliente INTEGER NOT NULL,
 	fecha DATE NOT NULL,
+	total INTEGER NOT NULL,
 	CONSTRAINT pk_id_venta PRIMARY KEY(id_venta),
-	CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente),
+	CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente)
+);
+
+CREATE TABLE ventaProducto(
+	id_ventaProducto SERIAL NOT NULL,
+	id_venta INTEGER NOT NULL,
+	id_producto INTEGER NOT NULL,
+	cantidad INTEGER NOT NULL,
+	precio INTEGER NOT NULL,
+	CONSTRAINT pk_idProducto PRIMARY KEY(id_ventaProducto),
+	CONSTRAINT fk_id_venta FOREIGN KEY(id_venta) REFERENCES venta(id_venta),
 	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
 );
+
 
 INSERT INTO venta VALUES(1,2,3,'20/12/2018');
 

@@ -1,5 +1,6 @@
 <template>
   <div id="NuevaVenta">
+    <!--
     <div class="container">
           <div style="float:center;">
           			<div class="card-header">
@@ -10,7 +11,7 @@
                           <div class="input-group form-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text">Cliente</span>
-                              <v-select :options="cliente" label="dni"  v-model="clienteSelected" style="width:320px; background-color: white;">
+                              <v-select :options="cliente" label="dni" id="clienteSelect"  v-model="clienteSelected" style="width:320px; background-color: white;">
                                 <template slot="option" slot-scope="option">
                                     <span class="fa" :class="option.icon"></span>
                                     {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
@@ -48,7 +49,7 @@
                           </div>
                           <div v-if="productoSelected" class="input-group form-group" style="width:403px;">
                               <div class="input-group-prepend">
-                                <span class="input-group-text">Total</span>
+                                <span class="input-group-text">Precio</span>
                               </div>
                               <input  type="number" min="0"  v-model="venta.precio"  class="form-control form-control-lg">
                           </div>
@@ -93,12 +94,13 @@
                       </div>
                     </div>
         		</div>
+          -->
       </div>
 
 </template>
 
 <script>
-
+/*
 import axios from 'axios'
 import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
@@ -165,6 +167,7 @@ export default {
             }
       }
     },
+    /*
     nuevaVenta(){
       //Cicla la Lista de Objetos y las envia al Servidor
       console.log(this.Lista);
@@ -194,6 +197,7 @@ export default {
       this.venta = new Venta();
 
     },
+
     increment(){
           if(this.productoSelected.precio){
               if (this.num ==  this.productoSelected.stock){
@@ -221,7 +225,7 @@ export default {
     }
   }
 }
-
+*/
 </script>
 
 <style scoped>
@@ -267,6 +271,32 @@ border:0 !important;
 .form-control {
     border: 0;
     box-shadow: none;
+}
+
+form input:focus:invalid{
+    background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
+    /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);*/
+}
+
+
+form input:required:focus:valid{
+  background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
+/*  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);*/
+}
+
+#clienteSelect:focus:invalid{
+    background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
+    /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);*/
+}
+
+
+v-select:required:focus:valid{
+  background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
+/*  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);*/
 }
 
 </style>
