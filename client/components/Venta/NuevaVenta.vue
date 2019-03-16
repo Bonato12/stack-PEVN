@@ -1,6 +1,5 @@
 <template>
   <div id="NuevaVenta">
-    <!--
     <div class="container">
           <div style="float:center;">
           			<div class="card-header">
@@ -51,7 +50,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text">Precio</span>
                               </div>
-                              <input  type="number" min="0"  v-model="venta.precio"  class="form-control form-control-lg">
+                              <input  type="number" min="0"  v-model="precio"  class="form-control form-control-lg">
                           </div>
                           <div class="input-group form-group">
                               <button class="btn btn-success" v-on:click="guardarLista()" title="Añadir al Carrito">
@@ -98,9 +97,8 @@
       </div>
 
 </template>
-
 <script>
-/*
+
 import axios from 'axios'
 import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
@@ -118,6 +116,8 @@ export default {
       venta: new Venta(),
       cliente: [],
       producto: [],
+      precio: '',
+      acumulador: 0,
       productoSelected: '',
       clienteSelected: '',
       num: '',
@@ -151,50 +151,27 @@ export default {
       if (this.numCarrito ==  4){
             alertWarningLimite();
       }else {
-            if(this.clienteSelected && this.productoSelected && this.num && this.venta.precio){
+            if(this.clienteSelected && this.productoSelected && this.num){
                 this.numCarrito++;
                 this.venta.cliente = this.clienteSelected;
-                this.venta.producto= this.productoSelected;
-                this.venta.cantidad = this.num;
-                this.venta.precio = (parseInt(this.productoSelected.precio) * parseInt(this.num)) ;
-                this.Lista.push(this.venta);
-                console.log(this.Lista);
-                this.producto[0].stock = this.productoSelected.stock - this.num;
-                console.log("El Stock de ahora es:"+this.producto[0].stock);
-                this.venta = new Venta();
-                this.num = '';
-                this.productoSelected = '';
+                this.acumulador = parseInt(this.acumulador) + parseInt(this.precio);
+                alert(this.acumulador);
+                this.venta.total = this.acumulador;
+
             }
       }
     },
-    /*
     nuevaVenta(){
       //Cicla la Lista de Objetos y las envia al Servidor
-      console.log(this.Lista);
-      for (var i = 0; i < this.Lista.length; i++) {
         axios.post('http://localhost:3000/venta',
-                    this.Lista[i],
-                  {
-                    headers: {
+                    this.venta,
+                    {
+                      headers:{
                       'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
                       'Content-Type': 'application/json'
-                    }
-                  }).then(
-                    axios.put('http://localhost:3000/productoStock/'+ this.Lista[i].producto.id_producto,
-                       {
-                       stock: this.Lista[i].cantidad,
-                       id_producto: this.Lista[i].producto.id_producto
-                     },
-                       { headers: {
-                           'Content-Type': 'application/json',
                        }
-                     }));
-      }
+                    });
       alertSucessVenta();
-      this.Lista = [];
-      this.clienteSelected = '';
-      this.productoSelected = '';
-      this.venta = new Venta();
 
     },
 
@@ -204,7 +181,6 @@ export default {
                   alertWarningLimiteStock();
               }else{
                   this.num++;
-                  this.venta.precio = this.productoSelected.precio * this.num;
               }
           }
     },
@@ -214,7 +190,6 @@ export default {
             alertWarningLimiteOne();
           } else {
             this.num--;
-            this.venta.precio = this.productoSelected.precio * this.num;
           }
       }
     },
@@ -225,7 +200,7 @@ export default {
     }
   }
 }
-*/
+
 </script>
 
 <style scoped>

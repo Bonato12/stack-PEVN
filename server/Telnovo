@@ -65,6 +65,7 @@ CREATE TABLE ventaProducto(
 	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
 );
 
+SELECT * FROM venta;
 
 INSERT INTO venta VALUES(1,2,3,'20/12/2018');
 
