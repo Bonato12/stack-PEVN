@@ -29,7 +29,7 @@ module.exports = {
       postProducto(req, res){
       console.log("PETICION POST");
       console.log(req.body);
-      pool.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
+      pool.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
       req.body.stock,req.body.precio]).then(response=>{
         console.log(response);
       }).catch(error =>{

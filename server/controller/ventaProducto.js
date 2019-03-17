@@ -26,16 +26,17 @@ var pool = require('../database');
               });
             },
 
-        /*
+
         postVenta(req, res){
-              console.log("Peticion POST");
-              pool.query("INSERT INTO venta(id_cliente,fecha,total) VALUES($1,$2,$3)",[req.body.cliente.id_cliente,req.body.fecha,req.body.total]).then(response=> {
+              console.log(req.body);
+              pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4) RETURNING id_venta",[req.body.last,req.body.id_producto,req.body.cantidad,req.body.precio]).then(response=> {
                 console.log(response);
               }).catch((error) =>{
                 console.log(error);
               });
         },
 
+        /*
         deleteVenta(req,res){
                 console.log("Peticion DELETE");
                 pool.query("DELETE FROM venta WHERE id_venta=($1)",[req.params.id_venta]).then(response=> {
@@ -44,7 +45,7 @@ var pool = require('../database');
                 }).catch(error =>{
                   console.log(error);
                 })
-        },
-        */
+        }
+*/
 
        }

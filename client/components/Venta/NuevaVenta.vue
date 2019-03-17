@@ -104,6 +104,7 @@ import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweet
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
+import VentaProducto from '../../models/VentaProducto';
 
 export default {
   name: 'NuevaVenta',
@@ -114,6 +115,9 @@ export default {
   data () {
     return {
       venta: new Venta(),
+      Lista: [],
+      ventaProducto: new VentaProducto(),
+      last: '',
       cliente: [],
       producto: [],
       precio: '',
@@ -122,12 +126,8 @@ export default {
       clienteSelected: '',
       num: '',
       numCarrito: '',
-      Lista: [
-        //  {id:'0',id_cliente:'120', modelo:'J7', marca:'Samsung', id_producto:'15', cantidad: '2', fecha: '12/09/2019', precio: '4000'},
-        //  {id:'1',id_cliente:'174', modelo: 'X Play', marca:'Motorola', id_producto:'17', cantidad: '1', fecha: '12/09/2019', precio: '8000'},
-        //  {id:'2',id_cliente:'120', modelo: 'X', marca:'Apple', id_producto:'18', cantidad: '4', fecha: '12/09/2018', precio: '12000'}
+      prueba:''
 
-      ]
 		}
   },
   computed:{
@@ -157,12 +157,17 @@ export default {
                 this.acumulador = parseInt(this.acumulador) + parseInt(this.precio);
                 alert(this.acumulador);
                 this.venta.total = this.acumulador;
+                this.ventaProducto.producto = this.productoSelected;
+                this.ventaProducto.cantidad = this.num;
+                this.ventaProducto.precio = this.precio;
+                this.Lista.push(this.ventaProducto);
+                this.ventaProducto = new VentaProducto();
+
 
             }
       }
     },
     nuevaVenta(){
-      //Cicla la Lista de Objetos y las envia al Servidor
         axios.post('http://localhost:3000/venta',
                     this.venta,
                     {
@@ -170,8 +175,29 @@ export default {
                       'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
                       'Content-Type': 'application/json'
                        }
-                    });
-      alertSucessVenta();
+                    }).then((response)=>{
+                      response.data;
+                      });
+                        alert("HOLA");
+                        for (var i=0 ; i < this.Lista.length ; i++) {
+                              this.Lista[i].venta = 55;
+                        };
+                        console.log("Lista Nueva");
+                        console.log(this.Lista);
+
+
+                       /*
+                       axios.post('http://localhost:3000/ventaProducto',
+
+
+
+                                {
+                                  headers:{
+                                  'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
+                                  'Content-Type': 'application/json'
+                                   }
+                       });*/
+
 
     },
 
