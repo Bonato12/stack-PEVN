@@ -167,6 +167,18 @@ export default {
             }
       }
     },
+
+    prueba(){
+           axios.post('http://localhost:3000/ventaProducto',
+                    this.Lista,
+                    {
+                      headers:{
+                      'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
+                      'Content-Type': 'application/json'
+                       }
+           });
+
+    },
     nuevaVenta(){
         axios.post('http://localhost:3000/venta',
                     this.venta,
@@ -175,29 +187,16 @@ export default {
                       'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
                       'Content-Type': 'application/json'
                        }
-                    }).then((response)=>{
-                      response.data;
-                      });
-                        alert("HOLA");
-                        for (var i=0 ; i < this.Lista.length ; i++) {
-                              this.Lista[i].venta = 55;
-                        };
-                        console.log("Lista Nueva");
-                        console.log(this.Lista);
-
-
-                       /*
-                       axios.post('http://localhost:3000/ventaProducto',
-
-
-
-                                {
-                                  headers:{
-                                  'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
-                                  'Content-Type': 'application/json'
-                                   }
-                       });*/
-
+                    }).then(
+                    axios.post('http://localhost:3000/ventaProducto',
+                             this.Lista,
+                             {
+                               headers:{
+                               'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
+                               'Content-Type': 'application/json'
+                             }
+                    }));
+                     alertSucessVenta();
 
     },
 

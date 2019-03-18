@@ -26,10 +26,10 @@ var pool = require('../database');
               });
             },
 
-
+            /*
         postVenta(req, res){
               console.log(req.body);
-              pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4) RETURNING id_venta",[req.body.last,req.body.id_producto,req.body.cantidad,req.body.precio]).then(response=> {
+              pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4) RETURNING id_venta",[req.body.venta,req.body.producto.id_producto,req.body.cantidad,req.body.precio]).then(response=> {
                 console.log(response);
               }).catch((error) =>{
                 console.log(error);

@@ -4,8 +4,8 @@ var app = express();
 const ventaController = require('../controller/venta');
 
 router.get('/venta', ventaController.getVenta);
-router.get('/lastVenta', ventaController.lastVenta)
 router.post('/venta',ventaController.postVenta);
+router.post('/ventaProducto',ventaController.postVentaProducto);
 router.delete('/venta/:id_venta',ventaController.deleteVenta);
 
 
