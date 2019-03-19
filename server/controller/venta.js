@@ -38,19 +38,6 @@ var id;
 
         },
 
-
-
-        /*
-        lastVenta(req, res){
-            pool.query("SELECT id_venta FROM venta ORDER BY id_venta DESC LIMIT 1").then(response=> {
-              console.log(response.rows)
-              //Muestra los resultados en forma de JSON en nuestro HTML
-              res.json(response.rows);
-            }).catch(error =>{
-              console.log(error);
-            })
-        },
-        */
         deleteVenta(req,res){
                 console.log("Peticion DELETE");
                 pool.query("DELETE FROM venta WHERE id_venta=($1)",[req.params.id_venta]).then(response=> {

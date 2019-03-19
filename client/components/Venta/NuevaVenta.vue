@@ -50,7 +50,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text">Precio</span>
                               </div>
-                              <input  type="number" min="0"  v-model="precio"  class="form-control form-control-lg">
+                              <input required  type="number" min="0"  v-model="precio"  class="form-control form-control-lg">
                           </div>
                           <div class="input-group form-group">
                               <button class="btn btn-success" v-on:click="guardarLista()" title="Añadir al Carrito">
@@ -93,7 +93,6 @@
                       </div>
                     </div>
         		</div>
-          -->
       </div>
 
 </template>
@@ -161,11 +160,11 @@ export default {
                 this.ventaProducto.producto = this.productoSelected;
                 this.ventaProducto.cantidad = this.num;
                 this.ventaProducto.precio = this.precio;
-                //this.Lista.push(this.venta);
                 this.Lista.push(this.ventaProducto);
-
                 this.ventaProducto = new VentaProducto();
-
+                this.productoSelected = '';
+                this.num = '';
+                this.precio = 0;
 
             }
       }
@@ -195,6 +194,8 @@ export default {
                   alertWarningLimiteStock();
               }else{
                   this.num++;
+                  this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+
               }
           }
     },
@@ -204,6 +205,8 @@ export default {
             alertWarningLimiteOne();
           } else {
             this.num--;
+            this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+
           }
       }
     },

@@ -33,9 +33,19 @@
                 theme="default">
          </vue-good-table>
          <div style="color:black;">
-              <b-modal ref="myModalRef" hide-footer title="Detalles Venta">
+           <b-modal
+               title="Detalle Venta"
+               :header-bg-variant="headerBgVariant"
+               :header-text-variant="headerTextVariant"
+               :body-bg-variant="bodyBgVariant"
+               :body-text-variant="bodyTextVariant"
+               :footer-bg-variant="footerBgVariant"
+               :footer-text-variant="footerTextVariant"
+                size="lg"
+                ref="myModalRef"
+         >
 
-              <table class="table table-dark">
+              <table class="table table-default">
                     <thead>
                           <tr>
                             <th scope="col">Id</th>
@@ -55,6 +65,19 @@
                           </tr>
                     </tbody>
               </table>
+              <div slot="modal-footer" class="w-100">
+                <p class="float-left">Opciones</p>
+                <div style="float:right;">
+                    <button class="btn btn-danger"  title="Eliminar Cliente">
+                        <i class="fas fa-trash-alt"></i>
+                        Eliminar
+                    </button>
+                    <router-link   class="btn" style="background-color:yellow;" tag="button" title="Editar Cliente">
+                        <i class="fas fa-edit fa-1x"></i>
+                        Editar
+                    </router-link>
+                </div>
+              </div>
               </b-modal>
         </div>
      </div>
@@ -94,6 +117,13 @@ export default {
   },
   data () {
     return {
+      variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
+      headerBgVariant: 'dark',
+      headerTextVariant: 'light',
+      bodyBgVariant: 'light',
+      bodyTextVariant: 'dark',
+      footerBgVariant: 'warning',
+      footerTextVariant: 'dark',
       idv:'',
       lista: [],
       modalShow: false,
