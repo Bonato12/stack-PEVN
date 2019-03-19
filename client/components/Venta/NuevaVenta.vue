@@ -114,6 +114,7 @@ export default {
   },
   data () {
     return {
+      idventa : -1,
       venta: new Venta(),
       Lista: [],
       ventaProducto: new VentaProducto(),
@@ -160,7 +161,9 @@ export default {
                 this.ventaProducto.producto = this.productoSelected;
                 this.ventaProducto.cantidad = this.num;
                 this.ventaProducto.precio = this.precio;
+                //this.Lista.push(this.venta);
                 this.Lista.push(this.ventaProducto);
+
                 this.ventaProducto = new VentaProducto();
 
 
@@ -168,35 +171,21 @@ export default {
       }
     },
 
-    prueba(){
-           axios.post('http://localhost:3000/ventaProducto',
-                    this.Lista,
-                    {
-                      headers:{
-                      'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
-                      'Content-Type': 'application/json'
-                       }
-           });
 
-    },
     nuevaVenta(){
-        axios.post('http://localhost:3000/venta',
-                    this.venta,
+        this.id_venta = axios.post('http://localhost:3000/venta',
+
+                  {
+                  lista: this.Lista,
+                  venta: this.venta
+                  },
                     {
                       headers:{
                       'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
                       'Content-Type': 'application/json'
                        }
-                    }).then(
-                    axios.post('http://localhost:3000/ventaProducto',
-                             this.Lista,
-                             {
-                               headers:{
-                               'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
-                               'Content-Type': 'application/json'
-                             }
-                    }));
-                     alertSucessVenta();
+                    });
+                    alertSucessVenta();
 
     },
 
