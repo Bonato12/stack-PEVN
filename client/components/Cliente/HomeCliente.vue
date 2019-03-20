@@ -100,7 +100,7 @@
                 <i class="fas fa-envelope fa-1x"></i>
                 Enviar Mail
             </button>
-      </div>
+        </div>
       </div>
     </b-modal>
     </div>

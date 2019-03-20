@@ -65,8 +65,8 @@ CREATE TABLE ventaProducto(
 	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
 );
 
-SELECT * FROM venta;
-
+SELECT * FROM ventaProducto;
+DELETE FROM venta
 INSERT INTO venta VALUES(1,2,3,'20/12/2018');
 
 INSERT INTO cliente VALUES(3,39261832,'Sebastian','Bonato','Herrera','CLSN','3442507780','sebabonato12@gmail.com');
@@ -76,3 +76,9 @@ INSERT INTO producto VALUES(2,'Samsung J7','Celular',50000);
 INSERT INTO producto VALUES(3,'Samsung S6','Celular',50000);
 
 INSERT INTO  venta VALUES(1,120,3,'24/01/2009');
+
+DROP CASCADE FROM venta WHERE id_venta = 177;
+
+SELECT * FROM venta
+
+SELECT * FROM cliente WHERE id_cliente = 178

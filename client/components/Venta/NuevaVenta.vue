@@ -6,7 +6,9 @@
                   <h3 style="text-align:center; color:white;"> Nueva Venta </h3>
           			</div>
           			<div class="animated fadeInDown" id="card" style="float:left;  width:500px;">
-              				<form style="margin-left: 50px; margin-top:30px;">
+                      <br>
+                      <br>
+                      <form style="margin-left: 50px; margin-top:30px;">
                           <div class="input-group form-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text">Cliente</span>
@@ -59,13 +61,19 @@
                           </div>
                       </form>
                       <br>
-              				<div class="form-group">
-              						<input v-on:click="nuevaVenta()" value="Guardar" class="btn venta_btn">
-                          <router-link to="/HomeVenta" tag="button" class="btn" style="background:white; margin-left:90px;">
-                              <i class="fas fa-arrow-left"></i>
-                                  Volver
-                          </router-link>
+              				<div class="d-flex justify-content-end" style="padding-right:50px;">
+                        <router-link to="/HomeVenta" tag="button" class="btn" style="background:white;">
+                            <i class="fas fa-arrow-left"></i>
+                                Volver
+                        </router-link>
+                        <div style="width:5px;"></div>
+                        <button v-on:click="nuevaVenta()"  class="btn" style="width:115px; background-color:#fec400;">
+                          <i class="far fa-save fa-1x"></i>
+                                Guardar
+                        </button>
               				</div>
+                      <br>
+                      <br>
                   </div>
                   <div class="animated fadeIn" style="float:right; width:500px;">
                             <table class="table table-dark">
@@ -113,6 +121,7 @@ export default {
   },
   data () {
     return {
+      id: -1,
       idventa : -1,
       venta: new Venta(),
       Lista: [],
@@ -151,7 +160,7 @@ export default {
       if (this.numCarrito ==  4){
             alertWarningLimite();
       }else {
-            if(this.clienteSelected && this.productoSelected && this.num){
+            if(this.clienteSelected && this.productoSelected && this.precio && this.num){
                 this.numCarrito++;
                 this.venta.cliente = this.clienteSelected;
                 this.acumulador = parseInt(this.acumulador) + parseInt(this.precio);
@@ -160,31 +169,37 @@ export default {
                 this.ventaProducto.producto = this.productoSelected;
                 this.ventaProducto.cantidad = this.num;
                 this.ventaProducto.precio = this.precio;
+                this.id++;
+                this.ventaProducto.id = this.id;
                 this.Lista.push(this.ventaProducto);
                 this.ventaProducto = new VentaProducto();
                 this.productoSelected = '';
                 this.num = '';
                 this.precio = 0;
-
+            }else {
+              alert("Completar los Campos");
             }
       }
     },
 
 
     nuevaVenta(){
-        this.id_venta = axios.post('http://localhost:3000/venta',
-
-                  {
-                  lista: this.Lista,
-                  venta: this.venta
-                  },
-                    {
-                      headers:{
-                      'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
-                      'Content-Type': 'application/json'
-                       }
-                    });
-                    alertSucessVenta();
+                  if (this.Lista.length > 0 && this.venta){
+                      axios.post('http://localhost:3000/venta',
+                          {
+                          lista: this.Lista,
+                          venta: this.venta
+                          },
+                          {
+                            headers:{
+                            'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
+                            'Content-Type': 'application/json'
+                             }
+                        })
+                          alertSucessVenta();
+                  }else {
+                    alert("Completar Los Campos");
+                  }
 
     },
 
@@ -211,6 +226,7 @@ export default {
       }
     },
     borrar(item){
+      console.log(this.Lista);
       this.numCarrito--;
       console.log(item);
       this.Lista.splice((item.id), 1);
@@ -241,12 +257,6 @@ background-color: rgba(0,0,0,0.5) !important;
 }
 
 
-.venta_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
-margin-left: 290px;
-}
 
 .venta_btn:hover{
 color: black;

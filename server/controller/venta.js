@@ -37,7 +37,6 @@ var id;
               });
 
         },
-
         deleteVenta(req,res){
                 console.log("Peticion DELETE");
                 pool.query("DELETE FROM venta WHERE id_venta=($1)",[req.params.id_venta]).then(response=> {

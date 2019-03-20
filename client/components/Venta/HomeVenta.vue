@@ -68,7 +68,7 @@
               <div slot="modal-footer" class="w-100">
                 <p class="float-left">Opciones</p>
                 <div style="float:right;">
-                    <button class="btn btn-danger"  title="Eliminar Cliente">
+                    <button class="btn btn-danger" v-on:click="eliminarVenta()"  title="Eliminar Cliente">
                         <i class="fas fa-trash-alt"></i>
                         Eliminar
                     </button>
@@ -163,9 +163,7 @@ export default {
     },
 
 
-    eliminarVenta(id){
-        console.log(id);
-        this.idv = id;
+    eliminarVenta(){
         axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
           console.log(data)
           this.getVenta()
@@ -174,6 +172,7 @@ export default {
     onRowClick(params) {
         this.$refs.myModalRef.show()
         console.log(params.row);
+            this.idv =  params.row.id_venta;
             axios.get('http://localhost:3000/ventaProducto/'+ params.row.id_venta).then((response) =>{
               this.ventasProducto = response.data;
               console.log(this.ventasProducto);
