@@ -62,12 +62,12 @@
                       </form>
                       <br>
               				<div class="d-flex justify-content-end" style="padding-right:50px;">
-                        <router-link to="/HomeVenta" tag="button" class="btn" style="background:white;">
+                        <router-link to="/HomeVenta" tag="button" class="botones"  style="background:white;">
                             <i class="fas fa-arrow-left"></i>
                                 Volver
                         </router-link>
                         <div style="width:5px;"></div>
-                        <button v-on:click="nuevaVenta()"  class="btn" style="width:115px; background-color:#fec400;">
+                        <button v-on:click="nuevaVenta()" class="botones" style="width:115px; background-color:#fec400;">
                           <i class="far fa-save fa-1x"></i>
                                 Guardar
                         </button>
@@ -275,6 +275,8 @@ border:0 !important;
     box-shadow: none;
 }
 
+
+
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
     background-color: white;
@@ -299,6 +301,20 @@ v-select:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
   background-color: white;
 /*  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);*/
+}
+
+.botones{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:200px;
+  height:50px;
+  margin-top:-10px;
+  border:none;
+  color:black;
+  -webkit-transition:.5s;
+  transition:.5s;
 }
 
 </style>

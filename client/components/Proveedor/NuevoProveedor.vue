@@ -50,12 +50,13 @@
                         </div>
                           <input required type="text" v-model="proveedor.descripcion" class="form-control" placeholder="Ingrese Descripcion">
                     </div>
+                    <br>
                     <div class="form-group">
-                        <button type="submit" class="btn float-right buttonProveedor">
+                        <button type="submit" style="background-color:#fec400">
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                         </button>
-                        <router-link to="/HomeProveedor" tag="button" class="btn" style="background:white; margin-left:182px;">
+                        <router-link to="/HomeProveedor" tag="button" style="background:white;">
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>
@@ -140,9 +141,24 @@ border:0 !important;
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 450px;
+width: 850px;
 background-color: rgba(0,0,0,0.5) !important;
 }
+
+button{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:200px;
+  height:50px;
+  margin-top:-10px;
+  border:none;
+  color:black;
+  -webkit-transition:.5s;
+  transition:.5s;
+}
+
 
 .proveedor_btn{
 color: black;

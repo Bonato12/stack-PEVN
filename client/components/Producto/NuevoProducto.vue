@@ -47,15 +47,18 @@
               						</div>
               						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
+                      <br>
             					<div class="form-group">
-                          <button type="submit" class="btn float-right nuevoProducto_btn" title="Guardar Producto">
-                              <i class="far fa-save fa-1x"></i>
-                              Guardar
-                          </button>
-                          <router-link to="/HomeProducto" tag="button" class="btn" title="Volver a HomeProducto" style="background:white; margin-left:182px;">
-                              <i class="fas fa-arrow-left"></i>
-                                Volver
-                          </router-link>
+                        <button type="submit"  title="Guardar Producto" style="background-color:#fec400">
+                            <i class="far fa-save fa-1x"></i>
+                            Guardar
+                        </button>
+                        <router-link to="/HomeProducto" tag="button" title="Volver a HomeProducto" style="background:white;">
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
+
+
             					</div>
         				</form>
                       <br>
@@ -141,10 +144,11 @@ border:0 !important;
 height: 510px;
 margin-top: 30px;
 margin-bottom: auto;
-width: 450px;
+width: 850px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
+/*
 .nuevoProducto_btn{
 color: black;
 background-color: #FFC312;
@@ -153,6 +157,20 @@ background-color: #FFC312;
 .nuevoProducto_btn:hover{
 color: black;
 background-color: white;
+}
+*/
+button{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:200px;
+  height:50px;
+  margin-top:-10px;
+  border:none;
+  color:black;
+  -webkit-transition:.5s;
+  transition:.5s;
 }
 
 /*Sirve para desabilitar las flechas en los inputs numer*/

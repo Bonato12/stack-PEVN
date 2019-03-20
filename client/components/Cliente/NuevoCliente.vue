@@ -50,12 +50,13 @@
                         </div>
                           <input required type="email" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
                     </div>
+                    <br>
                     <div class="form-group">
-                        <button type="submit" class="btn float-right cliente_btn" title="Guardar Cliente">
+                        <button type="submit"  title="Guardar Cliente" style="background-color:#fec400">
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                         </button>
-                        <router-link to="/HomeCliente" tag="button" class="btn" title="Volver a HomeCliente" style="background:white; margin-left:182px;">
+                        <router-link to="/HomeCliente" tag="button"  title="Volver a HomeCliente" style="background:white;">
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>
@@ -152,9 +153,9 @@ border:0 !important;
 
 .card{
 height: auto;
-margin-top: 30px;
+margin-top: 25px;
 margin-bottom: auto;
-width: 450px;
+width: 850px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
@@ -173,6 +174,19 @@ background-color: white;
     box-shadow: none;
 }
 
+button{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:200px;
+  height:50px;
+  margin-top:-20px;
+  border:none;
+  color:black;
+  -webkit-transition:.5s;
+  transition:.5s;
+}
 
 /*Sirve para desabilitar las flechas en los inputs numer*/
 input::-webkit-outer-spin-button,
