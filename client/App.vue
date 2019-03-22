@@ -100,7 +100,6 @@ background-blend-mode: multiply;
 
 .navbar{background:#222222;}
 .nav-item::after{content:'';display:block;width:0px;height:2px;background:#fec400;transition: 0.2s;}
-.nav-item:hover::after{width:100%;}
 .nav-link{padding:15px 5px;transition:0.2s;}
 
 
@@ -108,7 +107,7 @@ background-blend-mode: multiply;
 .activo{
     background-color: #fec400;
     color: black;
-    height: 193%;
+    height: 123%;
 }
 
 
