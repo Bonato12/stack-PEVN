@@ -161,8 +161,6 @@ export default {
           console.log(this.ventas);
         });
     },
-
-
     eliminarVenta(){
         axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
           console.log(data)
@@ -214,10 +212,6 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
-
 #formulario{
   background-color: rgba(0,0,0,0.8);
   width: 450px;
@@ -230,6 +224,8 @@ a {
 .botonVenta:hover{
   background-color: white;
 }
+
+
 
 
 </style>

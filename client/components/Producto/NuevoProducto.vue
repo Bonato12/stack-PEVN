@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="container">
+      <!--
         <div class="d-flex justify-content-center">
       		<div class="card">
         			<div class="card-header">
@@ -66,7 +67,73 @@
         			</div>
       		</div>
       	</div>
+      -->
+      <section class="formulario animated fadeInDown">
+          <section class="info">
+              <section class="titulo">
+                  <span class="fas fa-mobile-alt"></span>
+                  <p style="font-size:25px;">NUEVO PRODUCTO</p>
+              </section>
+          </section>
+          <form @submit.prevent="nuevoProducto()">
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Modelo</span>
+                    </div>
+                    <input required type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Marca</span>
+                    </div>
+                    <input required type="text" v-model="producto.marca" class="form-control" placeholder="Ingrese Marca">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Descripcion</span>
+                    </div>
+                    <textarea required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Tipo Producto</span>
+                    </div>
+                    <select required class="form-control" v-model="producto.tipoProducto">
+                      <option disabled>Elige un Tipo Producto</option>
+                      <option  v-for="item in tipoProductos">{{ item.name }}</option>
+                   </select>
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Stock</span>
+                    </div>
+                    <input required type="number" min="0" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Precio</span>
+                    </div>
+                    <input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
+                </div>
+                <br>
+                <div class="form-group">
+                  <button type="submit"  title="Guardar Producto" style="background-color:#fec400">
+                      <i class="far fa-save fa-1x"></i>
+                      Guardar
+                  </button>
+                  <router-link to="/HomeProducto" tag="button" title="Volver a HomeProducto" style="background:white;">
+                      <i class="fas fa-arrow-left"></i>
+                        Volver
+                  </router-link>
+                  <br>
+                </div>
+              <br>
+          </form>
+      </section>
+      <br>
   </div>
+  <br>
+
   </br>
   </div>
 </template>
@@ -137,7 +204,8 @@ li {
 width: auto;
 background-color: #FFC312;
 color: black;
-border:0 !important;
+border: none;
+
 }
 
 .card{
@@ -145,20 +213,9 @@ height: 510px;
 margin-top: 30px;
 margin-bottom: auto;
 width: 850px;
-background-color: rgba(0,0,0,0.5) !important;
+background-color: rgba(0,0,0,0.5) ;
 }
 
-/*
-.nuevoProducto_btn{
-color: black;
-background-color: #FFC312;
-}
-
-.nuevoProducto_btn:hover{
-color: black;
-background-color: white;
-}
-*/
 button{
   margin-left: 2px;
   cursor:pointer;
@@ -171,6 +228,8 @@ button{
   color:black;
   -webkit-transition:.5s;
   transition:.5s;
+  border:1px solid black;
+
 }
 
 /*Sirve para desabilitar las flechas en los inputs numer*/
@@ -183,13 +242,11 @@ input::-webkit-inner-spin-button {
 
 form select:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
 
 }
 
 form select:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
 
 
 }
@@ -197,18 +254,18 @@ form select:required:focus:valid{
 
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
 }
 
 
 form input:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
 }
 
 .form-control {
     border: 0;
     box-shadow: none;
+    border-bottom: 2px solid gray;
+
 }
 
 
@@ -225,6 +282,65 @@ form textarea:required:focus:valid{
 }
 
 
+
+.formulario{
+    width: 1050px;
+    height: 450px;
+    margin: 50px auto;
+    display: flex;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+
+}
+
+/* Informacion de Contacto*/
+
+.info::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #FEC404;
+    opacity: 0.9;
+
+}
+
+.info{
+    width: 38%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center center;
+    background-image: url('https://i0.wp.com/brunettebraid.com/wp-content/uploads/2017/11/nuevos-wallpapers-celular-noviembre-2.jpg');
+
+
+}
+
+.titulo{
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+
+.titulo span{
+    font-size: 100px;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Formulario de contacto*/
+form{
+    width: 62%;
+    padding: 30px 40px;
+}
 
 
 </style>

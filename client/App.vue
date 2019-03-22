@@ -93,7 +93,7 @@ background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
 font-family: 'Numans', sans-serif;
-background-color: #0C94F5;
+background-color: #063A5E;
 background-blend-mode: multiply;
 
 }
@@ -121,7 +121,7 @@ nav{
      height: 75px;
 }
 
-/* Style The Dropdown Button */
+/* DROPDOWN DEL USUARIO */
 .dropbtn {
   background-color: rgba(0,0,0,0.7);
   color: white;
@@ -129,14 +129,12 @@ nav{
   border: none;
 }
 
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
   background-color: rgba(0,0,0,0.7);
   position: relative;
   display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -144,7 +142,6 @@ nav{
   min-width: 160px;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -152,19 +149,8 @@ nav{
   display: block;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-
-}
-
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-
 }
 
 </style>

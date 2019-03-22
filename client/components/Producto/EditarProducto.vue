@@ -147,10 +147,6 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */

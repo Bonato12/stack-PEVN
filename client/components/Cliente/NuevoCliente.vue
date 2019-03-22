@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="container">
+      <!--
       <div class="d-flex justify-content-center">
         <div class="card">
             <div class="card-header">
@@ -66,6 +67,70 @@
             </div>
         </div>
       </div>
+      -->
+      <section class="formulario animated fadeInDown">
+          <section class="info">
+              <section class="titulo">
+                  <span class="fas fa-user-circle"></span>
+                    <p style="font-size:25px;">NUEVO CLIENTE</p>
+              </section>
+          </section>
+          <form @submit.prevent="nuevoCliente()">
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Dni</span>
+                </div>
+                <input required type="number" min="0" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
+            </div>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Nombre</span>
+                </div>
+                <input required  type="text" v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
+            </div>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Apellido</span>
+                </div>
+                <input required  type="text" v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
+            </div>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Ciudad</span>
+                </div>
+                <input required type="text" v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
+            </div>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Direccion</span>
+                </div>
+                <input required type="text" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
+            </div>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Telefono</span>
+                </div>
+                <input required type="number" min="0" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
+            </div>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Mail</span>
+                </div>
+                  <input required type="email" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
+            </div>
+            <br>
+            <div class="form-group">
+                <button type="submit"  title="Guardar Cliente" style="background-color:#fec400">
+                      <i class="far fa-save fa-1x"></i>
+                      Guardar
+                </button>
+                <router-link to="/HomeCliente" tag="button"  title="Volver a HomeCliente" style="background:white;">
+                    <i class="fas fa-arrow-left"></i>
+                      Volver
+                </router-link>
+            </div>
+          </form>
+        </section>
   </div>
   </br>
   </div>
@@ -148,7 +213,7 @@ li {
 width: auto;
 background-color: #FFC312;
 color: black;
-border:0 !important;
+border: none;
 }
 
 .card{
@@ -172,8 +237,9 @@ background-color: white;
 .form-control {
     border: 0;
     box-shadow: none;
-}
+    border-bottom: 2px solid gray;
 
+}
 button{
   margin-left: 2px;
   cursor:pointer;
@@ -186,13 +252,72 @@ button{
   color:black;
   -webkit-transition:.5s;
   transition:.5s;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
-/*Sirve para desabilitar las flechas en los inputs numer*/
+/*Sirve para desabilitar las flechas en los inputs numBer*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.formulario{
+    width: 1050px;
+    height: 480px;
+    margin: 50px auto;
+    display: flex;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Informacion de Contacto*/
+
+.info::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #FEC404;
+    opacity: 0.9;
+}
+
+.info{
+    width: 38%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center center;
+    background-image: url('http://farm6.staticflickr.com/5068/5744132135_34835702ec_b.jpg');
+
+
+}
+
+.titulo{
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+
+.titulo span{
+    font-size: 100px;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Formulario de contacto*/
+form {
+    width: 62%;
+    padding: 30px 40px;
 }
 </style>

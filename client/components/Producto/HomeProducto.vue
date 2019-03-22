@@ -277,6 +277,7 @@ export default {
   text-align: center;
   font-family: 'Numans', sans-serif;
   color: white;
+  background-color: #063A5E;
 }
 
 h1,
@@ -292,10 +293,6 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 
 .buttonProducto {

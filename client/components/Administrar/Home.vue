@@ -40,7 +40,7 @@ background-image: url('./background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
-background-color: #0C94F5;
+background-color: #063A5E;
 background-blend-mode: multiply;
 }
 

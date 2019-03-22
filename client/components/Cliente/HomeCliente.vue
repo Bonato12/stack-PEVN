@@ -272,7 +272,7 @@ background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
 font-family: 'Numans', sans-serif;
-background-color: #0C94F5;
+background-color: #063A5E;
 background-blend-mode: multiply;
 }
 
@@ -298,9 +298,6 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
 
 .buttonCliente{
   background-color: #fec400;

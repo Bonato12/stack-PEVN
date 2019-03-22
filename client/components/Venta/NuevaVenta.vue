@@ -244,12 +244,6 @@ h1, h2 {
 }
 
 
-a {
-  color: #42b983;
-}
-
-
-
 #card{
 
 background-color: rgba(0,0,0,0.5) !important;
