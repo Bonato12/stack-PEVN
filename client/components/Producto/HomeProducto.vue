@@ -28,8 +28,8 @@
       </vue-good-table>
     </div>
     <div style="color:black;">
-      <b-modal ref="myModalRef" title="Detalle Producto" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant"
-        :footer-text-variant="footerTextVariant" size="lg">
+      <b-modal style="margin-top:100px;" ref="myModalRef" title="Detalle Producto" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant"
+        :footer-text-variant="footerTextVariant" size="xl">
         <b-container fluid>
           <b-row class="mb-1">
             <b-col cols="3">ID:</b-col>
