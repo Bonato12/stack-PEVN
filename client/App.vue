@@ -117,7 +117,7 @@ nav li{
 }
 
 nav{
-     height: 75px;
+     height: 65px;
 }
 
 /* DROPDOWN DEL USUARIO */

@@ -1,70 +1,53 @@
 <template>
   <div id="app">
     <div class="container">
-        <div class="row h-100 justify-content-center align-items-center">
-          <div class="col-md-5">
-          <div class="card">
-            <div class="card-header">
-              <h3> Editar Cliente </h3>
-            </div>
-            <div class="card-body animated fadeInDown">
-                  <form @submit.prevent="editarCliente()">
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Dni</span>
-                        </div>
-                        <input required type="number" min="0" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Nombre</span>
-                        </div>
-                        <input required  type="text" v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Apellido</span>
-                        </div>
-                        <input required  type="text" v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Ciudad</span>
-                        </div>
-                        <input required type="text" v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Direccion</span>
-                        </div>
-                        <input required type="text" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Telefono</span>
-                        </div>
-                        <input required type="number" min="0" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Mail</span>
-                        </div>
-                          <input required type="text" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Modificar"  class="btn float-right clientebtn">
-                        <router-link to="/HomeCliente" tag="button" class="btn flaot-right" style="background:white; margin-left:195px;">
-                            <i class="fas fa-arrow-left"></i>
-                              Volver
-                        </router-link>
-                    </div>
-              </form>
-          </div>
-        </div>
-      </div>
-    </div>
+      <section class="formulario animated fadeInDown">
+          <section class="info">
+              <section class="titulo">
+                  <span class="fas fa-user-cog"></span>
+                    <p style="font-size:25px;">EDITAR CLIENTE</p>
+              </section>
+          </section>
+          <form @submit.prevent="editarCliente()">
+
+                                <div class="input-field col s6">
+                                   <input placeholder="Placeholder" id="dni" v-model="cliente.dni" type="number" class="validate">
+                                   <label class="active" for="dni">Dni</label>
+                                 </div>
+                                <div class="input-field col s6">
+                                  <input required id="nombre"  v-model="cliente.nombre" type="text" class="validate">
+                                  <label class="active" for="nombre">Nombre</label>
+                                </div>
+                                <div class="input-field col s6">
+                                  <input required id="nombre"  v-model="cliente.apellido" type="text" class="validate">
+                                  <label class="active" for="nombre">Apellido</label>
+                                </div>
+                                <div class="input-field col s6">
+                                  <input required id="direccion"  v-model="cliente.direccion" type="text" class="validate">
+                                  <label class="active" for="precio">Direccion</label>
+                                </div>
+                                <div class="input-field col s6">
+                                  <input required id="telefono"  v-model="cliente.telefono" type="number" class="validate">
+                                  <label class="active" for="precio">Telefono</label>
+                                </div>
+                                <div class="input-field col s6">
+                                  <input required id="mail"  v-model="cliente.mail" type="email" class="validate">
+                                  <label class="active" for="precio">Mail</label>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button type="submit"  title="Guardar Cliente" >
+                                          <i class="far fa-save fa-1x"></i>
+                                          Guardar
+                                    </button>
+                                    <router-link to="/HomeCliente" tag="button"  title="Volver a HomeCliente" >
+                                        <i class="fas fa-arrow-left"></i>
+                                          Volver
+                                    </router-link>
+                                </div>
+                      </form>
+        </section>
   </div>
-  </br>
   </div>
 </template>
 
@@ -100,7 +83,7 @@ export default {
          console.log(this.idc);
          axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
            console.log(response.data);
-           this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+           this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
          });
       },
       editarCliente(){
@@ -174,6 +157,78 @@ form input:required:focus:valid{
 .form-control {
     border: 0;
     box-shadow: none;
+}
+
+.formulario{
+    width: 1050px;
+    height: 525px;
+    margin: 40px auto;
+    display: flex;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Informacion de Contacto*/
+
+.info::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #FEC404;
+    opacity: 0.9;
+}
+
+.info{
+    width: 38%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center center;
+    background-image: url('http://farm6.staticflickr.com/5068/5744132135_34835702ec_b.jpg');
+
+
+}
+
+.titulo{
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+
+.titulo span{
+    font-size: 100px;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Formulario de contacto*/
+form {
+    width: 62%;
+    padding: 30px 40px;
+}
+
+button{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  background-color: #00c853  !important;
+  float:right;
+  width:150px;
+  height:50px;
+  margin-top:-20px;
+  border:none;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 10px;
 }
 
 

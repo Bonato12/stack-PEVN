@@ -1,73 +1,6 @@
 <template>
   <div>
     <div class="container">
-      <!--
-      <div class="d-flex justify-content-center">
-        <div class="card">
-            <div class="card-header">
-              <h3 style="text-align:center; color:white;"> Nuevo Cliente </h3>
-            </div>
-            <div class="card-body animated fadeInDown">
-                  <form @submit.prevent="nuevoCliente()">
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Dni</span>
-                        </div>
-                        <input required type="number" min="0" v-model="cliente.dni" class="form-control" placeholder="Ingrese Dni">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Nombre</span>
-                        </div>
-                        <input required  type="text" v-model="cliente.nombre" class="form-control" placeholder="Ingrese Nombre">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Apellido</span>
-                        </div>
-                        <input required  type="text" v-model="cliente.apellido" class="form-control" placeholder="Ingrese Apellido">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Ciudad</span>
-                        </div>
-                        <input required type="text" v-model="cliente.ciudad" class="form-control" placeholder="Ingrese Ciudad">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Direccion</span>
-                        </div>
-                        <input required type="text" v-model="cliente.direccion" class="form-control" placeholder="Ingrese Direccion">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Telefono</span>
-                        </div>
-                        <input required type="number" min="0" v-model="cliente.telefono" class="form-control" placeholder="Ingrese Telefono">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Mail</span>
-                        </div>
-                          <input required type="email" v-model="cliente.mail" class="form-control" placeholder="Ingrese Mail">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <button type="submit"  title="Guardar Cliente" style="background-color:#fec400">
-                              <i class="far fa-save fa-1x"></i>
-                              Guardar
-                        </button>
-                        <router-link to="/HomeCliente" tag="button"  title="Volver a HomeCliente" style="background:white;">
-                            <i class="fas fa-arrow-left"></i>
-                              Volver
-                        </router-link>
-                    </div>
-              </form>
-
-            </div>
-        </div>
-      </div>
-      -->
       <section class="formulario animated fadeInDown">
           <section class="info">
               <section class="titulo">
@@ -76,7 +9,6 @@
               </section>
           </section>
           <form @submit.prevent="nuevoCliente()">
-
                                 <div class="input-field col s6">
                                   <input required id="dni"  v-model="cliente.dni" type="number" class="validate">
                                   <label for="dni">Dni</label>
@@ -85,12 +17,10 @@
                                   <input required id="nombre"  v-model="cliente.nombre" type="text" class="validate">
                                   <label for="nombre">Nombre</label>
                                 </div>
-                                <!--
                                 <div class="input-field col s6">
-                                  <input required id="stock"  v-model="cliente.ciudad" type="text" class="validate">
-                                  <label for="stock">Ciudad</label>
+                                  <input required id="nombre"  v-model="cliente.apellido" type="text" class="validate">
+                                  <label for="nombre">Apellido</label>
                                 </div>
-                                -->
                                 <div class="input-field col s6">
                                   <input required id="direccion"  v-model="cliente.direccion" type="text" class="validate">
                                   <label for="precio">Direccion</label>
@@ -114,10 +44,9 @@
                                           Volver
                                     </router-link>
                                 </div>
-          </form>
+                      </form>
         </section>
   </div>
-  </br>
   </div>
 </template>
 
@@ -205,13 +134,6 @@ color: black;
 border: none;
 }
 
-.card{
-height: auto;
-margin-top: 25px;
-margin-bottom: auto;
-width: 850px;
-background-color: rgba(0,0,0,0.5) !important;
-}
 
 .cliente_btn{
 color: black;
@@ -254,7 +176,7 @@ input::-webkit-inner-spin-button {
 
 .formulario{
     width: 1050px;
-    height: 475px;
+    height: 525px;
     margin: 40px auto;
     display: flex;
     background: #fff;
