@@ -1,72 +1,58 @@
 <template>
   <div>
     <div class="container">
-      <div class="d-flex justify-content-center">
-        <div class="card">
-            <div class="card-header">
-              <h3 style="text-align:center; color:white; ">Nuevo Proveedor </h3>
-            </div>
-            <div class="card-body animated fadeInDown">
-                  <form @submit.prevent="nuevoProveedor()">
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Dni</span>
-                        </div>
-                        <input required type="number" min="0"  v-model="proveedor.dni"  class="form-control" placeholder="Ingrese Dni">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Nombre</span>
-                        </div>
-                        <input required  type="text" v-model="proveedor.nombre"   class="form-control" placeholder="Ingrese Nombre">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Apellido</span>
-                        </div>
-                        <input required  type="text" v-model="proveedor.apellido"   class="form-control" placeholder="Ingrese Apellido">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Direccion</span>
-                        </div>
-                        <input required type="text" v-model="proveedor.direccion"   class="form-control" placeholder="Ingrese Direccion">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Telefono</span>
-                        </div>
-                        <input required type="number" min="0" v-model="proveedor.telefono"   class="form-control" placeholder="Ingrese Telefono">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Mail</span>
-                        </div>
-                          <input required type="email" v-model="proveedor.mail"   class="form-control" placeholder="Ingrese Mail">
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Descripcion</span>
-                        </div>
-                          <input required type="text" v-model="proveedor.descripcion" class="form-control" placeholder="Ingrese Descripcion">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <button type="submit" style="background-color:#fec400">
-                              <i class="far fa-save fa-1x"></i>
-                              Guardar
-                        </button>
-                        <router-link to="/HomeProveedor" tag="button" style="background:white;">
-                            <i class="fas fa-arrow-left"></i>
-                              Volver
-                        </router-link>
-                    </div>
-              </form>
-            </div>
-        </div>
-      </div>
+      <section class="formulario animated fadeInDown">
+          <section class="info">
+              <section class="titulo">
+                    <span  class="fas fa-people-carry"></span>
+                    <p style="font-size:25px;">NUEVO PROVEEDOR</p>
+              </section>
+          </section>
+          <form @submit.prevent="nuevoCliente()">
+                                <div class="input-field col s6">
+                                  <input required id="dni"  v-model="proveedor.dni" type="number" class="validate">
+                                  <label for="dni">Dni</label>
+                                </div>
+                                <div class="input-field col s6">
+                                  <input required id="nombre"  v-model="proveedor.nombre" type="text" class="validate">
+                                  <label for="nombre">Nombre</label>
+                                </div>
+                                <div class="input-field col s6">
+                                  <input required id="nombre"  v-model="proveedor.apellido" type="text" class="validate">
+                                  <label for="nombre">Apellido</label>
+                                </div>
+                                <div class="input-field col s6">
+                                  <input required id="direccion"  v-model="proveedor.direccion" type="text" class="validate">
+                                  <label for="precio">Direccion</label>
+                                </div>
+                                <div class="input-field col s6">
+                                  <input required id="telefono"  v-model="proveedor.descripcion" type="number" class="validate">
+                                  <label for="precio">Descripcion</label>
+                                </div>
+                                <div class="row" style="padding-left:20px; width:580px;">
+                                  <div class="input-field col s6">
+                                    <input required id="telefono"  v-model="proveedor.telefono" type="number" class="validate">
+                                    <label for="precio">Telefono</label>
+                                  </div>
+                                  <div class="input-field col s6">
+                                    <input required id="mail"  v-model="proveedor.mail" type="email" class="validate">
+                                    <label for="precio">Mail</label>
+                                  </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button type="submit"  title="Guardar Cliente" >
+                                          <i class="far fa-save fa-1x"></i>
+                                          Guardar
+                                    </button>
+                                    <router-link to="/HomeProveedor" tag="button"  title="Volver a HomeCliente" >
+                                        <i class="fas fa-arrow-left"></i>
+                                          Volver
+                                    </router-link>
+                                </div>
+                      </form>
+        </section>
   </div>
-  </br>
   </div>
 </template>
 
@@ -149,49 +135,81 @@ button{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
+  background-color: #00c853  !important;
   float:right;
-  width:200px;
+  width:150px;
   height:50px;
-  margin-top:-10px;
+  margin-top:-20px;
   border:none;
-  color:black;
   -webkit-transition:.5s;
   transition:.5s;
+  border-radius: 10px;
 }
 
-
-.proveedor_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
-}
-
-.proveedor_btn:hover{
-color: black;
-background-color: white;
-}
-
-form input:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
-}
-
-
-form input:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
-}
-
-.form-control {
-    border: 0;
-    box-shadow: none;
-}
-
+/*Sirve para desabilitar las flechas en los inputs numBer*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+
+.formulario{
+    width: 1050px;
+    height: 565px;
+    margin: 40px auto;
+    display: flex;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Informacion de Contacto*/
+
+.info::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #FEC404;
+    opacity: 0.9;
+}
+
+.info{
+    width: 38%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center center;
+    background-image: url('http://farm6.staticflickr.com/5068/5744132135_34835702ec_b.jpg');
+
+
+}
+
+.titulo{
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+
+.titulo span{
+    font-size: 100px;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Formulario de contacto*/
+form {
+    width: 62%;
+    padding: 30px 40px;
+}
+
 
 </style>

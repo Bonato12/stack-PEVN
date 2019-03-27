@@ -2,7 +2,7 @@
   <div id="Cliente">
     <div class="container">
     </br>
-    <h2 class="animated fadeIn"> Clientes</h2>
+    <h2 class="animated fadeIn" style="text-align:center;color:white;"> Clientes</h2>
     </br>
     <div v-if="datos.length" class="animated zoomIn">
         <vue-good-table
