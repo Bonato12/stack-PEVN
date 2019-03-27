@@ -32,53 +32,59 @@
 
                 theme="default">
          </vue-good-table>
-         <div style="color:black;">
-           <b-modal
-               title="Detalle Venta"
-               :header-bg-variant="headerBgVariant"
-               :header-text-variant="headerTextVariant"
-               :body-bg-variant="bodyBgVariant"
-               :body-text-variant="bodyTextVariant"
-               :footer-bg-variant="footerBgVariant"
-               :footer-text-variant="footerTextVariant"
-                size="lg"
-                ref="myModalRef"
-         >
-
-              <table class="table table-default">
-                    <thead>
-                          <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Id_Venta</th>
-                            <th scope="col">Modelo</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Producto</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr v-for="item in this.ventasProducto">
-                            <th scope="row">{{item.id_ventaproducto}}</th>
-                            <td scope="row">{{item.id_venta}}</td>
-                            <td scope="row">{{item.modelo}}</td>
-                            <td scope="row"> {{item.cantidad}}</td>
-                            <td scope="row">{{item.precio}}</td>
-                          </tr>
-                    </tbody>
-              </table>
-              <div slot="modal-footer" class="w-100">
-                <p class="float-left">Opciones</p>
-                <div style="float:right;">
-                    <button class="btn btn-danger" v-on:click="eliminarVenta()"  title="Eliminar Cliente">
-                        <i class="fas fa-trash-alt"></i>
-                        Eliminar
-                    </button>
-                    <router-link   class="btn" style="background-color:yellow;" tag="button" title="Editar Cliente">
-                        <i class="fas fa-edit fa-1x"></i>
-                        Editar
-                    </router-link>
+         <div>
+              <transition v-if="showModal" class="animation fadeIn" name="modal">
+                <div class="modal-mask">
+                  <div class="modal-wrapper">
+                    <div class="modal-container">
+                      <div class="modal-header" style="background-color:#424242;">
+                        <slot name="header">
+                          <h2 style="color:white; text-align:left;">Detalles</h2>
+                          <button class="modal-default-button" @click="hide()">
+                           <i class="far fa-times-circle"></i>
+                          </button>
+                        </slot>
+                      </div>
+                      <div class="modal-body" style="background-color:#f1f8e9;">
+                        <slot name="body">
+                          <table class="table table-default">
+                                <thead>
+                                      <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Id_Venta</th>
+                                        <th scope="col">Modelo</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Producto</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr v-for="item in this.ventasProducto">
+                                        <th scope="row">{{item.id_ventaproducto}}</th>
+                                        <td scope="row">{{item.id_venta}}</td>
+                                        <td scope="row">{{item.modelo}}</td>
+                                        <td scope="row"> {{item.cantidad}}</td>
+                                        <td scope="row">{{item.precio}}</td>
+                                      </tr>
+                                </tbody>
+                          </table>
+                        </slot>
+                      </div>
+                      <div class="modal-header" style="background-color:#FEC404;">
+                        <h2 class="opciones" style="color:white;">Opciones</h2>
+                        <div class="row" style="float:right; padding-right:3px;">
+                             <button class="btn-floating red darken-1" v-on:click="eliminarVenta()" title="Eliminar Cliente">
+                                 <i class="fas fa-trash-alt"></i>
+                             </button>
+                             <router-link class="btn-floating yellow accent-2" style="background-color:yellow;" tag="button" title="Editar Cliente">
+                                 <i class="fas fa-edit fa-1x"></i>
+                                 Editar
+                             </router-link>
+                         </div>
+                     </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              </b-modal>
+              </transition>
         </div>
      </div>
     </br>
@@ -118,16 +124,9 @@ export default {
   },
   data () {
     return {
-      variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
-      headerBgVariant: 'dark',
-      headerTextVariant: 'light',
-      bodyBgVariant: 'light',
-      bodyTextVariant: 'dark',
-      footerBgVariant: 'warning',
-      footerTextVariant: 'dark',
       idv:'',
       lista: [],
-      modalShow: false,
+      showModal: false,
       ventas: [],
       ventasProducto: [],
       columns: [
@@ -169,7 +168,7 @@ export default {
         }).then(alertSucessDelete()).then(this.hideModal());
     },
     onRowClick(params) {
-        this.$refs.myModalRef.show()
+        this.showModal = true;
         console.log(params.row);
             this.idv =  params.row.id_venta;
             axios.get('http://localhost:3000/ventaProducto/'+ params.row.id_venta).then((response) =>{
@@ -179,9 +178,9 @@ export default {
 
 
     },
-    hideModal() {
-        this.$refs.myModalRef.hide()
-    },
+    hide(){
+      this.showModal = false;
+    }
 
 
 
@@ -218,12 +217,45 @@ li {
   width: 450px;
 }
 
-.botonVenta{
-  background-color: #fec400;
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
 }
 
-.botonVenta:hover{
-  background-color: white;
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 700px;
+  height: auto;
+  margin: 0px auto;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 
