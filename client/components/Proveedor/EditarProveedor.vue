@@ -8,7 +8,7 @@
                     <p style="font-size:25px;">EDITAR PROVEEDOR</p>
               </section>
           </section>
-          <form @submit.prevent="nuevoCliente()">
+          <form @submit.prevent="editarProveedor()">
                                 <div class="input-field col s6">
                                   <input required id="dni"  v-model="proveedor.dni" type="number" class="validate">
                                   <label class="active" for="dni">Dni</label>
@@ -41,11 +41,11 @@
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <button type="submit"  title="Guardar Cliente" >
+                                    <button type="submit"  title="Guardar Proveedor" >
                                           <i class="far fa-save fa-1x"></i>
                                           Guardar
                                     </button>
-                                    <router-link to="/HomeProveedor" tag="button"  title="Volver a HomeCliente" >
+                                    <router-link to="/HomeProveedor" tag="button"  title="Volver a HomeProveedor" >
                                         <i class="fas fa-arrow-left"></i>
                                           Volver
                                     </router-link>
@@ -60,7 +60,7 @@
 
 import axios from 'axios'
 import Proveedor from '../../models/Proveedor';
-import { alertEdit,alertEditSucessProveedor } from '../../assets/sweetAlert.js';
+import { alertEdit,alertEditSucessProveedor,alertCompletarCampos } from '../../assets/sweetAlert.js';
 
 export default {
   name: 'app',
@@ -85,12 +85,16 @@ export default {
         });
       },
       editarProveedor(){
-          axios.put('http://localhost:3000/proveedor/'+ this.idp,
-            this.proveedor,
-            { headers: {
-                'Content-Type': 'application/json',
+            if (this.proveedor.dni && this.proveedor.nombre && this.proveedor.apellido && this.proveedor.direccion && this.proveedor.telefono && this.proveedor.mail && this.proveedor.descripcion){
+                axios.put('http://localhost:3000/proveedor/'+ this.idp,
+                this.proveedor,
+                { headers: {
+                    'Content-Type': 'application/json',
+                }
+                }).then(alertEditSucessProveedor());
+            }else{
+                alertCompletarCampos();
             }
-            }).then(alertEditSucessProveedor());
       }
 }
 }

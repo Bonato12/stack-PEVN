@@ -41,11 +41,11 @@
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <button type="submit"  title="Guardar Cliente" >
+                                    <button type="submit"  title="Guardar Proveedor" >
                                           <i class="far fa-save fa-1x"></i>
                                           Guardar
                                     </button>
-                                    <router-link to="/HomeProveedor" tag="button"  title="Volver a HomeCliente" >
+                                    <router-link to="/HomeProveedor" tag="button"  title="Volver a HomeProveedor" >
                                         <i class="fas fa-arrow-left"></i>
                                           Volver
                                     </router-link>

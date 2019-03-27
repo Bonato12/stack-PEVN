@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     nuevoCliente(){
-            if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.ciudad && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
+            if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
               console.log(this.cliente);
               axios.post('http://localhost:3000/cliente',
               this.cliente, // the data to posthttp://localhost:3000/cliente

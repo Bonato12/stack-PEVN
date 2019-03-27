@@ -105,7 +105,6 @@
           </div>
         </div>
       </transition>
-    </div>
     </br>
     </br>
       <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn" style="float:left;">
@@ -126,6 +125,7 @@
               Exportar Csv
           </button>
       </div>
+     </div>
     </div>
   </div>
 </template>
@@ -317,8 +317,6 @@ li {
 
 
 .btn{
-  padding-top: 3px;
-  margin-left: 2px;
   cursor:pointer;
   display:inline-block;
   float:right;

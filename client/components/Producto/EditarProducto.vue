@@ -54,7 +54,7 @@
 <script>
 
 import axios from 'axios'
-import { alertEdit,alertEditSucessProducto } from '../../assets/sweetAlert.js';
+import { alertEdit,alertEditSucessProducto,alertCompletarCampos } from '../../assets/sweetAlert.js';
 import Producto from '../../models/Producto';
 
 
@@ -86,12 +86,16 @@ export default {
          })
       },
       editarProducto(){
-         axios.put('http://localhost:3000/producto/'+ this.idp,
-           this.producto,
-           { headers: {
-             'Content-Type': 'application/json',
-           }
-           }).then(alertEditSucessProducto());
+        if(this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio){
+           axios.put('http://localhost:3000/producto/'+ this.idp,
+             this.producto,
+             { headers: {
+               'Content-Type': 'application/json',
+             }
+             }).then(alertEditSucessProducto());
+        }else{
+          alertCompletarCampos();
+        }
       }
    }
 }

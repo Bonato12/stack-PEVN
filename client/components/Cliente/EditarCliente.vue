@@ -54,7 +54,7 @@
 <script>
 
 import axios from 'axios'
-import { alertEdit,alertEditSucessCliente } from '../../assets/sweetAlert.js';
+import { alertEdit,alertEditSucessCliente,alertCompletarCampos } from '../../assets/sweetAlert.js';
 import Cliente from '../../models/Cliente';
 
 
@@ -87,12 +87,16 @@ export default {
          });
       },
       editarCliente(){
-          axios.put('http://localhost:3000/cliente/'+ this.idc,
-              this.cliente,
-              { headers: {
-                'Content-Type': 'application/json',
-              }
-          }).then(alertEditSucessCliente());
+          if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
+            axios.put('http://localhost:3000/cliente/'+ this.idc,
+                this.cliente,
+                { headers: {
+                  'Content-Type': 'application/json',
+                }
+            }).then(alertEditSucessCliente());
+          }else{
+            alertCompletarCampos();
+          }
       }
   }
 }
