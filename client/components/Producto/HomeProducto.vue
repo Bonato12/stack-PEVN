@@ -27,60 +27,71 @@
                 theme="default">
       </vue-good-table>
     </div>
-    <div style="color:black;">
-      <b-modal style="margin-top:100px;" ref="myModalRef" title="Detalle Producto" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant"
-        :footer-text-variant="footerTextVariant" size="xl">
-        <b-container fluid>
-          <b-row class="mb-1">
-            <b-col cols="3">ID:</b-col>
-            <b-col>{{producto.id_producto}}</b-col>
-          </b-row>
-          <hr>
-          <b-row class="mb-1">
-            <b-col cols="3">Modelo:</b-col>
-            <b-col>{{producto.modelo}}</b-col>
-          </b-row>
-          <hr>
-          <b-row class="mb-1">
-            <b-col cols="3">Marca:</b-col>
-            <b-col>{{ producto.marca }}</b-col>
-          </b-row>
-          <hr>
-          <b-row class="mb-1">
-            <b-col cols="3">Descripcion:</b-col>
-            <b-col>{{producto.descripcion}}</b-col>
-          </b-row>
-          <hr>
-          <b-row class="mb-1">
-            <b-col cols="3">TipoProducto:</b-col>
-            <b-col>{{ producto.tipoproducto }}</b-col>
-          </b-row>
-          <hr>
-          <b-row class="mb-1">
-            <b-col cols="3">Stock:</b-col>
-            <b-col>{{ producto.stock }}</b-col>
-          </b-row>
-          <hr>
-          <b-row class="mb-1">
-            <b-col cols="3">Precio:</b-col>
-            <b-col>{{ producto.precio }}</b-col>
-          </b-row>
-        </b-container>
-        <div slot="modal-footer" class="w-100">
-          <p class="float-left">Opciones</p>
-          <div style="float:right;">
-            <button class="btn btn-danger" v-on:click="eliminarProducto(producto.id_producto)" title="Eliminar Producto">
-              <i class="fas fa-trash-alt"></i>
-              Eliminar
-            </button>
-            <router-link :to="/editarProducto/+producto.id_producto" active-class="activo" class="btn" style="background-color:yellow;" tag="button" title="Editar Producto">
-              <i class="far fa-edit fa-1x"></i>
-              Editar
-            </router-link>
+    <transition v-if="showModal" class="animation fadeIn" name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <div class="modal-header" style="background-color:#424242;">
+              <slot name="header">
+                <h2 style="color:white; text-align:left;">Detalles</h2>
+                <button class="modal-default-button" @click="hide()">
+                 <i class="far fa-times-circle"></i>
+                </button>
+              </slot>
+            </div>
+            <div class="modal-body" style="background-color:#f1f8e9;">
+              <slot name="body">
+                <b-row class="mb-1">
+                  <b-col cols="3">ID:</b-col>
+                  <b-col>{{producto.id_producto}}</b-col>
+                </b-row>
+                <hr>
+                <b-row class="mb-1">
+                  <b-col cols="3">Modelo:</b-col>
+                  <b-col>{{producto.modelo}}</b-col>
+                </b-row>
+                <hr>
+                <b-row class="mb-1">
+                  <b-col cols="3">Marca:</b-col>
+                  <b-col>{{ producto.marca }}</b-col>
+                </b-row>
+                <hr>
+                <b-row class="mb-1">
+                  <b-col cols="3">Descripcion:</b-col>
+                  <b-col>{{producto.descripcion}}</b-col>
+                </b-row>
+                <hr>
+                <b-row class="mb-1">
+                  <b-col cols="3">TipoProducto:</b-col>
+                  <b-col>{{ producto.tipoproducto }}</b-col>
+                </b-row>
+                <hr>
+                <b-row class="mb-1">
+                  <b-col cols="3">Stock:</b-col>
+                  <b-col>{{ producto.stock }}</b-col>
+                </b-row>
+                <hr>
+                <b-row class="mb-1">
+                  <b-col cols="3">Precio:</b-col>
+                  <b-col>{{ producto.precio }}</b-col>
+                </b-row>
+              </slot>
+            </div>
+            <div class="modal-header" style="background-color:#FEC404;">
+              <h2 class="opciones" style="color:white;">Opciones</h2>
+              <div style="float:right;">
+                  <button class="btn-floating red darken-1" v-on:click="eliminarProducto(producto.id_producto)" title="Eliminar Producto">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <router-link class="btn-floating  yellow accent-2" :to="/editarProducto/+producto.id_producto"  tag="button" title="Editar Producto">
+                    <i class="far fa-edit fa-1x"></i>
+                  </router-link>
+               </div>
+           </div>
           </div>
         </div>
-      </b-modal>
-    </div>
+      </div>
+    </transition>
     <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn" title="Ir a Nuevo Producto" style="float:left;">
       <i class="fas fa-plus-circle fa-1x">
 
@@ -120,16 +131,9 @@ export default {
   },
   data() {
     return {
-      variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
-      headerBgVariant: 'dark',
-      headerTextVariant: 'light',
-      bodyBgVariant: 'light',
-      bodyTextVariant: 'dark',
-      footerBgVariant: 'warning',
-      footerTextVariant: 'dark',
-      modalShow: false,
       producto: new Producto(),
       productos: [],
+      showModal: false,
       //field nombre del atributo en la Lista Producto
       columns: [{
           label: 'Modelo',
@@ -188,7 +192,7 @@ export default {
 
     },
     detalleProducto(params) {
-        this.$refs.myModalRef.show()
+        this.showModal = true;
         console.log(params);
         this.producto.id_producto = params.row.id_producto;
         this.producto.modelo = params.row.modelo;
@@ -259,6 +263,9 @@ export default {
       var wb = XLSX.utils.book_new(); // make Workbook of Excel
       XLSX.utils.book_append_sheet(wb, productos, this.productos);
       XLSX.writeFile(wb, now + '-productos.csv');
+    },
+    hide(){
+      this.showModal = false;
     }
 
 
@@ -292,11 +299,65 @@ li {
   margin: 0 10px;
 }
 
-.buttonProducto {
-  background-color: #fec420;
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
 }
 
-.buttonProducto:hover {
-  background-color: white;
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 700px;
+  height: 545px;
+  margin: 0px auto;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+.btn{
+  padding-top: 3px;
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  background-color: #00c853  !important;
+  width:auto;
+  height:40px;
+  margin-top:20px;
+  border:none;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 10px;
+}
+
+.opciones{
+  text-align:left !important;
 }
 </style>
