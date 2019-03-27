@@ -239,9 +239,6 @@ export default {
         this.cliente.telefono = params.row.telefono;
         this.cliente.mail = params.row.mail;
     },
-    hideModal() {
-        this.$refs.myModalRef.hide()
-    },
     exportarXls() {
       var fecha = new Date();
       var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
@@ -262,7 +259,7 @@ export default {
       this.showModal = false;
     }
 
-}
+  }
 }
 </script>
 
@@ -307,16 +304,6 @@ li {
   margin: 0 10px;
 }
 
-
-.buttonCliente{
-  background-color: #fec400;
-
-}
-
-.buttonCliente:hover{
-  background-color: white;
-
-}
 
 .modal-mask {
   position: fixed;

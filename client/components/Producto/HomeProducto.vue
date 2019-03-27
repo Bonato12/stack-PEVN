@@ -203,9 +203,6 @@ export default {
         this.producto.precio = params.row.precio;
 
     },
-    hideModal() {
-      this.$refs.myModalRef.hide()
-    },
     exportarPdf() {
       var columnas = [{
           title: "MODELO",
