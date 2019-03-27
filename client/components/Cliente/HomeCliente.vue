@@ -38,54 +38,69 @@
              <div class="modal-container">
                <div class="modal-header" style="background-color:black;">
                  <slot name="header">
-                   <h2 style="color:white">Detalles</h2>
+                   <h2 style="color:white; text-align:left;">Detalles</h2>
                    <button class="modal-default-button" @click="hide()">
                     <i class="far fa-times-circle"></i>
                    </button>
                  </slot>
                </div>
-
-               <div class="modal-body">
+               <div class="modal-body" style="background-color:#f1f8e9;">
                  <slot name="body">
-                    <div class="row">
-                      <div class="col s12 m7">
-                        <div class="card">
-                          <div class="card-image">
-                            <img class="imagen" src="http://4.bp.blogspot.com/-qoZRsX8SN40/UkRCN-0EdxI/AAAAAAAAUI0/CIuaCzWXhVM/s1600/Descargar+Pack+Fondos+de+Pantalla+Personas+%252865%2529.jpg">
-                            <span class="card-title">Cliente</span>
-                            <a style="margin-right:100px;" v-on:click="eliminarCliente(cliente.id_cliente)" class="btn-floating halfway-fab waves-effect waves-light red"><i class="fas fa-trash-alt"></i></a>
-                            <router-link style="margin-right:50px;" tag="a" :to="/EditarCliente/+cliente.id_cliente" class="btn-floating halfway-fab waves-effect waves-light yellow" title="Editar Cliente"> <i class="fas fa-edit fa-1x"></i></router-link>
-                            <a style="margin-right:0px;" v-on:click="enviarMail()" class="btn-floating halfway-fab waves-effect waves-light green"><i class="fas fa-envelope fa-1x"></i></a>
-                          </div>
-                          <div class="card-content">
-                            <h3>Sebastian Bonato</h3></i>
-                            <h5>
-                              <i class="far fa-address-card"></i>
-                              {{cliente.dni}}
-                            </h5>
-                            <h5>
-                              <i class="fas fa-map-marker-alt"></i>
-                              8 De Junio, Concepcion del Uruguay
-                            </h5>
-                            <h5>
-                                  <i class="fas fa-mobile-alt"></i>
-                                  {{cliente.telefono}}
-                            </h5>
-                                <h5>
-                                  <i class="fas fa-envelope-square"></i>
-                                  {{cliente.mail}}
-                                </h5>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                   <b-row class="mb-1">
+                      <b-col cols="3">ID:</b-col>
+                        <b-col>{{cliente.id_cliente}}</b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Dni:</b-col>
+                        <b-col>{{cliente.dni}}</b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Nombre:</b-col>
+                        <b-col>{{cliente.nombre}}</b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Apellido:</b-col>
+                        <b-col>{{cliente.apellido}}</b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Ciudad:</b-col>
+                        <b-col>{{cliente.ciudad}}</b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Direccion:</b-col>
+                        <b-col>{{cliente.direccion}}</b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Telefono:</b-col>
+                        <b-col>{{cliente.telefono}}</b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Mail:</b-col>
+                        <b-col>{{cliente.mail}}</b-col>
+                    </b-row>
                  </slot>
                </div>
-               <div class="modal-footer" style="background-color:#FEC404">
-                  <slot name="footer">
-                      <h3>Opciones</h3>
-                  </slot>
+               <div class="modal-footer" style="background-color:#FEC404;">
+                 <h2 style="color:white; text-align:left;"></h2>
+                 <div class="row" style="float:right;">
+                      <button class="btn-floating" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
+                          <i class="fas fa-trash-alt"></i>
+                      </button>
+                      <router-link class="btn-floating" :to="/EditarCliente/+cliente.id_cliente" tag="button" title="Editar Cliente">
+                          <i class="fas fa-edit fa-1x"></i>
+
+                      </router-link>
+                      <button  class="btn-floating" v-on:click="enviarMail()" title="Enviar Mail">
+                          <i class="fas fa-envelope fa-1x"></i>
+                      </button>
+                  </div>
               </div>
              </div>
            </div>
@@ -321,9 +336,8 @@ li {
 }
 
 .modal-container {
-  width: 500px;
-  height: 630px;
-
+  width: 700px;
+  height: 640px;
   margin: 0px auto;
   padding: 10px 20px;
   background-color: #fff;
