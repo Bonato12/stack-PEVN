@@ -36,9 +36,9 @@
          <div class="modal-mask">
            <div class="modal-wrapper">
              <div class="modal-container">
-               <div class="modal-header">
+               <div class="modal-header" style="background-color:black;">
                  <slot name="header">
-                   <h2>Detalles</h2>
+                   <h2 style="color:white">Detalles</h2>
                    <button class="modal-default-button" @click="hide()">
                     <i class="far fa-times-circle"></i>
                    </button>
@@ -82,29 +82,35 @@
                     </div>
                  </slot>
                </div>
+               <div class="modal-footer" style="background-color:#FEC404">
+                  <slot name="footer">
+                      <h3>Opciones</h3>
+                  </slot>
+              </div>
              </div>
            </div>
          </div>
        </transition>
     </br>
-    <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn buttonCliente" style="float: left;"  >
+    <br>
+    <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn" style="float: left;"  >
         <i class="fas fa-plus-circle fa-1x"></i>
         Nuevo Cliente
     </router-link>
-    <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
-        <i class="fa fa-file-pdf" aria-hidden="true"></i>
-        Exportar Pdf
-    </button>
-    <div style="margin-left:630px;">
-        <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+    <div class="row" style="float:right">
+        <button type="button" class="btn"  v-on:click="exportarPdf()" style="float:right;">
+            <i class="fa fa-file-pdf" aria-hidden="true"></i>
+            Exportar Pdf
+        </button>
+        <button type="button" class="btn" v-on:click="exportarXls()" >
           <i class="fa fa-file-excel" aria-hidden="true"></i>
             Exportar Excel
         </button>
-        <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+        <button type="button" class="btn" v-on:click="exportarCsv()">
           <i class="fa fa-file-csv" aria-hidden="true"></i>
             Exportar Csv
         </button>
-    </div>
+     </div>
     </div>
   </div>
 </template>
@@ -364,5 +370,21 @@ li {
   transform: scale(1.1);
 }
 
+
+.btn{
+  padding-top: 3px;
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  background-color: #00c853  !important;
+  width:auto;
+  height:40px;
+  margin-top:-20px;
+  border:none;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 10px;
+}
 
 </style>

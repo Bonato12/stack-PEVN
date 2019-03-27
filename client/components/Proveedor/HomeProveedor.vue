@@ -101,21 +101,22 @@
       </div>
       </b-modal>
     </div>
-      </br>
-      <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn buttonProveedor">
+    </br>
+    </br>
+      <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn" style="float:left;">
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Proveedor
       </router-link>
-      <button type="button" class="btn btn-danger" v-on:click="exportarPdf()"  style="float:right;">
-          <i class="fa fa-file-pdf" aria-hidden="true"></i>
-          Exportar Pdf
-      </button>
-      <div style="margin-left:630px;">
-          <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+      <div class="row" style="float:right;">
+          <button type="button" class="btn" v-on:click="exportarPdf()"  style="float:right;">
+              <i class="fa fa-file-pdf" aria-hidden="true"></i>
+              Exportar Pdf
+          </button>
+          <button type="button" class="btn"  v-on:click="exportarXls()" >
             <i class="fa fa-file-excel" aria-hidden="true"></i>
               Exportar Excel
           </button>
-          <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+          <button type="button" class="btn"  v-on:click="exportarCsv()">
             <i class="fa fa-file-csv" aria-hidden="true"></i>
               Exportar Csv
           </button>
@@ -274,15 +275,20 @@ li {
   margin: 0 10px;
 }
 
-
-.buttonProveedor{
-  float:left;
-  background-color: #FEC400;
-}
-
-.buttonProveedor:hover{
-  float:left;
-  background-color: white;
+.btn{
+  padding-top: 3px;
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  background-color: #00c853  !important;
+  width:auto;
+  height:40px;
+  margin-top:-20px;
+  border:none;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 10px;
 }
 
 </style>
