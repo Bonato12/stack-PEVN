@@ -36,7 +36,7 @@
          <div class="modal-mask">
            <div class="modal-wrapper">
              <div class="modal-container">
-               <div class="modal-header" style="background-color:black;">
+               <div class="modal-header" style="background-color:#424242;">
                  <slot name="header">
                    <h2 style="color:white; text-align:left;">Detalles</h2>
                    <button class="modal-default-button" @click="hide()">
@@ -87,17 +87,17 @@
                     </b-row>
                  </slot>
                </div>
-               <div class="modal-footer" style="background-color:#FEC404;">
-                 <h2 style="color:white; text-align:left;"></h2>
-                 <div class="row" style="float:right;">
-                      <button class="btn-floating" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
+               <div class="modal-header" style="background-color:#FEC404;">
+                 <h2 class="opciones" style="color:white;">Opciones</h2>
+                 <div class="row" style="float:right; padding-right:3px;">
+                      <button class="btn-floating red darken-1" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
                           <i class="fas fa-trash-alt"></i>
                       </button>
-                      <router-link class="btn-floating" :to="/EditarCliente/+cliente.id_cliente" tag="button" title="Editar Cliente">
+                      <router-link class="btn-floating  yellow accent-2" :to="/EditarCliente/+cliente.id_cliente" tag="button" title="Editar Cliente">
                           <i class="fas fa-edit fa-1x"></i>
 
                       </router-link>
-                      <button  class="btn-floating" v-on:click="enviarMail()" title="Enviar Mail">
+                      <button  class="btn-floating  light-green  light-green accent-3" v-on:click="enviarMail()" title="Enviar Mail">
                           <i class="fas fa-envelope fa-1x"></i>
                       </button>
                   </div>
@@ -337,38 +337,13 @@ li {
 
 .modal-container {
   width: 700px;
-  height: 640px;
+  height: 620px;
   margin: 0px auto;
   padding: 10px 20px;
   background-color: #fff;
-  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
 }
-
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
-
-.modal-body {
-  margin: 20px 0;
-}
-
-.modal-default-button {
-  float: right;
-  border-radius: 20px;
-}
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter {
   opacity: 0;
@@ -399,6 +374,10 @@ li {
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 10px;
+}
+
+.opciones{
+  text-align:left !important;
 }
 
 </style>
