@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-        <nav v-if="autenticado" class="navbar navbar-expand-lg animated fadeInDown" style="background-color: rgba(0,0,0,0.7)" >
+        <nav v-if="autenticado" class="navbar navbar-expand-lg animated fadeInDown" style="background-color: rgba(0,0,0,0.7);" >
                 <div style="width:70px;">
                     <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>
@@ -93,9 +93,8 @@ background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
 font-family: 'Numans', sans-serif;
-background-color: #063A5E;
+background-color: lightgray;
 background-blend-mode: multiply;
-
 }
 
 .navbar{background:#222222;}
@@ -118,6 +117,7 @@ nav li{
 
 nav{
      height: 65px;
+
 }
 
 /* DROPDOWN DEL USUARIO */

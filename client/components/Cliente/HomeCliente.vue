@@ -67,11 +67,6 @@
                     </b-row>
                     <hr>
                     <b-row class="mb-1">
-                      <b-col cols="3">Ciudad:</b-col>
-                        <b-col>{{cliente.ciudad}}</b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
                       <b-col cols="3">Direccion:</b-col>
                         <b-col>{{cliente.direccion}}</b-col>
                     </b-row>
@@ -89,6 +84,7 @@
                </div>
                <div class="modal-header" style="background-color:#FEC404;">
                  <h2 class="opciones" style="color:white;">Opciones</h2>
+
                  <div class="row" style="float:right; padding-right:3px;">
                       <button class="btn-floating red darken-1" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
                           <i class="fas fa-trash-alt"></i>
@@ -150,6 +146,7 @@ export default {
   created(){
         this.getCliente();
 
+
   },
   data () {
     return {
@@ -195,7 +192,8 @@ export default {
     eliminarCliente(id) {
         axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
           this.getCliente();
-        }).then(alertSucessDelete()).then(this.hide());
+          alert(data.data.status);
+        }).then(this.hide());
     },
     enviarMail() {
         axios.get('http://localhost:3000/cliente/'+this.cliente.id_cliente).then((response) =>{
@@ -324,7 +322,7 @@ li {
 
 .modal-container {
   width: 700px;
-  height: 620px;
+  height: auto;
   margin: 0px auto;
   padding: 10px 20px;
   background-color: #fff;

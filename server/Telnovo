@@ -11,12 +11,13 @@ CREATE TABLE cliente(
 	dni INTEGER NOT NULL,
 	nombre VARCHAR(30) NOT NULL,
 	apellido VARCHAR(30) NOT NULL,
-	ciudad VARCHAR(30) NOT NULL,
 	direccion VARCHAR(30) NOT NULL,
 	telefono VARCHAR(30) NOT NULL,
 	mail VARCHAR(30) NOT NULL,
 	CONSTRAINT pk_id_cliente PRIMARY KEY (id_cliente)
 );
+
+ALTER TABLE cliente DROP COLUMN ciudad;
 
 
 CREATE TABLE proveedor(

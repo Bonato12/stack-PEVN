@@ -71,18 +71,34 @@ export default {
   },
   methods: {
     nuevoCliente(){
-            if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
-              console.log(this.cliente);
-              axios.post('http://localhost:3000/cliente',
-              this.cliente, // the data to posthttp://localhost:3000/cliente
-              { headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
-                'Content-Type': 'application/json',
-              },
-              }).then(this.cliente = new Cliente()).then(alertSucessCliente());
-            }else{
-              alertCompletarCampos();
-            }
+                    this.validar();
+                    if(this.validar()){
+                        console.log(this.cliente);
+                        axios.post('http://localhost:3000/cliente',
+                        this.cliente, // the data to posthttp://localhost:3000/cliente
+                        { headers: {
+                          'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
+                          'Content-Type': 'application/json',
+                        },
+                      }).then(data=> console.log(data)).then(this.cliente = new Cliente()).then(alertSucessCliente());
+                    }
+
+
+
+        },
+        validar(){
+          if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
+              if (/^([0-9])*$/.test(this.cliente.dni) && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(this.cliente.mail)){
+                  return true;
+              }else {
+                return false;
+                alert("Verificar Los Datos");
+
+              }
+           }else {
+             return false;
+             alertCompletarCampos();
+           }
         }
 
     }
@@ -248,5 +264,7 @@ form {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+
 
 </style>

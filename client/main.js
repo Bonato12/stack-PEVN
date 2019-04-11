@@ -21,6 +21,7 @@ Vue.component('v-select', vSelect);
 Vue.use(firebase);
 
 
+
 // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDgYzb7QqHY1VvHEGOnetz_DT7ejV2Mq_c",
