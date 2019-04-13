@@ -225,11 +225,14 @@ export default {
           }
       }
     },
-    borrar(item){
+    borrar(producto){
       console.log(this.Lista);
       this.numCarrito--;
-      console.log(item);
-      this.Lista.splice((item.id), 1);
+      console.log(producto);
+      var index = this.Lista.indexOf(producto);
+      if (index > -1) {
+          this.Lista.splice(index, 1);
+      }
     }
   }
 }
