@@ -314,10 +314,9 @@ li {
 }
 
 .modal-container {
-  width: 700px;
-  height: 545px;
+  width: 1000px;
+  height: auto;
   margin: 0px auto;
-  padding: 10px 20px;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;

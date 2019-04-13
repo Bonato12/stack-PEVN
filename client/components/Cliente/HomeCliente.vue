@@ -35,7 +35,7 @@
        <transition v-if="showModal" class="animation fadeIn" name="modal">
          <div class="modal-mask">
            <div class="modal-wrapper">
-             <div class="modal-container">
+             <div class="modal-container animated zoomIn">
                <div class="modal-header" style="background-color:#424242;">
                  <slot name="header">
                    <h2 style="color:white; text-align:left;">Detalles</h2>
@@ -82,7 +82,7 @@
                     </b-row>
                  </slot>
                </div>
-               <div class="modal-header" style="background-color:#FEC404;">
+               <div class="modal-header" style="background-color:#FEC404;" >
                  <h2 class="opciones" style="color:white;">Opciones</h2>
 
                  <div class="row" style="float:right; padding-right:3px;">
@@ -321,10 +321,9 @@ li {
 }
 
 .modal-container {
-  width: 700px;
+  width: 1000px;
   height: auto;
   margin: 0px auto;
-  padding: 10px 20px;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;

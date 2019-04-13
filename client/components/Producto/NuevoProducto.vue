@@ -89,6 +89,13 @@
                       <input required id="descripcion"  v-model="producto.descripcion" type="text" class="validate">
                       <label for="descripcion">Descripcion</label>
                     </div>
+                        <select  required v-model="producto.tipoProducto">
+                          <option disabled selected>Choose your option</option>
+                          <option  v-for="item in tipoProductos">{{ item.name }}</option>
+                        </select>
+                    <br>
+                    <br>
+                    <br>
                     <div class="row" style="padding-left:20px; width:580px;">
                         <div class="input-field col s6">
                           <input required id="stock"  v-model="producto.stock" type="text" class="validate">
