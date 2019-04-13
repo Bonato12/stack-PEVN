@@ -54,12 +54,12 @@
                               </div>
                               <input required  type="number" min="0"  v-model="precio"  class="form-control form-control-lg">
                           </div>
-                          <div class="input-group form-group">
-                              <button class="btn btn-success" v-on:click="guardarLista()" title="Añadir al Carrito">
-                                  <i class="fas fa-cart-plus"></i>
-                              </button>
-                          </div>
                       </form>
+                      <div class="input-group form-group">
+                          <button class="btn btn-success" v-on:click="guardarLista()" title="Añadir al Carrito">
+                              <i class="fas fa-cart-plus"></i>
+                          </button>
+                      </div>
                       <br>
               				<div class="d-flex justify-content-end" style="padding-right:50px;">
                         <router-link to="/HomeVenta" tag="button" class="botones"  style="background:white;">
