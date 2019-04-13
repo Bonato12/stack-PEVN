@@ -35,8 +35,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text">Cantidad</span>
                                 <b-input-group>
-                                  <b-form-input class="form-control form-control-lg" type="number" min="0.00" max="10.00"  v-model="num" style="width:225px;"/>
-
+                                  <b-form-input class="form-control form-control-lg" type="number" min="0"  v-model="num" style="width:225px;"/>
                                   <b-input-group-append>
                                     <b-button  variant="info" style="background-color: #FFC312;" @click="decrement()">
                                         <i class="fas fa-minus"></i>
@@ -121,12 +120,9 @@ export default {
   },
   data () {
     return {
-      id: -1,
-      idventa : -1,
       venta: new Venta(),
       Lista: [],
       ventaProducto: new VentaProducto(),
-      last: '',
       cliente: [],
       producto: [],
       precio: '',
@@ -135,7 +131,6 @@ export default {
       clienteSelected: '',
       num: '',
       numCarrito: '',
-      prueba:''
 
 		}
   },
@@ -160,7 +155,7 @@ export default {
       if (this.numCarrito ==  4){
             alertWarningLimite();
       }else {
-            if(this.clienteSelected && this.productoSelected && this.precio && this.num){
+            if(this.clienteSelected && this.productoSelected && this.precio > 0 && this.num > 0){
                 this.numCarrito++;
                 this.venta.cliente = this.clienteSelected;
                 this.acumulador = parseInt(this.acumulador) + parseInt(this.precio);
@@ -169,9 +164,11 @@ export default {
                 this.ventaProducto.producto = this.productoSelected;
                 this.ventaProducto.cantidad = this.num;
                 this.ventaProducto.precio = this.precio;
-                this.id++;
-                this.ventaProducto.id = this.id;
                 this.Lista.push(this.ventaProducto);
+                var index = this.producto.indexOf(this.productoSelected);
+                if (index > -1) {
+                  this.producto[index].stock = this.producto[index].stock - this.num;
+                }
                 this.ventaProducto = new VentaProducto();
                 this.productoSelected = '';
                 this.num = '';
