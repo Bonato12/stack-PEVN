@@ -223,9 +223,13 @@ export default {
       }
     },
     borrar(producto){
-      console.log(this.Lista);
+      //console.log(this.Lista);
       this.numCarrito--;
       console.log(producto);
+      var indice = this.producto.indexOf(producto.producto);
+      this.producto[indice].stock = this.producto[indice].stock + producto.cantidad;
+      console.log(indice);
+      //console.log(producto);
       var index = this.Lista.indexOf(producto);
       if (index > -1) {
           this.Lista.splice(index, 1);
