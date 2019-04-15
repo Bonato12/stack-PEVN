@@ -202,7 +202,9 @@ export default {
       var indice = this.producto.indexOf(producto.producto);
       this.producto[indice].stock = this.producto[indice].stock + producto.cantidad;
       console.log(indice);
+      //Resta al Precio Total el precio del Producto eliminado de la lista. 
       var index = this.Lista.indexOf(producto);
+      this.precioTotal = this.precioTotal - this.Lista[index].precio
       if (index > -1) {
           this.Lista.splice(index, 1);
       }

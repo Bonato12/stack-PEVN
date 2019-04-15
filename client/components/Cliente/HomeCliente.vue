@@ -192,7 +192,7 @@ export default {
     eliminarCliente(id) {
         axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
           this.getCliente();
-          console.log(data)
+          console.log(data);
         }).then(this.hide());
     },
     enviarMail() {
