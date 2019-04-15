@@ -30,13 +30,17 @@ var pool = require('../database');
                 mail: req.body.mail
               }
               pool.query("INSERT INTO cliente(dni,nombre,apellido,direccion,telefono,mail) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_cliente",[cliente.dni,cliente.nombre,cliente.apellido,
-              cliente.direccion,cliente.telefono,cliente.mail]).then(response=> {
+              cliente.direccion,cliente.telefono]).then(response=> {
                 console.log(response);
                 res.json({
-                  id: response.rows[0].id_cliente
+                  id: response.rows[0].id_cliente,
+                  status: 200
                 })
               }).catch((error) =>{
                 console.log(error);
+                res.json({
+                  status: 500
+                })
               });
         },
         getIdCliente(req,res){
@@ -51,7 +55,7 @@ var pool = require('../database');
                 console.log("Peticion DELETE");
                 pool.query("DELETE FROM cliente WHERE id_cliente=($1)",[req.params.id_cliente]).then(response=> {
                 res.json({
-                  status: 'Eliminado Correctamente'
+                  mensaje: 'Eliminado Correctamente'
                 })
                 }).catch(error =>{
                   console.log(error);
@@ -60,8 +64,10 @@ var pool = require('../database');
         updateCliente(req,res){
               console.log("Peticion UPDATE");
               pool.query("UPDATE cliente SET dni=($1), nombre=($2), apellido=($3), direccion=($4), telefono=($5), mail=($6) WHERE id_cliente=($7)", [req.body.dni, req.body.nombre, req.body.apellido,req.body.direccion,req.body.telefono,req.body.mail,req.params.id_cliente]).then(response=> {
-              console.log(response.rows)
-              res.json(response.rows);
+              //res.json(response.rows);
+              res.json({
+                mensaje: "Editado Correctamente"
+              })
               }).catch(error =>{
                 console.log(error);
               });

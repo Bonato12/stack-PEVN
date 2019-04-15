@@ -93,7 +93,7 @@ export default {
                 { headers: {
                   'Content-Type': 'application/json',
                 }
-            }).then(alertEditSucessCliente());
+            }).then((data) => console.log(data)).then(alertEditSucessCliente());
           }else{
             alertCompletarCampos();
           }

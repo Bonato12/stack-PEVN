@@ -8,6 +8,12 @@ export function alertSucessProducto(){
    Swal.fire( 'Exito!','Nuevo Producto Añadidossss!','success');
 }
 
+export function alertError(){
+   Swal.fire( 'Error!','No Se Pudo Guardar Correctamente!','error');
+}
+
+
+
 export function alertSucessProveedor(){
    Swal.fire( 'Exito!','Nuevo Proveedor Añadido!','success');
 }

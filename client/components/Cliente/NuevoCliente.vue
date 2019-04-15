@@ -53,7 +53,7 @@
 <script>
 
 import axios from 'axios'
-import { alertSucessCliente,alertCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertSucessCliente,alertCompletarCampos,alertError } from '../../assets/sweetAlert.js'
 import Cliente from '../../models/Cliente';
 
 export default {
@@ -79,7 +79,15 @@ export default {
                             'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
                             'Content-Type': 'application/json',
                           },
-                        }).then(data=> console.log(data)).then(this.cliente = new Cliente()).then(alertSucessCliente());
+                        }).then(function(data){
+                          console.log(data)
+                          if (data.data.status == 200){
+                            alertSucessCliente();
+                            this.cliente = new Cliente()
+                          }else {
+                            alertError();
+                          }
+                        });
                     }
               }
 
