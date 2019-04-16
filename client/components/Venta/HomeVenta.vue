@@ -72,12 +72,12 @@
                       <div class="modal-header" style="background-color:#FEC404;">
                         <h2 class="opciones" style="color:white;">Opciones</h2>
                         <div class="row" style="float:right; padding-right:3px;">
-                             <button class="btn-floating red darken-1" v-on:click="eliminarVenta()" title="Eliminar Cliente">
+                             <button class="btn-floating red darken-1" v-on:click="eliminarVenta()" title="Eliminar Venta">
                                  <i class="fas fa-trash-alt"></i>
                              </button>
-                             <router-link class="btn-floating yellow accent-2" style="background-color:yellow;" tag="button" title="Editar Cliente">
+                             <router-link class="btn-floating  yellow accent-2" :to="/EditarVenta/+this.idv" tag="button" title="Editar Venta">
                                  <i class="fas fa-edit fa-1x"></i>
-                                 Editar
+
                              </router-link>
                          </div>
                      </div>

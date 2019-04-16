@@ -8,6 +8,7 @@ import HomeProducto from './components/Producto/HomeProducto'
 import NuevoProducto from './components/Producto/NuevoProducto.vue'
 import HomeVenta from './components/Venta/HomeVenta.vue'
 import NuevaVenta from './components/Venta/NuevaVenta.vue'
+import EditarVenta from './components/Venta/EditarVenta.vue'
 import HomeProveedor from './components/Proveedor/HomeProveedor.vue'
 import NuevoProveedor from './components/Proveedor/NuevoProveedor.vue'
 import EditarProveedor from './components/Proveedor/EditarProveedor.vue'
@@ -77,6 +78,10 @@ const rutas = new VueRouter({
             {
               path:'/NuevaVenta',
               component: NuevaVenta
+            },
+            {
+              path:'/EditarVenta/:id',
+              component: EditarVenta
             },
             {
               path: '*',
