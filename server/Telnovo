@@ -55,6 +55,9 @@ CREATE TABLE venta(
 	CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente)
 );
 
+
+SELECT * FROM venta;
+
 CREATE TABLE ventaProducto(
 	id_ventaProducto SERIAL NOT NULL,
 	id_venta INTEGER NOT NULL,

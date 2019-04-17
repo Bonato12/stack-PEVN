@@ -39,7 +39,7 @@
                     <div class="modal-container">
                       <div class="modal-header" style="background-color:#424242;">
                         <slot name="header">
-                          <h2 style="color:white; text-align:left;">Detalles</h2>
+                          <h2 style="color:white; text-align:left;">Venta del {{this.fecha}} </h2>
                           <button class="modal-default-button" @click="hide()">
                            <i class="far fa-times-circle"></i>
                           </button>
@@ -47,24 +47,34 @@
                       </div>
                       <div class="modal-body" style="background-color:#f1f8e9;">
                         <slot name="body">
-                          <table class="table table-default">
+                          <table class="centered" style="color:black">
                                 <thead>
                                       <tr>
+                                        <!--
                                         <th scope="col">Id</th>
                                         <th scope="col">Id_Venta</th>
+                                      -->
                                         <th scope="col">Modelo</th>
                                         <th scope="col">Cantidad</th>
-                                        <th scope="col">Producto</th>
+                                        <th scope="col">Precio</th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                       <tr v-for="item in this.ventasProducto">
-                                        <th scope="row">{{item.id_ventaproducto}}</th>
-                                        <td scope="row">{{item.id_venta}}</td>
-                                        <td scope="row">{{item.modelo}}</td>
-                                        <td scope="row"> {{item.cantidad}}</td>
-                                        <td scope="row">{{item.precio}}</td>
+                                        <!--
+                                        <th scope="col">{{item.id_ventaproducto}}</th>
+                                        <td scope="col">{{item.id_venta}}</td>
+                                      -->
+                                        <td scope="col">{{item.modelo}}</td>
+                                        <td scope="col"> {{item.cantidad}}</td>
+                                        <td scope="col">{{item.precio}}</td>
                                       </tr>
+                                      <tr>
+                                        <td scope="col"></td>
+                                        <td scope="col"> </td>
+                                        <td scope="col">Total: 15000</td>
+                                      </tr>
+
                                 </tbody>
                           </table>
                         </slot>
@@ -75,10 +85,12 @@
                              <button class="btn-floating red darken-1" v-on:click="eliminarVenta()" title="Eliminar Venta">
                                  <i class="fas fa-trash-alt"></i>
                              </button>
+                             <!--
                              <router-link class="btn-floating  yellow accent-2" :to="/EditarVenta/+this.idv" tag="button" title="Editar Venta">
                                  <i class="fas fa-edit fa-1x"></i>
 
                              </router-link>
+                           -->
                          </div>
                      </div>
                     </div>
@@ -116,6 +128,7 @@
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import moment from 'moment';
 
 export default {
   name: 'HomeVenta',
@@ -129,6 +142,7 @@ export default {
       showModal: false,
       ventas: [],
       ventasProducto: [],
+      fecha: '',
       columns: [
         {
           label: 'Nombre',
@@ -159,6 +173,7 @@ export default {
         axios.get('http://localhost:3000/venta').then((response) =>{
           this.ventas = response.data;
           console.log(this.ventas);
+
         });
     },
     eliminarVenta(){
@@ -173,6 +188,8 @@ export default {
             this.idv =  params.row.id_venta;
             axios.get('http://localhost:3000/ventaProducto/'+ params.row.id_venta).then((response) =>{
               this.ventasProducto = response.data;
+              this.fecha = moment(response.data[0].fecha).format("D / M / YYYY");
+              console.log(this.fecha);
               console.log(this.ventasProducto);
             });
 
@@ -232,6 +249,7 @@ li {
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
+
 }
 
 .modal-container {
@@ -241,6 +259,7 @@ li {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
+  border-radius: 10px;
 }
 
 .modal-enter {

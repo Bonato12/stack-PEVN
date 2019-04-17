@@ -236,7 +236,7 @@ export default {
     guardarEditar(){
         this.Lista[this.index].cantidad = this.num;
         this.Lista[this.index].precio = this.precio;
-
+        console.log(this.Lista[this.index]);
     },
     nuevaVenta(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
@@ -246,14 +246,14 @@ export default {
                       //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
                       this.venta.cliente = this.clienteSelected;
                       this.venta.total = this.precioTotal;
-                      axios.post('http://localhost:3000/venta',
+                      axios.put('http://localhost:3000/venta/'+this.idv,
                           {
                           lista: this.Lista,
                           venta: this.venta
                           },
                           {
                             headers:{
-                            'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
+                            'Access-Control-Allow-Origin': 'http://localhost:3000/venta/'+this.idv,
                             'Content-Type': 'application/json'
                              }
                         })

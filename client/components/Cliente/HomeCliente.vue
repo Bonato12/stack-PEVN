@@ -4,7 +4,7 @@
     </br>
     <h2 class="animated fadeIn" style="text-align:center;color:white;"> Clientes</h2>
     </br>
-    <div v-if="datos.length" class="animated zoomIn">
+    <div v-if="datos.length" class="animated zoomInLeft">
         <vue-good-table
               :columns="columns"
               :rows="datos"
@@ -32,10 +32,10 @@
               theme="default">
        </vue-good-table>
      </div>
-       <transition v-if="showModal" class="animation fadeIn" name="modal">
+       <transition v-if="showModal" class="animation fadeInLeft" name="modal">
          <div class="modal-mask">
            <div class="modal-wrapper">
-             <div class="modal-container animated zoomIn">
+             <div class="modal-container animated fadeInLeft">
                <div class="modal-header" style="background-color:#424242;">
                  <slot name="header">
                    <h2 style="color:white; text-align:left;">Detalles</h2>
