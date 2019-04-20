@@ -1,13 +1,16 @@
 <template>
   <div>
     <div class="container">
-      <!--
-        <div class="d-flex justify-content-center">
-      		<div class="card">
-        			<div class="card-header">
-                <h3 style="text-align:center; color:white;"> Nuevo Producto </h3>
+        <div class="d-flex justify-content-left">
+      		<div class="card animated fadeInDown">
+        			<div class="card-header" style="background-color:#FFD700; ">
+                <h2 style="text-align:center; color:black;">
+                  <i class="fas fa-mobile-alt"></i>
+                   Nuevo Producto
+                 </h2>
         			</div>
-        			<div class="card-body animated fadeInDown" >
+                </hr style="color:black;">
+        			<div class="card-body" >
             				<form @submit.prevent="nuevoProducto()">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
@@ -32,7 +35,7 @@
               							<span class="input-group-text">Tipo Producto</span>
               						</div>
                           <select required class="form-control" v-model="producto.tipoProducto">
-                            <option disabled>Elige un Tipo Producto</option>
+                            <option disabled value="">Elige un Tipo Producto</option>
                             <option  v-for="item in tipoProductos">{{ item.name }}</option>
                          </select>
                       </div>
@@ -49,81 +52,21 @@
               						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
                       <br>
-            					<div class="form-group">
-                        <button type="submit"  title="Guardar Producto" style="background-color:#fec400">
-                            <i class="far fa-save fa-1x"></i>
-                            Guardar
-                        </button>
-                        <router-link to="/HomeProducto" tag="button" title="Volver a HomeProducto" style="background:white;">
-                            <i class="fas fa-arrow-left"></i>
-                              Volver
-                        </router-link>
-
-
+            					<div class="float-left">
+                          <button type="submit"  title="Guardar Producto" style="background-color:#fec400">
+                              <i class="far fa-save fa-1x"></i>
+                              Guardar
+                          </button>
+                          <router-link to="/HomeProducto" tag="button" title="Volver a HomeProducto" style="background:white;">
+                              <i class="fas fa-arrow-left"></i>
+                                Volver
+                          </router-link>
             					</div>
         				</form>
-                      <br>
-                      <br>
         			</div>
       		</div>
       	</div>
-      -->
-      <section class="formulario animated fadeInDown">
-          <section class="info">
-              <section class="titulo">
-                  <span class="fas fa-mobile-alt"></span>
-                  <p style="font-size:25px;">NUEVO PRODUCTO</p>
-              </section>
-          </section>
-          <form @submit.prevent="nuevoProducto()">
-
-                    <div class="input-field col s6">
-                      <input required id="modelo"  v-model="producto.modelo" type="text" class="validate">
-                      <label for="modelo">Modelo</label>
-                    </div>
-                    <div class="input-field col s6">
-                      <input required id="marca"  v-model="producto.marca" type="text" class="validate">
-                      <label for="marca">Marca</label>
-                    </div>
-                    <div class="input-field col s6">
-                      <input required id="descripcion"  v-model="producto.descripcion" type="text" class="validate">
-                      <label for="descripcion">Descripcion</label>
-                    </div>
-                        <select  required v-model="producto.tipoProducto">
-                          <option disabled selected>Choose your option</option>
-                          <option  v-for="item in tipoProductos">{{ item.name }}</option>
-                        </select>
-                    <br>
-                    <div class="row" style="padding-left:20px; width:580px;">
-                        <div class="input-field col s6">
-                          <input required id="stock"  v-model="producto.stock" type="text" class="validate">
-                          <label for="stock">Stock</label>
-                        </div>
-                        <div class="input-field col s6">
-                          <input required id="precio"  v-model="producto.precio" type="text" class="validate">
-                          <label for="precio">Precio</label>
-                        </div>
-                    </div>
-
-                <br>
-                <div class="form-group">
-                  <button type="submit"  title="Guardar Producto">
-                      <i class="far fa-save fa-1x"></i>
-                      Guardar
-                  </button>
-                  <router-link to="/HomeProducto" tag="button" title="Volver a HomeProducto">
-                      <i class="fas fa-arrow-left fa-1x"></i>
-                      Volver
-                  </router-link>
-                  <br>
-                </div>
-              <br>
-          </form>
-      </section>
-  </div>
-  <br>
-
-  </br>
+   </div>
   </div>
 </template>
 
@@ -131,8 +74,7 @@
 import axios from 'axios'
 import { alertSucessProducto,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import Producto from '../../models/Producto';
-import 'materialize-css';
-import 'materialize-css/dist/css/materialize.min.css'
+
 
 export default {
   created(){
@@ -197,18 +139,29 @@ li {
 
 .input-group-prepend span{
 width: auto;
-background-color: #FFC312;
+background-color: #FFD700;
 color: black;
 border: none;
 
+
+}
+
+.input-group{
+  width: 950px;
+}
+
+input:focus{
+  background-color: white;
 }
 
 .card{
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 850px;
-background-color: rgba(0,0,0,0.5) ;
+width: 1250px;
+background-color: #696969;
+border: 1px solid;
+border-radius: 5px;
 }
 
 button{
@@ -220,10 +173,15 @@ button{
   height:50px;
   margin-top:-10px;
   border:none;
-  background-color: #00c853  !important;
+  background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 10px;
+}
+
+button:hover{
+     background-color: white  !important;
+     /*color: white;*/
 }
 
 /*Sirve para desabilitar las flechas en los inputs numer*/
@@ -236,11 +194,13 @@ input::-webkit-inner-spin-button {
 
 form select:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
 
 }
 
 form select:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
 
 
 }
@@ -248,18 +208,20 @@ form select:required:focus:valid{
 
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
+
 }
 
 
 form input:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
+
 }
 
 .form-control {
     border: 0;
     box-shadow: none;
-    border-bottom: 2px solid gray;
-
 }
 
 

@@ -135,9 +135,7 @@ import XLSX from 'xlsx'
 import Cliente from '../../models/Cliente';
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete } from '../../assets/sweetAlert.js';
-import 'materialize-css';
-import 'materialize-css/dist/css/materialize.css'
-import 'materialize-css/dist/js/materialize.js'
+
 
 
 
@@ -327,6 +325,7 @@ li {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
+  border-radius: 8px;
 }
 
 .modal-enter {

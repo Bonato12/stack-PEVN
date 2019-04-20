@@ -1,36 +1,109 @@
 <template>
-  <div id="app">
+  <div>
     <div class="container">
+        <div class="d-flex justify-content-left">
+      		<div class="card animated fadeInDown">
+        			<div class="card-header" style="background-color:#FFD700; ">
+                <h3 style="text-align:center; color:black;">
+                  <i class="fas fa-mobile-alt"></i>
+                   Editar Producto
+                 </h3>
+        			</div>
+                </hr style="color:black;">
+        			<div class="card-body" >
+            				<form @submit.prevent="EditarProducto()">
+            					<div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text">Modelo</span>
+              						</div>
+              						<input required type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
+            					</div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text">Marca</span>
+              						</div>
+              						<input required type="text" v-model="producto.marca" class="form-control" placeholder="Ingrese Marca">
+            					</div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text">Descripcion</span>
+              						</div>
+              						<textarea required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
+            					</div>
+            					<div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text">Tipo Producto</span>
+              						</div>
+                          <select required class="form-control" v-model="producto.tipoProducto">
+                            <option disabled value="">Elige un Tipo Producto</option>
+                            <option  v-for="item in tipoProductos">{{ item.name }}</option>
+                         </select>
+                      </div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text">Stock</span>
+              						</div>
+              						<input required type="number" min="0" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
+            					</div>
+                      <div class="input-group form-group">
+              						<div class="input-group-prepend">
+              							<span class="input-group-text">Precio</span>
+              						</div>
+              						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
+            					</div>
+                      <br>
+            					<div class="float-left">
+                          <button type="submit"  title="Guardar Producto" style="background-color:#fec400">
+                              <i class="far fa-save fa-1x"></i>
+                              Guardar
+                          </button>
+                          <router-link to="/HomeProducto" tag="button" title="Volver a HomeProducto" style="background:white;">
+                              <i class="fas fa-arrow-left"></i>
+                                Volver
+                          </router-link>
+            					</div>
+        				</form>
+        			</div>
+      		</div>
+      	</div>
+      <!--
       <section class="formulario animated fadeInDown">
           <section class="info">
               <section class="titulo">
                   <span class="fas fa-mobile-alt"></span>
-                  <p style="font-size:25px;">MODIFICAR PRODUCTO</p>
+                  <p style="font-size:25px;">NUEVO PRODUCTO</p>
               </section>
           </section>
-          <form @submit.prevent="editarProducto()">
+          <form @submit.prevent="nuevoProducto()">
+
                     <div class="input-field col s6">
                       <input required id="modelo"  v-model="producto.modelo" type="text" class="validate">
-                      <label class="active" for="modelo">Modelo</label>
+                      <label for="modelo">Modelo</label>
                     </div>
                     <div class="input-field col s6">
                       <input required id="marca"  v-model="producto.marca" type="text" class="validate">
-                      <label class="active" for="marca">Marca</label>
+                      <label for="marca">Marca</label>
                     </div>
                     <div class="input-field col s6">
                       <input required id="descripcion"  v-model="producto.descripcion" type="text" class="validate">
-                      <label class="active" for="descripcion">Descripcion</label>
+                      <label for="descripcion">Descripcion</label>
                     </div>
+                        <select  required v-model="producto.tipoProducto">
+                          <option disabled selected>Choose your option</option>
+                          <option  v-for="item in tipoProductos">{{ item.name }}</option>
+                        </select>
+                    <br>
                     <div class="row" style="padding-left:20px; width:580px;">
                         <div class="input-field col s6">
                           <input required id="stock"  v-model="producto.stock" type="text" class="validate">
-                          <label class="active" for="stock">Stock</label>
+                          <label for="stock">Stock</label>
                         </div>
                         <div class="input-field col s6">
                           <input required id="precio"  v-model="producto.precio" type="text" class="validate">
-                          <label class="active" for="precio">Precio</label>
+                          <label for="precio">Precio</label>
                         </div>
                     </div>
+
                 <br>
                 <div class="form-group">
                   <button type="submit"  title="Guardar Producto">
@@ -46,8 +119,8 @@
               <br>
           </form>
       </section>
-  </div>
-  </br>
+    -->
+   </div>
   </div>
 </template>
 
@@ -113,8 +186,14 @@ border:0 !important;
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 450px;
-background-color: rgba(0,0,0,0.5) !important;
+width: 1250px;
+background-color: #696969;
+border: 1px solid;
+border-radius: 5px;
+}
+
+.input-group{
+  width: 950px;
 }
 
 .editarProducto_btn{
@@ -184,8 +263,6 @@ form input:required:focus:valid{
 .form-control {
     border: 0;
     box-shadow: none;
-    border-bottom: 2px solid gray;
-
 }
 
 
