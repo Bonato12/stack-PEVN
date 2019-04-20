@@ -94,8 +94,6 @@
                           <option  v-for="item in tipoProductos">{{ item.name }}</option>
                         </select>
                     <br>
-                    <br>
-                    <br>
                     <div class="row" style="padding-left:20px; width:580px;">
                         <div class="input-field col s6">
                           <input required id="stock"  v-model="producto.stock" type="text" class="validate">
@@ -177,6 +175,10 @@ export default {
 
 <style scoped>
 
+select{
+  display: block !important;
+}
+
 
 h1, h2 {
   font-weight: normal;
@@ -202,7 +204,7 @@ border: none;
 }
 
 .card{
-height: 510px;
+height: auto;
 margin-top: 30px;
 margin-bottom: auto;
 width: 850px;
@@ -277,7 +279,7 @@ form textarea:required:focus:valid{
 
 .formulario{
     width: 1050px;
-    height: 450px;
+    height: auto;
     margin: 50px auto;
     display: flex;
     background: #fff;

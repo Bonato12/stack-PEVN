@@ -102,7 +102,6 @@ export default {
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
     background-color: white;
-    /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);*/
     animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
@@ -113,7 +112,6 @@ form input:focus:invalid{
 form input:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
   background-color: white;
-/*  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6);*/
 }
 
 

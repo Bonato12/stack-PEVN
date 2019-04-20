@@ -30,7 +30,7 @@ var pool = require('../database');
                 mail: req.body.mail
               }
               pool.query("INSERT INTO cliente(dni,nombre,apellido,direccion,telefono,mail) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_cliente",[cliente.dni,cliente.nombre,cliente.apellido,
-              cliente.direccion,cliente.telefono]).then(response=> {
+              cliente.direccion,cliente.telefono,cliente.mail]).then(response=> {
                 console.log(response);
                 res.json({
                   id: response.rows[0].id_cliente,
