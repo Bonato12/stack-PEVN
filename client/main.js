@@ -11,6 +11,10 @@ import vSelect from 'vue-select'
 import VueGoodTablePlugin from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css'
 import {store} from './store.js';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import Spinner from 'bootstrap-vue/es/components/spinner'
+Vue.use(Spinner)
+
 /*
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.css'
@@ -47,6 +51,9 @@ firebase.auth().onAuthStateChanged((user)=>{
   new Vue({
     el: '#app',
     router: rutas,
+    components: {
+    PulseLoader
+    },
     store,
     render: h => h(App)
   })

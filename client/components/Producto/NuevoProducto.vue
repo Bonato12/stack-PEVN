@@ -61,6 +61,11 @@
                               <i class="fas fa-arrow-left"></i>
                                 Volver
                           </router-link>
+                          <!--
+                          <div v-if="loading" class="d-flex justify-content-left mb-2">
+                            <b-spinner label="Loading..."></b-spinner>
+                          </div>
+                        -->
             					</div>
         				</form>
         			</div>
@@ -82,6 +87,7 @@ export default {
   },
   data () {
     return {
+      loading:  false,
       producto:  new Producto(),
       tipoProductos : [{name:"Celular"},
                        {name:"Tablet"},
@@ -97,6 +103,7 @@ export default {
   },
   methods: {
     nuevoProducto(){
+            this.loading = true;
             if(this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
                   console.log(this.producto);
                   axios.post('http://localhost:3000/producto',
@@ -105,7 +112,7 @@ export default {
                     'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
                     'Content-Type': 'application/json',
                   },
-                  }).then(this.producto = new Producto()).then(alertSucessProducto());
+                }).then(this.producto = new Producto())
             }else{
                 alertCompletarCampos();
             }

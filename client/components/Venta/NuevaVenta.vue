@@ -1,92 +1,97 @@
 <template>
-  <div id="NuevaVenta">
-    <div class="container">
-          <div style="float:center;">
-          			<div class="card-header">
-                  <h3 style="text-align:center; color:white;"> Nueva Venta </h3>
-          			</div>
-          			<div class="animated fadeInDown" id="card" style="float:left;  width:1200px;">
-                      <br>
-                      <form style="margin-left: 50px; margin-top:30px;">
-                              <div class="caja">
+      <div>
+        <br>
+        <br>
+        <div class="container">
+            <div class="d-flex justify-content-center">
+              <div class="card animated fadeInDown">
+                  <div class="card-header" style="background-color:#FFD700;">
+                    <h2 style="text-align:center; color:black;">
+                      <i class="fas fa-mobile-alt"></i>
+                       Nueva Venta
+                     </h2>
+                  </div>
+                    </hr style="color:black;">
+                  <div class="card-body">
+                    <form style="margin-left: 30px; margin-top:30px;">
+                            <div class="caja">
                                 <span class="input-group-text">Cliente</span>
-                                <v-select :options="cliente" label="dni" id="clienteSelect"  v-model="clienteSelected" style="width:290px; background-color: white;">
+                                <v-select :options="cliente" label="dni" id="clienteSelect"  v-model="clienteSelected" style="width:290px; height:57px; background-color: white; border-radius: 4px;">
                                   <template slot="option" slot-scope="option">
                                       <span class="fa" :class="option.icon"></span>
                                       {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
                                   </template>
                                 </v-select>
-                              </div>
-                              <div class="caja">
-                                <span class="input-group-text">Producto</span>
-                                  <v-select  :options="producto" label="modelo"  v-model="productoSelected" style="width:290px; background-color: white;">
-                                    <template slot="option" slot-scope="option">
-                                        <span class="fa" :class="option.icon"></span>
-                                      {{ option.marca }} {{ option.modelo }} {{ option.precio }}
-                                    </template>
-                                  </v-select>
-                              </div>
-                              <div class="caja" style="width:230px;" >
-                                  <div>
-                                    <span class="input-group-text">Cantidad</span>
-                                    <b-input-group>
-                                      <b-form-input class="form-control form-control-lg" type="number" :disabled="!productoSelected" min="0"  v-model="num" style="width:145px; height:57px; background-color:white;"/>
-                                      <b-input-group-append>
-                                        <b-button  variant="info" style="height:57px;" @click="decrementarCantidad()">
-                                            <i class="fas fa-minus"></i>
-                                        </b-button>
-                                        <b-button  variant="info"   @click="incrementarCantidad()" style="height:57px;">
-                                            <i class="fas fa-plus"></i>
-                                        </b-button>
-                                      </b-input-group-append>
-                                    </b-input-group>
-                                 </div>
-                              </div>
-                              <div class="caja">
-                                  <div>
-                                    <span class="input-group-text">Precio</span>
-                                  </div>
-                                  <input required  type="number" min="0"  v-model="precio" :disabled="!productoSelected"  class="form-control form-control-lg" style="background-color:white; height:57px; width:250px;">
-                              </div>
-                      </form>
+                            </div>
+                            <div class="caja">
+                              <span class="input-group-text">Producto</span>
+                                <v-select  :options="producto" label="modelo"  v-model="productoSelected" style="width:290px; height:57px; border-radius: 4px; background-color: white;">
+                                  <template slot="option" slot-scope="option">
+                                      <span class="fa" :class="option.icon"></span>
+                                    {{ option.marca }} {{ option.modelo }} {{ option.precio }}
+                                  </template>
+                                </v-select>
+                            </div>
+                            <div class="caja" style="width:230px;" >
+                                <div>
+                                  <span class="input-group-text">Cantidad</span>
+                                  <b-input-group>
+                                    <b-form-input class="form-control form-control-lg" type="number" :disabled="!productoSelected" min="0"  v-model="num" style="width:145px; height:57px; border-top:1px solid lightgray;  background-color:white;"/>
+                                    <b-input-group-append>
+                                      <b-button  variant="info" style="height:57px;" @click="decrementarCantidad()">
+                                          <i class="fas fa-minus"></i>
+                                      </b-button>
+                                      <b-button  variant="info"   @click="incrementarCantidad()" style="height:57px;">
+                                          <i class="fas fa-plus"></i>
+                                      </b-button>
+                                    </b-input-group-append>
+                                  </b-input-group>
+                               </div>
+                            </div>
+                            <div class="caja">
+                                <div>
+                                  <span class="input-group-text">Precio</span>
+                                </div>
+                                <input required  type="number" min="0"  v-model="precio" :disabled="!productoSelected"  class="form-control form-control-lg" style="background-color:white; border-top:1px solid lightgray; height:57px; width:200px;">
+                            </div>
+                    </form>
+                    <div>
                         <br>
-                      <div>
+                        <button class="btn btn-success" v-on:click="guardarLista()" style="margin-left:52px;" title="Añadir al Carrito">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                    </div>
+                    <br>
+                      <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
+                                <table class="table" style="background-color:white;">
+                                  <thead>
+                                    <tr >
+                                      <th scope="col">Modelo</th>
+                                      <th scope="col">Cantidad</th>
+                                      <th scope="col">Precio</th>
+                                      <th scope="col">Opciones</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr v-for="item in this.Lista">
+                                      <th class="centered">{{item.producto.modelo}}</th>
+                                      <td>{{item.cantidad}}</td>
+                                      <td>{{item.precio}}</td>
+                                      <td>
+                                          <button v-on:click="borrar(item)" class="btn btn-danger">
+                                              <i class="fas fa-trash-alt"></i>
+                                          </button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                          </div>
                           <br>
-                          <button class="btn btn-success" v-on:click="guardarLista()" style="margin-left:52px;" title="Añadir al Carrito">
-                              <i class="fas fa-cart-plus"></i>
-                          </button>
-                      </div>
-                      <br>
-                        <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1100px;">
-                                  <table class="centered" style="background-color:white;">
-                                    <thead>
-                                      <tr >
-                                        <th scope="col">Modelo</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Precio</th>
-                                        <th scope="col">Opciones</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr v-for="item in this.Lista">
-                                        <th class="centered">{{item.producto.modelo}}</th>
-                                        <td>{{item.cantidad}}</td>
-                                        <td>{{item.precio}}</td>
-                                        <td>
-                                            <button v-on:click="borrar(item)" class="btn btn-danger">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                            </div>
-                            <br>
-                            <div v-if="this.precioTotal" style="text-align:right; margin-right:50px; color:white;">
-                              <h3>Total $: {{this.precioTotal}} </h3>
-                            </div>
-                            <br>
-                            <div class="d-flex justify-content-end" style="padding-right:50px;">
+                          <div v-if="this.precioTotal" style="text-align:right; margin-right:50px; color:white;">
+                            <h3>Total $: {{this.precioTotal}} </h3>
+                          </div>
+                          <br>
+                          <div class="d-flex justify-content-end" style="padding-right:50px;">
                               <router-link to="/HomeVenta" tag="button" class="botones"  style="background:white;">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
@@ -96,11 +101,11 @@
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
-                            </div>
-                            <br>
                           </div>
                   </div>
-        		</div>
+              </div>
+            </div>
+       </div>
       </div>
 </template>
 <script>
@@ -249,10 +254,13 @@ h1, h2 {
 }
 
 
-#card{
-
-background-color: rgba(0,0,0,0.5) !important;
-
+.card{
+height: auto;
+margin-bottom: auto;
+width: 1650px;
+background-color: #696969;
+border: 1px solid;
+border-radius: 5px;
 }
 
 
@@ -294,6 +302,17 @@ border:0 !important;
 .caja{
    float:left;
    margin-left:5px;
+   height: 100px;
+
+}
+
+.input-group-text{
+width: auto;
+background-color: #FFD700;
+color: black;
+border: none;
+
+
 }
 
 input{
