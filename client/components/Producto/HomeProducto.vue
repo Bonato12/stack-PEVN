@@ -1,10 +1,17 @@
 <template>
 <div>
-  <div class="container">
-    <br>
-    <h2 class="animated fadeIn" style="color:white; text-align:center;"> Productos</h2>
-    <br>
-    <div v-if="this.productos.length" class="animated zoomIn">
+  <div class="container animated zoomIn">
+    </br>
+    </br>
+    <div>
+        <div class="card-header" style="background-color:#FFD700; ">
+          <h2 style="text-align:center; color:black;">
+              <i class="fas fa-mobile-alt"></i>
+              Productos
+           </h2>
+        </div>
+    </div>
+    <div v-if="this.productos.length">
       <vue-good-table :columns="columns" :rows="productos" title="Ver Opciones y Detalles" :search-options="{
                 enabled: true,
                 skipDiacritics: true,

@@ -5,7 +5,7 @@
       		<div class="card animated fadeInDown">
         			<div class="card-header" style="background-color:#FFD700; ">
                 <h3 style="text-align:center; color:black;">
-                  <i class="fas fa-mobile-alt"></i>
+                  <i class="fas fa-cog"></i>
                    Editar Producto
                  </h3>
         			</div>
@@ -32,7 +32,7 @@
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text">Tipo Producto</span>
+              							<span class="input-group-text">Tipo</span>
               						</div>
                           <select required class="form-control" v-model="producto.tipoProducto">
                             <option disabled value="">Elige un Tipo Producto</option>
@@ -66,60 +66,6 @@
         			</div>
       		</div>
       	</div>
-      <!--
-      <section class="formulario animated fadeInDown">
-          <section class="info">
-              <section class="titulo">
-                  <span class="fas fa-mobile-alt"></span>
-                  <p style="font-size:25px;">NUEVO PRODUCTO</p>
-              </section>
-          </section>
-          <form @submit.prevent="nuevoProducto()">
-
-                    <div class="input-field col s6">
-                      <input required id="modelo"  v-model="producto.modelo" type="text" class="validate">
-                      <label for="modelo">Modelo</label>
-                    </div>
-                    <div class="input-field col s6">
-                      <input required id="marca"  v-model="producto.marca" type="text" class="validate">
-                      <label for="marca">Marca</label>
-                    </div>
-                    <div class="input-field col s6">
-                      <input required id="descripcion"  v-model="producto.descripcion" type="text" class="validate">
-                      <label for="descripcion">Descripcion</label>
-                    </div>
-                        <select  required v-model="producto.tipoProducto">
-                          <option disabled selected>Choose your option</option>
-                          <option  v-for="item in tipoProductos">{{ item.name }}</option>
-                        </select>
-                    <br>
-                    <div class="row" style="padding-left:20px; width:580px;">
-                        <div class="input-field col s6">
-                          <input required id="stock"  v-model="producto.stock" type="text" class="validate">
-                          <label for="stock">Stock</label>
-                        </div>
-                        <div class="input-field col s6">
-                          <input required id="precio"  v-model="producto.precio" type="text" class="validate">
-                          <label for="precio">Precio</label>
-                        </div>
-                    </div>
-
-                <br>
-                <div class="form-group">
-                  <button type="submit"  title="Guardar Producto">
-                      <i class="far fa-save fa-1x"></i>
-                      Guardar
-                  </button>
-                  <router-link to="/HomeProducto" tag="button" title="Volver a HomeProducto">
-                      <i class="fas fa-arrow-left fa-1x"></i>
-                      Volver
-                  </router-link>
-                  <br>
-                </div>
-              <br>
-          </form>
-      </section>
-    -->
    </div>
   </div>
 </template>
@@ -176,10 +122,10 @@ export default {
 
 <style scoped>
 .input-group-prepend span{
-width: auto;
-background-color: #FFC312;
-color: black;
-border:0 !important;
+  width: 120px;
+  background-color: #FFC312;
+  color: black;
+  border:0 !important;
 }
 
 .card{
@@ -187,7 +133,7 @@ height: auto;
 margin-top: 30px;
 margin-bottom: auto;
 width: 1250px;
-background-color: #696969;
+background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }
@@ -225,10 +171,15 @@ button{
   height:50px;
   margin-top:-10px;
   border:none;
-  background-color: #00c853  !important;
+  background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 10px;
+}
+
+button:hover{
+     background-color: white  !important;
+     /*color: white;*/
 }
 
 /*Sirve para desabilitar las flechas en los inputs numer*/

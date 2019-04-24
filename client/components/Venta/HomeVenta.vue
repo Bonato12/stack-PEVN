@@ -1,10 +1,17 @@
 <template>
   <div id="HomeVenta">
-    <div class="container">
+    <div class="container animated zoomIn">
       <br>
-      <h2 class="animated fadeIn">Ventas</h2>
       <br>
-      <div v-if="this.ventas.length" class="animated zoomIn">
+      <div>
+          <div class="card-header" style="background-color:#FFD700; ">
+            <h2 style="text-align:center; color:black;">
+                <i class="fas fa-cart-plus"></i>
+                Ventas
+             </h2>
+          </div>
+      </div>
+      <div v-if="this.ventas.length">
           <vue-good-table
               :columns="columns"
               :rows="ventas"

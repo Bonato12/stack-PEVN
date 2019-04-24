@@ -36,10 +36,12 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 body{
+background-image: url('./background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
 background-color: lightgray;
+background-blend-mode: multiply;
 }
 
 

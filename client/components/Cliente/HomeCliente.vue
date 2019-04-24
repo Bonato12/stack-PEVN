@@ -1,10 +1,17 @@
 <template>
   <div id="Cliente">
-    <div class="container">
+    <div class="container animated zoomIn">
     </br>
-    <h2 class="animated fadeIn" style="text-align:center;color:white;"> Clientes</h2>
     </br>
-    <div v-if="datos.length" class="animated zoomInLeft">
+    <div>
+        <div class="card-header" style="background-color:#FFD700; ">
+          <h2 style="text-align:center; color:black;">
+              <i class="fas fa-user"></i>
+              Clientes
+           </h2>
+        </div>
+    </div>
+    <div v-if="datos.length">
         <vue-good-table
               :columns="columns"
               :rows="datos"
@@ -84,7 +91,6 @@
                </div>
                <div class="modal-header" style="background-color:#FEC404;" >
                  <h2 class="opciones" style="color:white;">Opciones</h2>
-
                  <div class="row" style="float:right; padding-right:3px;">
                       <button class="btn-floating red darken-1" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
                           <i class="fas fa-trash-alt"></i>
@@ -102,26 +108,27 @@
            </div>
          </div>
        </transition>
-    </br>
-    <br>
-    <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn" style="float: left;"  >
-        <i class="fas fa-plus-circle fa-1x"></i>
-        Nuevo Cliente
-    </router-link>
-    <div class="row" style="float:right">
-        <button type="button" class="btn"  v-on:click="exportarPdf()" style="float:right;">
-            <i class="fa fa-file-pdf" aria-hidden="true"></i>
-            Exportar Pdf
-        </button>
-        <button type="button" class="btn" v-on:click="exportarXls()" >
-          <i class="fa fa-file-excel" aria-hidden="true"></i>
-            Exportar Excel
-        </button>
-        <button type="button" class="btn" v-on:click="exportarCsv()">
-          <i class="fa fa-file-csv" aria-hidden="true"></i>
-            Exportar Csv
-        </button>
-     </div>
+    <div class="card-footer" style="background-color:#FFD700; height:70px;">
+        <br>
+        <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn" style="float: left;"  >
+            <i class="fas fa-plus-circle fa-1x"></i>
+            Nuevo Cliente
+        </router-link>
+        <div class="row" style="float:right">
+            <button type="button" class="btn"  v-on:click="exportarPdf()" style="float:right;">
+                <i class="fa fa-file-pdf" aria-hidden="true"></i>
+                Exportar Pdf
+            </button>
+            <button type="button" class="btn" v-on:click="exportarXls()" >
+              <i class="fa fa-file-excel" aria-hidden="true"></i>
+                Exportar Excel
+            </button>
+            <button type="button" class="btn" v-on:click="exportarCsv()">
+              <i class="fa fa-file-csv" aria-hidden="true"></i>
+                Exportar Csv
+            </button>
+         </div>
+       </div>
     </div>
   </div>
 </template>
@@ -349,18 +356,18 @@ li {
   cursor:pointer;
   display:inline-block;
   float:right;
-  background-color: #00c853  !important;
+  background-color: white  !important;
   width:auto;
   height:40px;
   margin-top:-20px;
-  border:none;
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
 }
 
 .opciones{
   text-align:left !important;
 }
+
+
 
 </style>

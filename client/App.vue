@@ -106,7 +106,7 @@ background-blend-mode: multiply;
 .activo{
     background-color: #fec400;
     color: black;
-    height: 123%;
+    height: 183%;
 }
 
 

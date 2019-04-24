@@ -7,7 +7,7 @@
               <div class="card animated fadeInDown">
                   <div class="card-header" style="background-color:#FFD700;">
                     <h2 style="text-align:center; color:black;">
-                      <i class="fas fa-mobile-alt"></i>
+                      <i class="fas fa-cart-plus"></i>
                        Nueva Venta
                      </h2>
                   </div>
@@ -26,8 +26,8 @@
                             <div class="caja">
                               <span class="input-group-text">Producto</span>
                                 <v-select  :options="producto" label="modelo"  v-model="productoSelected" style="width:290px; height:57px; border-radius: 4px; background-color: white;">
-                                  <template slot="option" slot-scope="option">
-                                      <span class="fa" :class="option.icon"></span>
+                                  <template slot="option" slot-scope="option" style="height:107px;">
+                                      <span class="fa" :class="option.icon" style="height:107px;"></span>
                                     {{ option.marca }} {{ option.modelo }} {{ option.precio }}
                                   </template>
                                 </v-select>

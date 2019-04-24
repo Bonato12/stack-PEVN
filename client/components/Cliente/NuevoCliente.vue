@@ -1,51 +1,73 @@
 <template>
   <div>
     <div class="container">
-      <section class="formulario animated fadeInDown">
-          <section class="info">
-              <section class="titulo">
-                  <span class="fas fa-user-circle"></span>
-                    <p style="font-size:25px;">NUEVO CLIENTE</p>
-              </section>
-          </section>
-          <form @submit.prevent="nuevoCliente()">
-                                <div class="input-field col s6">
-                                  <input required id="dni"  v-model="cliente.dni" type="number" class="validate">
-                                  <label for="dni">Dni</label>
-                                </div>
-                                <div class="input-field col s6">
-                                  <input required id="nombre"  v-model="cliente.nombre" type="text" class="validate">
-                                  <label for="nombre">Nombre</label>
-                                </div>
-                                <div class="input-field col s6">
-                                  <input required id="nombre"  v-model="cliente.apellido" type="text" class="validate">
-                                  <label for="nombre">Apellido</label>
-                                </div>
-                                <div class="input-field col s6">
-                                  <input required id="direccion"  v-model="cliente.direccion" type="text" class="validate">
-                                  <label for="precio">Direccion</label>
-                                </div>
-                                <div class="input-field col s6">
-                                  <input required id="telefono"  v-model="cliente.telefono" type="number" class="validate">
-                                  <label for="precio">Telefono</label>
-                                </div>
-                                <div class="input-field col s6">
-                                  <input required id="mail"  v-model="cliente.mail" type="email" class="validate">
-                                  <label for="precio">Mail</label>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <button type="submit"  title="Guardar Cliente" >
-                                          <i class="far fa-save fa-1x"></i>
-                                          Guardar
-                                    </button>
-                                    <router-link to="/HomeCliente" tag="button"  title="Volver a HomeCliente" >
-                                        <i class="fas fa-arrow-left"></i>
-                                          Volver
-                                    </router-link>
-                                </div>
-                      </form>
-        </section>
+      <div class="d-flex justify-content-left">
+        <div class="card animated fadeInDown">
+            <div class="card-header" style="background-color:#FFD700; ">
+              <h2 style="text-align:center; color:black;">
+                  <i class="fas fa-user"></i>
+                  Nuevo Cliente
+               </h2>
+            </div>
+              </hr style="color:black;">
+            <div class="card-body" >
+                  <form @submit.prevent="nuevoCliente()" style="width:1025px;">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Dni</span>
+                        </div>
+                        <input required type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Nombre</span>
+                        </div>
+                        <input required type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Apellido</span>
+                        </div>
+                        <input required type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Direccion</span>
+                        </div>
+                        <input required type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" >
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Telefono</span>
+                        </div>
+                        <input required type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Mail</span>
+                        </div>
+                        <input required type="mail"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
+                    </div>
+                    <br>
+                      <div style="margin-left:250px;">
+                        <button type="submit"  title="Guardar Cliente" >
+                              <i class="far fa-save fa-1x"></i>
+                              Guardar
+                        </button>
+                        <router-link to="/HomeCliente" tag="button"  title="Volver a HomeCliente" >
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
+                        <!--
+                        <div v-if="loading" class="d-flex justify-content-left mb-2">
+                          <b-spinner label="Loading..."></b-spinner>
+                        </div>
+                      -->
+                    </div>
+              </form>
+            </div>
+        </div>
+      </div>
   </div>
   </div>
 </template>
@@ -102,10 +124,6 @@ export default {
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
     background-color: white;
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
 }
 
 
@@ -131,43 +149,52 @@ li {
 
 
 .input-group-prepend span{
-width: auto;
-background-color: #FFC312;
+width: 120px;
+background-color: #FFD700;
 color: black;
 border: none;
+
+
 }
 
-
-.cliente_btn{
-color: black;
-background-color: #FFC312;
+.input-group{
+  width: 950px;
 }
 
-.cliente_btn:hover{
-color: black;
-background-color: white;
+input:focus{
+  background-color: white;
 }
 
-.form-control {
-    border: 0;
-    box-shadow: none;
-    border-bottom: 2px solid gray;
-
+.card{
+height: auto;
+margin-top: 30px;
+margin-bottom: auto;
+width: 1100px;
+background-color: rgb(70,90,101);
+border: 1px solid;
+border-radius: 5px;
 }
+
 button{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
-  background-color: #00c853  !important;
   float:right;
   width:150px;
   height:50px;
-  margin-top:-20px;
+  margin-top:-10px;
   border:none;
+  background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 10px;
 }
+
+button:hover{
+     background-color: white  !important;
+     /*color: white;*/
+}
+
 
 /*Sirve para desabilitar las flechas en los inputs numBer*/
 input::-webkit-outer-spin-button,
@@ -200,35 +227,7 @@ input::-webkit-inner-spin-button {
     opacity: 0.9;
 }
 
-.info{
-    width: 38%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center center;
-    background-image: url('http://farm6.staticflickr.com/5068/5744132135_34835702ec_b.jpg');
 
-
-}
-
-.titulo{
-    position: relative;
-    z-index: 2;
-    color: #fff;
-}
-
-
-.titulo span{
-    font-size: 100px;
-    display: block;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-/* Formulario de contacto*/
 form {
     width: 62%;
     padding: 30px 40px;

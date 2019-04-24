@@ -11,7 +11,7 @@
         			</div>
                 </hr style="color:black;">
         			<div class="card-body" >
-            				<form @submit.prevent="nuevoProducto()">
+            				<form @submit.prevent="nuevoProducto()" style="width:1025px;">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Modelo</span>
@@ -32,9 +32,9 @@
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text">Tipo Producto</span>
+              							<span class="input-group-text">Tipo </span>
               						</div>
-                          <select required class="form-control" v-model="producto.tipoProducto">
+                          <select required class="form-control" v-model="producto.tipoProducto" placeholder="Elige un Tipo Producto">
                             <option disabled value="">Elige un Tipo Producto</option>
                             <option  v-for="item in tipoProductos">{{ item.name }}</option>
                          </select>
@@ -43,7 +43,7 @@
               						<div class="input-group-prepend">
               							<span class="input-group-text">Stock</span>
               						</div>
-              						<input required type="number" min="0" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
+              						<input required type="number" min="0" v-model.number="producto.stock" class="form-control" placeholder="Ingrese Stock">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
@@ -52,7 +52,7 @@
               						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
                       <br>
-            					<div class="float-left">
+                        <div style="margin-left:250px;">
                           <button type="submit"  title="Guardar Producto" style="background-color:#fec400">
                               <i class="far fa-save fa-1x"></i>
                               Guardar
@@ -66,7 +66,7 @@
                             <b-spinner label="Loading..."></b-spinner>
                           </div>
                         -->
-            					</div>
+                      </div>
         				</form>
         			</div>
       		</div>
@@ -102,8 +102,13 @@ export default {
 
   },
   methods: {
+    isNumeric(n){
+        var digito =  /^\d*$/;
+        return digito.test(n);
+    },
     nuevoProducto(){
             this.loading = true;
+            console.log(this.isNumeric(this.producto.stock))
             if(this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
                   console.log(this.producto);
                   axios.post('http://localhost:3000/producto',
@@ -145,7 +150,7 @@ li {
 
 
 .input-group-prepend span{
-width: auto;
+width: 120px;
 background-color: #FFD700;
 color: black;
 border: none;
@@ -165,8 +170,8 @@ input:focus{
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 1250px;
-background-color: #696969;
+width: 1100px;
+background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }

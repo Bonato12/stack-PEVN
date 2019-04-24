@@ -1,10 +1,17 @@
 <template>
   <div id="Cliente">
-    <div class="container">
+    <div class="container animated zoomIn">
       </br>
-          <h2 style="text-align:center; color:white;"> Proveedores </h2>
       </br>
-      <div v-if="datos.length" class="animated zoomIn">
+      <div>
+          <div class="card-header" style="background-color:#FFD700; ">
+            <h2 style="text-align:center; color:black;">
+                <i class="fas fa-people-carry"></i>
+                Proveedores
+             </h2>
+          </div>
+      </div>
+      <div v-if="datos.length">
           <vue-good-table
                 :columns="columns"
                 :rows="datos"
@@ -105,8 +112,8 @@
           </div>
         </div>
       </transition>
-    </br>
-    </br>
+    <div class="card-footer" style="background-color:#FFD700; height:100px;">
+      <br>
       <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn" style="float:left;">
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Proveedor
@@ -125,6 +132,7 @@
               Exportar Csv
           </button>
       </div>
+    </div>
      </div>
     </div>
   </div>
