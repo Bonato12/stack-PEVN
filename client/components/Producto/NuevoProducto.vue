@@ -77,7 +77,7 @@
 
 <script>
 import axios from 'axios'
-import { alertSucessProducto,alertCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertSucessProducto,alertCompletarCampos,alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import Producto from '../../models/Producto';
 
 
@@ -107,8 +107,6 @@ export default {
         return digito.test(n);
     },
     nuevoProducto(){
-            this.loading = true;
-            console.log(this.isNumeric(this.producto.stock))
             if(this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
                   console.log(this.producto);
                   axios.post('http://localhost:3000/producto',
@@ -119,7 +117,7 @@ export default {
                   },
                 }).then(this.producto = new Producto())
             }else{
-                alertCompletarCampos();
+                alertWarningCompletarCampos();
             }
 
         }

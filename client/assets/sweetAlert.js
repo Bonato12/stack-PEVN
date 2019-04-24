@@ -38,6 +38,10 @@ export function alertWarningLimiteStock(){
   Swal.fire('','Limite de Stock Disponible','warning');
 }
 
+export function alertWarningCompletarCampos(){
+  Swal.fire('','Completar los Campos','warning');
+}
+
 export function alertWarningLimiteOne(){
   Swal.fire('','La Cantidad debe ser al menos de 1','warning');
 }
