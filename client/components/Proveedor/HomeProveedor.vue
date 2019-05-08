@@ -96,23 +96,27 @@
               </div>
               <div class="modal-header" style="background-color:#FEC404;">
                 <h2 class="opciones" style="color:white;">Opciones</h2>
-                <div class="row" style="float:right; padding-right:7px;">
-                      <button class="btn-floating red darken-1" v-on:click="eliminarProveedor(proveedor.id_proveedor)" title="Eliminar Proveedor">
-                          <i class="fas fa-trash-alt"></i>
-                          Eliminar
-                      </button>
-                      <router-link  class="btn-floating  yellow accent-2" :to="/EditarProveedor/+proveedor.id_proveedor" tag="button" title="Editar Proveedor">
-                          <i class="fas fa-edit fa-1x">
-                          </i>
-                          Editar
-                      </router-link>
+                <div class="row" style="float:right; padding-right:13px;">
+                      <div>
+                        <button class="btn btn-danger" v-on:click="eliminarProveedor(proveedor.id_proveedor)" title="Eliminar Proveedor">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                      <div style="width:5px;">
+                      </div>
+                      <div>
+                        <router-link class="btn btn-dark" :to="/EditarProveedor/+proveedor.id_proveedor" tag="button" title="Editar Proveedor">
+                            <i class="fas fa-edit fa-1x">
+                            </i>
+                        </router-link>
+                      </div>
                  </div>
              </div>
             </div>
           </div>
         </div>
       </transition>
-    <div class="card-footer" style="background-color:#FFD700; height:100px;">
+    <div class="card-footer">
       <br>
       <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn" style="float:left;">
             <i class="fas fa-plus-circle fa-1x"></i>
@@ -322,20 +326,6 @@ li {
   transform: scale(1.1);
 }
 
-
-.btn{
-  cursor:pointer;
-  display:inline-block;
-  float:right;
-  background-color: #00c853  !important;
-  width:auto;
-  height:40px;
-  margin-top:-20px;
-  border:none;
-  -webkit-transition:.5s;
-  transition:.5s;
-  border-radius: 10px;
-}
 
 .opciones{
   text-align:left !important;
