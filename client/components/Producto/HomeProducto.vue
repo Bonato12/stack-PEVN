@@ -105,25 +105,29 @@
         </div>
       </div>
     </transition>
-    <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn" title="Ir a Nuevo Producto" style="float:left;">
+    <br>
+    <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn btn-warning" title="Ir a Nuevo Producto" style="float:left;">
       <i class="fas fa-plus-circle fa-1x">
-
       </i>
       Nuevo Producto
     </router-link>
-    <div class="row" style="float:right">
-        <button type="button" class="btn" v-on:click="exportarPdf()" style="float:right;">
+    <div class="row" style="float:right; padding-right:15px;">
+        <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
           <i class="fa fa-file-pdf" aria-hidden="true"></i>
           Exportar Pdf
         </button>
-          <button type="button" class="btn" v-on:click="exportarXls()">
+        <div style="width:5px;">
+        </div>
+        <button type="button" class="btn btn-success" v-on:click="exportarXls()">
             <i class="fa fa-file-excel" aria-hidden="true"></i>
             Exportar Excel
-          </button>
-          <button type="button" class="btn" v-on:click="exportarCsv()">
+        </button>
+        <div style="width:5px;">
+        </div>
+        <button type="button" class="btn btn-info" v-on:click="exportarCsv()">
             <i class="fa fa-file-csv" aria-hidden="true"></i>
             Exportar Csv
-          </button>
+        </button>
     </div>
   </div>
 </div>

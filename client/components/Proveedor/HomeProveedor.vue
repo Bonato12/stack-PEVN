@@ -118,7 +118,7 @@
       </transition>
     <div class="card-footer">
       <br>
-      <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn" style="float:left;">
+      <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn btn-warning" style="float:left;">
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Proveedor
       </router-link>
@@ -127,10 +127,14 @@
               <i class="fa fa-file-pdf" aria-hidden="true"></i>
               Exportar Pdf
           </button>
+          <div style="width:5px;">
+          </div>
           <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
             <i class="fa fa-file-excel" aria-hidden="true"></i>
               Exportar Excel
           </button>
+          <div style="width:5px;">
+          </div>
           <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
             <i class="fa fa-file-csv" aria-hidden="true"></i>
               Exportar Csv
