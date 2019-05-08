@@ -48,7 +48,7 @@ var id;
         },
 
         getIdVenta(req,res){
-             pool.query('SELECT VP.id_ventaproducto, P.modelo,VP.cantidad, VP.precio  FROM producto P,ventaProducto VP, venta V WHERE V.id_venta=($1) AND ($1) = VP.id_venta AND VP.id_producto = P.id_producto ', [req.params.id_venta])
+             pool.query('SELECT VP.id_ventaproducto,P.marca, P.modelo,VP.cantidad, VP.precio  FROM producto P,ventaProducto VP, venta V WHERE V.id_venta=($1) AND ($1) = VP.id_venta AND VP.id_producto = P.id_producto ', [req.params.id_venta])
             .then(response=> {
               res.json(response.rows);
             }).catch(error =>{

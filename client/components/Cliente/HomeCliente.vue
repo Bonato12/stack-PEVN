@@ -91,26 +91,36 @@
                </div>
                <div class="modal-header" style="background-color:#FEC404;" >
                  <h2 class="opciones" style="color:white;">Opciones</h2>
-                 <div class="row" style="float:right; padding-right:3px;">
-                      <button class="btn-floating red darken-1" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
-                          <i class="fas fa-trash-alt"></i>
-                      </button>
-                      <router-link class="btn-floating  yellow accent-2" :to="/EditarCliente/+cliente.id_cliente" tag="button" title="Editar Cliente">
-                          <i class="fas fa-edit fa-1x"></i>
+                 <div class="row" style="float:right; padding-right:15px;">
+                      <div>
+                        <button class="btn btn-danger" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                      <div style="width:5px;">
+                      </div>
+                      <div>
+                        <router-link class="btn btn-dark" :to="/EditarCliente/+cliente.id_cliente" tag="button" title="Editar Cliente">
+                            <i class="fas fa-edit fa-1x"></i>
 
-                      </router-link>
-                      <button  class="btn-floating  light-green  light-green accent-3" v-on:click="enviarMail()" title="Enviar Mail">
-                          <i class="fas fa-envelope fa-1x"></i>
-                      </button>
+                        </router-link>
+                      </div>
+                      <div style="width:5px;">
+                      </div>
+                      <div>
+                        <button  class="btn btn-success" v-on:click="enviarMail()" title="Enviar Mail">
+                            <i class="fas fa-envelope fa-1x"></i>
+                        </button>
+                      </div>
                   </div>
               </div>
              </div>
            </div>
          </div>
        </transition>
-    <div class="card-footer" style="background-color:#FFD700; height:70px;">
+    <div>
         <br>
-        <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn" style="float: left;"  >
+        <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn button" style="float: left;"  >
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Cliente
         </router-link>
@@ -350,19 +360,7 @@ li {
 }
 
 
-.btn{
-  padding-top: 3px;
-  margin-left: 2px;
-  cursor:pointer;
-  display:inline-block;
-  float:right;
-  background-color: white  !important;
-  width:auto;
-  height:40px;
-  margin-top:-20px;
-  -webkit-transition:.5s;
-  transition:.5s;
-}
+
 
 .opciones{
   text-align:left !important;

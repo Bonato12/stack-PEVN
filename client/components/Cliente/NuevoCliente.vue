@@ -3,7 +3,7 @@
     <div class="container">
       <div class="d-flex justify-content-left">
         <div class="card animated fadeInDown">
-            <div class="card-header" style="background-color:#FFD700; ">
+            <div class="card-header" style="background-color:#FFD700;">
               <h2 style="text-align:center; color:black;">
                   <i class="fas fa-user"></i>
                   Nuevo Cliente
@@ -46,7 +46,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Mail</span>
                         </div>
-                        <input required type="mail"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
+                        <input required type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
                     </div>
                     <br>
                       <div style="margin-left:250px;">
@@ -111,7 +111,7 @@ export default {
                           }
                         });
                     }
-              }
+              },
 
 }
 }

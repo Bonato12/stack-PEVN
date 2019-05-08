@@ -53,14 +53,14 @@
                         </slot>
                       </div>
                       <div class="modal-body" style="background-color:#f1f8e9;">
-                        <slot name="body">
-                          <table class="centered" style="color:black">
+                          <table class="table" style="color:black">
                                 <thead>
                                       <tr>
                                         <!--
                                         <th scope="col">Id</th>
                                         <th scope="col">Id_Venta</th>
                                       -->
+                                        <th scope="col">Marca</th>
                                         <th scope="col">Modelo</th>
                                         <th scope="col">Cantidad</th>
                                         <th scope="col">Precio</th>
@@ -72,24 +72,24 @@
                                         <th scope="col">{{item.id_ventaproducto}}</th>
                                         <td scope="col">{{item.id_venta}}</td>
                                       -->
+                                        <td scope="col">{{item.marca}}</td>
                                         <td scope="col">{{item.modelo}}</td>
                                         <td scope="col"> {{item.cantidad}}</td>
                                         <td scope="col">{{item.precio}}</td>
                                       </tr>
                                       <tr>
                                         <td scope="col"></td>
+                                        <td scope="col"></td>
                                         <td scope="col"> </td>
                                         <td scope="col">Total: 15000</td>
                                       </tr>
-
                                 </tbody>
                           </table>
-                        </slot>
                       </div>
                       <div class="modal-header" style="background-color:#FEC404;">
                         <h2 class="opciones" style="color:white;">Opciones</h2>
-                        <div class="row" style="float:right; padding-right:3px;">
-                             <button class="btn-floating red darken-1" v-on:click="eliminarVenta()" title="Eliminar Venta">
+                        <div class="row" style="float:right; padding-right:15px;">
+                             <button class="btn btn-danger" v-on:click="eliminarVenta()" title="Eliminar Venta">
                                  <i class="fas fa-trash-alt"></i>
                              </button>
                              <!--
@@ -195,7 +195,7 @@ export default {
             this.idv =  params.row.id_venta;
             axios.get('http://localhost:3000/ventaProducto/'+ params.row.id_venta).then((response) =>{
               this.ventasProducto = response.data;
-              this.fecha = moment(response.data[0].fecha).format("D / M / YYYY");
+              this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
               console.log(this.fecha);
               console.log(this.ventasProducto);
             });

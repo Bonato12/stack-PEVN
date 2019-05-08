@@ -86,13 +86,19 @@
             </div>
             <div class="modal-header" style="background-color:#FEC404;">
               <h2 class="opciones" style="color:white;">Opciones</h2>
-              <div style="float:right;">
-                  <button class="btn-floating red darken-1" v-on:click="eliminarProducto(producto.id_producto)" title="Eliminar Producto">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                  <router-link class="btn-floating  yellow accent-2" :to="/editarProducto/+producto.id_producto"  tag="button" title="Editar Producto">
-                    <i class="far fa-edit fa-1x"></i>
-                  </router-link>
+              <div  class="row" style="float:right; padding-right:15px;">
+                  <div>
+                      <button class="btn btn-danger" v-on:click="eliminarProducto(producto.id_producto)" title="Eliminar Producto">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                  </div>
+                  <div style="width:5px;">
+                  </div>
+                  <div>
+                    <router-link class="btn btn-dark" :to="/editarProducto/+producto.id_producto"  tag="button" title="Editar Producto">
+                      <i class="far fa-edit fa-1x"></i>
+                    </router-link>
+                  </div>
                </div>
            </div>
           </div>
@@ -343,22 +349,6 @@ li {
   transform: scale(1.1);
 }
 
-
-.btn{
-  padding-top: 3px;
-  margin-left: 2px;
-  cursor:pointer;
-  display:inline-block;
-  float:right;
-  background-color: #00c853  !important;
-  width:auto;
-  height:40px;
-  margin-top:20px;
-  border:none;
-  -webkit-transition:.5s;
-  transition:.5s;
-  border-radius: 10px;
-}
 
 .opciones{
   text-align:left !important;
