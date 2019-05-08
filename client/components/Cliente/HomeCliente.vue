@@ -120,20 +120,24 @@
        </transition>
     <div>
         <br>
-        <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn button" style="float: left;"  >
+        <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn btn-warning" style="float: left;"  >
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Cliente
         </router-link>
-        <div class="row" style="float:right">
-            <button type="button" class="btn"  v-on:click="exportarPdf()" style="float:right;">
+        <div class="row" style="float:right; padding-right:15px;">
+            <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
                 <i class="fa fa-file-pdf" aria-hidden="true"></i>
                 Exportar Pdf
             </button>
-            <button type="button" class="btn" v-on:click="exportarXls()" >
+            <div style="width:5px;">
+            </div>
+            <button type="button" class="btn btn-success" v-on:click="exportarXls()" >
               <i class="fa fa-file-excel" aria-hidden="true"></i>
                 Exportar Excel
             </button>
-            <button type="button" class="btn" v-on:click="exportarCsv()">
+            <div style="width:5px;">
+            </div>
+            <button type="button" class="btn btn-info" v-on:click="exportarCsv()">
               <i class="fa fa-file-csv" aria-hidden="true"></i>
                 Exportar Csv
             </button>

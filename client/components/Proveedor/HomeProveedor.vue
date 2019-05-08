@@ -123,15 +123,15 @@
             Nuevo Proveedor
       </router-link>
       <div class="row" style="float:right;">
-          <button type="button" class="btn" v-on:click="exportarPdf()"  style="float:right;">
+          <button type="button" class="btn btn-danger" v-on:click="exportarPdf()"  style="float:right;">
               <i class="fa fa-file-pdf" aria-hidden="true"></i>
               Exportar Pdf
           </button>
-          <button type="button" class="btn"  v-on:click="exportarXls()" >
+          <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
             <i class="fa fa-file-excel" aria-hidden="true"></i>
               Exportar Excel
           </button>
-          <button type="button" class="btn"  v-on:click="exportarCsv()">
+          <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
             <i class="fa fa-file-csv" aria-hidden="true"></i>
               Exportar Csv
           </button>
