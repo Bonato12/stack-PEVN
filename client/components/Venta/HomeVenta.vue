@@ -92,12 +92,11 @@
                              <button class="btn btn-danger" v-on:click="eliminarVenta()" title="Eliminar Venta">
                                  <i class="fas fa-trash-alt"></i>
                              </button>
-                             <!--
-                             <router-link class="btn-floating  yellow accent-2" :to="/EditarVenta/+this.idv" tag="button" title="Editar Venta">
+                             <div style="width:5px;">
+                             </div>
+                             <router-link class="btn btn-dark" :to="/EditarVenta/+this.idv" tag="button" title="Editar Venta">
                                  <i class="fas fa-edit fa-1x"></i>
-
                              </router-link>
-                           -->
                          </div>
                      </div>
                     </div>
