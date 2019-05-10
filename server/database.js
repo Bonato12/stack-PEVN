@@ -3,7 +3,7 @@ var router = express.Router();
 const Pool = require('pg').Pool
 
 
-sd = {
+config= {
   user: 'postgres',
   host: '127.0.0.1',
   database: 'Telnovo',
@@ -11,7 +11,7 @@ sd = {
   port: 5432,
 }
 
-const pool = new Pool(sd);
+const db = new Pool(config);
 
 pool.connect(function(err) {
     if(err){
@@ -23,4 +23,4 @@ pool.connect(function(err) {
 
 
 
-module.exports = pool;
+module.exports = db;
