@@ -26,6 +26,7 @@
                         </li>
                     </ul>
                     <div class="dropdown">
+                      <i class="fas fa-user"></i>
                        <button class="dropbtn">{{ user }}</button>
                        <div class="dropdown-content">
                          <router-link   tag="a" style="black"  to="/Login" v-on:click.native="logout()" title="Salir">

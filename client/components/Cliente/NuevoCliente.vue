@@ -16,7 +16,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                        <input required  type="number"  v-model="cliente.dni"  pattern="[0-9]{7}"  class="form-control" placeholder="Ingrese Dni" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -93,6 +93,7 @@ export default {
   },
   methods: {
     nuevoCliente(){
+                    console.log(this.isInteger(this.cliente.dni));
                     if(this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
                           console.log(this.cliente);
                           axios.post('http://localhost:3000/cliente',
@@ -110,8 +111,12 @@ export default {
                             alertError();
                           }
                         });
-                    }
-              },
+                  }
+          },
+          isInteger(valor) {
+                var er = /^-?[0-9]+$/;
+                return er.test(valor);
+          }
 
 }
 }

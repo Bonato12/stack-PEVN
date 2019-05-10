@@ -13,6 +13,14 @@ sd = {
 
 const pool = new Pool(sd);
 
+pool.connect(function(err) {
+    if(err){
+      console.log("Error al Conectar la Base de Datos");
+    }else{
+      console.log("Conexion Exitosa a la Base de Datos");
+    }
+  });
+
 
 
 module.exports = pool;
