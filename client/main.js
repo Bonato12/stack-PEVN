@@ -11,9 +11,8 @@ import vSelect from 'vue-select'
 import VueGoodTablePlugin from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css'
 import {store} from './store.js';
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
-import Spinner from 'bootstrap-vue/es/components/spinner'
-Vue.use(Spinner)
+import Datepicker from 'vuejs-datepicker';
+
 
 /*
 import 'materialize-css';
@@ -24,6 +23,8 @@ Vue.use(VueGoodTablePlugin);
 Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue);
 Vue.component('v-select', vSelect);
+Vue.component('datepicker', Datepicker)
+
 Vue.use(firebase);
 
 
@@ -52,7 +53,7 @@ firebase.auth().onAuthStateChanged((user)=>{
     el: '#app',
     router: rutas,
     components: {
-    PulseLoader
+      
     },
     store,
     render: h => h(App)

@@ -92,7 +92,7 @@ export default {
 
   },
   methods: {
-    nuevoCliente(){
+            nuevoCliente(){
                     console.log(this.isInteger(this.cliente.dni));
                     if(this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
                           console.log(this.cliente);

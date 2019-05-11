@@ -370,6 +370,14 @@ li {
   text-align:left !important;
 }
 
+.btn:hover{
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+
+.btn{
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+}
 
 
 </style>
