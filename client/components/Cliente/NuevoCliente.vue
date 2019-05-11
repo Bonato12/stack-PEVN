@@ -16,7 +16,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                        <input required type="number" v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -123,9 +123,12 @@ export default {
   methods: {
             nuevoCliente(){
                     this.errors = [];
-
                     if (!this.cliente.dni){
                       this.errors.push('Dni Vacio');
+                    }else {
+                      if(this.isInteger(this.cliente.dni) == false){
+                           this.errors.push('Dni debe ser un numero entero');
+                      }
                     }
                     if (!this.cliente.nombre){
                       this.errors.push('Nombre Vacio');
@@ -138,6 +141,10 @@ export default {
                     }
                     if (!this.cliente.telefono){
                       this.errors.push('Telefono Vacio');
+                    }else {
+                        if(this.isInteger(this.cliente.dni) == false){
+                             this.errors.push('Telefono debe ser un numero entero');
+                        }
                     }
                     if (!this.cliente.mail){
                       this.errors.push('Mail Vacio');
