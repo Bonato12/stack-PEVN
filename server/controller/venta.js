@@ -7,7 +7,7 @@ var id;
   module.exports = {
 
           getVenta(req,res){
-              db.query("SELECT cl.nombre, cl.apellido, vt.fecha, vt.total, vt.id_venta FROM cliente cl,  venta vt WHERE cl.id_cliente = vt.id_cliente").then(response=> {
+              db.query("SELECT cl.nombre, cl.apellido,to_char( vt.fecha, 'DD-MM-YYYY') as fecha, vt.total, vt.id_venta FROM cliente cl,  venta vt WHERE cl.id_cliente = vt.id_cliente").then(response=> {
                   console.log(response.rows)
                 //Muestra los resultados en forma de JSON en nuestro HTML
                   res.json(response.rows);
