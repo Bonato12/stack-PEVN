@@ -16,19 +16,19 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required  type="number"  v-model="cliente.dni"  pattern="[0-9]{7}"  class="form-control" placeholder="Ingrese Dni" >
+                        <input required type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Nombre</span>
                         </div>
-                        <input required type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                        <input required  type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Apellido</span>
                         </div>
-                        <input required type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
+                        <input required  type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -40,7 +40,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                        <input required  type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -50,11 +50,11 @@
                     </div>
                     <br>
                       <div style="margin-left:250px;">
-                        <button type="submit"  title="Guardar Cliente" >
+                        <button type="submit" class="btn"  title="Guardar Cliente" >
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                         </button>
-                        <router-link to="/HomeCliente" tag="button"  title="Volver a HomeCliente" >
+                        <router-link to="/HomeCliente" tag="button" class="btn"  title="Volver a HomeCliente" >
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>
@@ -65,6 +65,32 @@
                       -->
                     </div>
               </form>
+              <div>
+                <transition v-if="showModal" class="animation fadeInRight" name="modal">
+                  <div class="modal-mask">
+                    <div class="modal-wrapper">
+                      <div class="modal-container animated fadeInRight">
+                        <div class="modal-header" style="background-color:#424242;">
+                          <slot name="header">
+                            <img src="../../assets/invalid.png">
+                            <button class="modal-default-button" @click="hide()">
+                             <i class="far fa-times-circle"></i>
+                            </button>
+                          </slot>
+                        </div>
+                        <div class="modal-body" style="background-color:#f1f8e9;">
+                          <p v-if="errors.length">
+                            <h4 style="margin-left:10px;">Errores:</h4>
+                            <ul  class="list-group">
+                                <li class="list-group-item" v-for="error in errors">{{ error }}</li>
+                            </ul>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </transition>
+              </div>
             </div>
         </div>
       </div>
@@ -84,7 +110,10 @@ export default {
   },
   data () {
     return {
-      cliente: new Cliente()
+      cliente: new Cliente(),
+      errors: [],
+      showModal: false,
+
 		}
   },
   mounted(){
@@ -93,7 +122,48 @@ export default {
   },
   methods: {
             nuevoCliente(){
-                    console.log(this.isInteger(this.cliente.dni));
+                    this.errors = [];
+
+                    if (!this.cliente.dni){
+                      this.errors.push('Dni Vacio');
+                    }
+                    if (!this.cliente.nombre){
+                      this.errors.push('Nombre Vacio');
+                    }
+                    if (!this.cliente.apellido){
+                      this.errors.push('Apellido Vacio');
+                    }
+                    if (!this.cliente.direccion){
+                      this.errors.push('Direccion Vacia');
+                    }
+                    if (!this.cliente.telefono){
+                      this.errors.push('Telefono Vacio');
+                    }
+                    if (!this.cliente.mail){
+                      this.errors.push('Mail Vacio');
+                    }
+
+                    if (this.errors.length == 0){
+                            axios.post('http://localhost:3000/cliente',
+                            this.cliente, // the data to posthttp://localhost:3000/cliente
+                            { headers: {
+                              'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
+                              'Content-Type': 'application/json',
+                            },
+                            }).then(function(data){
+                              console.log(data)
+                              if (data.data.status == 200){
+                                alertSucessCliente();
+                                this.cliente = new Cliente()
+                              }else {
+                                alertError();
+                              }
+                            });
+                    }else {
+                      this.showModal = true;
+                    }
+                  },
+                    /*
                     if(this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
                           console.log(this.cliente);
                           axios.post('http://localhost:3000/cliente',
@@ -113,9 +183,13 @@ export default {
                         });
                   }
           },
+          */
           isInteger(valor) {
                 var er = /^-?[0-9]+$/;
                 return er.test(valor);
+          },
+          hide(){
+            this.showModal = false;
           }
 
 }
@@ -180,7 +254,7 @@ border: 1px solid;
 border-radius: 5px;
 }
 
-button{
+.btn{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
@@ -255,6 +329,47 @@ form {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  float: right;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 300px;
+  height: auto;
+  margin-left: 900px;
+  background-color: #fff;
+  transition: all .3s ease;
+  border-radius: 8px;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 
 
 
