@@ -89,7 +89,7 @@ export default {
 
 <style>
 html,body{
-background-image: url('./components/Administrar/background.jpg');
+background-image: url('./components/Administrar/background1.png');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;

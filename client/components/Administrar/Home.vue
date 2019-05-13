@@ -36,7 +36,7 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 body{
-background-image: url('./background.jpg');
+background-image: url('./background1.png');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
