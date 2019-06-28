@@ -8,7 +8,7 @@
             <h2 style="text-align:center; color:black;">
                 <i class="fas fa-cart-plus"></i>
                 <i class="fas fa-clipboard-list"></i>
-                Ventas
+                Arreglos
              </h2>
           </div>
       </div>
@@ -107,9 +107,9 @@
         </div>
      </div>
     </br>
-        <router-link to="/NuevaVenta" tag="button" class="btn btn-warning" style="float: left;">
+        <router-link to="/NuevoArreglo" tag="button" class="btn btn-warning" style="float: left;">
           <i class="fas fa-plus-circle fa-1x"></i>
-          Nueva Venta
+          Nuevo Arreglo
         </router-link>
         <div class="row" style="float:right; padding-right:15px;">
             <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
