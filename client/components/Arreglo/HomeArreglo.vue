@@ -155,11 +155,11 @@ export default {
       fecha: '',
       columns: [
         {
-          label: 'Nombre',
+          label: 'Cliente',
           field: 'nombre',
         },
         {
-          label: 'Apellido',
+          label: 'Producto',
           field: 'apellido',
         },
         {
@@ -167,7 +167,11 @@ export default {
           field: 'fecha',
         },
         {
-          label: 'Total',
+          label: 'Observacion',
+          field: 'total',
+        },
+        {
+          label: 'Estado',
           field: 'total',
         }
       ],
