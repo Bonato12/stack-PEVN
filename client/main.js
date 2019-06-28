@@ -12,6 +12,8 @@ import VueGoodTablePlugin from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css'
 import {store} from './store.js';
 import Datepicker from 'vuejs-datepicker';
+import Dropdown from 'vue-simple-search-dropdown';
+
 
 
 /*
@@ -24,6 +26,7 @@ Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue);
 Vue.component('v-select', vSelect);
 Vue.component('datepicker', Datepicker)
+Vue.component('Dropdown', Dropdown)
 
 Vue.use(firebase);
 
@@ -53,7 +56,7 @@ firebase.auth().onAuthStateChanged((user)=>{
     el: '#app',
     router: rutas,
     components: {
-      
+
     },
     store,
     render: h => h(App)

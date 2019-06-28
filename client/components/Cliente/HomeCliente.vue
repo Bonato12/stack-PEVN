@@ -216,7 +216,7 @@ export default {
     },
     enviarMail() {
         axios.get('http://localhost:3000/cliente/'+this.cliente.id_cliente).then((response) =>{
-          this.cliente = new Cliente(this.cliente.id_cliente,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].ciudad,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+          this.cliente = new Cliente(this.cliente.id_cliente,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
           axios.post('http://localhost:3000/email',
             this.cliente
           )});

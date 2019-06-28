@@ -35,7 +35,7 @@
               							<span class="input-group-text">Tipo </span>
               						</div>
                           <select required class="form-control" v-model="producto.tipoProducto" placeholder="Elige un Tipo Producto">
-                            <option disabled value="">Elige un Tipo Producto</option>
+                            <option value=""  disabled selected>Elige un Tipo Producto</option>
                             <option  v-for="item in tipoProductos">{{ item.name }}</option>
                          </select>
                       </div>
