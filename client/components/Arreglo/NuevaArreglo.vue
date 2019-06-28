@@ -7,7 +7,7 @@
               <div class="card animated fadeInDown">
                   <div class="card-header" style="background-color:#FFD700;">
                     <h2 style="text-align:center; color:black;">
-                      <i class="fas fa-cart-plus"></i>
+                      <i class="fas fa-tools"></i>
                       <i class="fas fa-plus-circle"></i>
                        Nuevo Arreglo
                      </h2>
@@ -15,20 +15,18 @@
                     </hr style="color:black;">
                   <div class="card-body">
                     <form style="margin-left: 30px; margin-top:30px;">
-                            <div class="caja">
+                            <div class="input-group form-group">
                                 <span class="input-group-text">Cliente</span>
-                                <v-select :options="cliente" label="dni" id="clienteSelect"  v-model="clienteSelected" style="width:290px; height:57px; background-color: white; border-radius: 4px;">
+                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="clienteSelected">
                                   <template slot="option" slot-scope="option">
-                                      <span class="fa" :class="option.icon"></span>
                                       {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="caja">
+                            <div class="input-group form-group">
                               <span class="input-group-text">Producto</span>
-                                <v-select  :options="producto" label="modelo"  v-model="productoSelected" style="width:290px; height:57px; border-radius: 4px; background-color: white;">
-                                  <template slot="option" slot-scope="option" style="height:107px;">
-                                      <span class="fa" :class="option.icon" style="height:107px;"></span>
+                                <v-select  class="form-control"  :options="producto" label="modelo"  v-model="productoSelected" >
+                                  <template class="form-control" slot="option" slot-scope="option">
                                     {{ option.marca }} {{ option.modelo }} {{ option.precio }}
                                   </template>
                                 </v-select>
@@ -44,14 +42,15 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">Estado</span>
                                 </div>
-                                <select v-model="selected">
-                                  <option disabled value="">Please select one</option>
+                                <select class="form-control" v-model="selected">
+                                  <option disabled value="">Por Favor Seleccione un Estado</option>
                                   <option selected:>EN ESPERA</option>
                                   <option>ACEPTADO</option>
                                   <option>CANCELADO</option>
                                 </select>
                             </div>
                     </form>
+                    <br>
                           <div class="d-flex justify-content-end" style="padding-right:50px;">
                               <router-link to="/HomeArreglo" tag="button" class="botones"  style="background:white;">
                                   <i class="fas fa-arrow-left"></i>
@@ -233,14 +232,14 @@ background-color: white;
 
 .input-group-prepend span{
 width: auto;
-background-color: #FFC312;
-color: black;
+background-color: #FFD700;
 border:0 !important;
 }
 
 .form-control {
     border: 0;
     box-shadow: none;
+    background-color: white;
 }
 
 
@@ -260,17 +259,11 @@ border:0 !important;
   border-radius: 10px;
 }
 
-.caja{
-   float:left;
-   margin-left:5px;
-   height: 100px;
 
-}
 
 .input-group-text{
 width: auto;
 background-color: #FFD700;
-color: black;
 border: none;
 
 
