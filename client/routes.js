@@ -14,6 +14,8 @@ import NuevoProveedor from './components/Proveedor/NuevoProveedor.vue'
 import EditarProveedor from './components/Proveedor/EditarProveedor.vue'
 import NuevoArreglo from './components/Arreglo/NuevaArreglo.vue'
 import HomeArreglo from './components/Arreglo/HomeArreglo.vue'
+import HomeCompra from './components/Compra/HomeCompra.vue'
+import NuevaCompra from './components/Compra/NuevaCompra.vue'
 import Registrar from './components/Administrar/Registrar.vue'
 import NotFound from './components/Administrar/error404.vue'
 import Vue from 'vue'
@@ -84,6 +86,14 @@ const rutas = new VueRouter({
             {
               path:'/EditarVenta/:id',
               component: EditarVenta
+            },
+            {
+              path:'/HomeCompra',
+              component: HomeCompra
+            },
+            {
+              path:'/NuevaCompra',
+              component: NuevaCompra
             },
             {
               path:'/HomeArreglo',

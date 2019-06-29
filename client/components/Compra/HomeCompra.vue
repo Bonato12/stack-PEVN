@@ -1,13 +1,21 @@
 <template>
-  <div id="HomeVenta">
-    <div class="container">
+  <div id="HomeCompra">
+    <div class="container animated zoomIn">
       <br>
-      <h2 class="animated fadeIn">Ventas</h2>
       <br>
-      <div v-if="this.ventas.length" class="animated zoomIn">
+      <div>
+          <div class="card-header" style="background-color:#FFD700; ">
+            <h2 style="text-align:center; color:black;">
+                <i class="fas fa-cart-plus"></i>
+                <i class="fas fa-clipboard-list"></i>
+                Compras
+             </h2>
+          </div>
+      </div>
+      <div v-if="this.compras.length">
           <vue-good-table
               :columns="columns"
-              :rows="ventas"
+              :rows="compras"
               title="Ver Opciones y Detalles"
               :search-options="{
                 enabled: true,
@@ -32,58 +40,119 @@
 
                 theme="default">
          </vue-good-table>
-         <div style="color:black;">
-              <b-modal ref="myModalRef" hide-footer title="Detalles">
-                  <div class="d-block text-center">
-                      <h4>ID:{{idv}}</h4>
-                        <hr>
-                      <button class="btn btn-danger" v-on:click="eliminarVenta(idv)">Eliminar</button>
-                      <router-link :to="/editarVenta/+idv" active-class="activo" class="btn btn-warning" tag="button" >Editar</router-link>
+         <div>
+              <transition v-if="showModal" class="animation fadeIn" name="modal">
+                <div class="modal-mask">
+                  <div class="modal-wrapper">
+                    <div class="modal-container">
+                      <div class="modal-header" style="background-color:#424242;">
+                        <slot name="header">
+                          <h2 style="color:white; text-align:left;">Compra del {{this.fecha}} </h2>
+                          <button class="modal-default-button" @click="hide()">
+                           <i class="far fa-times-circle"></i>
+                          </button>
+                        </slot>
+                      </div>
+                      <div class="modal-body" style="background-color:#f1f8e9;">
+                          <table class="table" style="color:black">
+                                <thead>
+                                      <tr>
+                                        <!--
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Id_Venta</th>
+                                      -->
+                                        <th scope="col">Marca</th>
+                                        <th scope="col">Modelo</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Precio</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr v-for="item in this.comprasProducto" :key="item">
+                                        <!--
+                                        <th scope="col">{{item.id_ventaproducto}}</th>
+                                        <td scope="col">{{item.id_venta}}</td>
+                                      -->
+                                        <td scope="col">{{item.marca}}</td>
+                                        <td scope="col">{{item.modelo}}</td>
+                                        <td scope="col"> {{item.cantidad}}</td>
+                                        <td scope="col">{{item.precio}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
+                                        <td scope="col"> </td>
+                                        <td scope="col">Total: 15000</td>
+                                      </tr>
+                                </tbody>
+                          </table>
+                      </div>
+                      <div class="modal-header" style="background-color:#FEC404;">
+                        <h2 class="opciones" style="color:white;">Opciones</h2>
+                        <div class="row" style="float:right; padding-right:15px;">
+                             <button class="btn btn-danger" v-on:click="eliminarCompra()" title="Eliminar Compra">
+                                 <i class="fas fa-trash-alt"></i>
+                             </button>
+                             <div style="width:5px;">
+                             </div>
+                             <router-link class="btn btn-dark" :to="/EditarCompra/+this.idv" tag="button" title="Editar Compra">
+                                 <i class="fas fa-edit fa-1x"></i>
+                             </router-link>
+                         </div>
+                     </div>
+                    </div>
                   </div>
-              </b-modal>
+                </div>
+              </transition>
         </div>
      </div>
-    </br>
-    <router-link to="/NuevaVenta" tag="button" class="btn botonVenta" style="float: left;">
-      <i class="fas fa-plus-circle fa-1x">
-
-      </i>
-      Nueva Venta
-    </router-link>
-    <button type="button" class="btn botonVenta" style="float:right;">
-        <i class="fas fa-download"></i>
-    </button>
-    </div>
+    <br>
+        <router-link to="/NuevaCompra" tag="button" class="btn btn-warning" style="float: left;">
+          <i class="fas fa-plus-circle fa-1x"></i>
+          Nueva Compra
+        </router-link>
+        <div class="row" style="float:right; padding-right:15px;">
+            <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
+                <i class="fa fa-file-pdf" aria-hidden="true"></i>
+                Exportar Pdf
+            </button>
+            <div style="width:5px;">
+            </div>
+            <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+              <i class="fa fa-file-excel" aria-hidden="true"></i>
+                Exportar Excel
+            </button>
+            <div style="width:5px;">
+            </div>
+            <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+              <i class="fa fa-file-csv" aria-hidden="true"></i>
+                Exportar Csv
+            </button>
+        </div>
+  </div>
   </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-
-/*
-class Venta{
-    constructor(id_venta,id_cliente,id_producto,fecha){
-      this.id_venta =  Number(new Date().getTime()),
-      this.id_cliente = id_cliente,
-      this.id_producto = id_producto,
-      this.fecha = fecha
-    }
-}
-*/
+import { imgData } from '../../assets/imagenPDF';
+import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import moment from 'moment';
 
 export default {
-  name: 'HomeVenta',
+  name: 'HomeCompra',
   created(){
-    this.getVenta();
-
+    this.getCompra();
   },
   data () {
     return {
       idv:'',
       lista: [],
-      modalShow: false,
-      ventas: [],
+      showModal: false,
+      compras: [],
+      comprasProducto: [],
+      fecha: '',
       columns: [
         {
           label: 'Nombre',
@@ -94,16 +163,12 @@ export default {
           field: 'apellido',
         },
         {
-          label: 'Modelo',
-          field: 'modelo',
-        },
-        {
           label: 'Fecha',
           field: 'fecha',
         },
         {
-          label: 'Precio',
-          field: 'precio',
+          label: 'Total',
+          field: 'total',
         }
       ],
 		}
@@ -114,29 +179,36 @@ export default {
   mounted(){
   },
   methods: {
-    getVenta(){
-    axios.get('http://localhost:3000/venta').then((response) =>{
-      this.ventas = response.data;
-      console.log(this.ventas);
-    });
+    getCompra(){
+        axios.get('http://localhost:3000/compra').then((response) =>{
+          this.compras = response.data;
+          console.log(this.compras);
+
+        });
     },
-    eliminarVenta(id){
-      console.log(id);
-      this.idv = id;
-      axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
-        console.log(data)
-        this.getVenta()
-      });
+
+    eliminarCompra(){
+        axios.delete('http://localhost:3000/compra/'+this.idv).then((data)=>{
+          console.log(data)
+          this.getCompra()
+        }).then(alertSucessDelete()).then(this.hideModal());
     },
     onRowClick(params) {
-        this.$refs.myModalRef.show()
-        console.log(params);
-        this.idv = params.row.id_venta;
+        this.showModal = true;
+        console.log(params.row);
+            this.idv =  params.row.id_compra;
+            axios.get('http://localhost:3000/compraProducto/'+ params.row.id_compra).then((response) =>{
+              this.comprasProducto = response.data;
+              this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
+              console.log(this.fecha);
+              console.log(this.comprasProducto);
+            });
+
 
     },
-    hideModal() {
-        this.$refs.myModalRef.hide()
-    },
+    hide(){
+      this.showModal = false;
+    }
 
 
 
@@ -145,7 +217,7 @@ export default {
 </script>
 
 <style>
-#HomeVenta {
+#HomeCompra {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -168,22 +240,54 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
-
 #formulario{
   background-color: rgba(0,0,0,0.8);
   width: 450px;
 }
 
-.botonVenta{
-  background-color: #fec400;
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
 }
 
-.botonVenta:hover{
-  background-color: white;
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+
 }
+
+.modal-container {
+  width: 1000px;
+  height: auto;
+  margin: 0px auto;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  border-radius: 10px;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
 
 
 </style>
