@@ -57,7 +57,7 @@
                                       Volver
                               </router-link>
                               <div style="width:5px;"></div>
-                              <button v-on:click="NuevoArreglo()" class="botones" style="width:115px; background-color:#fec400;">
+                              <button v-on:click="nuevoArreglo()" class="botones" style="width:115px; background-color:#fec400;">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -74,7 +74,7 @@ import axios from 'axios'
 import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
-//import Arreglo from '../../models/Arreglo';
+import Arreglo from '../../models/Arreglo';
 
 export default {
   name: 'NuevoArreglo',
@@ -85,7 +85,9 @@ export default {
   data () {
     return {
       cliente:'',
-      producto:''
+      producto:'',
+      arreglo : new Arreglo()
+
 
 		}
   },
@@ -105,6 +107,13 @@ export default {
         axios.get('http://localhost:3000/productoStock').then(response=>{
           this.producto = response.data;
         });
+      },
+      nuevoArreglo(){
+          console.log("Hola");
+          this.arreglo.setTitle("Simpsons");
+          this.arreglo.setAuthor("JHA");
+          this.arreglo.setIsbn("23123");
+          console.log(this.arreglo);
       }
     }
 }
