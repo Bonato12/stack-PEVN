@@ -59,7 +59,7 @@
                     </form>
                     <div>
                         <br>
-                        <button class="btn btn-success" v-on:click="guardarLista()" style="margin-left:32px;" title="Añadir al Carrito">
+                        <button class="btn" v-on:click="guardarLista()" style="margin-left:32px; background-color:#FFD700;" title="Añadir al Carrito">
                             <i class="fas fa-cart-plus"></i>
                         </button>
                     </div>
@@ -116,7 +116,7 @@
 <script>
 
 import axios from 'axios'
-import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
@@ -252,7 +252,7 @@ export default {
                           this.ventaProducto = new VentaProducto();
 
                   }else {
-                    alert("Completar Los Campos");
+                     alertWarningCompletarCampos()
                   }
 
     }

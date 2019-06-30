@@ -45,7 +45,7 @@
                   <i class="far fa-list-alt"></i>
                   Detalles
                 </h2>
-                <button class="modal-default-button" @click="hide()">
+                <button class="modal-default-button" @click="hideModal()">
                  <i class="far fa-times-circle"></i>
                 </button>
               </slot>
@@ -144,7 +144,7 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import { alertSucessDelete,alertWarningFK } from '../../assets/sweetAlert.js';
 
 export default {
   created() {
@@ -207,9 +207,38 @@ export default {
       })
     },
     eliminarProducto(id) {
-      axios.delete('http://localhost:3000/producto/' + id).then((data) => {
-        this.getProducto();
-      }).then(alertSucessDelete()).then(this.hideModal());
+          this.$swal({
+              title: 'Estas Seguro?',
+              text: "No se podran recuperar los datos!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Si, Borrar!'
+              }).then((result) => {
+              if (result.value) {
+                axios.delete('http://localhost:3000/producto/' + id).then((data) => {
+                  console.log(data);
+                  if (data.data.status == 200){
+                    this.$swal(
+                      'Eliminado!',
+                      'El Producto ha sido eliminado.',
+                      'success'
+                    );
+                    this.getProducto();
+                    this.hideModal()
+                  }else {
+                    if(data.data.status == 23503){
+                      alertWarningFK()
+                    }else{
+                      alertError();
+                    }
+                  }
+                }).then(this.hide());
+
+              }
+              })
+
 
     },
     detalleProducto(params) {
@@ -282,7 +311,7 @@ export default {
       XLSX.utils.book_append_sheet(wb, productos, this.productos);
       XLSX.writeFile(wb, now + '-productos.csv');
     },
-    hide(){
+    hideModal(){
       this.showModal = false;
     }
 

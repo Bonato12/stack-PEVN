@@ -51,10 +51,15 @@ module.exports = {
   deleteProducto(req,res){
           console.log(req.params.id_producto);
           db.query("DELETE FROM producto WHERE id_producto=($1)",[req.params.id_producto]).then(response=>{
-              res.json(response.rows);
+            res.json({
+              status: 200
+            })
           }).catch(error =>{
-              console.log(error);
-          });
+            console.log(error);
+            res.json({
+              status: error.code
+            })
+          })
         },
   updateProducto(req,res){
           console.log("PETICION UPDATE")

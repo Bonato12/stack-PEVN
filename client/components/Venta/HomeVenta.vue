@@ -51,7 +51,7 @@
                             <i class="far fa-list-alt"></i>
                             Venta del {{this.fecha}}
                           </h2>
-                          <button class="modal-default-button" @click="hide()">
+                          <button class="modal-default-button" @click="hideModal()">
                            <i class="far fa-times-circle"></i>
                           </button>
                         </slot>
@@ -185,10 +185,28 @@ export default {
         });
     },
     eliminarVenta(){
-        axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
-          console.log(data)
-          this.getVenta()
-        }).then(alertSucessDelete()).then(this.hideModal());
+      this.$swal({
+          title: 'Estas Seguro?',
+          text: "No se podran recuperar los datos!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Borrar!'
+          }).then((result) => {
+          if (result.value) {
+            axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
+              console.log(data)
+              this.getVenta()
+            }).then(alertSucessDelete()).then(this.hideModal());
+            this.$swal(
+              'Eliminado!',
+              'La venta ha sido eliminada.',
+              'success'
+            )
+          }
+          })
+
     },
     onRowClick(params) {
         this.showModal = true;
@@ -203,7 +221,7 @@ export default {
 
 
     },
-    hide(){
+    hideModal(){
       this.showModal = false;
     }
 

@@ -159,7 +159,7 @@ import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import Cliente from '../../models/Cliente';
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import { alertSucessDelete,alertError,alertWarningFK } from '../../assets/sweetAlert.js';
 
 
 
@@ -213,10 +213,38 @@ export default {
         });
     },
     eliminarCliente(id) {
-        axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
-          this.getCliente();
-          console.log(data);
-        }).then(this.hide());
+        this.$swal({
+            title: 'Estas Seguro?',
+            text: "No se podran recuperar los datos!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Borrar!'
+            }).then((result) => {
+            if (result.value) {
+              axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
+                console.log("Hola");
+                console.log(data);
+                if (data.data.status == 200){
+                  this.$swal(
+                    'Eliminado!',
+                    'El Cliente ha sido eliminado.',
+                    'success'
+                  );
+                  this.getCliente();
+                }else {
+                  if(data.data.status == 23503){
+                    alertWarningFK()
+                  }else{
+                    alertError();
+                  }
+                }
+              }).then(this.hide());
+
+            }
+            })
+
     },
     enviarMail() {
         axios.get('http://localhost:3000/cliente/'+this.cliente.id_cliente).then((response) =>{

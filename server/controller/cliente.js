@@ -54,11 +54,14 @@ var db = require('../database');
         deleteCliente(req,res){
                 console.log("Peticion DELETE");
                 db.query("DELETE FROM cliente WHERE id_cliente=($1)",[req.params.id_cliente]).then(response=> {
-                res.json({
-                  mensaje: 'Eliminado Correctamente'
-                })
+                  res.json({
+                    status: 200
+                  })
                 }).catch(error =>{
                   console.log(error);
+                  res.json({
+                    status: error.code
+                  })
                 })
         },
         updateCliente(req,res){
