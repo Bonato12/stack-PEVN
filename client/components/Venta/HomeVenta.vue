@@ -47,7 +47,10 @@
                     <div class="modal-container">
                       <div class="modal-header" style="background-color:#424242;">
                         <slot name="header">
-                          <h2 style="color:white; text-align:left;">Venta del {{this.fecha}} </h2>
+                          <h2 style="color:white; text-align:left;">
+                            <i class="far fa-list-alt"></i>
+                            Venta del {{this.fecha}}
+                          </h2>
                           <button class="modal-default-button" @click="hide()">
                            <i class="far fa-times-circle"></i>
                           </button>
@@ -57,10 +60,6 @@
                           <table class="table" style="color:black">
                                 <thead>
                                       <tr>
-                                        <!--
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Id_Venta</th>
-                                      -->
                                         <th scope="col">Marca</th>
                                         <th scope="col">Modelo</th>
                                         <th scope="col">Cantidad</th>

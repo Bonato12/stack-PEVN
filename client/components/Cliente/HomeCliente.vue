@@ -46,7 +46,10 @@
              <div class="modal-container animated fadeInLeft">
                <div class="modal-header" style="background-color:#424242;">
                  <slot name="header">
-                   <h2 style="color:white; text-align:left;">Detalles</h2>
+                   <h2 style="color:white; text-align:left;">
+                     <i class="fas fa-id-card"></i>
+                     Detalles
+                   </h2>
                    <button class="modal-default-button" @click="hide()">
                     <i class="far fa-times-circle"></i>
                    </button>
@@ -371,10 +374,7 @@ li {
   text-align:left !important;
 }
 
-.btn:hover{
-  -webkit-transform: rotate(360deg);
-          transform: rotate(360deg);
-}
+
 
 .btn{
   -webkit-transition: -webkit-transform .8s ease-in-out;
