@@ -15,55 +15,58 @@
                     </hr style="color:black;">
                   <div class="card-body">
                     <form style="margin-left: 30px; margin-top:30px;">
-                            <div class="caja">
-                                <span class="input-group-text">Cliente</span>
-                                <v-select :options="cliente" label="dni" id="clienteSelect"  v-model="venta.cliente" style="width:290px; height:57px; background-color: white; border-radius: 4px;">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Cliente</span>
+                                </div>
+                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="venta.cliente">
                                   <template slot="option" slot-scope="option">
-                                      <span class="fa" :class="option.icon"></span>
                                       {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="caja">
-                              <span class="input-group-text">Producto</span>
-                                <v-select  :options="producto" label="modelo"  v-model="productoSelected" style="width:290px; height:57px; border-radius: 4px; background-color: white;">
-                                  <template slot="option" slot-scope="option" style="height:107px;">
-                                      <span class="fa" :class="option.icon" style="height:107px;"></span>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Producto</span>
+                                </div>
+                                <v-select  class="form-control"  :options="producto" label="modelo"  v-model="productoSelected">
+                                  <template class="form-control" slot="option" slot-scope="option">
                                     {{ option.marca }} {{ option.modelo }} {{ option.precio }}
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="caja" style="width:230px;" >
-                                <div>
-                                  <span class="input-group-text">Cantidad</span>
-                                  <b-input-group>
-                                    <b-form-input class="form-control form-control-lg" type="number" :disabled="!productoSelected" min="0"  v-model="num" style="width:145px; height:57px; border-top:1px solid lightgray;  background-color:white;"/>
-                                    <b-input-group-append>
-                                      <b-button  variant="info" style="height:57px;" @click="decrementarCantidad()">
-                                          <i class="fas fa-minus"></i>
-                                      </b-button>
-                                      <b-button  variant="info"   @click="incrementarCantidad()" style="height:57px;">
-                                          <i class="fas fa-plus"></i>
-                                      </b-button>
-                                    </b-input-group-append>
-                                  </b-input-group>
-                               </div>
+                            <div class="caja">
+                              <b-input-group prepend="Cantidad">
+                                <b-form-input v-model="num"></b-form-input>
+                                <b-input-group-append>
+                                  <b-button variant="info" @click="decrementarCantidad()">
+                                        <i class="fas fa-minus"></i>
+                                  </b-button>
+                                  <b-button variant="info" @click="incrementarCantidad()">
+                                        <i class="fas fa-plus"></i>
+                                  </b-button>
+                                </b-input-group-append>
+                              </b-input-group>
                             </div>
                             <div class="caja">
-                                <div>
-                                  <span class="input-group-text">Precio</span>
-                                </div>
-                                <input required  type="number" min="0"  v-model="precio" :disabled="!productoSelected"  class="form-control form-control-lg" style="background-color:white; border-top:1px solid lightgray; height:57px; width:200px;">
+                              <div class="input-group form-group" style="width:537px; padding-left:25px;">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Precio</span>
+                                  </div>
+                                  <input  type="number" min="0"  v-model="precio"  class="form-control">
+                              </div>
                             </div>
                     </form>
                     <div>
                         <br>
-                        <button class="btn btn-success" v-on:click="guardarLista()" style="margin-left:52px;" title="Añadir al Carrito">
+                        <button class="btn btn-success" v-on:click="guardarLista()" style="margin-left:32px;" title="Añadir al Carrito">
                             <i class="fas fa-cart-plus"></i>
                         </button>
                     </div>
                     <br>
+                  <hr style="background-color:black;"/>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
+
                                 <table class="table" style="background-color:white;">
                                   <thead>
                                     <tr >
@@ -271,7 +274,7 @@ background-color: white;
 
 .input-group-prepend span{
 width: auto;
-background-color: #FFC312;
+background-color: #FFD700;
 color: black;
 border:0 !important;
 }
@@ -279,9 +282,14 @@ border:0 !important;
 .form-control {
     border: 0;
     box-shadow: none;
+    background-color: white;
 }
 
 
+.caja {
+float:left;
+width:500px;
+}
 
 .botones{
   margin-left: 2px;
@@ -298,12 +306,7 @@ border:0 !important;
   border-radius: 10px;
 }
 
-.caja{
-   float:left;
-   margin-left:5px;
-   height: 100px;
 
-}
 
 .input-group-text{
 width: auto;
@@ -317,5 +320,7 @@ border: none;
 input{
   background-color: white;
 }
+
+
 
 </style>
