@@ -81,8 +81,7 @@
                                       <tr>
                                         <td scope="col"></td>
                                         <td scope="col"></td>
-                                        <td scope="col"> </td>
-                                        <td scope="col">Total: 15000</td>
+                                        <td scope="col"></td>
                                       </tr>
                                 </tbody>
                           </table>

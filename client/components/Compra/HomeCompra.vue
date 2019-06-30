@@ -6,7 +6,7 @@
       <div>
           <div class="card-header" style="background-color:#FFD700; ">
             <h2 style="text-align:center; color:black;">
-                <i class="fas fa-cart-plus"></i>
+                <i class="fas fa-hand-holding-usd"></i>
                 <i class="fas fa-clipboard-list"></i>
                 Compras
              </h2>
@@ -75,14 +75,14 @@
                                       -->
                                         <td scope="col">{{item.marca}}</td>
                                         <td scope="col">{{item.modelo}}</td>
-                                        <td scope="col"> {{item.cantidad}}</td>
+                                        <td scope="col">{{item.cantidad}}</td>
                                         <td scope="col">{{item.precio}}</td>
                                       </tr>
                                       <tr>
                                         <td scope="col"></td>
                                         <td scope="col"></td>
-                                        <td scope="col"> </td>
-                                        <td scope="col">Total: 15000</td>
+                                        <td scope="col"></td>
+                                        <td scope="col"></td>
                                       </tr>
                                 </tbody>
                           </table>

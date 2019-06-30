@@ -12,10 +12,10 @@
              </h2>
           </div>
       </div>
-      <div v-if="this.ventas.length">
+      <div v-if="this.arreglo.length">
           <vue-good-table
               :columns="columns"
-              :rows="ventas"
+              :rows="arreglo"
               title="Ver Opciones y Detalles"
               :search-options="{
                 enabled: true,
@@ -69,10 +69,6 @@
                                   </thead>
                                   <tbody>
                                       <tr v-for="item in this.ventasProducto">
-                                        <!--
-                                        <th scope="col">{{item.id_ventaproducto}}</th>
-                                        <td scope="col">{{item.id_venta}}</td>
-                                      -->
                                         <td scope="col">{{item.marca}}</td>
                                         <td scope="col">{{item.modelo}}</td>
                                         <td scope="col"> {{item.cantidad}}</td>
@@ -82,7 +78,7 @@
                                         <td scope="col"></td>
                                         <td scope="col"></td>
                                         <td scope="col"> </td>
-                                        <td scope="col">Total: 15000</td>
+                                        <td scope="col"></td>
                                       </tr>
                                 </tbody>
                           </table>
@@ -90,12 +86,12 @@
                       <div class="modal-header" style="background-color:#FEC404;">
                         <h2 class="opciones" style="color:white;">Opciones</h2>
                         <div class="row" style="float:right; padding-right:15px;">
-                             <button class="btn btn-danger" v-on:click="eliminarVenta()" title="Eliminar Venta">
+                             <button class="btn btn-danger" v-on:click="eliminarArreglo()" title="Eliminar Venta">
                                  <i class="fas fa-trash-alt"></i>
                              </button>
                              <div style="width:5px;">
                              </div>
-                             <router-link class="btn btn-dark" :to="/EditarVenta/+this.idv" tag="button" title="Editar Venta">
+                             <router-link class="btn btn-dark"  tag="button" title="Editar Venta">
                                  <i class="fas fa-edit fa-1x"></i>
                              </router-link>
                          </div>
@@ -147,20 +143,17 @@ export default {
   },
   data () {
     return {
-      idv:'',
-      lista: [],
       showModal: false,
-      ventas: [],
-      ventasProducto: [],
+      arreglo: [],
       fecha: '',
       columns: [
         {
           label: 'Cliente',
-          field: 'nombre',
+          field: 'cliente',
         },
         {
           label: 'Producto',
-          field: 'apellido',
+          field: 'producto',
         },
         {
           label: 'Fecha',
@@ -168,11 +161,11 @@ export default {
         },
         {
           label: 'Observacion',
-          field: 'total',
+          field: 'observacion',
         },
         {
-          label: 'Estado',
-          field: 'total',
+          label: 'Condicion',
+          field: 'condicion',
         }
       ],
 		}
@@ -184,13 +177,13 @@ export default {
   },
   methods: {
     getVenta(){
-        axios.get('http://localhost:3000/venta').then((response) =>{
-          this.ventas = response.data;
-          console.log(this.ventas);
-
+        axios.get('http://localhost:3000/arreglo').then((response) =>{
+          this.arreglo = response.data;
+          console.log(this.arreglo);
         });
     },
-    eliminarVenta(){
+
+    eliminarArreglo(){
         axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
           console.log(data)
           this.getVenta()
