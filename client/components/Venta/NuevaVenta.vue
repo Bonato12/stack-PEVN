@@ -17,7 +17,7 @@
                     <form style="margin-left: 30px; margin-top:30px;">
                             <div class="caja">
                                 <span class="input-group-text">Cliente</span>
-                                <v-select :options="cliente" label="dni" id="clienteSelect"  v-model="clienteSelected" style="width:290px; height:57px; background-color: white; border-radius: 4px;">
+                                <v-select :options="cliente" label="dni" id="clienteSelect"  v-model="venta.cliente" style="width:290px; height:57px; background-color: white; border-radius: 4px;">
                                   <template slot="option" slot-scope="option">
                                       <span class="fa" :class="option.icon"></span>
                                       {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
@@ -219,9 +219,7 @@ export default {
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
                   //Vamos a Vender no es Vacia
                   if (this.Lista.length > 0 ){
-                      //Asignamos el Cliente Selecionado a this.venta.clientes
                       //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
-                      this.venta.cliente = this.clienteSelected;
                       this.venta.total = this.precioTotal;
                       axios.post('http://localhost:3000/venta',
                           {

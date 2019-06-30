@@ -68,21 +68,18 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      
+
                                 </tbody>
                           </table>
                       </div>
                       <div class="modal-header" style="background-color:#FEC404;">
                         <h2 class="opciones" style="color:white;">Opciones</h2>
                         <div class="row" style="float:right; padding-right:15px;">
-                             <button class="btn btn-danger" v-on:click="eliminarArreglo()" title="Eliminar Venta">
+                             <button class="btn btn-danger" v-on:click="eliminarArreglo()" title="Eliminar Arreglo">
                                  <i class="fas fa-trash-alt"></i>
                              </button>
                              <div style="width:5px;">
                              </div>
-                             <router-link class="btn btn-dark"  tag="button" title="Editar Venta">
-                                 <i class="fas fa-edit fa-1x"></i>
-                             </router-link>
                          </div>
                      </div>
                     </div>
@@ -175,8 +172,8 @@ export default {
     eliminarArreglo(){
         axios.delete('http://localhost:3000/arreglo/'+this.ida).then((data)=>{
           console.log(data)
-          this.getVenta()
-        }).then(alertSucessDelete()).then(this.hideModal());
+          this.getArreglo()
+        }).then(alertSucessDelete()).then(this.hide());
     },
     onRowClick(params) {
         this.showModal = true;

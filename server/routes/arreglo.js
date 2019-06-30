@@ -5,6 +5,7 @@ const arregloController = require('../controller/arreglo');
 
 router.get('/arreglo', arregloController.getArreglo);
 router.post('/arreglo',arregloController.postArreglo);
+router.delete('/arreglo/:id_arreglo',arregloController.deleteArreglo);
 
 
 const cors = require('cors');

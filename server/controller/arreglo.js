@@ -28,7 +28,7 @@ var id;
         },
         deleteArreglo(req,res){
                 console.log("Peticion DELETE");
-                db.query("DELETE FROM arreglo WHERE id_venta=($1)",[req.params.id_arreglo]).then(response=> {
+                db.query("DELETE FROM arreglo WHERE id_arreglo=($1)",[req.params.id_arreglo]).then(response=> {
                     console.log(response.rows)
                     res.json(response.rows);
                 }).catch(error =>{
