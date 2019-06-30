@@ -37,7 +37,7 @@
                             </div>
                             <div class="caja">
                               <b-input-group prepend="Cantidad">
-                                <b-form-input v-model="num"></b-form-input>
+                                <b-form-input v-model="num" readonly></b-form-input>
                                 <b-input-group-append>
                                   <b-button variant="info" @click="decrementarCantidad()">
                                         <i class="fas fa-minus"></i>
@@ -66,7 +66,8 @@
                     <br>
                   <hr style="background-color:black;"/>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
-
+                                <i class="fas fa-shopping-cart fa-5x"></i>
+                                <br>
                                 <table class="table" style="background-color:white;">
                                   <thead>
                                     <tr >
