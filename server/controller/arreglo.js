@@ -26,18 +26,13 @@ var id;
               });
 
         },
-        /*
-        deleteVenta(req,res){
+        deleteArreglo(req,res){
                 console.log("Peticion DELETE");
-                db.query("DELETE FROM venta WHERE id_venta=($1)",[req.params.id_venta]).then(response=> {
+                db.query("DELETE FROM arreglo WHERE id_venta=($1)",[req.params.id_arreglo]).then(response=> {
                     console.log(response.rows)
                     res.json(response.rows);
                 }).catch(error =>{
                     console.log(error);
                 })
         },
-        */
-
-
-
        }

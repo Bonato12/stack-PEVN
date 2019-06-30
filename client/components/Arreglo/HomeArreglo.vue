@@ -47,7 +47,7 @@
                     <div class="modal-container">
                       <div class="modal-header" style="background-color:#424242;">
                         <slot name="header">
-                          <h2 style="color:white; text-align:left;">Venta del {{this.fecha}} </h2>
+                          <h2 style="color:white; text-align:left;"></h2>
                           <button class="modal-default-button" @click="hide()">
                            <i class="far fa-times-circle"></i>
                           </button>
@@ -68,18 +68,7 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <tr v-for="item in this.ventasProducto">
-                                        <td scope="col">{{item.marca}}</td>
-                                        <td scope="col">{{item.modelo}}</td>
-                                        <td scope="col"> {{item.cantidad}}</td>
-                                        <td scope="col">{{item.precio}}</td>
-                                      </tr>
-                                      <tr>
-                                        <td scope="col"></td>
-                                        <td scope="col"></td>
-                                        <td scope="col"> </td>
-                                        <td scope="col"></td>
-                                      </tr>
+                                      
                                 </tbody>
                           </table>
                       </div>
@@ -139,10 +128,11 @@ import moment from 'moment';
 export default {
   name: 'HomeVenta',
   created(){
-    this.getVenta();
+    this.getArreglo();
   },
   data () {
     return {
+      ida:'',
       showModal: false,
       arreglo: [],
       fecha: '',
@@ -176,15 +166,14 @@ export default {
   mounted(){
   },
   methods: {
-    getVenta(){
+    getArreglo(){
         axios.get('http://localhost:3000/arreglo').then((response) =>{
           this.arreglo = response.data;
           console.log(this.arreglo);
         });
     },
-
     eliminarArreglo(){
-        axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
+        axios.delete('http://localhost:3000/arreglo/'+this.ida).then((data)=>{
           console.log(data)
           this.getVenta()
         }).then(alertSucessDelete()).then(this.hideModal());
@@ -192,15 +181,7 @@ export default {
     onRowClick(params) {
         this.showModal = true;
         console.log(params.row);
-            this.idv =  params.row.id_venta;
-            axios.get('http://localhost:3000/ventaProducto/'+ params.row.id_venta).then((response) =>{
-              this.ventasProducto = response.data;
-              this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
-              console.log(this.fecha);
-              console.log(this.ventasProducto);
-            });
-
-
+        this.ida = params.row.id_arreglo;
     },
     hide(){
       this.showModal = false;

@@ -11,7 +11,7 @@
         			</div>
                 </hr style="color:black;">
         			<div class="card-body" >
-            				<form @submit.prevent="EditarProducto()">
+            				<form @submit.prevent="editarProducto()">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Modelo</span>
