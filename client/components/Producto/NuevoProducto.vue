@@ -61,11 +61,6 @@
                               <i class="fas fa-arrow-left"></i>
                                 Volver
                           </router-link>
-                          <!--
-                          <div v-if="loading" class="d-flex justify-content-left mb-2">
-                            <b-spinner label="Loading..."></b-spinner>
-                          </div>
-                        -->
                       </div>
         				</form>
         			</div>
@@ -186,7 +181,7 @@ button{
   background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 button:hover{

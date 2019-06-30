@@ -4,14 +4,14 @@
         <div class="d-flex justify-content-left">
       		<div class="card animated fadeInDown">
         			<div class="card-header" style="background-color:#FFD700; ">
-                <h3 style="text-align:center; color:black;">
-                  <i class="fas fa-cog"></i>
+                <h2 style="text-align:center; color:black;">
+                  <i class="fas fa-mobile-alt"></i>
                    Editar Producto
-                 </h3>
+                 </h2>
         			</div>
                 </hr style="color:black;">
         			<div class="card-body" >
-            				<form @submit.prevent="editarProducto()">
+            				<form @submit.prevent="editarProducto()" style="width:1025px;">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Modelo</span>
@@ -32,10 +32,10 @@
             					</div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
-              							<span class="input-group-text">Tipo</span>
+              							<span class="input-group-text">Tipo </span>
               						</div>
-                          <select required class="form-control" v-model="producto.tipoProducto">
-                            <option disabled value="">Elige un Tipo Producto</option>
+                          <select required class="form-control" v-model="producto.tipoProducto" placeholder="Elige un Tipo Producto">
+                            <option value=""  disabled selected>Elige un Tipo Producto</option>
                             <option  v-for="item in tipoProductos">{{ item.name }}</option>
                          </select>
                       </div>
@@ -43,7 +43,7 @@
               						<div class="input-group-prepend">
               							<span class="input-group-text">Stock</span>
               						</div>
-              						<input required type="number" min="0" v-model="producto.stock" class="form-control" placeholder="Ingrese Stock">
+              						<input required type="number" min="0" v-model.number="producto.stock" class="form-control" placeholder="Ingrese Stock">
             					</div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
@@ -52,8 +52,8 @@
               						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
                       <br>
-            					<div class="float-left">
-                          <button type="submit"  title="Guardar Producto" style="background-color:#fec400">
+                        <div style="margin-left:250px;">
+                          <button type="submit"  title="Editar Producto" style="background-color:#fec400">
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                           </button>
@@ -61,7 +61,7 @@
                               <i class="fas fa-arrow-left"></i>
                                 Volver
                           </router-link>
-            					</div>
+                      </div>
         				</form>
         			</div>
       		</div>
@@ -121,45 +121,46 @@ export default {
 </script>
 
 <style scoped>
-.input-group-prepend span{
-  width: 120px;
-  background-color: #FFC312;
-  color: black;
-  border:0 !important;
+h1, h2 {
+  font-weight: normal;
 }
 
-.card{
-height: auto;
-margin-top: 30px;
-margin-bottom: auto;
-width: 1250px;
-background-color: rgb(70,90,101);
-border: 1px solid;
-border-radius: 5px;
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+
+.input-group-prepend span{
+width: 120px;
+background-color: #FFD700;
+color: black;
+border: none;
+
+
 }
 
 .input-group{
   width: 950px;
 }
 
-.editarProducto_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
+input:focus{
+  background-color: white;
 }
 
-.editarProducto_btn:hover{
-color: black;
-background-color: white;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+.card{
+height: auto;
+margin-top: 30px;
+margin-bottom: auto;
+width: 1100px;
+background-color: rgb(70,90,101);
+border: 1px solid;
+border-radius: 5px;
 }
 
 button{
@@ -174,7 +175,7 @@ button{
   background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 button:hover{
@@ -192,11 +193,13 @@ input::-webkit-inner-spin-button {
 
 form select:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
 
 }
 
 form select:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
 
 
 }
@@ -204,11 +207,15 @@ form select:required:focus:valid{
 
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
+
 }
 
 
 form input:required:focus:valid{
   background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
+
 }
 
 .form-control {
@@ -233,7 +240,7 @@ form textarea:required:focus:valid{
 
 .formulario{
     width: 1050px;
-    height: 450px;
+    height: auto;
     margin: 50px auto;
     display: flex;
     background: #fff;
