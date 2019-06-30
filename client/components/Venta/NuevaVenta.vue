@@ -29,7 +29,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Producto</span>
                                 </div>
-                                <v-select  class="form-control"  :options="producto" label="modelo"  v-model="productoSelected">
+                                <v-select  class="form-control" @change="onChange($event)"  :options="producto" label="modelo"  v-model="productoSelected">
                                   <template class="form-control" slot="option" slot-scope="option">
                                     {{ option.marca }} {{ option.modelo }} {{ option.precio }}
                                   </template>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="caja">
                               <b-input-group prepend="Cantidad">
-                                <b-form-input v-model="num" readonly></b-form-input>
+                                <b-form-input v-model="num" min="0" readonly></b-form-input>
                                 <b-input-group-append>
                                   <b-button variant="info" @click="decrementarCantidad()">
                                         <i class="fas fa-minus"></i>
@@ -139,7 +139,7 @@ export default {
       precioTotal: 0,
       productoSelected: '',
       clienteSelected: '',
-      num: '',
+      num: 0,
 
 		}
   },
@@ -161,6 +161,7 @@ export default {
       });
     },
     guardarLista(){
+            console.log(JSON.stringify(this.productoSelected));
             //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
             if(this.productoSelected && this.precio > 0 && this.num > 0){
                 this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
@@ -199,7 +200,7 @@ export default {
     decrementarCantidad() {
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
       if(this.productoSelected){
-          if (this.num == 1) {
+          if (this.num == 0) {
             alertWarningLimiteOne();
           } else {
             this.num--;
@@ -219,6 +220,17 @@ export default {
           this.Lista.splice(index, 1);
       }
     },
+    onChange(event) {
+           var actual = JSON.stringify(event);
+           var viejo = JSON.stringify(this.productoSelected);
+           if (viejo){
+             if (actual == viejo){
+               this.num = 0;
+               this.precio = '';
+             }
+           }
+
+       },
     nuevaVenta(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
                   //Vamos a Vender no es Vacia
