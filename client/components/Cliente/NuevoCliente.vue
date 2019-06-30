@@ -73,7 +73,7 @@
                         <div class="modal-header" style="background-color:#424242;">
                           <slot name="header">
                             <img src="../../assets/invalid.png">
-                            <button class="modal-default-button" @click="hide()">
+                            <button class="modal-default-button" @click="hideModal()">
                              <i class="far fa-times-circle"></i>
                             </button>
                           </slot>
@@ -123,6 +123,7 @@ export default {
   methods: {
             nuevoCliente(){
                     this.errors = [];
+                    /*
                     if (!this.cliente.dni){
                       this.errors.push('Dni Vacio');
                     }else {
@@ -130,6 +131,7 @@ export default {
                            this.errors.push('Dni debe ser un numero entero');
                       }
                     }
+                    */
                     if (!this.cliente.nombre){
                       this.errors.push('Nombre Vacio');
                     }
@@ -142,7 +144,7 @@ export default {
                     if (!this.cliente.telefono){
                       this.errors.push('Telefono Vacio');
                     }else {
-                        if(this.isInteger(this.cliente.dni) == false){
+                        if(this.isInteger(this.cliente.telefono) == false){
                              this.errors.push('Telefono debe ser un numero entero');
                         }
                     }
@@ -161,11 +163,10 @@ export default {
                               console.log(data)
                               if (data.data.status == 200){
                                 alertSucessCliente();
-                                this.cliente = new Cliente()
                               }else {
                                 alertError();
                               }
-                            });
+                            }).then(this.cliente = new Cliente());
                     }else {
                       this.showModal = true;
                     }
@@ -195,7 +196,7 @@ export default {
                 var er = /^-?[0-9]+$/;
                 return er.test(valor);
           },
-          hide(){
+          hideModal(){
             this.showModal = false;
           }
 
