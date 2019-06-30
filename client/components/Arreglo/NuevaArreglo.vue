@@ -17,7 +17,7 @@
                     <form style="margin-left: 30px; margin-top:30px;">
                             <div class="input-group form-group">
                                 <span class="input-group-text">Cliente</span>
-                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="clienteSelected">
+                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="arreglo.cliente">
                                   <template slot="option" slot-scope="option">
                                       {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
                                   </template>
@@ -25,7 +25,7 @@
                             </div>
                             <div class="input-group form-group">
                               <span class="input-group-text">Producto</span>
-                                <v-select  class="form-control"  :options="producto" label="modelo"  v-model="productoSelected" >
+                                <v-select  class="form-control"  :options="producto" label="modelo"  v-model="arreglo.producto">
                                   <template class="form-control" slot="option" slot-scope="option">
                                     {{ option.marca }} {{ option.modelo }} {{ option.precio }}
                                   </template>
@@ -35,19 +35,17 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">Observacion</span>
                                 </div>
-                                <textarea required type="text" v-model="DA" class="form-control" placeholder="Ingrese Observacion"></textarea>
+                                <textarea required type="text" v-model="arreglo.observacion" class="form-control" placeholder="Ingrese Observacion"></textarea>
 
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text">Estado</span>
+                                  <span class="input-group-text">Condicion</span>
                                 </div>
-                                <select class="form-control" v-model="selected">
-                                  <option disabled value="">Por Favor Seleccione un Estado</option>
-                                  <option selected:>EN ESPERA</option>
-                                  <option>ACEPTADO</option>
-                                  <option>CANCELADO</option>
-                                </select>
+                                <select required class="form-control" v-model="arreglo.condicion" placeholder="Elige una Condicion">
+                                  <option   disabled selected>Elige un Tipo Producto</option>
+                                  <option  v-for="item in condicion">{{ item.name }}</option>
+                               </select>
                             </div>
                     </form>
                     <br>
@@ -86,10 +84,14 @@ export default {
     return {
       cliente:'',
       producto:'',
-      arreglo : new Arreglo()
-
-
+      arreglo : new Arreglo(),
+      condicion : [{name:"EN ESPERA"},
+                       {name:"ACEPTADO"},
+                       {name:"CANCELADO"}]
 		}
+
+
+
   },
   computed:{
 
@@ -109,11 +111,18 @@ export default {
         });
       },
       nuevoArreglo(){
-          console.log("Hola");
-          this.arreglo.setTitle("Simpsons");
-          this.arreglo.setAuthor("JHA");
-          this.arreglo.setIsbn("23123");
           console.log(this.arreglo);
+          if (this.arreglo.cliente && this.arreglo.producto && this.arreglo.bservacion && this.arreglo.condicion){
+              axios.post('http://localhost:3000/arreglo',
+              {
+              arreglo: this.arreglo
+              },
+              { headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000/arreglo',
+                'Content-Type': 'application/json',
+              },
+            }).then(this.arreglo = new Arreglo())
+         }
       }
     }
 }

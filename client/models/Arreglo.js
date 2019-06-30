@@ -1,31 +1,10 @@
-export default class Arreglo {
-    constructor(title, author, isbn){
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-    }
-
-    getTitle(){
-        return this.title;
-    }
-
-    setTitle(newTitle){
-        this.title = newTitle;
-    }
-
-    getAuthor(){
-        return this.author;
-    }
-
-    setAuthor(newAuthor){
-        this.author = newAuthor;
-    }
-
-    getIsbn(){
-        return this.isbn;
-    }
-
-    setIsbn(newIsbn){
-        this.isbn = newIsbn;
+export default class Arreglo{
+    constructor(id_arreglo,cliente,producto,fecha,observacion,condicion){
+      this.id_arreglo =  id_arreglo,
+      this.cliente = cliente,
+      this.producto = producto,
+      this.fecha = new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear(),
+      this.observacion = observacion,
+      this.condicion = condicion
     }
 }

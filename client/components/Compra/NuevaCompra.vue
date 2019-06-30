@@ -234,6 +234,7 @@ export default {
                             'Content-Type': 'application/json'
                              }
                         })
+
                           alertSucessCompra();
                           this.compraProducto = new CompraProducto();
 

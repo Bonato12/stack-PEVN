@@ -69,6 +69,18 @@ CREATE TABLE ventaProducto(
 	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
 );
 
+CREATE TABLE arreglo(
+	id_arreglo SERIAL NOT NULL,
+	cliente INTEGER NOT NULL,
+	producto INTEGER NOT NULL,
+	fecha DATE NOT NULL,
+	observacion VARCHAR(100) NOT NULL,
+	condicion VARCHAR (100) NOT NULL,
+	CONSTRAINT pk_idArreglo PRIMARY KEY(id_arreglo),
+	CONSTRAINT fk_id_clienteA FOREIGN KEY(cliente) REFERENCES cliente(id_cliente),
+	CONSTRAINT fk_id_productoA FOREIGN KEY(producto) REFERENCES producto(id_producto)
+);
+
 SELECT * FROM ventaProducto;
 DELETE FROM venta
 INSERT INTO venta VALUES(1,2,3,'20/12/2018');
@@ -86,3 +98,5 @@ DROP CASCADE FROM venta WHERE id_venta = 177;
 SELECT * FROM venta
 
 SELECT * FROM cliente WHERE id_cliente = 178
+
+SELECT * FROM arreglo;
