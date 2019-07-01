@@ -16,6 +16,16 @@ var id;
               })
           },
 
+          getIdArreglo(req,res){
+              db.query("SELECT a.id_arreglo, a.fecha, c.dni,c.nombre,c.apellido, p.modelo FROM cliente c, producto p, arreglo a  WHERE id_arreglo=($1) AND a.cliente = c.id_cliente AND a.producto = p.id_producto", [req.params.id_arreglo]).then(response=> {
+                  console.log(response.rows)
+                //Muestra los resultados en forma de JSON en nuestro HTML
+                  res.json(response.rows);
+              }).catch(error =>{
+                  console.log(error);
+              })
+          },
+
         postArreglo(req, res){
               console.log("Peticion POST");
               console.log(req.body);

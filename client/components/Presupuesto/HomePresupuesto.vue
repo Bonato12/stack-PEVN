@@ -78,9 +78,9 @@
                              <button class="btn btn-danger" v-on:click="eliminarArreglo()" title="Eliminar Arreglo">
                                  <i class="fas fa-trash-alt"></i>
                              </button>
-                             <router-link class="btn btn-dark" :to="/NuevoPresupuesto/+ida" tag="button" title="Presupuestar">
+                             <button class="btn btn-info" title="Presupuestar Arreglo">
                                  <i class="fas fa-coins"></i>
-                             </router-link>
+                             </button>
                          </div>
                      </div>
                     </div>
