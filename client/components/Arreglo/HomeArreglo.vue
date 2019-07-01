@@ -54,33 +54,22 @@
                         </slot>
                       </div>
                       <div class="modal-body" style="background-color:#f1f8e9;">
-                          <table class="table" style="color:black">
-                                <thead>
-                                      <tr>
-                                        <!--
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Id_Venta</th>
-                                      -->
-                                        <th scope="col">Marca</th>
-                                        <th scope="col">Modelo</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Precio</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-
-                                </tbody>
-                          </table>
+                        <button class="btn btn-danger" v-on:click="eliminarArreglo()" title="Eliminar Arreglo">
+                            <i class="fas fa-trash-alt fa-5x"></i>
+                        </button>
+                        <button class="btn btn-dark" v-on:click="verPresupuesto()" title="Eliminar Arreglo">
+                              <i class="fas fa-coins fa-5x"></i>
+                        </button>
+                        <!--
+                        <router-link class="btn btn-dark" :to="/NuevoPresupuesto/+ida" tag="button" title="Presupuestar Arreglo">
+                            <i class="fas fa-coins fa-5x"></i>
+                        </router-link>
+                      -->
                       </div>
                       <div class="modal-header" style="background-color:#FEC404;">
-                        <h2 class="opciones" style="color:white;">Opciones</h2>
+                        <h2 class="opciones" style="color:white;"></h2>
                         <div class="row" style="float:right; padding-right:15px;">
-                             <button class="btn btn-danger" v-on:click="eliminarArreglo()" title="Eliminar Arreglo">
-                                 <i class="fas fa-trash-alt"></i>
-                             </button>
-                             <router-link class="btn btn-dark" :to="/NuevoPresupuesto/+ida" tag="button" title="Presupuestar">
-                                 <i class="fas fa-coins"></i>
-                             </router-link>
+
                          </div>
                      </div>
                     </div>
@@ -180,6 +169,10 @@ export default {
         this.showModal = true;
         console.log(params.row);
         this.ida = params.row.id_arreglo;
+
+    },
+    verPresupuesto(){
+      console.log(this.ida)
     },
     hide(){
       this.showModal = false;

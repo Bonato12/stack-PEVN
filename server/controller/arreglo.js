@@ -26,6 +26,16 @@ var id;
               })
           },
 
+          getArregloPresupuesto(){
+            db.query("SELECT p.id_presupuesto FROM presupuesto p  WHERE p.arreglo = ($1) ", [req.params.id_arreglo]).then(response=> {
+                console.log(response.rows)
+              //Muestra los resultados en forma de JSON en nuestro HTML
+                res.json(response.rows);
+            }).catch(error =>{
+                console.log(error);
+            })
+          },
+
         postArreglo(req, res){
               console.log("Peticion POST");
               console.log(req.body);
