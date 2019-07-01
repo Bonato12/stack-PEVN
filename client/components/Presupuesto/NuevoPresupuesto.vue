@@ -8,8 +8,7 @@
                   <div class="card-header" style="background-color:#FFD700;">
                     <h2 style="text-align:center; color:black;">
                       <i class="fas fa-coins"></i>
-                      <i class="fas fa-plus-circle"></i>
-                       Nuevo Presupuesto
+                        Presupuesto para el Arreglo N° {{this.arreglo.id_arreglo}}
                      </h2>
                   </div>
                     </hr style="color:black;">
@@ -19,7 +18,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Repuesto</span>
                                 </div>
-                                <v-select  class="form-control" @change="onChange($event)"  :options="producto" label="modelo"  v-model="productoSelected">
+                                <v-select  class="form-control" @change="onChange($event)"  :options="producto" label="modelo"  v-model="repuestoSelected">
                                   <template class="form-control" slot="option" slot-scope="option">
                                     {{ option.marca }} {{ option.modelo }} {{ option.precio }}
                                   </template>
@@ -119,8 +118,8 @@ import axios from 'axios'
 import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
-import Venta from '../../models/Venta';
-import VentaProducto from '../../models/VentaProducto';
+import Presupuesto from '../../models/Presupuesto';
+import PresupuestoProducto from '../../models/VentaProducto';
 import Arreglo from '../../models/Arreglo'
 export default {
   name: 'NuevaVenta',
@@ -131,17 +130,16 @@ export default {
   data () {
     return {
       ida: this.$route.params.id,
-      arreglo: new Arreglo(),
-      venta: new Venta(),
+      arreglo: '',
       Lista: [],
-      ventaProducto: new VentaProducto(),
       cliente: [],
       producto: [],
       precio: '',
       precioTotal: 0,
-      productoSelected: '',
-      clienteSelected: '',
+      repuestoSelected: '',
       num: 0,
+      presupuesto: new Presupuesto(),
+      presupuestoProducto: new PresupuestoProducto()
 		}
   },
   computed:{
@@ -151,7 +149,7 @@ export default {
   methods: {
     getArreglo(){
       axios.get('http://localhost:3000/arreglo/'+this.ida).then(response=>{
-        this.arreglo = response.data;
+        this.arreglo = response.data[0];
         console.log(this.arreglo);
       });
     },
@@ -161,13 +159,13 @@ export default {
       });
     },
     guardarLista(){
-            console.log(JSON.stringify(this.productoSelected));
+            console.log(JSON.stringify(this.respuestoSelected));
             //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
-            if(this.productoSelected && this.precio > 0 && this.num > 0){
+            if(this.respuestoSelected && this.precio > 0 && this.num > 0){
                 this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
-                this.ventaProducto.producto = this.productoSelected;
-                this.ventaProducto.cantidad = this.num;
-                this.ventaProducto.precio = this.precio;
+                this.presupuestoProducto.producto = this.productoSelected;
+                this.presupuestoProducto.cantidad = this.num;
+                this.presupuestoProducto.precio = this.precio;
                 this.Lista.push(this.ventaProducto);
                 //Una Vez añadido al carrito Actializamos el Stock de la Lista Productos
                 var index = this.producto.indexOf(this.productoSelected);
