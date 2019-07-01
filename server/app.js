@@ -15,6 +15,8 @@ var ventaProductoRouter =require('./routes/ventaProducto');
 var compraRouter = require('./routes/compra');
 var compraProductoRouter = require('./routes/compraProducto');
 var arregloRouter = require('./routes/arreglo');
+var presupuestoRouter = require('./routes/presupuesto');
+var presupuestoProductoRouter = require('./routes/presupuestoProducto');
 
 var app = express();
 
@@ -40,7 +42,8 @@ app.use('/', ventaProductoRouter);
 app.use('/', compraProductoRouter);
 app.use('/', compraRouter);
 app.use('/', arregloRouter);
-
+app.use('/', presupuestoRouter);
+app.use('/', presupuestoProductoRouter);
 //app.use('/',adminRouter);
 
 

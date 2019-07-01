@@ -55,8 +55,25 @@ CREATE TABLE venta(
 	CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente)
 );
 
+CREATE TABLE presupuesto(
+	id_presupuesto SERIAL NOT NULL,
+	arreglo INTEGER NOT NULL,
+	observacion VARCHAR(100) NOT NULL,
+	precioTotal INTEGER NOT NULL,
+	CONSTRAINT pk_id_presupuesto PRIMARY KEY(id_presupuesto),
+	CONSTRAINT fk_arreglo FOREIGN KEY(arreglo) REFERENCES arreglo(id_arreglo)
+);
 
-SELECT * FROM venta;
+CREATE TABLE presupuestoProducto(
+	id_presupuestoProducto SERIAL NOT NULL,
+	arreglo INTEGER NOT NULL,
+	producto INTEGER NOT NULL,
+	cantidad INTEGER NOT NULL,
+	precio INTEGER NOT NULL,
+	CONSTRAINT pk_id_presupuesto_producto PRIMARY KEY(id_presupuestoProducto),
+	CONSTRAINT fk_id_arreglo_presupuesto FOREIGN KEY(arreglo) REFERENCES venta(id_venta),
+	CONSTRAINT fk_id_producto_presupuesto FOREIGN KEY(producto) REFERENCES producto(id_producto)
+);
 
 CREATE TABLE ventaProducto(
 	id_ventaProducto SERIAL NOT NULL,
