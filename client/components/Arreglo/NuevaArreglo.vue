@@ -16,7 +16,9 @@
                   <div class="card-body">
                     <form style="margin-left: 30px; margin-top:30px;">
                             <div class="input-group form-group">
-                                <span class="input-group-text">Cliente</span>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Cliente</span>
+                                </div>
                                 <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="arreglo.cliente">
                                   <template slot="option" slot-scope="option">
                                       {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
@@ -24,7 +26,9 @@
                                 </v-select>
                             </div>
                             <div class="input-group form-group">
-                              <span class="input-group-text">Producto</span>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Producto</span>
+                                </div>
                                 <v-select  class="form-control"  :options="producto" label="modelo"  v-model="arreglo.producto">
                                   <template class="form-control" slot="option" slot-scope="option">
                                     {{ option.marca }} {{ option.modelo }} {{ option.precio }}
@@ -112,7 +116,7 @@ export default {
       },
       nuevoArreglo(){
           console.log(this.arreglo);
-          if (this.arreglo.cliente && this.arreglo.producto && this.arreglo.bservacion && this.arreglo.condicion){
+          if (this.arreglo.cliente && this.arreglo.producto && this.arreglo.observacion && this.arreglo.condicion){
               axios.post('http://localhost:3000/arreglo',
               {
               arreglo: this.arreglo

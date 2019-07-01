@@ -171,13 +171,13 @@ button{
   display:inline-block;
   float:right;
   width:150px;
-  height:50px;
+  height:45px;
   margin-top:-10px;
   border:none;
   background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 button:hover{

@@ -19,9 +19,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Cliente</span>
                                 </div>
-                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="venta.cliente">
+                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect" @change="onChangeCliente($event)"   v-model="venta.cliente">
                                   <template slot="option" slot-scope="option">
-                                      {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
+                                      {{ option.dni }}-{{ option.nombre }}-{{ option.apellido }}
                                   </template>
                                 </v-select>
                             </div>
@@ -114,14 +114,12 @@
       </div>
 </template>
 <script>
-
 import axios from 'axios'
 import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 import VentaProducto from '../../models/VentaProducto';
-
 export default {
   name: 'NuevaVenta',
   created(){
@@ -140,14 +138,15 @@ export default {
       productoSelected: '',
       clienteSelected: '',
       num: 0,
-
+      a1:null,
+      colors:[
+        'green','blue','red','black'
+      ]
 		}
   },
   computed:{
-
   },
   mounted(){
-
   },
   methods: {
     getCliente(){
@@ -179,12 +178,10 @@ export default {
                 this.num = '';
                 this.precio = '';
                 this.ventaProducto = new VentaProducto();
-
             }else {
               alert("Completar los Campos");
             }
     },
-
     incrementarCantidad(){
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
           if(this.productoSelected.precio){
@@ -193,7 +190,6 @@ export default {
               }else{
                   this.num++;
                   this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
-
               }
           }
     },
@@ -229,8 +225,10 @@ export default {
                this.precio = '';
              }
            }
-
        },
+       addValue: function(e){
+      this.colors.push(e.target.value)
+    },
     nuevaVenta(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
                   //Vamos a Vender no es Vacia
@@ -250,25 +248,18 @@ export default {
                         })
                           alertSucessVenta();
                           this.ventaProducto = new VentaProducto();
-
                   }else {
                      alertWarningCompletarCampos()
                   }
-
     }
   }
 }
-
 </script>
 
 <style scoped>
-
-
 h1, h2 {
   font-weight: normal;
 }
-
-
 .card{
 height: auto;
 margin-bottom: auto;
@@ -277,33 +268,25 @@ background-color: #696969;
 border: 1px solid;
 border-radius: 5px;
 }
-
-
-
 .venta_btn:hover{
 color: black;
 background-color: white;
 }
-
 .input-group-prepend span{
 width: auto;
 background-color: #FFD700;
 color: black;
 border:0 !important;
 }
-
 .form-control {
     border: 0;
     box-shadow: none;
     background-color: white;
 }
-
-
 .caja {
 float:left;
 width:500px;
 }
-
 .botones{
   margin-left: 2px;
   cursor:pointer;
@@ -318,22 +301,13 @@ width:500px;
   transition:.5s;
   border-radius: 10px;
 }
-
-
-
 .input-group-text{
 width: auto;
 background-color: #FFD700;
 color: black;
 border: none;
-
-
 }
-
 input{
   background-color: white;
 }
-
-
-
 </style>
