@@ -66,12 +66,12 @@ CREATE TABLE presupuesto(
 
 CREATE TABLE presupuestoProducto(
 	id_presupuestoProducto SERIAL NOT NULL,
-	arreglo INTEGER NOT NULL,
+	presupuesto INTEGER NOT NULL,
 	producto INTEGER NOT NULL,
 	cantidad INTEGER NOT NULL,
 	precio INTEGER NOT NULL,
 	CONSTRAINT pk_id_presupuesto_producto PRIMARY KEY(id_presupuestoProducto),
-	CONSTRAINT fk_id_arreglo_presupuesto FOREIGN KEY(arreglo) REFERENCES venta(id_venta),
+	CONSTRAINT fk_id_presupuesto FOREIGN KEY(presupuesto) REFERENCES presupuesto(id_presupuesto),
 	CONSTRAINT fk_id_producto_presupuesto FOREIGN KEY(producto) REFERENCES producto(id_producto)
 );
 

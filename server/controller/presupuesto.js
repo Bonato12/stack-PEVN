@@ -18,15 +18,15 @@ var id;
 
         postPresupuesto(req, res){
               console.log("Peticion POST");
-              console.log(req.body);
+              console.log(req.body.presupuesto);
               for (var i=0; i < req.body.lista.length; i++){
                   console.log(req.body.lista[i]);
               }
-              db.query("INSERT INTO presupuesto(arreglo,observacion,precioTotal) VALUES($1,$2,$3) RETURNING id_presupuesto",[req.body.presupuesto.arreglo.id_arreglo,req.body.arreglo.observacion,req.body.venta.total]).then(response=> {
+              db.query("INSERT INTO presupuesto(arreglo,observacion,precioTotal) VALUES($1,$2,$3) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.precioTotal]).then(response=> {
                   id = parseInt(response.rows[0].id_presupuesto);
                   console.log("EL ID INSERTADO ES:"+id);
                         for (var i=0 ; i < req.body.lista.length ; i++) {
-                            db.query("INSERT INTO presupuestoProducto(arreglo,producto,cantidad,precio) VALUES($1,$2,$3,$4) RETURNING id_presupuesto",[id,req.body.lista[i].producto.id_producto,req.body.lista[i].cantidad,req.body.lista[i].precio]).then(response=> {
+                            db.query("INSERT INTO presupuestoProducto(presupuesto,producto,cantidad,precio) VALUES($1,$2,$3,$4)",[id,req.body.lista[i].producto.id_producto,req.body.lista[i].cantidad,req.body.lista[i].precio]).then(response=> {
                                 console.log(response);
                             }).then(
                               db.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.lista[i].cantidad,req.body.lista[i].producto.id_producto]).then(response =>{

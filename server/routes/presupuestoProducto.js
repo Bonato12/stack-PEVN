@@ -4,7 +4,7 @@ var app = express();
 const cors = require('cors');
 const presupuestoProductoController = require('../controller/presupuestoProducto');
 
-router.get('/presupuestoProducto', presupuestoProductoControllerget.getPresupuestoProducto);
+router.get('/presupuestoProducto', presupuestoProductoController.getPresupuestoProducto);
 //router.get('/presupuestoProducto/:id',presupuestoProductoController.getIdPresupuestoProducto);
 
 

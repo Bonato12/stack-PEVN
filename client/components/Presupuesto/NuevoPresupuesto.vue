@@ -49,7 +49,7 @@
                     						<div class="input-group-prepend">
                     							<span class="input-group-text">Observaciones</span>
                     						</div>
-                    						<textarea required type="text" class="form-control" placeholder="Ingrese Descripcion"></textarea>
+                    						<textarea required type="text" class="form-control" v-model="presupuesto.observacion" placeholder="Ingrese Descripcion"></textarea>
                   					</div>
                     </form>
                     <div>
@@ -129,6 +129,8 @@ export default {
   },
   data () {
     return {
+      presupuesto: new Presupuesto(),
+      presupuestoProducto: new PresupuestoProducto(),
       ida: this.$route.params.id,
       arreglo: '',
       Lista: [],
@@ -137,9 +139,8 @@ export default {
       precio: '',
       precioTotal: 0,
       repuestoSelected: '',
-      num: 0,
-      presupuesto: new Presupuesto(),
-      presupuestoProducto: new PresupuestoProducto()
+      num: 0
+
 		}
   },
   computed:{
@@ -159,21 +160,21 @@ export default {
       });
     },
     guardarLista(){
-            console.log(JSON.stringify(this.respuestoSelected));
+            console.log(JSON.stringify(this.repuestoSelected));
             //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
-            if(this.respuestoSelected && this.precio > 0 && this.num > 0){
+            if(this.repuestoSelected && this.precio > 0 && this.num > 0){
                 this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
-                this.presupuestoProducto.producto = this.productoSelected;
+                this.presupuestoProducto.producto = this.repuestoSelected;
                 this.presupuestoProducto.cantidad = this.num;
                 this.presupuestoProducto.precio = this.precio;
                 this.Lista.push(this.presupuestoProducto);
                 //Una Vez añadido al carrito Actializamos el Stock de la Lista Productos
-                var index = this.producto.indexOf(this.respuestoSelected);
+                var index = this.producto.indexOf(this.repuestoSelected);
                 if (index > -1) {
                   this.producto[index].stock = this.producto[index].stock - this.num;
                 }
                 //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
-                this.respuestoSelected = '';
+                this.repuestoSelected = '';
                 this.num = '';
                 this.precio = '';
                 this.presupuestoProducto = new PresupuestoProducto();
@@ -182,13 +183,14 @@ export default {
             }
     },
     incrementarCantidad(){
+          console.log(this.repuestoSelected)
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
-          if(this.respuestoSelected.precio){
-              if (this.num ==  this.respuestoSelected.stock){
+          if(this.repuestoSelected.precio){
+              if (this.num ==  this.repuestoSelected.stock){
                   alertWarningLimiteStock();
               }else{
                   this.num++;
-                  this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+                  this.precio = parseInt(this.repuestoSelected.precio) * parseInt(this.num)
               }
           }
     },
@@ -225,23 +227,22 @@ export default {
              }
            }
        },
-       addValue: function(e){
-      this.colors.push(e.target.value)
-    },
+
     nuevaVenta(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
                   //Vamos a Vender no es Vacia
                   if (this.Lista.length > 0 ){
                       //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
+                      this.presupuesto.arreglo = this.ida
                       this.presupuesto.precioTotal = this.precioTotal;
-                      axios.post('http://localhost:3000/venta',
+                      axios.post('http://localhost:3000/presupuesto',
                           {
                           lista: this.Lista,
-                          venta: this.presupuesto
+                          presupuesto: this.presupuesto
                           },
                           {
                             headers:{
-                            'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
+                            'Access-Control-Allow-Origin': 'http://localhost:3000/presupuesto',
                             'Content-Type': 'application/json'
                              }
                         })
