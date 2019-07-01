@@ -166,25 +166,25 @@ export default {
                 this.presupuestoProducto.producto = this.productoSelected;
                 this.presupuestoProducto.cantidad = this.num;
                 this.presupuestoProducto.precio = this.precio;
-                this.Lista.push(this.ventaProducto);
+                this.Lista.push(this.presupuestoProducto);
                 //Una Vez añadido al carrito Actializamos el Stock de la Lista Productos
-                var index = this.producto.indexOf(this.productoSelected);
+                var index = this.producto.indexOf(this.respuestoSelected);
                 if (index > -1) {
                   this.producto[index].stock = this.producto[index].stock - this.num;
                 }
                 //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
-                this.productoSelected = '';
+                this.respuestoSelected = '';
                 this.num = '';
                 this.precio = '';
-                this.ventaProducto = new VentaProducto();
+                this.presupuestoProducto = new PresupuestoProducto();
             }else {
               alert("Completar los Campos");
             }
     },
     incrementarCantidad(){
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
-          if(this.productoSelected.precio){
-              if (this.num ==  this.productoSelected.stock){
+          if(this.respuestoSelected.precio){
+              if (this.num ==  this.respuestoSelected.stock){
                   alertWarningLimiteStock();
               }else{
                   this.num++;
@@ -194,12 +194,12 @@ export default {
     },
     decrementarCantidad() {
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
-      if(this.productoSelected){
+      if(this.repuestoSelected){
           if (this.num == 0) {
             alertWarningLimiteOne();
           } else {
             this.num--;
-            this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+            this.precio = parseInt(this.repuestoSelected.precio) * parseInt(this.num)
           }
       }
     },
@@ -217,7 +217,7 @@ export default {
     },
     onChange(event) {
            var actual = JSON.stringify(event);
-           var viejo = JSON.stringify(this.productoSelected);
+           var viejo = JSON.stringify(this.repuestoSelected);
            if (viejo){
              if (actual == viejo){
                this.num = 0;
@@ -233,11 +233,11 @@ export default {
                   //Vamos a Vender no es Vacia
                   if (this.Lista.length > 0 ){
                       //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
-                      this.venta.total = this.precioTotal;
+                      this.presupuesto.precioTotal = this.precioTotal;
                       axios.post('http://localhost:3000/venta',
                           {
                           lista: this.Lista,
-                          venta: this.venta
+                          venta: this.presupuesto
                           },
                           {
                             headers:{
@@ -246,7 +246,7 @@ export default {
                              }
                         })
                           alertSucessVenta();
-                          this.ventaProducto = new VentaProducto();
+                          this.presupuestoProducto = new PresupuestoProducto();
                   }else {
                      alertWarningCompletarCampos()
                   }
