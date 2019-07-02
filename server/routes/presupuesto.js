@@ -4,6 +4,7 @@ var app = express();
 const presupuestoController = require('../controller/presupuesto');
 
 router.get('/presupuesto', presupuestoController.getPresupuesto);
+router.get('/presupuesto/:id_presupuesto', presupuestoController.getIdPresupuesto);
 router.post('/presupuesto',presupuestoController.postPresupuesto);
 
 

@@ -1,4 +1,4 @@
-template>
+<template>
   <div>
     <div class="container animated zoomIn">
       <br>
@@ -26,12 +26,13 @@ import moment from 'moment';
 export default {
   name: 'HomeVenta',
   created(){
-    this.getArreglo();
+    this.getPresupuesto();
   },
   data () {
     return {
-      ida:'',
+      idp: this.$route.params.id,
       showModal: false,
+      presupuesto:'',
       arreglo: [],
       fecha: '',
       columns: [
@@ -64,10 +65,10 @@ export default {
   mounted(){
   },
   methods: {
-    getArreglo(){
-        axios.get('http://localhost:3000/arreglo').then((response) =>{
-          this.arreglo = response.data;
-          console.log(this.arreglo);
+    getPresupuesto(){
+        axios.get('http://localhost:3000/presupuesto/'+this.idp).then((response) =>{
+          this.presupuesto = response.data;
+          console.log(this.presupuesto);
         });
     },
     eliminarArreglo(){

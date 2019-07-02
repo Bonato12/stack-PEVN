@@ -16,6 +16,15 @@ var id;
               })
           },
 
+          getIdPresupuesto(req,res){
+               db.query('SELECT * FROM presupuesto WHERE id_presupuesto=($1)', [req.params.id_presupuesto])
+              .then(response=> {
+                res.json(response.rows);
+              }).catch(error =>{
+                console.log(error);
+              });
+            },
+
         postPresupuesto(req, res){
               console.log("Peticion POST");
               console.log(req.body.presupuesto);
