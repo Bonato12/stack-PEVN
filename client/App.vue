@@ -7,22 +7,40 @@
                 <div class="navbar-collapse" style="margin-left:150px;">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
-                            <router-link   tag="li" active-class="activo" id="cliente"   to="/HomeCliente">Clientes</router-link>
+                            <router-link   tag="li" active-class="activo" id="cliente"   to="/HomeCliente">
+                              <i class="fas fa-user"></i>
+                              Clientes
+                            </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  tag="li" active-class="activo"   to="/HomeProducto">Productos</router-link>
+                            <router-link  tag="li" active-class="activo"   to="/HomeProducto">
+                              <i class="fas fa-mobile-alt"></i>
+                              Productos
+                            </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  tag="li" active-class="activo"   to="/HomeVenta">Ventas</router-link>
+                            <router-link  tag="li" active-class="activo"   to="/HomeVenta">
+                              <i class="fas fa-shopping-cart"></i>
+                              Ventas
+                            </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  tag="li" active-class="activo"   to="/HomeCompra">Compras</router-link>
+                            <router-link  tag="li" active-class="activo"   to="/HomeCompra">
+                              <i class="fas fa-coins"></i>
+                              Compras
+                            </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link   tag="li"active-class="activo"   to="/HomeArreglo">Arreglos</router-link>
+                            <router-link   tag="li"active-class="activo"   to="/HomeArreglo">
+                              <i class="fas fa-tools"></i>
+                              Arreglos
+                            </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link   tag="li" active-class="activo"   to="/HomeProveedor">Proveedores</router-link>
+                            <router-link   tag="li" active-class="activo"   to="/HomeProveedor">
+                              <i class="fas fa-people-carry"></i>
+                              Proveedores
+                            </router-link>
                         </li>
                     </ul>
                     <div class="dropdown">
@@ -114,7 +132,7 @@ background-blend-mode: multiply;
 
 nav li{
     color: white;
-    padding: 2px 1px 2px 1px;
+    padding: 1px 1px 1px 1px;
 }
 
 nav{
