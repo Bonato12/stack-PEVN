@@ -8,7 +8,7 @@
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
                             <router-link   tag="li" active-class="activo" id="cliente"   to="/HomeCliente">
-                              <i class="fas fa-user"></i>
+                              <i class="fas fa-wheelchair"></i>
                               Clientes
                             </router-link>
                         </li>
@@ -43,15 +43,20 @@
                             </router-link>
                         </li>
                     </ul>
-                    <div class="dropdown">
-                      <i class="fas fa-user"></i>
-                       <button class="dropbtn">{{ user }}</button>
-                       <div class="dropdown-content">
-                         <router-link   tag="a" style="black"  to="/Login" v-on:click.native="logout()" title="Salir">
-                               <i class="fas fa-sign-out-alt"></i>
-                               Salir
-                         </router-link>
-                       </div>
+                    <div>
+                      <b-dropdown id="dropdown-right" right text="Usuario" variant="warning" class="m-2">
+                        <b-dropdown-item href="#">
+                            <i class="fas fa-user"></i>
+                            {{ user }}
+                        </b-dropdown-item>
+                        <b-dropdown-item>
+                          <router-link   tag="a" style="color:black;"  to="/Login" v-on:click.native="logout()" title="Salir">
+                                 <i class="fas fa-sign-out-alt"></i>
+                                 Salir
+                           </router-link>
+                        </b-dropdown-item>
+
+                      </b-dropdown>
                     </div>
                 </div>
             </nav>
@@ -126,17 +131,18 @@ background-blend-mode: multiply;
 .activo{
     background-color: #fec400;
     color: black;
-    height: 183%;
+    height: 193%;
 }
 
 
 nav li{
     color: white;
-    padding: 1px 1px 1px 1px;
 }
 
 nav{
      height: 65px;
+     text-align:center;
+
 
 }
 
