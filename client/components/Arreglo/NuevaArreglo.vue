@@ -122,7 +122,6 @@ export default {
               arreglo: this.arreglo
               },
               { headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000/arreglo',
                 'Content-Type': 'application/json',
               },
             }).then(this.arreglo = new Arreglo())

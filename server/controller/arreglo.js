@@ -48,10 +48,14 @@ var id;
         deleteArreglo(req,res){
                 console.log("Peticion DELETE");
                 db.query("DELETE FROM arreglo WHERE id_arreglo=($1)",[req.params.id_arreglo]).then(response=> {
-                    console.log(response.rows)
-                    res.json(response.rows);
+                  res.json({
+                    status: 200
+                  })
                 }).catch(error =>{
-                    console.log(error);
+                  console.log(error);
+                  res.json({
+                    status: error.code
+                  })
                 })
-        },
-       }
+        }
+ }

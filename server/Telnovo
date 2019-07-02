@@ -117,3 +117,9 @@ SELECT * FROM venta
 SELECT * FROM cliente WHERE id_cliente = 178
 
 SELECT * FROM arreglo;
+
+
+SELECT * FROM presupuesto;
+SELECT p.id_presupuesto FROM presupuesto p  WHERE p.arreglo = (3)
+
+SELECT p.id_presupuesto FROM presupuesto p  WHERE p.arreglo=3 

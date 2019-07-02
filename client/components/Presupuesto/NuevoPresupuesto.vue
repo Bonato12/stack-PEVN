@@ -242,7 +242,6 @@ export default {
                           },
                           {
                             headers:{
-                            'Access-Control-Allow-Origin': 'http://localhost:3000/presupuesto',
                             'Content-Type': 'application/json'
                              }
                         })

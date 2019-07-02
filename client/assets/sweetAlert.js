@@ -42,6 +42,10 @@ export function alertWarningFK(){
   Swal.fire('','No se puede eliminar ya que a realizado venta','warning');
 }
 
+export function alertWarningArregloFK(){
+  Swal.fire('','No se puede eliminar ya que posee un presupuesto','warning');
+}
+
 export function alertWarningCompletarCampos(){
   Swal.fire('','Completar los Campos','warning');
 }

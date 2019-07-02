@@ -57,14 +57,9 @@
                         <button class="btn btn-danger" v-on:click="eliminarArreglo()" title="Eliminar Arreglo">
                             <i class="fas fa-trash-alt fa-5x"></i>
                         </button>
-                        <button class="btn btn-dark" v-on:click="verPresupuesto()" title="Eliminar Arreglo">
+                        <button class="btn btn-dark" v-on:click="verPresupuesto()" title="Ver Prepuesto">
                               <i class="fas fa-coins fa-5x"></i>
                         </button>
-                        <!--
-                        <router-link class="btn btn-dark" :to="/NuevoPresupuesto/+ida" tag="button" title="Presupuestar Arreglo">
-                            <i class="fas fa-coins fa-5x"></i>
-                        </router-link>
-                      -->
                       </div>
                       <div class="modal-header" style="background-color:#FEC404;">
                         <h2 class="opciones" style="color:white;"></h2>
@@ -109,7 +104,8 @@
 
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import { alertSucessDelete,alertError,alertWarningArregloFK } from '../../assets/sweetAlert.js';
+
 import moment from 'moment';
 
 export default {
@@ -161,10 +157,36 @@ export default {
         });
     },
     eliminarArreglo(){
-        axios.delete('http://localhost:3000/arreglo/'+this.ida).then((data)=>{
-          console.log(data)
-          this.getArreglo()
-        }).then(alertSucessDelete()).then(this.hide());
+            this.$swal({
+                title: 'Estas Seguro?',
+                text: "No se podran recuperar los datos!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Borrar!'
+                }).then((result) => {
+                if (result.value) {
+                  axios.delete('http://localhost:3000/arreglo/'+this.ida).then((data)=>{
+                    console.log(data)
+                    if (data.data.status == 200){
+                      this.$swal(
+                        'Eliminado!',
+                        'El Cliente ha sido eliminado.',
+                        'success'
+                      );
+                     this.getArreglo()
+                    }else {
+                      if(data.data.status == 23503){
+                        alertWarningArregloFK()
+                      }else{
+                        alertError();
+                      }
+                    }
+                  }).then(this.hide());
+
+                }
+                })
     },
     onRowClick(params) {
         this.showModal = true;
@@ -179,10 +201,20 @@ export default {
       });
     },
       control(id){
-        alert(id);
-        console.log(id);
         if(id == undefined){
-            this.$router.push('/NuevoPresupuesto/'+this.ida);
+            this.$swal({
+              title: 'No tiene Presupuesto!',
+              text: "¿Desea crear un presupuesto para el arreglo?",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Aceptar'
+            }).then((result) => {
+              if (result.value) {
+                  this.$router.push('/NuevoPresupuesto/'+this.ida);
+              }
+            })
         }else {
             this.$router.push('/VerPresupuesto/'+id.id_presupuesto);
         }
