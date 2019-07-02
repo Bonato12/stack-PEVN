@@ -145,6 +145,7 @@ export default {
           field: 'condicion',
         }
       ],
+      id_presupuesto:''
 		}
   },
   computed:{
@@ -167,12 +168,25 @@ export default {
     },
     onRowClick(params) {
         this.showModal = true;
-        console.log(params.row);
+        //console.log(params.row);
         this.ida = params.row.id_arreglo;
 
     },
     verPresupuesto(){
       console.log(this.ida)
+      axios.get('http://localhost:3000/arreglo/'+this.ida).then((response) =>{
+        this.control(response.data[0])
+      });
+    },
+      control(id){
+        alert(id);
+        console.log(id);
+        if(id == undefined){
+            this.$router.push('/NuevoPresupuesto/'+this.ida);
+        }else {
+            this.$router.push('/VerPresupuesto/'+id.id_presupuesto);
+        }
+
     },
     hide(){
       this.showModal = false;

@@ -157,6 +157,7 @@ export default {
                             this.cliente, // the data to posthttp://localhost:3000/cliente
                             { headers: {
                               'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
+                              'Access-Control-Allow-Methods': 'POST',
                               'Content-Type': 'application/json',
                             },
                             }).then(function(data){

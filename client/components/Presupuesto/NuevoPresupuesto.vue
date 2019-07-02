@@ -8,7 +8,7 @@
                   <div class="card-header" style="background-color:#FFD700;">
                     <h2 style="text-align:center; color:black;">
                       <i class="fas fa-coins"></i>
-                        Presupuesto para el Arreglo N° {{this.arreglo.id_arreglo}}
+                        Presupuesto para el Arreglo N° {{this.ida}}
                      </h2>
                   </div>
                     </hr style="color:black;">
