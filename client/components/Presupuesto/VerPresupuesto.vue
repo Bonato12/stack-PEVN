@@ -8,8 +8,32 @@
             <h2 style="text-align:center; color:black;">
                 <i class="fas fa-tools"></i>
                 <i class="fas fa-clipboard-list"></i>
-                Presupuesto
+                Presupuesto {{presupuesto.id_presupuesto}}
              </h2>
+          </div>
+          <div class="modal-body" style="background-color:#f1f8e9;">
+            <slot name="body">
+              <b-row class="mb-1">
+                 <b-col cols="3">ID:</b-col>
+                   <b-col>{{presupuesto.id_presupuesto}}</b-col>
+               </b-row>
+               <hr>
+               <b-row class="mb-1">
+                 <b-col cols="3">Dni:</b-col>
+                   <b-col>{{presupuesto.arreglo}}</b-col>
+               </b-row>
+               <hr>
+               <b-row class="mb-1">
+                 <b-col cols="3">Nombre:</b-col>
+                   <b-col>{{presupuesto.observacion}}</b-col>
+               </b-row>
+               <hr>
+               <b-row class="mb-1">
+                 <b-col cols="3">Apellido:</b-col>
+                   <b-col>{{presupuesto.precioTotal}}</b-col>
+               </b-row>
+               <hr>
+            </slot>
           </div>
       </div>
     </div>
@@ -67,7 +91,7 @@ export default {
   methods: {
     getPresupuesto(){
         axios.get('http://localhost:3000/presupuesto/'+this.idp).then((response) =>{
-          this.presupuesto = response.data;
+          this.presupuesto = JSON.stringify(response.data[0]);
           console.log(this.presupuesto);
         });
     },
@@ -77,14 +101,6 @@ export default {
           this.getArreglo()
         }).then(alertSucessDelete()).then(this.hide());
     },
-    onRowClick(params) {
-        this.showModal = true;
-        console.log(params.row);
-        this.ida = params.row.id_arreglo;
-    },
-    hide(){
-      this.showModal = false;
-    }
 
 
 
