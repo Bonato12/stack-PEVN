@@ -99,6 +99,15 @@ CREATE TABLE arreglo(
 	CONSTRAINT fk_id_productoA FOREIGN KEY(producto) REFERENCES producto(id_producto)
 );
 
+CREATE  TABLE reparacion(
+	id_reparacion Serial NOT NULL,
+	Fecha_ini date NOT NULL,
+	fecha_fin date NOT NULL,
+	id_presupuesto integer NOT NULL,
+	constraint pk_reparacion primary key (id_reparacion),
+	constraint fk_presupuesto foreign key (id_presupuesto) references presupuesto(id_presupuesto)
+);
+
 SELECT * FROM ventaProducto;
 DELETE FROM venta
 INSERT INTO venta VALUES(1,2,3,'20/12/2018');
@@ -149,3 +158,48 @@ SELECT * FROM presupuesto;
 
 INSERT INTO presupuesto(2,)
 SELECT * FROM producto
+
+
+
+
+ 
+
+/*trigger 1*/ 
+CREATE OR REPLACE FUNCTION func_e() RETURNS TRIGGER AS $funcemp$
+DECLARE 
+BEGIN 
+		UPDATE arreglo SET condicion = 'EN EVALUACION DE PRESUPUESTO' where arreglo.id_arreglo = NEW.arreglo;
+RETURN NEW;
+END; $funcemp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_e BEFORE INSERT ON presupuesto
+FOR EACH ROW EXECUTE PROCEDURE func_e();
+ 
+/*trigger 2*/ 
+
+CREATE OR REPLACE FUNCTION func_H() RETURNS TRIGGER AS $funcemp$
+DECLARE 
+BEGIN 
+IF NEW.ESTADO='ACEPTADO' THEN
+	UPDATE arreglo SET condicion = 'PRESUPUESTO ACEPTADO' where arreglo.id_arreglo = NEW.arreglo;
+	INSERT INTO reparacion values (DEFAULT,id_presupuesto,,' ')
+END IF;
+IF new.ESTADO='CANCELADO' THEN
+	UPDATE arreglo SET condicion = 'PRESUPUESTO CANCELADO' where arreglo.id_arreglo = NEW.arreglo;
+end if;
+RETURN NEW;
+END; $funcemp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_H BEFORE UPDATE ON presupuesto
+FOR EACH ROW EXECUTE PROCEDURE func_H();
+
+SELECT * FROM presupuesto;
+UPDATE presupuesto
+set estado ='ACEPTADO'
+WHERE (presupuesto.id_presupuesto=19);
+
+
+SELECT *
+FROM arreglo
+where (arreglo.id_arreglo=10);
+
