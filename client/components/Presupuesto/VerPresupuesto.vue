@@ -12,6 +12,7 @@
              </h2>
           </div>
           <div class="modal-body" style="background-color:#f1f8e9;">
+            <h4>Detalle del Presupuesto:</h4>
             <slot name="body">
                <hr>
                <b-row class="mb-1">
@@ -30,6 +31,44 @@
                </b-row>
                <hr>
             </slot>
+          </div>
+          </hr>
+          <div class="modal-body" style="background-color:#f1f8e9;">
+              <h4>Lista de Repuestos Utilizados:</h4>
+              <br>
+              <table class="table" style="color:black">
+                    <thead>
+                          <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr v-for="item in this.presupuestoProducto">
+                            <td scope="col">{{item.producto}}</td>
+                            <td scope="col">{{item.cantidad}}</td>
+                            <td scope="col"> {{item.precio}}</td>
+                          </tr>
+                          <tr>
+                            <td scope="col"></td>
+                            <td scope="col"></td>
+                            <td scope="col"></td>
+                          </tr>
+                    </tbody>
+              </table>
+          </div>
+          <div class="modal-body" style="background-color:#f1f8e9;">
+              <h4>Estado del Presupuesto:</h4>
+              <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Estado</span>
+                  </div>
+                  <select required class="form-control" v-model="Estado" placeholder="Elige una Condicion">
+                    <option   disabled selected>Elige un Estado</option>
+                    <option  v-for="item in estado">{{ item.name }}</option>
+                 </select>
+              </div>
           </div>
       </div>
     </div>
@@ -53,30 +92,11 @@ export default {
       idp: this.$route.params.id,
       showModal: false,
       presupuesto:'',
-      arreglo: [],
-      fecha: '',
-      columns: [
-        {
-          label: 'Cliente',
-          field: 'cliente',
-        },
-        {
-          label: 'Producto',
-          field: 'producto',
-        },
-        {
-          label: 'Fecha',
-          field: 'fecha',
-        },
-        {
-          label: 'Observacion',
-          field: 'observacion',
-        },
-        {
-          label: 'Condicion',
-          field: 'condicion',
-        }
-      ],
+      presupuestoProducto: '',
+      idpp: '',
+      estado : [{name:"EN ESPERA"},
+                       {name:"ACEPTADO"},
+                       {name:"CANCELADO"}]
 		}
   },
   computed:{
@@ -86,10 +106,20 @@ export default {
   },
   methods: {
     getPresupuesto(){
+      this.idpp = 1;
         axios.get('http://localhost:3000/presupuesto/'+this.idp).then((response) =>{
           this.presupuesto = response.data[0];
           console.log(this.presupuesto);
+          this.control(this.presupuesto.id_presupuesto)
         });
+  },
+    control(id){
+      console.log("HOLA");
+      console.log(id);
+      axios.get('http://localhost:3000/presupuestoProducto/'+id).then((response) =>{
+        console.log(response.data)
+        this.presupuestoProducto = response.data;
+      })
     },
     eliminarArreglo(){
         axios.delete('http://localhost:3000/arreglo/'+this.ida).then((data)=>{

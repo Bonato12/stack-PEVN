@@ -17,7 +17,7 @@ var db = require('../database');
               })
           },
           getIdPresupuestoProducto(req,res){
-               db.query('SELECT  PP.id_presupuesto, PP.presupuesto, PP.producto, PP.cantidad, PP.precio  FROM presupuesto P, presupuestoProducto PP WHERE PP.presupuesto =($1)', [req.params.id_venta])
+               db.query('SELECT  PP.id_presupuestoProducto, PP.presupuesto, PP.producto, PP.cantidad, PP.precio  FROM presupuesto P, presupuestoProducto PP WHERE PP.presupuesto = P.id_presupuesto AND PP.presupuesto =($1)', [req.params.id_presupuesto])
               .then(response=> {
                 res.json(response.rows);
                 console.log(response.rows);
