@@ -74,7 +74,7 @@
 
 import axios from 'axios'
 import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
-import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
+import { alertWarningLimiteOne,alertWarningLimite,alertSucessArreglo } from '../../assets/sweetAlert.js'
 import Arreglo from '../../models/Arreglo';
 
 export default {
@@ -124,7 +124,7 @@ export default {
               { headers: {
                 'Content-Type': 'application/json',
               },
-            }).then(this.arreglo = new Arreglo())
+            }).then(alertSucessArreglo()).then(this.arreglo = new Arreglo())
          }
       }
     }

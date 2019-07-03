@@ -45,12 +45,6 @@
                                   <input  type="number" min="0"  v-model="precio"  class="form-control">
                               </div>
                             </div>
-                            <div class="input-group form-group">
-                    						<div class="input-group-prepend">
-                    							<span class="input-group-text">Observaciones</span>
-                    						</div>
-                    						<textarea required type="text" class="form-control" v-model="presupuesto.observacion" placeholder="Ingrese Descripcion"></textarea>
-                  					</div>
                     </form>
                     <div>
                         <button class="btn" v-on:click="guardarLista()" style="margin-left:32px; width:100px; border-radius:15px; background-color:#FFD700;" title="Ingrese Observacion">
@@ -87,7 +81,13 @@
                                 </table>
                           </div>
                           <br>
-                          <div v-if="this.precioTotal" style="text-align:right; margin-right:50px; color:white;">
+                          <div class="input-group form-group" style="margin-left: 25px; width:1045px;" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">Observaciones</span>
+                              </div>
+                              <textarea required type="text" class="form-control" v-model="presupuesto.observacion" placeholder="Ingrese Descripcion"></textarea>
+                          </div>
+                          <div  style="text-align:right; margin-right:50px; color:white;">
                             <div class="input-group form-group" style="width:337px; padding-left:25px;">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Precio Total</span>
@@ -117,7 +117,7 @@
 import axios from 'axios'
 import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertSucessVenta} from '../../assets/sweetAlert.js'
+import { alertSucessPresupuesto} from '../../assets/sweetAlert.js'
 import Presupuesto from '../../models/Presupuesto';
 import PresupuestoProducto from '../../models/VentaProducto';
 import Arreglo from '../../models/Arreglo'
@@ -244,9 +244,9 @@ export default {
                             headers:{
                             'Content-Type': 'application/json'
                              }
-                        })
-                          alertSucessVenta();
-                          this.presupuestoProducto = new PresupuestoProducto();
+                        }).then(this.presupuestoProducto = new PresupuestoProducto().then(alertSucessPresupuesto()));
+                        
+
                   }else {
                      alertWarningCompletarCampos()
                   }
