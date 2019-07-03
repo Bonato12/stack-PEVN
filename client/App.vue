@@ -4,59 +4,60 @@
                 <div style="width:70px;">
                     <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>
-                <div class="navbar-collapse" style="margin-left:150px;">
+                <div class="navbar-collapse" style="margin-left:250px;">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
-                            <router-link   tag="a" active-class="activo" id="cliente"   to="/HomeCliente">
+                            <router-link class="item"   tag="a" active-class="activo" id="cliente"   to="/HomeCliente">
                               <i class="fas fa-wheelchair"></i>
                               Clientes
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  tag="a" active-class="activo"   to="/HomeProducto">
+                            <router-link  class="item" tag="a" active-class="activo"   to="/HomeProducto">
                               <i class="fas fa-mobile-alt"></i>
                               Productos
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  tag="a" active-class="activo"   to="/HomeVenta">
+                            <router-link class="item"  tag="a" active-class="activo"   to="/HomeVenta">
                               <i class="fas fa-shopping-cart"></i>
                               Ventas
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  tag="a" active-class="activo"   to="/HomeCompra">
+                            <router-link class="item"  tag="a" active-class="activo"   to="/HomeCompra">
                               <i class="fas fa-coins"></i>
                               Compras
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link   tag="a"active-class="activo"   to="/HomeArreglo">
+                            <router-link class="item"   tag="a"active-class="activo"   to="/HomeArreglo">
                               <i class="fas fa-tools"></i>
                               Arreglos
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link   tag="a" active-class="activo"   to="/HomeProveedor">
+                            <router-link  class="item" tag="a" active-class="activo"   to="/HomeProveedor">
                               <i class="fas fa-people-carry"></i>
                               Proveedores
                             </router-link>
                         </li>
                     </ul>
-                    <div>
-                      <b-dropdown id="dropdown-right" right text="Usuario" variant="warning" class="m-2">
-                        <b-dropdown-item href="#">
-                            <i class="fas fa-user"></i>
-                            {{ user }}
-                        </b-dropdown-item>
+                    <div style="margin-right:0px; width:400px;">
+                      <div class="dropdown" style="float:right;">
+                      <b-dropdown variant="warning">
+                        <template slot="button-content">
+                          <i class="fas fa-user"></i>
+                          {{ user }}
+                        </template>
                         <b-dropdown-item>
-                          <router-link   tag="a" style="color:black;"  to="/Login" v-on:click.native="logout()" title="Salir">
+                          <router-link class="salir"   tag="a" style="color:black;"  to="/Login" v-on:click.native="logout()" title="Salir">
                                  <i class="fas fa-sign-out-alt"></i>
                                  Salir
                            </router-link>
                         </b-dropdown-item>
-
                       </b-dropdown>
+                    </div>
                     </div>
                 </div>
             </nav>
@@ -131,18 +132,27 @@ background-blend-mode: multiply;
 .activo{
     background-color: #fec400;
     color: black;
-    height: 183%;
+    height: 123%;
     width:auto;
     margin-top:-55;
 
 
 }
 
+.dropdown{
+  z-index: 20;
+}
+
 a{
-  height: 120%;
+
+  height: 10%;
   display: inline-block;
 
+}
 
+.item{
+  height: 120%;
+  display: inline-block;
 }
 
 a:link
@@ -166,7 +176,56 @@ nav{
      text-align:center;
 }
 
+/*nuevo boton*/
+.btns{
+  border: 1px solid black;
+  background: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: 'Numans', sans-serif;
+  cursor: pointer;
+  transition: 0.8s;
+  position: relative;
+  overflow: hidden;
+}
 
+.btns1{
+  color: #fec400;
+}
 
+.btns1:hover{
+  color: #fff;
+}
+
+.btns::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #fec400;
+  z-index: -1;
+  transition: 0.8s;
+}
+.btns1::before{
+  top: 0;
+  border-radius: 0 0 50% 50%;
+}
+
+.btns1:hover::before{
+  height: 180%;
+}
+
+dropbtn {
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  font-size: 16px;
+  border: none;
+}
+
+.salir{
+  width: 220px;
+}
 
 </style>
