@@ -111,7 +111,7 @@ export default {
              { headers: {
                'Content-Type': 'application/json',
              }
-             }).then(alertEditSucessProducto());
+           }).then(alertEditSucessProducto()).then(this.$router.push('/HomeProducto'));
         }else{
           alertCompletarCampos();
         }

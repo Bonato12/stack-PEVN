@@ -110,7 +110,7 @@ export default {
                     'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
                     'Content-Type': 'application/json',
                   },
-                }).then(this.producto = new Producto())
+                }).then(this.producto = new Producto()).then(alertSucessProducto());
             }else{
                 alertWarningCompletarCampos();
             }
