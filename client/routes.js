@@ -16,6 +16,7 @@ import NuevoArreglo from './components/Arreglo/NuevaArreglo.vue'
 import HomeArreglo from './components/Arreglo/HomeArreglo.vue'
 import HomeCompra from './components/Compra/HomeCompra.vue'
 import NuevaCompra from './components/Compra/NuevaCompra.vue'
+import EditarCompra from './components/Compra/EditarCompra.vue'
 import HomePresupuesto from './components/Presupuesto/HomePresupuesto.vue'
 import NuevoPresupuesto from './components/Presupuesto/NuevoPresupuesto.vue'
 import VerPresupuesto from './components/Presupuesto/VerPresupuesto.vue'
@@ -97,6 +98,10 @@ const rutas = new VueRouter({
             {
               path:'/NuevaCompra',
               component: NuevaCompra
+            },
+            {
+              path:'/EditarCompra/:id',
+              component: EditarCompra
             },
             {
               path:'/HomeArreglo',

@@ -17,7 +17,7 @@ var db = require('../database');
               })
           },
           getIdCompraProducto(req,res){
-               db.query('SELECT V.fecha, VP.id_compraProducto, V.id_compra,PR.marca, PR.modelo,VP.cantidad, VP.precio FROM compraProducto VP, compra V, producto PR WHERE VP.id_compra = ($1) AND VP.id_compra = V.id_compra AND VP.id_producto = PR.id_producto', [req.params.id_compra])
+               db.query('SELECT C.fecha, CP.id_compraProducto, C.id_compra, PR.marca, PR.modelo,CP.cantidad, CP.precio FROM compraProducto CP, compra C, producto PR WHERE CP.id_compra = ($1) AND CP.id_compra = C.id_compra AND CP.id_producto = PR.id_producto', [req.params.id_compra])
               .then(response=> {
                 res.json(response.rows);
                 console.log(response.rows);
