@@ -12,7 +12,7 @@
            </h2>
         </div>
     </div>
-    <div v-if="datos.length">
+    <div v-if="datos.length" style="tabla">
         <vue-good-table
               :columns="columns"
               :rows="datos"
@@ -406,6 +406,10 @@ li {
 
 .btn{
   -webkit-transition: -webkit-transform .8s ease-in-out;
+}
+
+.tabla{
+  z-index: -1;
 }
 
 

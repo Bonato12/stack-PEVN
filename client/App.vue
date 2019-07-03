@@ -45,19 +45,13 @@
                     </ul>
                     <div style="margin-right:0px; width:400px;">
                       <div class="dropdown" style="float:right;">
-                      <b-dropdown variant="warning">
-                        <template slot="button-content">
-                          <i class="fas fa-user"></i>
-                          {{ user }}
-                        </template>
-                        <b-dropdown-item>
-                          <router-link class="salir"   tag="a" style="color:black;"  to="/Login" v-on:click.native="logout()" title="Salir">
-                                 <i class="fas fa-sign-out-alt"></i>
-                                 Salir
-                           </router-link>
-                        </b-dropdown-item>
-                      </b-dropdown>
-                    </div>
+                        <button class="btn btn-warning">
+                          <router-link   tag="a" style="color:black;"  to="/Login" v-on:click.native="logout()" title="Salir">
+                                {{ user }}
+                                <i class="fas fa-sign-out-alt"></i>
+                          </router-link>
+                        </button>
+                      </div>
                     </div>
                 </div>
             </nav>
@@ -226,6 +220,8 @@ dropbtn {
 
 .salir{
   width: 220px;
+  height:5px;
+  z-index:999
 }
 
 </style>
