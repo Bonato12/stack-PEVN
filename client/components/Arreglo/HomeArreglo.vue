@@ -41,10 +41,10 @@
                 theme="default">
          </vue-good-table>
          <div>
-              <transition v-if="showModal" class="animation fadeIn" name="modal">
+              <transition v-if="showModal" class="animation fadeInLeft" name="modal">
                 <div class="modal-mask">
                   <div class="modal-wrapper">
-                    <div class="modal-container">
+                    <div class="modal-container animated fadeInLeft">
                       <div class="modal-header" style="background-color:#424242;">
                         <slot name="header">
                           <h2 style="color:white; text-align:left;"></h2>

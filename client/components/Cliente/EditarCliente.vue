@@ -116,7 +116,7 @@ export default {
                   'Content-Type': 'application/json',
                 }
             }).then((data) => console.log(data)).then(alertEditSucessCliente()).then(this.$router.push('/HomeCliente'));
-          }else{0
+          }else{
             alertCompletarCampos();
           }
       }

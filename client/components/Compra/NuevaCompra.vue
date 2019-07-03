@@ -15,55 +15,63 @@
                   <hr style="color:black;">
                   <div class="card-body">
                     <form style="margin-left: 30px; margin-top:30px;">
-                            <div class="caja">
-                                <span class="input-group-text">Proveedor</span>
-                                <v-select :options="proveedor" label="dni" id="proveedorSelect"  v-model="proveedorSelected" style="width:290px; height:57px; background-color: white; border-radius: 4px;">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Proveedor</span>
+                                </div>
+                                <v-select  class="form-control" :options="proveedor" label="dni" id="proveedorSelect" v-model="proveedorSelected">
                                   <template slot="option" slot-scope="option">
-                                      <span class="fa" :class="option.icon"></span>
                                       {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="caja">
-                              <span class="input-group-text">Producto</span>
-                                <v-select  :options="producto" label="modelo"  v-model="productoSelected" style="width:290px; height:57px; border-radius: 4px; background-color: white;">
-                                  <template slot="option" slot-scope="option" style="height:107px;">
-                                      <span class="fa" :class="option.icon" style="height:107px;"></span>
-                                    {{ option.marca }} {{ option.modelo }} {{ option.precio }}
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Producto</span>
+                                </div>
+                                <v-select  class="form-control" @change="onChange($event)"  :options="producto" label="modelo"  v-model="productoSelected">
+                                  <template class="form-control" slot="option" slot-scope="option">
+                                    {{ option.marca }} {{ option.modelo }}
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="caja" style="width:230px;" >
-                                <div>
-                                  <span class="input-group-text">Cantidad</span>
-                                  <b-input-group>
-                                    <b-form-input class="form-control form-control-lg" type="number" :disabled="!productoSelected" min="0"  v-model="num" style="width:145px; height:57px; border-top:1px solid lightgray;  background-color:white;"/>
-                                    <b-input-group-append>
-                                      <b-button  variant="info" style="height:57px;" @click="decrementarCantidad()">
-                                          <i class="fas fa-minus"></i>
-                                      </b-button>
-                                      <b-button  variant="info"   @click="incrementarCantidad()" style="height:57px;">
-                                          <i class="fas fa-plus"></i>
-                                      </b-button>
-                                    </b-input-group-append>
-                                  </b-input-group>
-                               </div>
+                            <div>
+                              <span style="color:white; font-weight: bold;">Precio Unitario: {{this.productoSelected.precio}} </span>
+                            </div>
+                            <br>
+                            <div class="caja">
+                              <b-input-group prepend="Cantidad">
+                                <b-form-input v-model="num" min="0" readonly></b-form-input>
+                                <b-input-group-append>
+                                  <b-button variant="info" @click="decrementarCantidad()">
+                                        <i class="fas fa-minus"></i>
+                                  </b-button>
+                                  <b-button variant="info" @click="incrementarCantidad()">
+                                        <i class="fas fa-plus"></i>
+                                  </b-button>
+                                </b-input-group-append>
+                              </b-input-group>
                             </div>
                             <div class="caja">
-                                <div>
-                                  <span class="input-group-text">Precio</span>
-                                </div>
-                                <input required  type="number" min="0"  v-model="precio" :disabled="!productoSelected"  class="form-control form-control-lg" style="background-color:white; border-top:1px solid lightgray; height:57px; width:200px;">
+                              <div class="input-group form-group" style="width:537px; padding-left:25px;">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Precio</span>
+                                  </div>
+                                  <input  type="number" min="0"  v-model="precio"  class="form-control">
+                              </div>
                             </div>
                     </form>
                     <div>
                         <br>
-                        <button class="btn btn-success" v-on:click="guardarLista()" style="margin-left:52px;" title="Añadir al Carrito">
+                        <button class="btn" v-on:click="guardarLista()" style="margin-left:32px; background-color:#FFD700;" title="Añadir al Carrito">
                             <i class="fas fa-cart-plus"></i>
                         </button>
                     </div>
                     <br>
+                  <hr style="background-color:black;"/>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
+                                <i class="fas fa-shopping-cart fa-5x"></i>
+                                <br>
                                 <table class="table" style="background-color:white;">
                                   <thead>
                                     <tr >
@@ -109,6 +117,7 @@
        </div>
       </div>
 </template>
+</template>
 <script>
 
 import axios from 'axios'
@@ -131,6 +140,7 @@ export default {
       compraProducto: new CompraProducto(),
       proveedor: [],
       producto: [],
+      precioUnitario:'',
       precio: '',
       precioTotal: 0,
       productoSelected: '',
@@ -183,13 +193,8 @@ export default {
     incrementarCantidad(){
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
           if(this.productoSelected.precio){
-              if (this.num ==  this.productoSelected.stock){
-                  alertWarningLimiteStock();
-              }else{
                   this.num++;
                   this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
-
-              }
           }
     },
     decrementarCantidad() {
@@ -203,6 +208,7 @@ export default {
           }
       }
     },
+
     borrar(producto){
       //Funcion Que Elimina un Producto determinado de la Lista de Compra y actualiza el stock
       var indice = this.producto.indexOf(producto.producto);
@@ -215,11 +221,12 @@ export default {
           this.Lista.splice(index, 1);
       }
     },
+
     nuevaCompra(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
                   //Vamos a Comprar no es Vacia
                   if (this.Lista.length > 0 ){
-                      //Asignamos el Cliente Selecionado a this.compra.proveedor
+                      //Asignamos el proveedor Selecionado a this.compra.proveedor
                       //Asignamos a this.compra total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a comprar
                       this.compra.proveedor = this.proveedorSelected;
                       this.compra.total = this.precioTotal;
@@ -231,10 +238,10 @@ export default {
                           {
                             headers:{
                             'Access-Control-Allow-Origin': 'http://localhost:3000/compra',
+                            'Access-Control-Allow-Methods': 'POST',
                             'Content-Type': 'application/json'
                              }
-                        })
-
+                        });
                           alertSucessCompra();
                           this.compraProducto = new CompraProducto();
 
@@ -254,8 +261,6 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-
-
 .card{
 height: auto;
 margin-bottom: auto;
@@ -264,28 +269,25 @@ background-color: #696969;
 border: 1px solid;
 border-radius: 5px;
 }
-
-
-
 .venta_btn:hover{
 color: black;
 background-color: white;
 }
-
 .input-group-prepend span{
 width: auto;
-background-color: #FFC312;
+background-color: #FFD700;
 color: black;
 border:0 !important;
 }
-
 .form-control {
     border: 0;
     box-shadow: none;
+    background-color: white;
 }
-
-
-
+.caja {
+float:left;
+width:500px;
+}
 .botones{
   margin-left: 2px;
   cursor:pointer;
@@ -299,23 +301,12 @@ border:0 !important;
   transition:.5s;
   border-radius: 10px;
 }
-
-.caja{
-   float:left;
-   margin-left:5px;
-   height: 100px;
-
-}
-
 .input-group-text{
 width: auto;
 background-color: #FFD700;
 color: black;
 border: none;
-
-
 }
-
 input{
   background-color: white;
 }

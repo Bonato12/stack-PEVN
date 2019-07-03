@@ -6,7 +6,7 @@
       <div>
           <div class="card-header" style="background-color:#FFD700; ">
             <h2 style="text-align:center; color:black;">
-                <i class="fas fa-hand-holding-usd"></i>
+                <i class="fas fa-cart-plus"></i>
                 <i class="fas fa-clipboard-list"></i>
                 Compras
              </h2>
@@ -75,14 +75,8 @@
                                       -->
                                         <td scope="col">{{item.marca}}</td>
                                         <td scope="col">{{item.modelo}}</td>
-                                        <td scope="col">{{item.cantidad}}</td>
+                                        <td scope="col"> {{item.cantidad}}</td>
                                         <td scope="col">{{item.precio}}</td>
-                                      </tr>
-                                      <tr>
-                                        <td scope="col"></td>
-                                        <td scope="col"></td>
-                                        <td scope="col"></td>
-                                        <td scope="col"></td>
                                       </tr>
                                 </tbody>
                           </table>
@@ -95,7 +89,7 @@
                              </button>
                              <div style="width:5px;">
                              </div>
-                             <router-link class="btn btn-dark" :to="/EditarCompra/+this.idv" tag="button" title="Editar Compra">
+                             <router-link class="btn btn-dark" :to="/EditarCompra/+this.idc" tag="button" title="Editar Compra">
                                  <i class="fas fa-edit fa-1x"></i>
                              </router-link>
                          </div>
@@ -136,8 +130,11 @@
 <script>
 
 import axios from 'axios'
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import { alertEliminarCompra } from '../../assets/sweetAlert.js';
 import moment from 'moment';
 
 export default {
@@ -147,7 +144,7 @@ export default {
   },
   data () {
     return {
-      idv:'',
+      idc:'',
       lista: [],
       showModal: false,
       compras: [],
@@ -186,17 +183,62 @@ export default {
 
         });
     },
-
     eliminarCompra(){
-        axios.delete('http://localhost:3000/compra/'+this.idv).then((data)=>{
+        axios.delete('http://localhost:3000/compra/'+this.idc).then((data)=>{
           console.log(data)
           this.getCompra()
-        }).then(alertSucessDelete()).then(this.hideModal());
+        }).then(alertEliminarCompra()).then(this.hideModal());
     },
-    onRowClick(params) {
+    exportarPdf(){
+        var columnas = [
+          {title: "NOMBRE", dataKey:"nombre"},
+          {title: "APELLIDO", dataKey:"apellido"},
+          {title: "FECHA", dataKey:"fecha"},
+          {title: "TOTAL", dataKey:"total"}
+          ]
+        var doc = new jsPDF();
+        var fecha = new Date();
+        var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+        doc.addImage(imgData, 'JPEG', 15, 5, 80, 40);
+        doc.text(15,60,'Lista Compras')
+        doc.text(15, 70, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
+        doc.text(65, 70, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
+        doc.autoTable(columnas,this.compras, {
+        				theme : 'grid',
+        				margin : {
+        					top : 75
+        				}
+              });
+        doc.save(now+'-compras.pdf');
+      },
+      detalleCompra(params) {
+        this.showModal = true;
+        console.log(params);
+        this.compra.id_proveedor = params.row.id_proveedor;
+        this.proveedor.dni = params.row.dni;
+        this.proveedor.nombre = params.row.nombre;
+        this.proveedor.apellido = params.row.apellido;
+    },
+    exportarXls() {
+      var fecha = new Date();
+      var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+      var proveedores = XLSX.utils.json_to_sheet(this.compras)
+      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      XLSX.utils.book_append_sheet(wb, proveedores, this.compras)
+      XLSX.writeFile(wb,now+'-compras.xlsx');
+    },
+    exportarCsv() {
+      var fecha = new Date();
+      var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+      var proveedores = XLSX.utils.json_to_sheet(this.compras)
+      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      XLSX.utils.book_append_sheet(wb, provedores, this.compras)
+      XLSX.writeFile(wb,now+'-compras.csv');
+    },
+      onRowClick(params) {
         this.showModal = true;
         console.log(params.row);
-            this.idv =  params.row.id_compra;
+            this.idc =  params.row.id_compra;
             axios.get('http://localhost:3000/compraProducto/'+ params.row.id_compra).then((response) =>{
               this.comprasProducto = response.data;
               this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
