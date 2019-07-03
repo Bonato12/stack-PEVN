@@ -13,24 +13,20 @@
           </div>
           <div class="modal-body" style="background-color:#f1f8e9;">
             <slot name="body">
-              <b-row class="mb-1">
-                 <b-col cols="3">ID:</b-col>
-                   <b-col>{{presupuesto.id_presupuesto}}</b-col>
-               </b-row>
                <hr>
                <b-row class="mb-1">
-                 <b-col cols="3">Dni:</b-col>
+                 <b-col cols="3">Arreglo:</b-col>
                    <b-col>{{presupuesto.arreglo}}</b-col>
                </b-row>
                <hr>
                <b-row class="mb-1">
-                 <b-col cols="3">Nombre:</b-col>
+                 <b-col cols="3">Observacion:</b-col>
                    <b-col>{{presupuesto.observacion}}</b-col>
                </b-row>
                <hr>
                <b-row class="mb-1">
-                 <b-col cols="3">Apellido:</b-col>
-                   <b-col>{{presupuesto.precioTotal}}</b-col>
+                 <b-col cols="3">precioTotal:</b-col>
+                   <b-col>{{presupuesto.preciototal}}</b-col>
                </b-row>
                <hr>
             </slot>
@@ -91,7 +87,7 @@ export default {
   methods: {
     getPresupuesto(){
         axios.get('http://localhost:3000/presupuesto/'+this.idp).then((response) =>{
-          this.presupuesto = JSON.stringify(response.data[0]);
+          this.presupuesto = response.data[0];
           console.log(this.presupuesto);
         });
     },

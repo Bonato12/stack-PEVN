@@ -16,9 +16,8 @@ var db = require('../database');
                 console.log(error);
               })
           },
-          /*
           getIdPresupuestoProducto(req,res){
-               db.query('SELECT V.fecha, VP.id_ventaProducto, V.id_venta,PR.marca, PR.modelo,VP.cantidad, VP.precio FROM ventaProducto VP, venta V, producto PR WHERE VP.id_venta = ($1) AND VP.id_venta = V.id_venta AND VP.id_producto = PR.id_producto', [req.params.id_venta])
+               db.query('SELECT  PP.id_presupuesto, PP.presupuesto, PP.producto, PP.cantidad, PP.precio  FROM presupuesto P, presupuestoProducto PP WHERE PP.presupuesto =($1)', [req.params.id_venta])
               .then(response=> {
                 res.json(response.rows);
                 console.log(response.rows);
@@ -26,5 +25,5 @@ var db = require('../database');
                 console.log(error);
               });
             },
-            */
+
        }
