@@ -172,7 +172,7 @@ export default {
                     if (data.data.status == 200){
                       this.$swal(
                         'Eliminado!',
-                        'El Cliente ha sido eliminado.',
+                        'El Arreglo ha sido eliminado.',
                         'success'
                       );
                      this.getArreglo()

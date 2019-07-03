@@ -89,9 +89,10 @@ export default {
       cliente:'',
       producto:'',
       arreglo : new Arreglo(),
-      condicion : [{name:"EN ESPERA"},
-                       {name:"ACEPTADO"},
-                       {name:"CANCELADO"}]
+      condicion : [{name:"EN ESPERA DE PRESUPUESTO"},
+                       {name:"EN EVALUACION DE PRESUPUESTO"},
+                       {name:"PRESUPUESTO CANCELADO"},
+                       {name:"PRESUPUESTO ACEPTADO"}]
 		}
 
 

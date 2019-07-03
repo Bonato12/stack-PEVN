@@ -31,7 +31,7 @@ var id;
               for (var i=0; i < req.body.lista.length; i++){
                   console.log(req.body.lista[i]);
               }
-              db.query("INSERT INTO presupuesto(arreglo,observacion,precioTotal) VALUES($1,$2,$3) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.precioTotal]).then(response=> {
+              db.query("INSERT INTO presupuesto(arreglo,observacion,estado,precioTotal) VALUES($1,$2,$3,$4) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.estado,req.body.presupuesto.precioTotal]).then(response=> {
                   id = parseInt(response.rows[0].id_presupuesto);
                   console.log("EL ID INSERTADO ES:"+id);
                         for (var i=0 ; i < req.body.lista.length ; i++) {

@@ -134,7 +134,6 @@ background-blend-mode: multiply;
 }
 
 .dropdown{
-  z-index: 20;
 }
 
 a{
