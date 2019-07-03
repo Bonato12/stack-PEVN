@@ -97,7 +97,7 @@
                           </div>
                           <br>
                           <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeVenta" tag="button" class="botones"  style="background:white;">
+                              <router-link to="/HomeArreglo" tag="button" class="botones"  style="background:white;">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>

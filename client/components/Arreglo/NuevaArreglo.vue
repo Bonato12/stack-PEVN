@@ -75,7 +75,6 @@
 import axios from 'axios'
 import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertSucessVenta} from '../../assets/sweetAlert.js'
 import Arreglo from '../../models/Arreglo';
 
 export default {

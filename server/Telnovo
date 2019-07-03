@@ -55,7 +55,7 @@ CREATE TABLE venta(
 	CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente)
 );
 
-CREATE OR REPLACE TABLE presupuesto(
+CREATE TABLE presupuesto(
 	id_presupuesto SERIAL NOT NULL,
 	arreglo INTEGER NOT NULL,
 	observacion VARCHAR(100) NOT NULL,
@@ -128,27 +128,24 @@ SELECT p.id_presupuesto FROM presupuesto p  WHERE p.arreglo=3
 SELECT  PP.id_presupuestoProducto, PP.presupuesto, PP.producto, PP.cantidad, PP.precio  FROM presupuesto P, presupuestoProducto PP WHERE PP.presupuesto = P.id_presupuesto AND PP.presupuesto =1
 
 
-CREATE OR REPLACE FUNCTION func_p() RETURNS TRIGGER AS $funcemp$
-DECLARE
+CREATE OR REPLACE FUNCTION func_e() RETURNS TRIGGER AS $funcemp$
+DECLARE 
+presupuesto INTEGER;
 BEGIN
-NEW.estadoCivil := UPPER(NEW.estadoCivil);
-if OLD.estadoCivil = 'SOLTERO' AND (NEW.estadoCivil = 'VIUDO' or
-NEW.estadoCivil='DIVORCIADO') THEN
-RAISE EXCEPTION 'ERROR de transición en estado civil';
-END IF;
-if (OLD.estadoCivil = 'CASADO' or OLD.estadoCivil = 'DIVORCIADO' OR OLD.estadoCivil =
-'VIUDO') AND (NEW.estadoCivil = 'SOLTERO') THEN
-RAISE EXCEPTION 'ERROR de transición en estado civil';
-END IF;
-if OLD.estadoCivil = 'DIVORCIADO' AND (NEW.estadoCivil = 'VIUDO') THEN
-RAISE EXCEPTION 'ERROR de transición en estado civil';
-END IF;
-if OLD.estadoCivil = 'VIUDO' AND (NEW.estadoCivil = 'DIVORDIADO') THEN
-RAISE EXCEPTION 'ERROR de transición en estado civil';
-END IF;
+	IF NEW.presupuesto <> '' THEN
+		UPDATE arreglo SET concicion = 'EVALUACION DE PRESUPUESTO' WHERE NEW.arreglo = id_arreglo;
+	END IF;
 RETURN NEW;
 END; $funcemp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_e AFTER UPDATE ON presupuesto
+FOR EACH ROW EXECUTE PROCEDURE func_e();
 
 
 CREATE TRIGGER trigger_p BEFORE UPDATE ON presupuesto
 FOR EACH ROW EXECUTE PROCEDURE func_p();
+
+SELECT * FROM presupuesto;
+
+INSERT INTO presupuesto(2,)
+SELECT * FROM producto
