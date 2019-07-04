@@ -12,7 +12,9 @@
              </h2>
           </div>
           <div class="modal-body" style="background-color:#f1f8e9;">
-            <h4>Detalle del Presupuesto:</h4>
+            <h4>
+              <i class="fas fa-file-invoice-dollar"></i>
+              Detalle del Presupuesto:</h4>
             <slot name="body">
                <hr>
                <b-row class="mb-1">
@@ -34,14 +36,17 @@
           </div>
           </hr>
           <div class="modal-body" style="background-color:#f1f8e9;">
-              <h4>Presupuesto de Mano de Obra:</h4>
+              <h4>
+                <i class="fas fa-toolbox"></i>
+                Presupuesto de Mano de Obra:</h4>
               <br>
                 {{presupuesto.preciomanoobra}}
               <br>
           </div>
           <div class="modal-body" style="background-color:#f1f8e9;">
-              <h4>Lista de Repuestos Utilizados:</h4>
-
+              <h4>
+                <i class="fas fa-tools"></i>
+                Lista de Repuestos Utilizados:</h4>
               <br>
               <table class="table" style="color:black">
                     <thead>
@@ -66,7 +71,9 @@
               </table>
           </div>
           <div class="modal-body" style="background-color:#f1f8e9;">
-              <h4>Estado del Presupuesto:</h4>
+              <h4>
+                <i class="fas fa-info-circle"></i>
+                Estado del Presupuesto:</h4>
             <form @submit.prevent="cambiarEstado()">
               <div class="input-group form-group">
                   <div class="input-group-prepend">

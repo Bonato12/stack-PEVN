@@ -48,14 +48,15 @@
                     </form>
                     <div>
                         <button class="btn" v-on:click="guardarLista()" style="margin-left:32px; width:100px; border-radius:15px; background-color:#FFD700;" title="Ingrese Observacion">
-                            <i class="fas fa-cart-plus"></i>
+                          <i class="fas fa-mobile-alt fa"></i>
+                          <i class="fas fa-tools fa"></i>
                         </button>
                     </div>
                     <br>
                   <hr style="background-color:black;"/>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
-                                <i class="fas fa-shopping-cart fa-5x"></i>
-                                <i class="fas fa-tools fa-5x"></i>
+                                <i class="fas fa-mobile-alt fa-3x"></i>
+                                <i class="fas fa-tools fa-3x"></i>
                                 <br>
                                 <table class="table" style="background-color:white;">
                                   <thead>
@@ -93,6 +94,14 @@
                                     <span class="input-group-text">Precio Mano de Obra</span>
                                 </div>
                                 <input @change="precioManoObra()" type="number" min="0"  v-model="presupuesto.precioManoObra"  class="form-control">
+                            </div>
+                          </div>
+                          <div  style="text-align:right; margin-right:50px; color:white;">
+                            <div class="input-group form-group" style="width:337px; padding-left:25px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Precio Repuesto</span>
+                                </div>
+                                <input  type="number" min="0"  v-model="precioRepuesto"  class="form-control">
                             </div>
                           </div>
                           <div  style="text-align:right; margin-right:50px; color:white;">
@@ -143,7 +152,8 @@ export default {
       arreglo: '',
       Lista: [],
       producto: [],
-      precio: '',
+      precio: 0,
+      precioRepuesto:0,
       precioTotal: 0,
       repuestoSelected: '',
       num: 0
@@ -170,7 +180,7 @@ export default {
             console.log(JSON.stringify(this.repuestoSelected));
             //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
             if(this.repuestoSelected && this.precio > 0 && this.num > 0){
-                this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
+                this.precioRepuesto = parseInt(this.precioRepuesto) + parseInt(this.precio);
                 this.presupuestoProducto.producto = this.repuestoSelected;
                 this.presupuestoProducto.cantidad = this.num;
                 this.presupuestoProducto.precio = this.precio;
@@ -219,7 +229,7 @@ export default {
       console.log(indice);
       //Resta al Precio Total el precio del Producto eliminado de la lista.
       var index = this.Lista.indexOf(producto);
-      this.precioTotal = this.precioTotal - this.Lista[index].precio
+      this.precioRepuesto = this.precioRepuesto - this.Lista[index].precio
       if (index > -1) {
           this.Lista.splice(index, 1);
       }
@@ -235,14 +245,11 @@ export default {
            }
        },
        precioManoObra(){
-         this.precioTotal = parseInt(this.precioTotal) + parseInt(this.presupuesto.precioManoObra);
+         this.precioTotal = parseInt(this.precioRepuesto) + parseInt(this.presupuesto.precioManoObra);
        },
 
     nuevoPresupuesto(){
-                  //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
-                  //Vamos a Vender no es Vacia
                   if (this.Lista.length > 0 ){
-                      //Asignamos a this.presupuesto total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
                       this.presupuesto.arreglo = this.ida;
                       this.presupuesto.estado = 'EN ESPERA';
                       this.presupuesto.precioTotal = this.precioTotal;
