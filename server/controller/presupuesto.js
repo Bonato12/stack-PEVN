@@ -48,6 +48,16 @@ var id;
               }).catch((error) =>{
                   console.log(error);
               });
+              },
+              updatePresupuesto(req,res){
+                    console.log("Peticion UPDATE Presupuesto");
+                    db.query("UPDATE presupuesto SET estado=($1) WHERE id_presupuesto=($2)", [req.body.estado,req.params.id_presupuesto]).then(response=> {
+                    res.json({
+                      mensaje: "Editado Correctamente"
+                    })
+                    }).catch(error =>{
+                      console.log(error);
+                    });
+                  }
 
-        },
        }

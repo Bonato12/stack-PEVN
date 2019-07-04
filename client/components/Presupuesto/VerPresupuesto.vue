@@ -60,15 +60,27 @@
           </div>
           <div class="modal-body" style="background-color:#f1f8e9;">
               <h4>Estado del Presupuesto:</h4>
+            <form @submit.prevent="cambiarEstado()">
               <div class="input-group form-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Estado</span>
                   </div>
-                  <select required class="form-control" v-model="Estado" placeholder="Elige una Condicion">
-                    <option   disabled selected>Elige un Estado</option>
-                    <option  v-for="item in estado">{{ item.name }}</option>
+                  <select required class="form-control" v-model="estado" placeholder="Elige un Tipo Producto">
+                    <option value=""  disabled selected>Elige un Tipo Producto</option>
+                    <option  v-for="item in estadoP">{{ item.name }}</option>
                  </select>
               </div>
+              <div style="margin-left:250px;">
+                <button type="submit" class="btn"  title="Guardar" >
+                      <i class="far fa-save fa-1x"></i>
+                      Guardar
+                </button>
+                <router-link to="/HomeArreglo" tag="button" class="btn"  title="Volver a HomeCliente" >
+                    <i class="fas fa-arrow-left"></i>
+                      Volver
+                </router-link>
+            </div>
+          </form>
           </div>
       </div>
     </div>
@@ -93,8 +105,8 @@ export default {
       showModal: false,
       presupuesto:'',
       presupuestoProducto: '',
-      idpp: '',
-      estado : [{name:"EN ESPERA"},
+      estado: '',
+      estadoP : [{name:"EN ESPERA"},
                        {name:"ACEPTADO"},
                        {name:"CANCELADO"}]
 		}
@@ -106,7 +118,6 @@ export default {
   },
   methods: {
     getPresupuesto(){
-      this.idpp = 1;
         axios.get('http://localhost:3000/presupuesto/'+this.idp).then((response) =>{
           this.presupuesto = response.data[0];
           console.log(this.presupuesto);
@@ -114,8 +125,6 @@ export default {
         });
   },
     control(id){
-      console.log("HOLA");
-      console.log(id);
       axios.get('http://localhost:3000/presupuestoProducto/'+id).then((response) =>{
         console.log(response.data)
         this.presupuestoProducto = response.data;
@@ -127,6 +136,19 @@ export default {
           this.getArreglo()
         }).then(alertSucessDelete()).then(this.hide());
     },
+    cambiarEstado(){
+      console.log(this.estado)
+      console.log(this.idp)
+      axios.put('http://localhost:3000/presupuesto/'+ this.idp,
+          {
+          estado: this.estado
+          }
+          ,
+          { headers: {
+            'Content-Type': 'application/json',
+          }
+      })
+    }
 
 
 
