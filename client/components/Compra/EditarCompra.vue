@@ -74,13 +74,13 @@ export default {
     return {
       idc: this.$route.params.id,
       compra: new Compra(),
+      proveedor:[],
       proveedorSelected: '',
       producto: [],
+      pro: '',
       num: '',
-      proveedor:'',
       fecha: '',
       date: '',
-      proveedorS: []
 		}
   },
   computed:{
@@ -92,7 +92,7 @@ export default {
   methods: {
     getProveedor(){
       axios.get('http://localhost:3000/proveedor').then((response) =>{
-        this.proveedorS = response.data;
+        this.proveedor = response.data;
       });
     },
     getIdCompra(){
@@ -102,14 +102,17 @@ export default {
           var mes =  moment(response.data[0].fecha).format("M");;
           var anio =  moment(response.data[0].fecha).format("YYYY");;
           this.date = new Date(anio,mes-1,dia);
-          axios.get('http://localhost:3000/proveedor/'+this.proveedor).then((response) =>{
+          this.pro = response.data[0].id_proveedor;
+          axios.get('http://localhost:3000/proveedor/'+this.pro).then((response) =>{
               this.proveedorSelected = response.data;
               console.log(this.proveedorSelected);
           });
       });
     },
     editarCompra(){
-                      this.compra.fecha = this.date
+                      console.log("EL ID ES :", this.proveedorSelected.id_proveedor)
+                      this.compra.fecha = this.date;
+                      this.compra.proveedor = this.proveedorSelected.id_proveedor;
                       axios.put('http://localhost:3000/compra/'+this.idc,
                           this.compra,
                           {
@@ -206,8 +209,6 @@ width: auto;
 background-color: #FFD700;
 color: black;
 border: none;
-
-
 }
 
 input{
