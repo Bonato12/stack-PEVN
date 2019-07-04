@@ -60,6 +60,7 @@ CREATE TABLE presupuesto(
 	arreglo INTEGER NOT NULL,
 	observacion VARCHAR(100) NOT NULL,
 	estado VARCHAR(100) NOT NULL,
+	precioManoObra INTEGER NOT NULL,
 	precioTotal INTEGER NOT NULL,
 	CONSTRAINT pk_id_presupuesto PRIMARY KEY(id_presupuesto),
 	CONSTRAINT fk_arreglo FOREIGN KEY(arreglo) REFERENCES arreglo(id_arreglo)
@@ -182,7 +183,7 @@ DECLARE
 BEGIN 
 IF NEW.ESTADO='ACEPTADO' THEN
 	UPDATE arreglo SET condicion = 'PRESUPUESTO ACEPTADO' where arreglo.id_arreglo = NEW.arreglo;
-	INSERT INTO reparacion values (DEFAULT,id_presupuesto,,' ')
+	--INSERT INTO reparacion values (DEFAULT,id_presupuesto,' ')
 END IF;
 IF new.ESTADO='CANCELADO' THEN
 	UPDATE arreglo SET condicion = 'PRESUPUESTO CANCELADO' where arreglo.id_arreglo = NEW.arreglo;

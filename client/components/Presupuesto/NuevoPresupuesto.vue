@@ -90,6 +90,14 @@
                           <div  style="text-align:right; margin-right:50px; color:white;">
                             <div class="input-group form-group" style="width:337px; padding-left:25px;">
                                 <div class="input-group-prepend">
+                                    <span class="input-group-text">Precio Mano de Obra</span>
+                                </div>
+                                <input @change="precioManoObra()" type="number" min="0"  v-model="presupuesto.precioManoObra"  class="form-control">
+                            </div>
+                          </div>
+                          <div  style="text-align:right; margin-right:50px; color:white;">
+                            <div class="input-group form-group" style="width:337px; padding-left:25px;">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text">Precio Total</span>
                                 </div>
                                 <input  type="number" min="0"  v-model="precioTotal"  class="form-control">
@@ -102,7 +110,7 @@
                                       Volver
                               </router-link>
                               <div style="width:5px;"></div>
-                              <button v-on:click="nuevaVenta()" class="botones" style="width:115px; background-color:#fec400;">
+                              <button v-on:click="nuevoPresupuesto()" class="botones" style="width:115px; background-color:#fec400;">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -134,7 +142,6 @@ export default {
       ida: this.$route.params.id,
       arreglo: '',
       Lista: [],
-      cliente: [],
       producto: [],
       precio: '',
       precioTotal: 0,
@@ -227,13 +234,17 @@ export default {
              }
            }
        },
+       precioManoObra(){
+         this.precioTotal = parseInt(this.precioTotal) + parseInt(this.presupuesto.precioManoObra);
+       },
 
-    nuevaVenta(){
+    nuevoPresupuesto(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
                   //Vamos a Vender no es Vacia
                   if (this.Lista.length > 0 ){
-                      //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
-                      this.presupuesto.arreglo = this.ida
+                      //Asignamos a this.presupuesto total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
+                      this.presupuesto.arreglo = this.ida;
+                      this.presupuesto.estado = 'EN ESPERA';
                       this.presupuesto.precioTotal = this.precioTotal;
                       axios.post('http://localhost:3000/presupuesto',
                           {
@@ -245,7 +256,7 @@ export default {
                             'Content-Type': 'application/json'
                              }
                         }).then(this.presupuestoProducto = new PresupuestoProducto().then(alertSucessPresupuesto()));
-                        
+
 
                   }else {
                      alertWarningCompletarCampos()

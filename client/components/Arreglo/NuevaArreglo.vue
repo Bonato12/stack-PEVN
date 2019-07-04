@@ -42,15 +42,6 @@
                                 <textarea required type="text" v-model="arreglo.observacion" class="form-control" placeholder="Ingrese Observacion"></textarea>
 
                             </div>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">Condicion</span>
-                                </div>
-                                <select required class="form-control" v-model="arreglo.condicion" placeholder="Elige una Condicion">
-                                  <option   disabled selected>Elige un Tipo Producto</option>
-                                  <option  v-for="item in condicion">{{ item.name }}</option>
-                               </select>
-                            </div>
                     </form>
                     <br>
                           <div class="d-flex justify-content-end" style="padding-right:50px;">
@@ -87,11 +78,7 @@ export default {
     return {
       cliente:'',
       producto:'',
-      arreglo : new Arreglo(),
-      condicion : [{name:"EN ESPERA DE PRESUPUESTO"},
-                       {name:"EN EVALUACION DE PRESUPUESTO"},
-                       {name:"PRESUPUESTO CANCELADO"},
-                       {name:"PRESUPUESTO ACEPTADO"}]
+      arreglo : new Arreglo()
 		}
 
 
@@ -115,6 +102,7 @@ export default {
         });
       },
       nuevoArreglo(){
+          this.arreglo.condicion = 'EN ESPERA DE PRESUPUESTO';
           console.log(this.arreglo);
           if (this.arreglo.cliente && this.arreglo.producto && this.arreglo.observacion && this.arreglo.condicion){
               axios.post('http://localhost:3000/arreglo',

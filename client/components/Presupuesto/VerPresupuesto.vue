@@ -34,7 +34,14 @@
           </div>
           </hr>
           <div class="modal-body" style="background-color:#f1f8e9;">
+              <h4>Presupuesto de Mano de Obra:</h4>
+              <br>
+                {{presupuesto.preciomanoobra}}
+              <br>
+          </div>
+          <div class="modal-body" style="background-color:#f1f8e9;">
               <h4>Lista de Repuestos Utilizados:</h4>
+
               <br>
               <table class="table" style="color:black">
                     <thead>
