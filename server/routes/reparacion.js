@@ -4,7 +4,8 @@ var app = express();
 var nodemailer = require('nodemailer');
 const reparacionController = require('../controller/reparacion');
 
-router.get('/proveedor', proveedorController.getReparacion);
+router.get('/reparacion', reparacionController.getReparacion);
+router.get('/reparacion/:id_reparacion', reparacionController.getIdReparacion);
 
 
 const cors = require('cors');

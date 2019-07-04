@@ -2,7 +2,7 @@
   <div id="HomeReparaciones">
   <br>
   <br>
-  <div>
+  <div class="container">
           <div class="card-header" style="background-color:#FFD700; ">
             <h2 style="text-align:center; color:black;">
                 <i class="fas fa-tools"></i>
@@ -10,7 +10,6 @@
                 Reparaciones
              </h2>
           </div>
-    </div>
     <div v-if="this.reparacion.length">
       <vue-good-table
               :columns="columns"
@@ -21,7 +20,7 @@
                 skipDiacritics: true,
                 placeholder: 'Buscar Reparacion',
               }"
-              @on-row-click="onRowClick"
+              @on-row-click="detalleReparacion"
               :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -39,7 +38,93 @@
 
                 theme="default">
          </vue-good-table>
+       </div>
+       <transition v-if="showModal" class="animation fadeInLeft" name="modal">
+         <div class="modal-mask">
+           <div class="modal-wrapper">
+             <div class="modal-container animated fadeInLeft">
+               <div class="modal-header" style="background-color:#424242;">
+                 <slot name="header">
+                   <h2 style="color:white; text-align:left;">
+                     <i class="fas fa-id-card"></i>
+                     Detalles
+                   </h2>
+                   <button class="modal-default-button" @click="hideModal()">
+                    <i class="far fa-times-circle"></i>
+                   </button>
+                 </slot>
+               </div>
+               <div class="modal-body" style="background-color:#f1f8e9;">
+                 <slot name="body">
+                   <b-row class="mb-1">
+                      <b-col cols="3">ID:</b-col>
+                        <b-col></b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Dni:</b-col>
+                        <b-col></b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Nombre:</b-col>
+                        <b-col></b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Apellido:</b-col>
+                        <b-col></b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Direccion:</b-col>
+                        <b-col></b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Telefono:</b-col>
+                        <b-col></b-col>
+                    </b-row>
+                    <hr>
+                    <b-row class="mb-1">
+                      <b-col cols="3">Mail:</b-col>
+                        <b-col></b-col>
+                    </b-row>
+                 </slot>
+               </div>
+               <div class="modal-header" style="background-color:#FEC404;" >
+                 <h2 class="opciones" style="color:white;">Opciones</h2>
+                 <div class="row" style="float:right; padding-right:15px;">
+
+                      <div>
+                        <button class="btn btn-danger" v-on:click="eliminarReparacion()" title="Eliminar Cliente">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                      <div style="width:5px;">
+                      </div>
+                      <div>
+                        <router-link class="btn btn-dark" :to="/EditarReparacion/+reparacion.id_reparacion" tag="button" title="Editar Cliente">
+                            <i class="fas fa-edit fa-1x"></i>
+
+                        </router-link>
+
+                      </div>
+                      <div style="width:5px;">
+                      </div>
+                      <div>
+                        <button  class="btn btn-success" v-on:click="enviarMail()" title="Enviar Mail">
+                            <i class="fas fa-envelope fa-1x"></i>
+                        </button>
+                      </div>
+                  </div>
+              </div>
+             </div>
+           </div>
+         </div>
+       </transition>
     </div>
+
   </div>
 </template>
 
@@ -60,41 +145,49 @@
       idp: '',
       showModal: false,
       reparacion: [],
-      fecha: '',
-      fechafin: '',
       columns: [
         {
-          label: 'Cliente',
-          field: 'cliente',
+          label: 'Reparacion',
+          field: 'id_reparacion',
         },
         {
-          label: 'Producto',
-          field: 'producto',
+          label: 'Fecha Inicial',
+          field: 'fecha_ini',
         },
         {
-          label: 'Fecha',
-          field: 'fecha',
+          label: 'Fecha Final',
+          field: 'fecha_fin',
         },
         {
-          label: 'Observacion',
-          field: 'observacion',
+          label: 'Presupuesto',
+          field: 'id_presupuesto',
         },
-        {
-          label: 'Condicion',
-          field: 'condicion',
-        }
       ],
-      id_reparacion:''
 		}
   },
+  methods: {
+    getReparacion(){
+        axios.get('http://localhost:3000/reparacion').then((response) =>{
+          this.reparacion = response.data;
+          console.log(this.reparacion);
+        });
+    },
+    detalleReparacion(params) {
+        this.showModal = true;
+        console.log(params);
+          this.reparacion.id_reparacion = params.row.id_reparacion;
+    },
+    hideModal(){
+      this.showModal = false;
+    }
 
 
 }
+}
 
 </script>
-
 <style>
-#HomeReparaciones {
+#HomeReparaciones{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -103,9 +196,7 @@
 }
 
 
-h1, h2 {
-  font-weight: normal;
-}
+
 
 ul {
   list-style-type: none;
@@ -163,8 +254,5 @@ li {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-
-
-
 
 </style>

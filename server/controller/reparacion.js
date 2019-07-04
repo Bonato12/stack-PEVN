@@ -12,6 +12,14 @@ var db = require('../database');
               }).catch(error =>{
                   console.log(error);
               })
-          }
+          },
+          getIdReparacion(req,res){
+               db.query('SELECT * FROM proveedor WHERE id_reparacion=($1)', [req.params.id_reparacion])
+              .then(response=> {
+                res.json(response.rows);
+              }).catch(error =>{
+                console.log(error);
+              });
+            }
 
        }
