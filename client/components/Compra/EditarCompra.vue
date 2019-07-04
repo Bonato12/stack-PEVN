@@ -15,6 +15,16 @@
                   <hr style="color:black;">
                   <div class="card-body">
                     <form style="margin-left: 30px; margin-top:30px;">
+                      <div class="input-group form-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">Proveedor</span>
+                          </div>
+                          <v-select  class="form-control" :options="proveedor" label="dni" id="proveedorSelect" v-model="proveedorSelected">
+                            <template slot="option" slot-scope="option">
+                                {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
+                            </template>
+                          </v-select>
+                      </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text;">Editar Fecha</span>
@@ -88,8 +98,6 @@ export default {
     getIdCompra(){
       console.log(this.idv);
       axios.get('http://localhost:3000/compra/'+this.idc).then((response) =>{
-          this.proveedor = response.data[0].id_proveedor;
-          console.log(this.proveedor);
           var dia =  moment(response.data[0].fecha).format("D");;
           var mes =  moment(response.data[0].fecha).format("M");;
           var anio =  moment(response.data[0].fecha).format("YYYY");;
@@ -101,10 +109,6 @@ export default {
       });
     },
     editarCompra(){
-                  if (this.proveedorSelected){
-                      //Asignamos el Cliente Selecionado a this.venta.clientes
-                      //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
-                      this.compra.proveedor = this.proveedorSelected;
                       this.compra.fecha = this.date
                       axios.put('http://localhost:3000/compra/'+this.idc,
                           this.compra,
@@ -116,12 +120,6 @@ export default {
                              }
                         })
                           alertEditSucessCompra()();
-                          this.compraProducto = new CompraProducto();
-
-                  }else {
-                    alert("Completar Los Campos");
-                  }
-
               },
                   datepickerAbierto: function() {
                         console.log('El datepicker ha sido abierto');

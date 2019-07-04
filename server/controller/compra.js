@@ -71,7 +71,7 @@ var id;
 
           updateCompra(req, res){
                 console.log(req.body);
-                db.query("UPDATE compra SET id_proveedor = ($1), fecha = ($2) WHERE id_compra = ($3)",[req.body.proveedor[0].id_proveedor,req.body.fecha,req.params.id_compra]).then(response=> {
+                db.query("UPDATE compra SET  fecha = ($1) WHERE id_compra = ($2)",[req.body.fecha,req.params.id_compra]).then(response=> {
                   res.json({
                       mensaje: "Editado Correctamente"
                   })
