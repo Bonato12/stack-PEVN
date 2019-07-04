@@ -97,25 +97,19 @@
                  <div class="row" style="float:right; padding-right:15px;">
 
                       <div>
-                        <button class="btn btn-danger" v-on:click="eliminarReparacion()" title="Eliminar Cliente">
+                        <button class="btn btn-danger" v-on:click="eliminarReparacion()" title="Eliminar Reparacion">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                       </div>
                       <div style="width:5px;">
                       </div>
                       <div>
-                        <router-link class="btn btn-dark" :to="/EditarReparacion/+reparacion.id_reparacion" tag="button" title="Editar Cliente">
+                        <router-link class="btn btn-dark" :to="/EditarReparacion/+reparacion.id_reparacion" tag="button" title="Editar Reparacion">
                             <i class="fas fa-edit fa-1x"></i>
 
                         </router-link>
-
                       </div>
                       <div style="width:5px;">
-                      </div>
-                      <div>
-                        <button  class="btn btn-success" v-on:click="enviarMail()" title="Enviar Mail">
-                            <i class="fas fa-envelope fa-1x"></i>
-                        </button>
                       </div>
                   </div>
               </div>

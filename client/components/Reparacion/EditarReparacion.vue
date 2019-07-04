@@ -9,7 +9,7 @@
                     <h2 style="text-align:center; color:black;">
                       <i class="fas fa-cart-plus"></i>
                       <i class="fas fa-cog"></i>
-                       Editar Compra
+                       Editar Reparacion
                      </h2>
                   </div>
                   <hr style="color:black;">
@@ -17,24 +17,34 @@
                   <form style="margin-left: 30px; margin-top:30px;">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                          <span class="input-group-text">Fecha Compra</span>
+                          <span class="input-group-text">Fecha Inicial</span>
                         </div>
-                        <datepicker  class="datepicker"  v-model="date" name="fecha"
+                        <datepicker  class="datepicker"  v-model="dateIni" name="fecha"
                             @opened="datepickerAbierto"
                             @selected="fechaSeleccionada"
                             @closed="datepickerCerrado">
                         </datepicker>
                       </div>
+                      <div class="input-group form-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">Fecha Final</span>
+                          </div>
+                          <datepicker  class="datepicker"  v-model="dateFin" name="fecha"
+                              @opened="datepickerAbierto"
+                              @selected="fechaSeleccionada"
+                              @closed="datepickerCerrado">
+                          </datepicker>
+                        </div>
                     </form>
                   </div>
                   <div>
                           <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeCompra" tag="button" class="botones"  style="background:white;">
+                              <router-link to="/HomeReparacion" tag="button" class="botones"  style="background:white;">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:5px;"></div>
-                              <button v-on:click="editarCompra()" class="botones" style="width:115px; background-color:#fec400;">
+                              <button v-on:click="editarReparacion()" class="botones" style="width:115px; background-color:#fec400;">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -57,11 +67,12 @@ import moment from 'moment';
 export default {
   name: 'EditarCompra',
   created(){
-      this.getIdCompra();
+      this.getIdReparacion();
   },
   data () {
     return {
       idr: this.$route.params.id,
+      reparacion: new Reparacion(),
       fecha: '',
       dateIni: '',
       dateFin: ''
@@ -74,22 +85,27 @@ export default {
 
   },
   methods: {
-    getIdCompra(){
-      console.log(this.idv);
+    getIdReparacion(){
+      console.log(this.idr);
       axios.get('http://localhost:3000/reparacion/'+this.idr).then((response) =>{
           var diaIni =  moment(response.data[0].fecha_ini).format("D");;
           var mesIni =  moment(response.data[0].fecha_ini).format("M");;
           var anioIni =  moment(response.data[0].fecha_ini).format("YYYY");
-          var diaFin =  moment(response.data[0].fecha_fin).format("D");;
-          var mesFin =  moment(response.data[0].fecha_fin).format("M");;
-          var anioFin =  moment(response.data[0].fecha_fin).format("YYYY");
-          this.dateIni = new Date(anio,mes-1,dia);
-          this.dateFin = new Date(anio,mes-1,dia);
+          if (response.data[0].fecha_fin){
+            var diaFin =  moment(response.data[0].fecha_fin).format("D");;
+            var mesFin =  moment(response.data[0].fecha_fin).format("M");;
+            var anioFin =  moment(response.data[0].fecha_fin).format("YYYY");
+            this.dateFin = new Date(anioFin,mesFin-1,diaFin);
+          }
+
+          this.dateIni = new Date(anioIni,mesIni-1,diaIni);
+
       });
     },
     editarReparacion(){
-                      if (this.date){
-                      this.compra.fecha = this.date;
+                      if (this.dateIni){
+                      this.reparacion.fecha_ini = this.dateIni;
+                      this.reparacion.fecha_fin = this.dateFin;
                       axios.put('http://localhost:3000/reparacion/'+this.idr,
                           this.reparacion,
                           {

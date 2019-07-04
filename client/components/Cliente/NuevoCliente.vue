@@ -123,7 +123,7 @@ export default {
   methods: {
             nuevoCliente(){
                     this.errors = [];
-                    /*
+
                     if (!this.cliente.dni){
                       this.errors.push('Dni Vacio');
                     }else {
@@ -131,7 +131,6 @@ export default {
                            this.errors.push('Dni debe ser un numero entero');
                       }
                     }
-                    */
                     if (!this.cliente.nombre){
                       this.errors.push('Nombre Vacio');
                     }
@@ -172,27 +171,6 @@ export default {
                       this.showModal = true;
                     }
                   },
-                    /*
-                    if(this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
-                          console.log(this.cliente);
-                          axios.post('http://localhost:3000/cliente',
-                          this.cliente, // the data to posthttp://localhost:3000/cliente
-                          { headers: {
-                            'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
-                            'Content-Type': 'application/json',
-                          },
-                        }).then(function(data){
-                          console.log(data)
-                          if (data.data.status == 200){
-                            alertSucessCliente();
-                            this.cliente = new Cliente()
-                          }else {
-                            alertError();
-                          }
-                        });
-                  }
-          },
-          */
           isInteger(valor) {
                 var er = /^-?[0-9]+$/;
                 return er.test(valor);

@@ -138,7 +138,7 @@ export default {
       productoSelected: '',
       clienteSelected: '',
       num: 0,
-  
+
 		}
   },
   computed:{
@@ -229,7 +229,7 @@ export default {
     nuevaVenta(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
                   //Vamos a Vender no es Vacia
-                  if (this.Lista.length > 0 ){
+                  if (this.Lista.length > 0 && this.precioTotal && this.venta.cliente){
                       //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
                       this.venta.total = this.precioTotal;
                       axios.post('http://localhost:3000/venta',

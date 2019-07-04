@@ -24,7 +24,9 @@ export function alertEditSucessCompra(){
    Swal.fire( 'Exito!','Compra Editada Correctamente!','success');
 }
 
-
+export function alertEditSucessVenta(){
+  Swal.fire( 'Exito!','Venta Editada Correctamente!','success');
+}
 export function alertError(){
    Swal.fire( 'Error!','No Se Pudo Guardar Correctamente!','error');
 }

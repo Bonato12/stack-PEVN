@@ -70,7 +70,7 @@ var id;
             },
           updateVenta(req, res){
                 console.log(req.body);
-                db.query("UPDATE venta SET id_cliente = ($1), fecha = ($2) WHERE id_venta = ($3)",[req.body.cliente[0].id_cliente,req.body.fecha,req.params.id_venta]).then(response=> {
+                db.query("UPDATE venta SET fecha = ($1) WHERE id_venta = ($2)",[req.body.fecha,req.params.id_venta]).then(response=> {
                   res.json({
                       mensaje: "Editado Correctamente"
                   })

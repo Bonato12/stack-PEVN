@@ -14,12 +14,21 @@ var db = require('../database');
               })
           },
           getIdReparacion(req,res){
-               db.query('SELECT * FROM proveedor WHERE id_reparacion=($1)', [req.params.id_reparacion])
+               db.query('SELECT * FROM reparacion WHERE id_reparacion=($1)', [req.params.id_reparacion])
               .then(response=> {
                 res.json(response.rows);
               }).catch(error =>{
                 console.log(error);
               });
-            }
+            },
+            updateReparacion(req, res){
+                  db.query("UPDATE reparacion SET  fecha_ini = ($1), fecha_fin = ($2) WHERE id_reparacion = ($3)",[req.body.fecha_ini,req.body.fecha_fin,req.params.id_reparacion]).then(response=> {
+                    res.json({
+                        mensaje: "Editado Correctamente"
+                    })
+                  }).catch((error) =>{
+                      console.log(error);
+                  });
+            },
 
        }

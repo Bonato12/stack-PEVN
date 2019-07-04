@@ -43,6 +43,7 @@ CREATE TABLE producto(
 	tipoProducto VARCHAR(30) NOT NULL,
 	stock INTEGER NOT NULL,
 	precio INTEGER NOT NULL,
+	check(stock>=0),
 	CONSTRAINT pk_id_producto PRIMARY KEY(id_producto)
 );
 
@@ -125,38 +126,14 @@ CREATE TABLE compraProducto(
 
 CREATE  TABLE reparacion(
 	id_reparacion Serial NOT NULL,
-	Fecha_ini date NOT NULL,
+	fecha_ini date NOT NULL,
 	fecha_fin date,
 	id_presupuesto integer NOT NULL,
+	check(fecha_fin>=fecha_ini),
 	constraint pk_reparacion primary key (id_reparacion),
 	constraint fk_presupuesto foreign key (id_presupuesto) references presupuesto(id_presupuesto)
 );
 
-SELECT * FROM ventaProducto;
-DELETE FROM venta
-INSERT INTO venta VALUES(1,2,3,'20/12/2018');
-
-INSERT INTO cliente VALUES(3,39261832,'Sebastian','Bonato','Herrera','CLSN','3442507780','sebabonato12@gmail.com');
-
-
-
-INSERT INTO  venta VALUES(1,120,3,'24/01/2009');
-
-DROP CASCADE FROM venta WHERE id_venta = 177;
-
-SELECT * FROM venta
-
-SELECT * FROM cliente WHERE id_cliente = 178
-
-SELECT * FROM arreglo;
-
-
-SELECT * FROM presupuesto;
-SELECT p.id_presupuesto FROM presupuesto p  WHERE p.arreglo = (3)
-
-SELECT p.id_presupuesto FROM presupuesto p  WHERE p.arreglo=3 
-
-SELECT  PP.id_presupuestoProducto, PP.presupuesto, PP.producto, PP.cantidad, PP.precio  FROM presupuesto P, presupuestoProducto PP WHERE PP.presupuesto = P.id_presupuesto AND PP.presupuesto =1
 
 
 CREATE OR REPLACE FUNCTION func_e() RETURNS TRIGGER AS $funcemp$
@@ -214,7 +191,7 @@ DECLARE
 BEGIN 
 IF NEW.ESTADO='ACEPTADO' THEN
 	UPDATE arreglo SET condicion = 'PRESUPUESTO ACEPTADO: EN REPARACION' where arreglo.id_arreglo = NEW.arreglo;
-	INSERT INTO reparacion values (DEFAULT, CURRENT_DATE,CURRENT_DATE,new.id_presupuesto);
+	INSERT INTO reparacion values (DEFAULT, CURRENT_DATE,null,new.id_presupuesto);
 END IF;
 IF new.ESTADO='CANCELADO' THEN
 	UPDATE arreglo SET condicion = 'PRESUPUESTO CANCELADO' where arreglo.id_arreglo = NEW.arreglo;
@@ -228,7 +205,7 @@ FOR EACH ROW EXECUTE PROCEDURE func_H();
 /* trigger 3 */
 
 
-SELECT * FROM presupuesto;
+SELECT * FROM reparacion;
 UPDATE presupuesto
 set estado ='ACEPTADO'
 WHERE (presupuesto.id_presupuesto=19);
@@ -237,6 +214,26 @@ WHERE (presupuesto.id_presupuesto=19);
 SELECT *
 FROM arreglo
 where (arreglo.id_arreglo=10);
+
+SELECT * FROM reparacion;
+
+/*trigger 4 */
+
+
+CREATE OR REPLACE FUNCTION func_R() RETURNS TRIGGER AS $funcemp$
+DECLARE 
+BEGIN 
+IF NEW.fecha_fin <> null THEN
+	UPDATE arreglo SET condicion = 'REPARACION TERMINADA' where arreglo.id_arreglo = new.id_arreglo;
+END IF;
+RETURN NEW;
+END; $funcemp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_R BEFORE UPDATE ON reparacion
+FOR EACH ROW EXECUTE PROCEDURE func_R();
+
+
+
 
 
 
