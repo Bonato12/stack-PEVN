@@ -73,7 +73,7 @@ CREATE  TABLE presupuestoProducto(
 	cantidad INTEGER NOT NULL,
 	precio INTEGER NOT NULL,
 	CONSTRAINT pk_id_presupuesto_producto PRIMARY KEY(id_presupuestoProducto),
-	CONSTRAINT fk_id_presupuesto FOREIGN KEY(presupuesto) REFERENCES presupuesto(id_presupuesto),
+	CONSTRAINT fk_id_presupuesto FOREIGN KEY(presupuesto) REFERENCES presupuesto(id_presupuesto)  ON DELETE CASCADE,
 	CONSTRAINT fk_id_producto_presupuesto FOREIGN KEY(producto) REFERENCES producto(id_producto)
 );
 
@@ -105,7 +105,7 @@ CREATE TABLE compra(
 	id_proveedor INTEGER NOT NULL,
 	fecha DATE NOT NULL,
 	total INTEGER NOT NULL,
-	CONSTRAINT pk_id_compra PRIMARY KEY(id_compra) ON DELETE CASCADE,
+	CONSTRAINT pk_id_compra PRIMARY KEY(id_compra),
 	CONSTRAINT fk_id_proveedor FOREIGN KEY(id_proveedor) REFERENCES proveedor(id_proveedor)
 );
 
@@ -116,7 +116,7 @@ CREATE TABLE compraProducto(
 	cantidad INTEGER NOT NULL,
 	precio INTEGER NOT NULL,
 	CONSTRAINT pk_idcompraProducto PRIMARY KEY(id_compraProducto),
-	CONSTRAINT fk_id_compra FOREIGN KEY(id_compra) REFERENCES compra(id_compra),
+	CONSTRAINT fk_id_compra FOREIGN KEY(id_compra) REFERENCES compra(id_compra)  ON DELETE CASCADE,
 	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
 );
 
@@ -138,9 +138,7 @@ INSERT INTO venta VALUES(1,2,3,'20/12/2018');
 
 INSERT INTO cliente VALUES(3,39261832,'Sebastian','Bonato','Herrera','CLSN','3442507780','sebabonato12@gmail.com');
 
-INSERT INTO producto VALUES(1,'Iphone X','Celular',50000);
-INSERT INTO producto VALUES(2,'Samsung J7','Celular',50000);
-INSERT INTO producto VALUES(3,'Samsung S6','Celular',50000);
+
 
 INSERT INTO  venta VALUES(1,120,3,'24/01/2009');
 

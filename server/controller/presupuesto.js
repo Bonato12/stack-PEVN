@@ -49,6 +49,15 @@ var id;
                   console.log(error);
               });
               },
+              deletePresupuesto(req,res){
+                      console.log("Peticion DELETE");
+                      db.query("DELETE FROM presupuesto WHERE id_presupuesto=($1)",[req.params.id_presupuesto]).then(response=> {
+                          console.log(response.rows)
+                          res.json(response.rows);
+                      }).catch(error =>{
+                          console.log(error);
+                      })
+              },
               updatePresupuesto(req,res){
                     console.log("Peticion UPDATE Presupuesto");
                     db.query("UPDATE presupuesto SET estado=($1) WHERE id_presupuesto=($2)", [req.body.estado,req.params.id_presupuesto]).then(response=> {

@@ -85,6 +85,11 @@
                  </select>
               </div>
               <div>
+                <button class="btn btn-danger" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" title="Eliminar Cliente">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+              <div>
                 <button type="submit" class="btn"  title="Guardar" >
                       <i class="far fa-save fa-1x"></i>
                       Guardar
@@ -100,12 +105,11 @@
     </div>
   </div>
 </template>
-
 <script>
 
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete,alertSucessEstado } from '../../assets/sweetAlert.js';
+import { alertSucessDelete,alertSucessEstado} from '../../assets/sweetAlert.js';
 import moment from 'moment';
 
 export default {
@@ -144,11 +148,11 @@ export default {
         this.presupuestoProducto = response.data;
       })
     },
-    eliminarArreglo(){
-        axios.delete('http://localhost:3000/arreglo/'+this.ida).then((data)=>{
+    eliminarPresupuesto(){
+        axios.delete('http://localhost:3000/presupuesto/'+this.idp).then((data)=>{
           console.log(data)
           this.getArreglo()
-        }).then(alertSucessDelete()).then(this.hide());
+        }).then(alertSucessDelete()).then(this.$router.push('/HomeArreglo'));
     },
     cambiarEstado(){
       axios.put('http://localhost:3000/presupuesto/'+ this.idp,
