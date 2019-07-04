@@ -50,7 +50,7 @@
                     <i class="far fa-list-alt"></i>
                     Detalles
                   </h2>
-                  <button class="modal-default-button" @click="hide()">
+                  <button class="modal-default-button" @click="hideModal()">
                    <i class="far fa-times-circle"></i>
                   </button>
                 </slot>
@@ -214,7 +214,7 @@ export default {
   eliminarProveedor(id) {
         axios.delete('http://localhost:3000/proveedor/' + id).then((data)=>{
               this.getProveedor();
-        }).then(alertSucessDelete()).then(this.hideDetalle());
+        }).then(alertSucessDelete()).then(this.hideModal());
   },
   exportarPdf(){
       var columnas = [
@@ -265,7 +265,7 @@ export default {
         this.proveedor.mail = params.row.mail;
         this.proveedor.descripcion = params.row.descripcion;
     },
-    hide(){
+    hideModal(){
       this.showModal = false;
     }
 

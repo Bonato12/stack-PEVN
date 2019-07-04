@@ -121,9 +121,9 @@
 <script>
 
 import axios from 'axios'
-import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertWarningLimiteStock } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertSucessCompra} from '../../assets/sweetAlert.js'
+import { alertSucessCompra,alertCompletarCampos} from '../../assets/sweetAlert.js'
 import Compra from '../../models/Compra';
 import CompraProducto from '../../models/CompraProducto';
 
@@ -162,7 +162,7 @@ export default {
       });
     },
     getProducto(){
-      axios.get('http://localhost:3000/productoStock').then(response=>{
+      axios.get('http://localhost:3000/producto').then(response=>{
         this.producto = response.data;
       });
     },
@@ -241,12 +241,11 @@ export default {
                             'Access-Control-Allow-Methods': 'POST',
                             'Content-Type': 'application/json'
                              }
-                        });
-                          alertSucessCompra();
-                          this.compraProducto = new CompraProducto();
+                        }).then(alertSucessCompra());
+                          //this.compraProducto = new CompraProducto();
 
                   }else {
-                    alert("Completar Los Campos");
+                    alertCompletarCampos();
                   }
 
     }

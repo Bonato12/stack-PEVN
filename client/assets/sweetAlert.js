@@ -41,6 +41,10 @@ export function alertSucessVenta(){
    Swal.fire( 'Exito!','Nueva Venta Añadida!','success');
 }
 
+export function alertSucessCompra(){
+   Swal.fire( 'Exito!','Nueva Compra Añadida!','success');
+}
+
 export function alertCompletarCampos(){
   Swal.fire( 'Error!','Completar los Campos Vacios!','error');
 }

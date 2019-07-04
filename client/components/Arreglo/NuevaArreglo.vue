@@ -80,9 +80,6 @@ export default {
       producto:'',
       arreglo : new Arreglo()
 		}
-
-
-
   },
   computed:{
 

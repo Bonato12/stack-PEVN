@@ -219,19 +219,19 @@ SELECT * FROM reparacion;
 
 /*trigger 4 */
 
-
+/*
 CREATE OR REPLACE FUNCTION func_R() RETURNS TRIGGER AS $funcemp$
 DECLARE 
 BEGIN 
 IF NEW.fecha_fin <> null THEN
-	UPDATE arreglo SET condicion = 'REPARACION TERMINADA' where arreglo.id_arreglo = new.id_arreglo;
+	UPDATE presupuesto SET estado = 'ACEPTADO' where presupuesto.id_presupuesto = new.id_presupuesto;
 END IF;
 RETURN NEW;
 END; $funcemp$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trigger_R BEFORE UPDATE ON reparacion
 FOR EACH ROW EXECUTE PROCEDURE func_R();
-
+*/
 
 
 
