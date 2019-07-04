@@ -139,7 +139,9 @@ export default {
         axios.get('http://localhost:3000/presupuesto/'+this.idp).then((response) =>{
           this.presupuesto = response.data[0];
           console.log(this.presupuesto);
+          this.estado = response.data[0].estado
           this.control(this.presupuesto.id_presupuesto)
+
         });
   },
     control(id){

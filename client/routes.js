@@ -22,6 +22,7 @@ import NuevoPresupuesto from './components/Presupuesto/NuevoPresupuesto.vue'
 import VerPresupuesto from './components/Presupuesto/VerPresupuesto.vue'
 import Registrar from './components/Administrar/Registrar.vue'
 import NotFound from './components/Administrar/error404.vue'
+import HomeReparacion './components/Reparacion/HomeReparacion.vue'
 import Vue from 'vue'
 import firebase from 'firebase'
 import VueRouter from 'vue-router'
@@ -122,6 +123,10 @@ const rutas = new VueRouter({
             {
               path:'/VerPresupuesto/:id',
               component: VerPresupuesto
+            },
+            {
+              path:'/HomeReparacion',
+              component: HomeReparacion
             },
             {
               path: '*',
