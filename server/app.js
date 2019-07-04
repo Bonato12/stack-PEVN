@@ -17,6 +17,7 @@ var compraProductoRouter = require('./routes/compraProducto');
 var arregloRouter = require('./routes/arreglo');
 var presupuestoRouter = require('./routes/presupuesto');
 var presupuestoProductoRouter = require('./routes/presupuestoProducto');
+var reparacionRouter = require('./routes/reparacion');
 
 var app = express();
 
@@ -44,6 +45,8 @@ app.use('/', compraRouter);
 app.use('/', arregloRouter);
 app.use('/', presupuestoRouter);
 app.use('/', presupuestoProductoRouter);
+app.use('/', reparacionRouter);
+
 //app.use('/',adminRouter);
 
 
