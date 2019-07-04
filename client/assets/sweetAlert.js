@@ -12,6 +12,10 @@ export function alertSucessArreglo(){
    Swal.fire( 'Exito!','Nuevo Arreglo Cargado!','success');
 }
 
+export function alertSucessEstado(){
+   Swal.fire( 'Exito!','Nuevo Estado Asignado!','success');
+}
+
 export function alertSucessPresupuesto(){
    Swal.fire( 'Exito!','Nuevo Presupuesto Cargado!','success');
 }

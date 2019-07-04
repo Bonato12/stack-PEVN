@@ -70,7 +70,7 @@
                     <option  v-for="item in estadoP">{{ item.name }}</option>
                  </select>
               </div>
-              <div style="margin-left:250px;">
+              <div>
                 <button type="submit" class="btn"  title="Guardar" >
                       <i class="far fa-save fa-1x"></i>
                       Guardar
@@ -91,7 +91,7 @@
 
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import { alertSucessDelete,alertSucessEstado } from '../../assets/sweetAlert.js';
 import moment from 'moment';
 
 export default {
@@ -137,8 +137,6 @@ export default {
         }).then(alertSucessDelete()).then(this.hide());
     },
     cambiarEstado(){
-      console.log(this.estado)
-      console.log(this.idp)
       axios.put('http://localhost:3000/presupuesto/'+ this.idp,
           {
           estado: this.estado
@@ -147,7 +145,7 @@ export default {
           { headers: {
             'Content-Type': 'application/json',
           }
-      })
+      }).then(alertSucessEstado());
     }
 
 
@@ -156,7 +154,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #HomeVenta {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -227,6 +225,16 @@ li {
   transform: scale(1.1);
 }
 
+
+.btn{
+  background-color: #FFD700  !important;
+  border-radius: 5px;
+}
+
+button:hover{
+     background-color: white  !important;
+     /*color: white;*/
+}
 
 
 
