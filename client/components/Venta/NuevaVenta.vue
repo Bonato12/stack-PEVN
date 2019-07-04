@@ -138,10 +138,7 @@ export default {
       productoSelected: '',
       clienteSelected: '',
       num: 0,
-      a1:null,
-      colors:[
-        'green','blue','red','black'
-      ]
+  
 		}
   },
   computed:{

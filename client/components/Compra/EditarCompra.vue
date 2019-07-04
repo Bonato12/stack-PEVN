@@ -14,27 +14,17 @@
                   </div>
                   <hr style="color:black;">
                   <div class="card-body">
-                    <form style="margin-left: 30px; margin-top:30px;">
-                      <div class="input-group form-group">
-                          <div class="input-group-prepend">
-                              <span class="input-group-text">Proveedor</span>
-                          </div>
-                          <v-select  class="form-control" :options="proveedor" label="dni" id="proveedorSelect" v-model="proveedorSelected">
-                            <template slot="option" slot-scope="option">
-                                {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
-                            </template>
-                          </v-select>
+                  <form style="margin-left: 30px; margin-top:30px;">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Fecha Compra</span>
+                        </div>
+                        <datepicker  class="datepicker"  v-model="date" name="fecha"
+                            @opened="datepickerAbierto"
+                            @selected="fechaSeleccionada"
+                            @closed="datepickerCerrado">
+                        </datepicker>
                       </div>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text;">Editar Fecha</span>
-                                </div>
-                                <datepicker class="datepicker" v-model="date" name="fecha"
-                                    @opened="datepickerAbierto"
-                                    @selected="fechaSeleccionada"
-                                    @closed="datepickerCerrado">
-                                </datepicker>
-                            </div>
                     </form>
                   </div>
                   <div>
@@ -67,18 +57,13 @@ import moment from 'moment';
 export default {
   name: 'EditarCompra',
   created(){
-      this.getProveedor();
       this.getIdCompra();
   },
   data () {
     return {
       idc: this.$route.params.id,
       compra: new Compra(),
-      proveedor:[],
-      proveedorSelected: '',
       producto: [],
-      pro: '',
-      num: '',
       fecha: '',
       date: '',
 		}
@@ -90,11 +75,6 @@ export default {
 
   },
   methods: {
-    getProveedor(){
-      axios.get('http://localhost:3000/proveedor').then((response) =>{
-        this.proveedor = response.data;
-      });
-    },
     getIdCompra(){
       console.log(this.idv);
       axios.get('http://localhost:3000/compra/'+this.idc).then((response) =>{
@@ -102,17 +82,11 @@ export default {
           var mes =  moment(response.data[0].fecha).format("M");;
           var anio =  moment(response.data[0].fecha).format("YYYY");;
           this.date = new Date(anio,mes-1,dia);
-          this.pro = response.data[0].id_proveedor;
-          axios.get('http://localhost:3000/proveedor/'+this.pro).then((response) =>{
-              this.proveedorSelected = response.data;
-              console.log(this.proveedorSelected);
-          });
       });
     },
     editarCompra(){
-                      console.log("EL ID ES :", this.proveedorSelected.id_proveedor)
+                      if (this.date){
                       this.compra.fecha = this.date;
-                      this.compra.proveedor = this.proveedorSelected.id_proveedor;
                       axios.put('http://localhost:3000/compra/'+this.idc,
                           this.compra,
                           {
@@ -121,8 +95,10 @@ export default {
                             'Access-Control-Allow-Methods': 'PUT',
                             'Content-Type': 'application/json'
                              }
-                        })
-                          alertEditSucessCompra()();
+                        }).then(alertEditSucessCompra());
+                      }else {
+                        alertCompletarCampos();
+                      }
               },
                   datepickerAbierto: function() {
                         console.log('El datepicker ha sido abierto');

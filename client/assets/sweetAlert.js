@@ -20,6 +20,10 @@ export function alertSucessPresupuesto(){
    Swal.fire( 'Exito!','Nuevo Presupuesto Cargado!','success');
 }
 
+export function alertEditSucessCompra(){
+   Swal.fire( 'Exito!','Compra Editada Correctamente!','success');
+}
+
 
 export function alertError(){
    Swal.fire( 'Error!','No Se Pudo Guardar Correctamente!','error');

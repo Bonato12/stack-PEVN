@@ -50,16 +50,6 @@ var id;
                     console.log(error);
                 })
         },
-        /*
-        getIdVenta(req,res){
-             db.query('SELECT VP.id_ventaproducto,P.marca, P.modelo,VP.cantidad, VP.precio  FROM producto P,ventaProducto VP, venta V WHERE V.id_venta=($1) AND ($1) = VP.id_venta AND VP.id_producto = P.id_producto ', [req.params.id_venta])
-            .then(response=> {
-              res.json(response.rows);
-            }).catch(error =>{
-              console.log(error);
-            });
-          },
-          */
           getIdCompra(req,res){
                db.query('SELECT V.id_compra,V.id_proveedor, V.fecha ,V.total  FROM compra V WHERE V.id_compra=($1)', [req.params.id_compra])
               .then(response=> {
@@ -70,9 +60,7 @@ var id;
             },
 
           updateCompra(req, res){
-                console.log("Hola Lexis")
-                console.log(req.body.proveedor);
-                db.query("UPDATE compra SET id_proveedor = ($1), fecha = ($2) WHERE id_compra = ($3)",[req.body.proveedor,req.body.fecha,req.params.id_compra]).then(response=> {
+                db.query("UPDATE compra SET  fecha = ($1) WHERE id_compra = ($2)",[req.body.fecha,req.params.id_compra]).then(response=> {
                   res.json({
                       mensaje: "Editado Correctamente"
                   })

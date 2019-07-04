@@ -184,10 +184,27 @@ export default {
         });
     },
     eliminarCompra(){
-        axios.delete('http://localhost:3000/compra/'+this.idc).then((data)=>{
-          console.log(data)
-          this.getCompra()
-        }).then(alertEliminarCompra()).then(this.hideModal());
+      this.$swal({
+          title: 'Estas Seguro?',
+          text: "No se podran recuperar los datos!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Borrar!'
+          }).then((result) => {
+          if (result.value) {
+            axios.delete('http://localhost:3000/compra/'+this.idc).then((data)=>{
+              this.getCompra()
+            }).then(
+            this.$swal(
+              'Eliminado!',
+              'La Compra ha sido eliminada.',
+              'success'
+            )).then(this.hideModal())
+          }
+          })
+
     },
     exportarPdf(){
         var columnas = [
@@ -248,7 +265,7 @@ export default {
 
 
     },
-    hide(){
+    hideModal(){
       this.showModal = false;
     }
 

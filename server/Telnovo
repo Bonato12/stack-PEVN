@@ -100,6 +100,29 @@ CREATE TABLE arreglo(
 	CONSTRAINT fk_id_productoA FOREIGN KEY(producto) REFERENCES producto(id_producto)
 );
 
+CREATE TABLE compra(
+	id_compra SERIAL NOT NULL,
+	id_proveedor INTEGER NOT NULL,
+	fecha DATE NOT NULL,
+	total INTEGER NOT NULL,
+	CONSTRAINT pk_id_compra PRIMARY KEY(id_compra) ON DELETE CASCADE,
+	CONSTRAINT fk_id_proveedor FOREIGN KEY(id_proveedor) REFERENCES proveedor(id_proveedor)
+);
+
+CREATE TABLE compraProducto(
+	id_compraProducto SERIAL NOT NULL,
+	id_compra INTEGER NOT NULL,
+	id_producto INTEGER NOT NULL,
+	cantidad INTEGER NOT NULL,
+	precio INTEGER NOT NULL,
+	CONSTRAINT pk_idcompraProducto PRIMARY KEY(id_compraProducto),
+	CONSTRAINT fk_id_compra FOREIGN KEY(id_compra) REFERENCES compra(id_compra),
+	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
+);
+
+
+
+
 CREATE  TABLE reparacion(
 	id_reparacion Serial NOT NULL,
 	Fecha_ini date NOT NULL,
@@ -203,4 +226,6 @@ WHERE (presupuesto.id_presupuesto=19);
 SELECT *
 FROM arreglo
 where (arreglo.id_arreglo=10);
+
+
 
