@@ -2,28 +2,46 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
-var db = require('../database');
 
+config= {
+  user: 'postgres',
+  host: '127.0.0.1',
+  database: 'Telnovo',
+  password: '1234',
+  port: 5432,
+}
 
   module.exports = {
 
           getVentaProducto(req,res){
-              db.query("SELECT * FROM ventaProducto").then(response=> {
-                console.log(response.rows)
-                //Muestra los resultados en forma de JSON en nuestro HTML
-                res.json(response.rows);
-              }).catch(error =>{
-                console.log(error);
+              var pool = new pg.Pool(config)
+              pool.connect(function(err, client, done) {
+                client.query("SELECT * FROM ventaProducto")
+                  .then(response => {
+                    pool.end()
+                    res.json(response.rows)
+                  })
+                  .catch(error => {
+                    pool.end()
+                    console.log(error.stack)
+                  })
+                done()
               })
           },
           getIdVentaProducto(req,res){
-               db.query('SELECT V.fecha, VP.id_ventaProducto, V.id_venta,PR.marca, PR.modelo,VP.cantidad, VP.precio FROM ventaProducto VP, venta V, producto PR WHERE VP.id_venta = ($1) AND VP.id_venta = V.id_venta AND VP.id_producto = PR.id_producto', [req.params.id_venta])
-              .then(response=> {
-                res.json(response.rows);
-                console.log(response.rows);
-              }).catch(error =>{
-                console.log(error);
-              });
+              var pool = new pg.Pool(config)
+              pool.connect(function(err, client, done) {
+                client.query('SELECT V.fecha, VP.id_ventaProducto, V.id_venta,PR.marca, PR.modelo,VP.cantidad, VP.precio FROM ventaProducto VP, venta V, producto PR WHERE VP.id_venta = ($1) AND VP.id_venta = V.id_venta AND VP.id_producto = PR.id_producto', [req.params.id_venta])
+                  .then(response => {
+                    pool.end()
+                    res.json(response.rows)
+                  })
+                  .catch(error => {
+                    pool.end()
+                    console.log(error.stack)
+                  })
+                done()
+              })
             },
 
             /*
@@ -34,18 +52,7 @@ var db = require('../database');
               }).catch((error) =>{
                 console.log(error);
               });
-        },
-
-        /*
-        deleteVenta(req,res){
-                console.log("Peticion DELETE");
-                pool.query("DELETE FROM venta WHERE id_venta=($1)",[req.params.id_venta]).then(response=> {
-                console.log(response.rows)
-                res.json(response.rows);
-                }).catch(error =>{
-                  console.log(error);
-                })
         }
-*/
+        */
 
        }

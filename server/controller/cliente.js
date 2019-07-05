@@ -2,25 +2,34 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
-var db = require('../database');
 
-
-//Realizamos peticiones GET POST DELETE PUT
+config= {
+  user: 'postgres',
+  host: '127.0.0.1',
+  database: 'Telnovo',
+  password: '1234',
+  port: 5432,
+}
 
   module.exports = {
 
           getCliente(req,res){
-              db.query("SELECT * FROM cliente").then(response=> {
-                console.log(response.rows)
-                //Muestra los resultados en forma de JSON en nuestro HTML
-                res.json(response.rows);
-              }).catch(error =>{
-                console.log(error);
-              })
+             var pool = new pg.Pool(config)
+             pool.connect(function(err, client, done) {
+               client.query("SELECT * FROM cliente")
+                 .then(response => {
+                   pool.end()
+                   res.json(response.rows)
+                 })
+                 .catch(error => {
+                   pool.end()
+                   console.log(error.stack)
+                 })
+               done()
+             })
         },
 
         postCliente(req, res){
-              console.log("Peticion POST");
               const cliente = {
                 dni: req.body.dni,
                 nombre: req.body.nombre,
@@ -29,51 +38,74 @@ var db = require('../database');
                 telefono: req.body.telefono,
                 mail: req.body.mail
               }
-              db.query("INSERT INTO cliente(dni,nombre,apellido,direccion,telefono,mail) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_cliente",[cliente.dni,cliente.nombre,cliente.apellido,
-              cliente.direccion,cliente.telefono,cliente.mail]).then(response=> {
-                console.log(response);
-                res.json({
-                  id: response.rows[0].id_cliente,
-                  status: 200
-                })
-              }).catch((error) =>{
-                console.log(error);
-                res.json({
-                  status: 500
-                })
-              });
+
+             var pool = new pg.Pool(config)
+             pool.connect(function(err, client, done) {
+               client.query("INSERT INTO cliente(dni,nombre,apellido,direccion,telefono,mail) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_cliente",[cliente.dni,cliente.nombre,cliente.apellido,
+               cliente.direccion,cliente.telefono,cliente.mail])
+                 .then(response => {
+                   pool.end()
+                   res.json(response.rows)
+                 })
+                 .catch(error => {
+                   pool.end()
+                   console.log(error.stack)
+
+                 })
+               done()
+             })
+
         },
         getIdCliente(req,res){
-             db.query('SELECT * FROM cliente WHERE id_cliente=($1)', [req.params.id_cliente])
-            .then(response=> {
-              res.json(response.rows);
-            }).catch(error =>{
-              console.log(error);
-            });
+           var pool = new pg.Pool(config)
+           pool.connect(function(err, client, done) {
+             client.query('SELECT * FROM cliente WHERE id_cliente=($1)',[req.params.id_cliente])
+               .then(response => {
+                 pool.end()
+                 res.json(response.rows)
+               })
+               .catch(error => {
+                 pool.end()
+                 console.log(error.stack)
+
+               })
+             done()
+           })
+
           },
         deleteCliente(req,res){
-                console.log("Peticion DELETE");
-                db.query("DELETE FROM cliente WHERE id_cliente=($1)",[req.params.id_cliente]).then(response=> {
-                  res.json({
-                    status: 200
-                  })
-                }).catch(error =>{
-                  console.log(error);
-                  res.json({
-                    status: error.code
-                  })
-                })
+               var pool = new pg.Pool(config)
+               pool.connect(function(err, client, done) {
+                 client.query("DELETE FROM cliente WHERE id_cliente=($1)",[req.params.id_cliente])
+                   .then(response => {
+                     pool.end()
+                     res.json(response.rows)
+                   })
+                   .catch(error => {
+                     pool.end()
+                     console.log(error.stack)
+
+                   })
+                 done()
+               })
         },
         updateCliente(req,res){
-              console.log("Peticion UPDATE");
-              db.query("UPDATE cliente SET dni=($1), nombre=($2), apellido=($3), direccion=($4), telefono=($5), mail=($6) WHERE id_cliente=($7)", [req.body.dni, req.body.nombre, req.body.apellido,req.body.direccion,req.body.telefono,req.body.mail,req.params.id_cliente]).then(response=> {
-              //res.json(response.rows);
-              res.json({
-                mensaje: "Editado Correctamente"
-              })
-              }).catch(error =>{
-                console.log(error);
-              });
+             var pool = new pg.Pool(config)
+             pool.connect(function(err, client, done) {
+               client.query("UPDATE cliente SET dni=($1), nombre=($2), apellido=($3), direccion=($4), telefono=($5), mail=($6) WHERE id_cliente=($7)", [req.body.dni, req.body.nombre, req.body.apellido,req.body.direccion,req.body.telefono,req.body.mail,req.params.id_cliente])
+                 .then(response => {
+                   pool.end()
+                   res.json(response.rows)
+
+                 })
+                 .catch(error => {
+                   pool.end()
+                   console.log(error.stack)
+
+                 })
+               done()
+             })
+
             }
 
 }

@@ -146,113 +146,112 @@ export default {
   mounted(){
   },
   methods: {
-    getCliente(){
-      axios.get('http://localhost:3000/cliente').then((response) =>{
-        this.cliente = response.data;
-      });
-    },
-    getProducto(){
-      axios.get('http://localhost:3000/productoStock').then(response=>{
-        this.producto = response.data;
-      });
-    },
-    guardarLista(){
-            console.log(JSON.stringify(this.productoSelected));
-            //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
-            if(this.productoSelected && this.precio > 0 && this.num > 0){
-                this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
-                this.ventaProducto.producto = this.productoSelected;
-                this.ventaProducto.cantidad = this.num;
-                this.ventaProducto.precio = this.precio;
-                this.Lista.push(this.ventaProducto);
-                //Una Vez añadido al carrito Actializamos el Stock de la Lista Productos
-                var index = this.producto.indexOf(this.productoSelected);
-                if (index > -1) {
-                  this.producto[index].stock = this.producto[index].stock - this.num;
-                }
-                //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
-                this.productoSelected = '';
-                this.num = '';
-                this.precio = '';
-                this.ventaProducto = new VentaProducto();
-            }else {
-              alert("Completar los Campos");
+getCliente(){
+  axios.get('http://localhost:3000/cliente').then((response) =>{
+    this.cliente = response.data;
+  });
+},
+getProducto(){
+  axios.get('http://localhost:3000/productoStock').then(response=>{
+    this.producto = response.data;
+  });
+},
+guardarLista(){
+        console.log(JSON.stringify(this.productoSelected));
+        //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
+        if(this.productoSelected && this.precio > 0 && this.num > 0){
+            this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
+            this.ventaProducto.producto = this.productoSelected;
+            this.ventaProducto.cantidad = this.num;
+            this.ventaProducto.precio = this.precio;
+            this.Lista.push(this.ventaProducto);
+            //Una Vez añadido al carrito Actializamos el Stock de la Lista Productos
+            var index = this.producto.indexOf(this.productoSelected);
+            if (index > -1) {
+              this.producto[index].stock = this.producto[index].stock - this.num;
             }
-    },
-    incrementarCantidad(){
-      //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
-          if(this.productoSelected.precio){
-              if (this.num ==  this.productoSelected.stock){
-                  alertWarningLimiteStock();
-              }else{
-                  this.num++;
-                  this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
-              }
-          }
-    },
-    decrementarCantidad() {
-      //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
-      if(this.productoSelected){
-          if (this.num == 0) {
-            alertWarningLimiteOne();
-          } else {
-            this.num--;
-            this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+            //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
+            this.productoSelected = '';
+            this.num = '';
+            this.precio = '';
+            this.ventaProducto = new VentaProducto();
+        }else {
+          alert("Completar los Campos");
+        }
+},
+incrementarCantidad(){
+  //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
+      if(this.productoSelected.precio){
+          if (this.num ==  this.productoSelected.stock){
+              alertWarningLimiteStock();
+          }else{
+              this.num++;
+              this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
           }
       }
-    },
-    borrar(producto){
-      //Funcion Que Elimina un Producto determinado de la Lista de Venta y actualiza el stock
-      var indice = this.producto.indexOf(producto.producto);
-      this.producto[indice].stock = this.producto[indice].stock + producto.cantidad;
-      console.log(indice);
-      //Resta al Precio Total el precio del Producto eliminado de la lista.
-      var index = this.Lista.indexOf(producto);
-      this.precioTotal = this.precioTotal - this.Lista[index].precio
-      if (index > -1) {
-          this.Lista.splice(index, 1);
+},
+decrementarCantidad() {
+  //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
+  if(this.productoSelected){
+      if (this.num == 0) {
+        alertWarningLimiteOne();
+      } else {
+        this.num--;
+        this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
       }
-    },
-    onChange(event) {
-           var actual = JSON.stringify(event);
-           var viejo = JSON.stringify(this.productoSelected);
-           if (viejo){
-             if (actual == viejo){
-               this.num = 0;
-               this.precio = '';
-             }
-           }
-       },
-       addValue: function(e){
-      this.colors.push(e.target.value)
-    },
-    nuevaVenta(){
-                  //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
-                  //Vamos a Vender no es Vacia
-                  if (this.Lista.length > 0 && this.precioTotal && this.venta.cliente){
-                      //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
-                      this.venta.total = this.precioTotal;
-                      axios.post('http://localhost:3000/venta',
-                          {
-                          lista: this.Lista,
-                          venta: this.venta
-                          },
-                          {
-                            headers:{
-                            'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
-                            'Content-Type': 'application/json'
-                             }
-                        })
-                          alertSucessVenta();
-                          this.ventaProducto = new VentaProducto();
-                  }else {
-                     alertWarningCompletarCampos()
-                  }
-    }
   }
-}
+},
+borrar(producto){
+  //Funcion Que Elimina un Producto determinado de la Lista de Venta y actualiza el stock
+  var indice = this.producto.indexOf(producto.producto);
+  this.producto[indice].stock = this.producto[indice].stock + producto.cantidad;
+  console.log(indice);
+  //Resta al Precio Total el precio del Producto eliminado de la lista.
+  var index = this.Lista.indexOf(producto);
+  this.precioTotal = this.precioTotal - this.Lista[index].precio
+  if (index > -1) {
+      this.Lista.splice(index, 1);
+  }
+},
+onChange(event) {
+       var actual = JSON.stringify(event);
+       var viejo = JSON.stringify(this.productoSelected);
+       if (viejo){
+         if (actual == viejo){
+           this.num = 0;
+           this.precio = '';
+         }
+       }
+   },
+   addValue: function(e){
+  this.colors.push(e.target.value)
+},
+nuevaVenta(){
+              //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
+              //Vamos a Vender no es Vacia
+              if (this.Lista.length > 0 && this.precioTotal && this.venta.cliente){
+                  //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
+                  this.venta.total = this.precioTotal;
+                                        axios.post('http://localhost:3000/venta',
+                                            {
+                                            lista: this.Lista,
+                                            venta: this.venta
+                                            },
+                                            {
+                                              headers:{
+                                              'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
+                                              'Content-Type': 'application/json'
+                                               }
+                                          })
+                                            alertSucessVenta();
+                                            this.ventaProducto = new VentaProducto();
+                                    }else {
+                                       alertWarningCompletarCampos()
+                                    }
+                      }
+                    }
+                  }
 </script>
-
 <style scoped>
 h1, h2 {
   font-weight: normal;

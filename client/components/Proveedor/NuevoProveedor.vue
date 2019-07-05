@@ -103,7 +103,7 @@ export default {
             if (this.proveedor.dni && this.proveedor.nombre && this.proveedor.apellido && this.proveedor.direccion && this.proveedor.telefono && this.proveedor.mail && this.proveedor.descripcion){
               console.log(this.proveedor);
               axios.post('http://localhost:3000/proveedor',
-              this.proveedor, // the data to posthttp://localhost:3000/cliente
+              this.proveedor,
               { headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:3000/proveedor',
                 'Content-Type': 'application/json',

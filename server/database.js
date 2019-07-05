@@ -13,13 +13,7 @@ config= {
 
 const db = new Pool(config);
 
-db.connect(function(err) {
-    if(err){
-      console.log("Error al Conectar la Base de Datos");
-    }else{
-      console.log("Conexion Exitosa a la Base de Datos");
-    }
-  });
+
 
 
 

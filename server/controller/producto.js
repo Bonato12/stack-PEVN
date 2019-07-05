@@ -1,87 +1,135 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
-var db = require('../database');
+
+config= {
+  user: 'postgres',
+  host: '127.0.0.1',
+  database: 'Telnovo',
+  password: '1234',
+  port: 5432,
+}
+
+const pg = require('pg')
+
 
 
 module.exports = {
 
         getProducto(req,res){
-            db.query("SELECT  * FROM producto").then((response)=> {
-            console.log(response.rows);
-            res.json(response.rows);
-            //res.end();
-            }).catch((error)=>{
-              console.log(error);
-            })
+          var pool = new pg.Pool(config)
+          pool.connect(function(err, client, done) {
+            client.query("SELECT  * FROM producto")
+              .then(response => {
+                pool.end()
+                res.json(response.rows)
+              })
+              .catch(error => {
+                pool.end()
+                console.log(error.stack)
+              })
+            done()
+          })
+
         },
 
         getProductoStock(req,res){
-            db.query("SELECT  * FROM producto WHERE stock >= 1").then((response)=> {
-            console.log(response.rows);
-            res.json(response.rows);
-            //res.end();
-            }).catch((error)=>{
-              console.log(error);
-            })
+            var pool = new pg.Pool(config)
+            pool.connect()
+            .then(client => {
+             return client.query("SELECT  * FROM producto WHERE stock >= 1")
+               .then(response => {
+                 res.json(response.rows)
+                  client.release()
+               })
+               .catch(error => {
+
+                 console.log(error.stack)
+                  client.release()
+               })
+           })
         },
 
       postProducto(req, res){
-      console.log("PETICION POST");
-      console.log(req.body);
-      db.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
-      req.body.stock,req.body.precio]).then(response=>{
-        console.log(response);
-        res.json({
-          id: response.rows[0].id_producto
-        })
-      }).catch(error =>{
-        console.log(error);
-      })
+      var pool = new pg.Pool(config)
+      pool.connect(function(err, client, done) {
+       client.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
+       req.body.stock,req.body.precio])
+         .then(response => {
+           pool.end()
+           res.json(response.rows)
+         })
+         .catch(error => {
+           pool.end()
+           console.log(error.stack)
+         })
+       done()
+     })
     },
 
    getIdProducto(req,res){
-          db.query('SELECT * FROM producto WHERE id_producto=($1)', [req.params.id_producto]).then(response=> {
-              res.json(response.rows);
-          }).catch(error =>{
-              console.log(error);
-          });
+          var pool = new pg.Pool(config)
+          pool.connect()
+          .then(client => {
+           return client.query('SELECT * FROM producto WHERE id_producto=($1)', [req.params.id_producto])
+             .then(response => {
+               pool.end()
+               res.json(response.rows)
+             })
+             .catch(error => {
+               pool.end()
+               console.log(error.stack)
+             })
+         })
     },
 
   deleteProducto(req,res){
-          console.log(req.params.id_producto);
-          db.query("DELETE FROM producto WHERE id_producto=($1)",[req.params.id_producto]).then(response=>{
-            res.json({
-              status: 200
-            })
-          }).catch(error =>{
-            console.log(error);
-            res.json({
-              status: error.code
-            })
-          })
+          var pool = new pg.Pool(config)
+          pool.connect()
+          .then(client => {
+           return client.query("DELETE FROM producto WHERE id_producto=($1)",[req.params.id_producto])
+             .then(response => {
+              pool.end()
+               res.json(response.rows)
+             })
+             .catch(error => {
+                pool.end()
+                console.log(error.stack)
+             })
+         })
         },
   updateProducto(req,res){
-          console.log("PETICION UPDATE")
-          console.log(req.params.id);
-          db.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipoProducto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
-              req.body.stock,req.body.precio, req.params.id_producto]).then((response)=>{
-              console.log(response);
-              res.json(response.rows);
-          }).catch((error)=>{
-              console.log(error);
-          })
+          pool.connect()
+          .then(client => {
+           return client.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipoProducto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
+               req.body.stock,req.body.precio, req.params.id_producto])
+             .then(response => {
+
+               res.json(response.rows)
+                  client.release()
+             })
+             .catch(error => {
+
+               console.log(error.stack)
+                    client.release()
+             })
+         })
+
         },
 
         updateProductoStock(req,res){
-                console.log("PETICION UPDATE")
-                console.log(req.body);
-                db.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.stock,req.body.id_producto]).then((response)=>{
-                    console.log(response);
-                    res.json(response.rows);
-                }).catch((error)=>{
-                    console.log(error);
-                })
+                pool.connect()
+                .then(client => {
+                 return client.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.stock,req.body.id_producto])
+                   .then(response => {
+                     client.release()
+                     res.json(response.rows)
+                   })
+                   .catch(error => {
+                     client.release()
+                     console.log(error.stack)
+                   })
+               })
           }
 
 

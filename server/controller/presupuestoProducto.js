@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
-var db = require('../database');
 
 
   module.exports = {
