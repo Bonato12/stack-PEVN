@@ -13,7 +13,7 @@ config= {
 
 module.exports = {
         getProveedor(req,res){
-            var pool = new pg.Pool(config)
+            var pool = new pg.Pool(config);
             pool.connect(function(err, client, done) {
             client.query("SELECT * FROM proveedor")
               .then(response => {
@@ -33,7 +33,7 @@ module.exports = {
                 client.query("INSERT INTO proveedor (dni,nombre,apellido,direccion,telefono,mail,descripcion) VALUES($1,$2,$3,$4,$5,$6,$7)",[req.body.dni,req.body.nombre,req.body.apellido,
                 req.body.direccion,req.body.telefono,req.body.mail,req.body.descripcion]).then(response => {
                     pool.end();
-                    console.log(response.rows);
+                    res.json(response.rows)
                   })
                   .catch(error => {
                     pool.end();
@@ -47,12 +47,12 @@ module.exports = {
             pool.connect(function(err, client, done) {
               client.query('SELECT * FROM proveedor WHERE id_proveedor=($1)', [req.params.id_proveedor])
                 .then(response => {
-                  pool.end()
-                  res.json(response.rows)
+                  pool.end();
+                  res.json(response.rows);
                 })
                 .catch(error => {
-                  pool.end()
-                  console.log(error.stack)
+                  pool.end();
+                  console.log(error.stack);
                 })
               done()
             })
@@ -62,11 +62,11 @@ module.exports = {
                 pool.connect(function(err, client, done) {
                   client.query("DELETE FROM proveedor WHERE id_proveedor=($1)",[req.params.id_proveedor])
                     .then(response => {
-                      pool.end()
+                      pool.end();
                     })
                     .catch(error => {
-                      pool.end()
-                      console.log(error.stack)
+                      pool.end();
+                      console.log(error.stack);
                     })
                   done()
                 })

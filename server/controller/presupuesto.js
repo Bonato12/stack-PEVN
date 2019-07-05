@@ -3,25 +3,47 @@ var router = express.Router();
 var app = express();
 var pg = require('pg');
 var id;
-  module.exports = {
 
+config= {
+  user: 'postgres',
+  host: '127.0.0.1',
+  database: 'Telnovo',
+  password: '1234',
+  port: 5432,
+}
+
+
+module.exports = {
           getPresupuesto(req,res){
-              db.query("SELECT cl.nombre, cl.apellido,to_char( vt.fecha, 'DD-MM-YYYY') as fecha, vt.total, vt.id_venta FROM cliente cl,  venta vt WHERE cl.id_cliente = vt.id_cliente").then(response=> {
-                  console.log(response.rows)
-                //Muestra los resultados en forma de JSON en nuestro HTML
-                  res.json(response.rows);
-              }).catch(error =>{
-                  console.log(error);
+              var pool = new pg.Pool(config)
+              pool.connect(function(err, client, done) {
+                client.query("SELECT cl.nombre, cl.apellido,to_char( vt.fecha, 'DD-MM-YYYY') as fecha, vt.total, vt.id_venta FROM cliente cl,  venta vt WHERE cl.id_cliente = vt.id_cliente")
+                  .then(response => {
+                    pool.end()
+                    res.json(response.rows)
+                  })
+                  .catch(error => {
+                    pool.end()
+                    console.log(error.stack)
+                  })
+                done()
               })
           },
 
           getIdPresupuesto(req,res){
-               db.query('SELECT * FROM presupuesto WHERE id_presupuesto=($1)', [req.params.id_presupuesto])
-              .then(response=> {
-                res.json(response.rows);
-              }).catch(error =>{
-                console.log(error);
-              });
+              var pool = new pg.Pool(config)
+              pool.connect(function(err, client, done) {
+                client.query('SELECT * FROM presupuesto WHERE id_presupuesto=($1)', [req.params.id_presupuesto])
+                  .then(response => {
+                    pool.end()
+                    res.json(response.rows)
+                  })
+                  .catch(error => {
+                    pool.end()
+                    console.log(error.stack)
+                  })
+                done()
+              })
             },
 
         postPresupuesto(req, res){
@@ -30,14 +52,15 @@ var id;
               for (var i=0; i < req.body.lista.length; i++){
                   console.log(req.body.lista[i]);
               }
-              db.query("INSERT INTO presupuesto(arreglo,observacion,estado,precioManoObra,precioTotal) VALUES($1,$2,$3,$4,$5) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.estado,req.body.presupuesto.precioManoObra,req.body.presupuesto.precioTotal]).then(response=> {
+              var pool = new pg.Pool(config)
+              pool.query("INSERT INTO presupuesto(arreglo,observacion,estado,precioManoObra,precioTotal) VALUES($1,$2,$3,$4,$5) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.estado,req.body.presupuesto.precioManoObra,req.body.presupuesto.precioTotal]).then(response=> {
                   id = parseInt(response.rows[0].id_presupuesto);
                   console.log("EL ID INSERTADO ES:"+id);
                         for (var i=0 ; i < req.body.lista.length ; i++) {
-                            db.query("INSERT INTO presupuestoProducto(presupuesto,producto,cantidad,precio) VALUES($1,$2,$3,$4)",[id,req.body.lista[i].producto.id_producto,req.body.lista[i].cantidad,req.body.lista[i].precio]).then(response=> {
+                            pool.query("INSERT INTO presupuestoProducto(presupuesto,producto,cantidad,precio) VALUES($1,$2,$3,$4)",[id,req.body.lista[i].producto.id_producto,req.body.lista[i].cantidad,req.body.lista[i].precio]).then(response=> {
                                 console.log(response);
                             }).then(
-                              db.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.lista[i].cantidad,req.body.lista[i].producto.id_producto]).then(response =>{
+                              pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.lista[i].cantidad,req.body.lista[i].producto.id_producto]).then(response =>{
                                    console.log(response);
                                  })
                             ).catch((error) =>{
@@ -45,27 +68,39 @@ var id;
                             });
                         }
               }).catch((error) =>{
+                  pool.end();
                   console.log(error);
               });
               },
               deletePresupuesto(req,res){
-                      console.log("Peticion DELETE");
-                      db.query("DELETE FROM presupuesto WHERE id_presupuesto=($1)",[req.params.id_presupuesto]).then(response=> {
-                          console.log(response.rows)
-                          res.json(response.rows);
-                      }).catch(error =>{
-                          console.log(error);
+                      var pool = new pg.Pool(config)
+                      pool.connect(function(err, client, done) {
+                        client.query("DELETE FROM presupuesto WHERE id_presupuesto=($1)",[req.params.id_presupuesto])
+                          .then(response => {
+                            pool.end()
+                            res.json(response.rows)
+                          })
+                          .catch(error => {
+                            pool.end()
+                            console.log(error.stack)
+                          })
+                        done()
                       })
               },
               updatePresupuesto(req,res){
-                    console.log("Peticion UPDATE Presupuesto");
-                    db.query("UPDATE presupuesto SET estado=($1) WHERE id_presupuesto=($2)", [req.body.estado,req.params.id_presupuesto]).then(response=> {
-                    res.json({
-                      mensaje: "Editado Correctamente"
+                    var pool = new pg.Pool(config)
+                    pool.connect(function(err, client, done) {
+                      client.query("UPDATE presupuesto SET estado=($1) WHERE id_presupuesto=($2)", [req.body.estado,req.params.id_presupuesto])
+                        .then(response => {
+                          pool.end()
+                          res.json(response.rows)
+                        })
+                        .catch(error => {
+                          pool.end()
+                          console.log(error.stack)
+                        })
+                      done()
                     })
-                    }).catch(error =>{
-                      console.log(error);
-                    });
                   }
 
        }

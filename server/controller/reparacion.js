@@ -3,31 +3,59 @@ var router = express.Router();
 var app = express();
 var pg = require('pg');
 
+config= {
+  user: 'postgres',
+  host: '127.0.0.1',
+  database: 'Telnovo',
+  password: '1234',
+  port: 5432,
+}
+
   module.exports = {
           getReparacion(req,res){
-              db.query("SELECT * FROM reparacion").then(response=> {
-                  console.log(response.rows)
-                  res.json(response.rows);
-              }).catch(error =>{
-                  console.log(error);
+              var pool = new pg.Pool(config)
+              pool.connect(function(err, client, done) {
+                client.query("SELECT * FROM reparacion")
+                  .then(response => {
+                    pool.end()
+                    res.json(response.rows)
+                  })
+                  .catch(error => {
+                    pool.end()
+                    console.log(error.stack)
+                  })
+                done()
               })
           },
           getIdReparacion(req,res){
-               db.query('SELECT * FROM reparacion WHERE id_reparacion=($1)', [req.params.id_reparacion])
-              .then(response=> {
-                res.json(response.rows);
-              }).catch(error =>{
-                console.log(error);
-              });
+              var pool = new pg.Pool(config)
+              pool.connect(function(err, client, done) {
+                client.query('SELECT * FROM reparacion WHERE id_reparacion=($1)', [req.params.id_reparacion])
+                  .then(response => {
+                    pool.end()
+                    res.json(response.rows)
+                  })
+                  .catch(error => {
+                    pool.end()
+                    console.log(error.stack)
+                  })
+                done()
+              })
             },
             updateReparacion(req, res){
-                  db.query("UPDATE reparacion SET  fecha_ini = ($1), fecha_fin = ($2) WHERE id_reparacion = ($3)",[req.body.fecha_ini,req.body.fecha_fin,req.params.id_reparacion]).then(response=> {
-                    res.json({
-                        mensaje: "Editado Correctamente"
-                    })
-                  }).catch((error) =>{
-                      console.log(error);
-                  });
+                  var pool = new pg.Pool(config)
+                  pool.connect(function(err, client, done) {
+                    client.query("UPDATE reparacion SET  fecha_ini = ($1), fecha_fin = ($2) WHERE id_reparacion = ($3)",[req.body.fecha_ini,req.body.fecha_fin,req.params.id_reparacion])
+                      .then(response => {
+                        pool.end()
+                        res.json(response.rows)
+                      })
+                      .catch(error => {
+                        pool.end()
+                        console.log(error.stack)
+                      })
+                    done()
+                  })
             },
 
        }

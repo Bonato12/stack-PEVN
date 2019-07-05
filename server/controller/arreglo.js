@@ -24,7 +24,7 @@ config= {
               client.query("SELECT * FROM arreglo")
                 .then(response => {
                   pool.end()
-                  res.json(response.rows)
+                  res.json(response.rows);
                 })
                 .catch(error => {
                   pool.end()
