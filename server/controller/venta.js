@@ -14,7 +14,6 @@ config= {
 
 
 module.exports = {
-
           getVenta(req,res){
               var pool = new pg.Pool(config)
               pool.connect(function(err, client, done) {
@@ -32,17 +31,12 @@ module.exports = {
           },
 
           postVenta(req, res){
-                  console.log("Peticion POST");
-                  console.log(req.body);
-                  for (var i=0; i < req.body.lista.length; i++){
-                      console.log(req.body.lista[i]);
-                  }
                   var pool = new pg.Pool(config)
                   pool.query("INSERT INTO venta(id_cliente,fecha,total) VALUES($1,$2,$3) RETURNING id_venta",[req.body.venta.cliente.id_cliente,req.body.venta.fecha,req.body.venta.total]).then(response=> {
                       pool.end();
                       res.json(response.rows);
                       res.json({
-                        id:id_venta
+                        id:response.rows[0].id_venta
                       })
                   }).catch((error) =>{
                       pool.end();
@@ -50,25 +44,25 @@ module.exports = {
                   });
             },
 
-            /*
-            id = parseInt(response.rows[0].id_venta);
-            console.log("EL ID INSERTADO ES:"+id);
-                  pool.end();
-                  res.json(response.rows);
-                  for (var i=0 ; i < req.body.lista.length ; i++) {
-                      var pool = new pg.Pool(config)
-                      pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4) RETURNING id_venta",[id,req.body.lista[i].producto.id_producto,req.body.lista[i].cantidad,req.body.lista[i].precio]).then(response=> {
-                        pool.end();
-                        res.json(response.rows);
-                      })
-                        var pool = new pg.Pool(config)
-                        pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.lista[i].cantidad,req.body.lista[i].producto.id_producto]).then(response =>{
-                             pool.end();
-                             res.json(response.rows)
-                           })
+            postVentaProducto(req,res){
+              console.log(req.body);
+                  for (var i=0; i < req.body.venta.length; i++){
+                      console.log(req.body.venta[i]);
                   }
+              for (var i=0 ; i < req.body.venta.length ; i++) {
+              var pool = new pg.Pool(config)
+              pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4) RETURNING cantidad",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
+                  res.json(response.data)
+              }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.venta[i].cantidad,req.body.venta[i].producto.id_producto]).then(response =>{
+                                    pool.end();
+                                    res.json(response.data)
+                              })).catch((error) =>{
+                                pool.end();
+                                console.log(error);
+                            });
+              }
+            },
 
-            */
 
         deleteVenta(req,res){
                 console.log("Peticion DELETE");
@@ -102,15 +96,6 @@ module.exports = {
               })
             },
           updateVenta(req, res){
-                console.log(req.body);
-                db.query("UPDATE venta SET fecha = ($1) WHERE id_venta = ($2)",[req.body.fecha,req.params.id_venta]).then(response=> {
-                  res.json({
-                      mensaje: "Editado Correctamente"
-                  })
-                }).catch((error) =>{
-                    console.log(error);
-                });
-
                 var pool = new pg.Pool(config)
                 pool.connect(function(err, client, done) {
                   client.query("UPDATE venta SET fecha = ($1) WHERE id_venta = ($2)",[req.body.fecha,req.params.id_venta])

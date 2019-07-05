@@ -138,6 +138,7 @@ export default {
       productoSelected: '',
       clienteSelected: '',
       num: 0,
+      id_venta: ''
 
 		}
   },
@@ -234,7 +235,7 @@ nuevaVenta(){
                   this.venta.total = this.precioTotal;
                                         axios.post('http://localhost:3000/venta',
                                             {
-                                            lista: this.Lista,
+                                            //lista: this.Lista,
                                             venta: this.venta
                                             },
                                             {
@@ -242,13 +243,34 @@ nuevaVenta(){
                                               'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
                                               'Content-Type': 'application/json'
                                                }
-                                          })
+                                          }).then(response=>{
+                                            console.log(response.data[0].id_venta);
+                                            this.id_venta = response.data[0].id_venta
+                                            this.postVentaProducto(this.id_venta)
+                                          }).then();
                                             alertSucessVenta();
-                                            this.ventaProducto = new VentaProducto();
                                     }else {
                                        alertWarningCompletarCampos()
                                     }
-                      }
+                      },
+          postVentaProducto(id){
+            console.log("El id es:",id)
+            axios.post('http://localhost:3000/ventaProducto',
+                {
+                id_venta: id,
+                venta: this.Lista
+                },
+                {
+                  headers:{
+                  'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
+                  'Content-Type': 'application/json'
+                   }
+              }).then(response=>{
+                console.log(response.data)
+              });
+
+          }
+
                     }
                   }
 </script>
