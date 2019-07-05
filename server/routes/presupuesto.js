@@ -8,6 +8,7 @@ router.get('/presupuesto/:id_presupuesto', presupuestoController.getIdPresupuest
 router.delete('/presupuesto/:id_presupuesto', presupuestoController.deletePresupuesto);
 router.put('/presupuesto/:id_presupuesto', presupuestoController.updatePresupuesto);
 router.post('/presupuesto',presupuestoController.postPresupuesto);
+router.post('/presupuestoProducto',presupuestoController.postPresupuestoProducto);
 
 
 const cors = require('cors');

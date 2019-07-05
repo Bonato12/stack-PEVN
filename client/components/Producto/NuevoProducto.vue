@@ -82,14 +82,13 @@ export default {
   },
   data () {
     return {
-      loading:  false,
       producto:  new Producto(),
       tipoProductos : [{name:"Celular"},
                        {name:"Tablet"},
                        {name:"Accesorio"},
-                       {name:"Televisor"},
                        {name:"Laptop"},
-                       {name:"Otros"}],
+                       {name:"Repuesto"},
+                       {name:"Otros"}]
 		}
 
   },

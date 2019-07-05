@@ -156,7 +156,8 @@ export default {
       precioRepuesto:0,
       precioTotal: 0,
       repuestoSelected: '',
-      num: 0
+      num: 0,
+      id_presupuesto:''
 
 		}
   },
@@ -255,22 +256,44 @@ export default {
                       this.presupuesto.precioTotal = this.precioTotal;
                       axios.post('http://localhost:3000/presupuesto',
                           {
-                          lista: this.Lista,
+                          //lista: this.Lista,
                           presupuesto: this.presupuesto
                           },
                           {
                             headers:{
                             'Content-Type': 'application/json'
                              }
-                        }).then(this.presupuestoProducto = new PresupuestoProducto().then(alertSucessPresupuesto()));
-
-
+                        }).then(response=>{
+                          console.log(response.data[0].id_venta);
+                          this.id_presupuesto = response.data[0].id_presupuesto
+                          this.postPresupuestoProducto(this.id_presupuesto)
+                        }).then();
+                          alertSucessVenta()
                   }else {
                      alertWarningCompletarCampos()
                   }
-    }
+
+    },
+    postPresupuestoProducto(id){
+      console.log("El id es:",id)
+      axios.post('http://localhost:3000/presupuestoProducto',
+          {
+          id_presupuesto: id,
+          presupuesto: this.Lista
+          },
+          {
+            headers:{
+            'Access-Control-Allow-Origin': 'http://localhost:3000/presupuestoProducto',
+            'Content-Type': 'application/json'
+             }
+        }).then(response=>{
+          console.log(response.data)
+        });
+
+   }
   }
 }
+
 </script>
 
 <style scoped>

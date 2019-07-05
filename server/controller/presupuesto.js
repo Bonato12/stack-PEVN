@@ -45,7 +45,7 @@ module.exports = {
                 done()
               })
             },
-
+            /*
         postPresupuesto(req, res){
               console.log("Peticion POST");
               console.log(req.body.presupuesto);
@@ -72,6 +72,37 @@ module.exports = {
                   console.log(error);
               });
               },
+              */
+              postPresupuesto(req, res){
+                      var pool = new pg.Pool(config)
+                      pool.query("INSERT INTO presupuesto(arreglo,observacion,estado,precioManoObra,precioTotal) VALUES($1,$2,$3,$4,$5) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.estado,req.body.presupuesto.precioManoObra,req.body.presupuesto.precioTotal]).then(response=> {
+                          pool.end();
+                          res.json(response.rows);
+                          res.json({
+                            id:response.rows[0].id_presupuesto
+                          })
+                      }).catch((error) =>{
+                          pool.end();
+                          console.log(error);
+                      });
+                },
+
+                postPresupuestoProducto(req,res){
+                  console.log(req.body);
+                  for (var i=0 ; i < req.body.presupuesto.length ; i++) {
+                  var pool = new pg.Pool(config)
+                  pool.query("INSERT INTO presupuestoProducto(presupuesto,producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_presupuesto,req.body.presupuesto[i].producto.id_producto,req.body.presupuesto[i].cantidad,req.body.presupuesto[i].precio]).then(response=> {
+                      res.json(response.data)
+                  }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.presupuesto[i].cantidad,req.body.presupuesto[i].producto.id_producto]).then(response =>{
+                                        pool.end();
+                                        res.json(response.data)
+                                  })).catch((error) =>{
+                                    pool.end();
+                                    console.log(error);
+                                });
+                  }
+                },
+
               deletePresupuesto(req,res){
                       var pool = new pg.Pool(config)
                       pool.connect(function(err, client, done) {
