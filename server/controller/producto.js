@@ -33,11 +33,29 @@ module.exports = {
 
         },
 
+        getProductoRepuesto(req,res){
+          var pool = new pg.Pool(config)
+          pool.connect(function(err, client, done) {
+            client.query("SELECT  * FROM producto WHERE tipoProducto = 'Repuesto' ")
+              .then(response => {
+                pool.end()
+                res.json(response.rows)
+              })
+              .catch(error => {
+                pool.end()
+                console.log(error.stack)
+              })
+            done()
+          })
+
+        },
+
+
         getProductoStock(req,res){
             var pool = new pg.Pool(config)
             pool.connect()
             .then(client => {
-             return client.query("SELECT  * FROM producto WHERE stock >= 1")
+             return client.query("SELECT  * FROM producto WHERE stock >= 1 AND tipoProducto <>'Repuesto' ")
                .then(response => {
                  res.json(response.rows)
                   client.release()
