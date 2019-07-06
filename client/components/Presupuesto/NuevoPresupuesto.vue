@@ -14,7 +14,7 @@
                     </hr style="color:black;">
                   <div class="card-body">
                     <form style="margin-left: 30px; margin-top:30px;">
-                            <div class="input-group form-group">
+                            <div class="input-group form-group" style="width:1007px;">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Repuesto</span>
                                 </div>
@@ -38,7 +38,7 @@
                               </b-input-group>
                             </div>
                             <div class="caja">
-                              <div class="input-group form-group" style="width:537px; padding-left:25px;">
+                              <div class="input-group form-group" style="width:507px; padding-left:25px;">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text">Precio</span>
                                   </div>
@@ -54,13 +54,14 @@
                     </div>
                     <br>
                   <hr style="background-color:black;"/>
-                      <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
+                      <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;  border-radius: 5px;">
                                 <i class="fas fa-mobile-alt fa-3x"></i>
                                 <i class="fas fa-tools fa-3x"></i>
                                 <br>
-                                <table class="table" style="background-color:white;">
-                                  <thead>
-                                    <tr >
+                                <br>
+                                <table class="table" style="background-color:white;   border-radius: 5px;">
+                                  <thead style="background-color:white;   border-radius: 5px;">
+                                    <tr>
                                       <th scope="col">Modelo</th>
                                       <th scope="col">Cantidad</th>
                                       <th scope="col">Precio</th>
@@ -82,36 +83,46 @@
                                 </table>
                           </div>
                           <br>
-                          <div class="input-group form-group" style="margin-left: 25px; width:1045px;" >
+                          <div class="input-group form-group" style="margin-left: 25px; width:1010px;" >
                               <div class="input-group-prepend">
                                 <span class="input-group-text">Observaciones</span>
                               </div>
                               <textarea required type="text" class="form-control" v-model="presupuesto.observacion" placeholder="Ingrese Descripcion"></textarea>
                           </div>
-                          <div  style="text-align:right; margin-right:50px; color:white;">
-                            <div class="input-group form-group" style="width:337px; padding-left:25px;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Precio Mano de Obra</span>
-                                </div>
-                                <input @change="cambiarPrecioManoObra()" type="number" min="0"  v-model="precioManoObra"  class="form-control">
+                          <div class="caja1">
+                            <div  style="color:white;">
+                              <div class="input-group form-group" style="width:337px; padding-left:25px;">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">
+                                         Precio Mano de Obra
+                                      </span>
+                                  </div>
+                                  <input @change="cambiarPrecioManoObra()" type="number" min="0"  v-model="precioManoObra"  class="form-control">
+                              </div>
                             </div>
                           </div>
-                          <div  style="text-align:right; margin-right:50px; color:white;">
-                            <div class="input-group form-group" style="width:337px; padding-left:25px;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Precio Repuesto</span>
-                                </div>
-                                <input @change="cambiarPrecioManoObra()"  type="number" min="0"  v-model="precioRepuesto"  class="form-control" readonly>
+                          <div class="caja1">
+                            <div  style="color:white;">
+                              <div class="input-group form-group" style="width:337px;">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Precio Repuesto</span>
+                                  </div>
+                                  <input @change="cambiarPrecioManoObra()"  type="number" min="0"  v-model="precioRepuesto"  class="form-control" readonly>
+                              </div>
                             </div>
                           </div>
-                          <div  style="text-align:right; margin-right:50px; color:white;">
-                            <div class="input-group form-group" style="width:337px; padding-left:25px;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Precio Total</span>
-                                </div>
-                                <input  type="number" min="0"  v-model="precioTotal"  class="form-control" readonly>
+                          <div class="caja1">
+                            <div  style="color:white;">
+                              <div class="input-group form-group" style="width:337px;">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Precio Total</span>
+                                  </div>
+                                  <input  type="number" min="0"  v-model="precioTotal"  class="form-control" readonly>
+                              </div>
                             </div>
                           </div>
+                          <br>
+                          <br>
                           <br>
                           <div class="d-flex justify-content-end" style="padding-right:50px;">
                               <router-link to="/HomeArreglo" tag="button" class="botones"  style="background:white;">
@@ -331,6 +342,11 @@ border:0 !important;
 float:left;
 width:500px;
 }
+
+.caja1 {
+float:left;
+width:350px;
+}
 .botones{
   margin-left: 2px;
   cursor:pointer;
@@ -343,7 +359,7 @@ width:500px;
   color:black;
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .input-group-text{
 width: auto;
