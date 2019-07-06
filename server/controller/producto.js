@@ -57,13 +57,12 @@ module.exports = {
             .then(client => {
              return client.query("SELECT  * FROM producto WHERE stock >= 1 AND tipoProducto <>'Repuesto' ")
                .then(response => {
+                 pool.end();
                  res.json(response.rows)
-                  client.release()
                })
                .catch(error => {
-
+                 pool.end();
                  console.log(error.stack)
-                  client.release()
                })
            })
         },
@@ -74,11 +73,11 @@ module.exports = {
        client.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
        req.body.stock,req.body.precio])
          .then(response => {
-           pool.end()
+           pool.end();
            res.json(response.rows)
          })
          .catch(error => {
-           pool.end()
+           pool.end();
            console.log(error.stack)
          })
        done()

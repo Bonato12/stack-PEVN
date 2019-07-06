@@ -93,7 +93,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Precio Mano de Obra</span>
                                 </div>
-                                <input @change="precioManoObra()" type="number" min="0"  v-model="presupuesto.precioManoObra"  class="form-control">
+                                <input @change="cambiarPrecioManoObra()" type="number" min="0"  v-model="precioManoObra"  class="form-control">
                             </div>
                           </div>
                           <div  style="text-align:right; margin-right:50px; color:white;">
@@ -101,7 +101,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Precio Repuesto</span>
                                 </div>
-                                <input  type="number" min="0"  v-model="precioRepuesto"  class="form-control">
+                                <input @change="cambiarPrecioManoObra()"  type="number" min="0"  v-model="precioRepuesto"  class="form-control" readonly>
                             </div>
                           </div>
                           <div  style="text-align:right; margin-right:50px; color:white;">
@@ -109,7 +109,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Precio Total</span>
                                 </div>
-                                <input  type="number" min="0"  v-model="precioTotal"  class="form-control">
+                                <input  type="number" min="0"  v-model="precioTotal"  class="form-control" readonly>
                             </div>
                           </div>
                           <br>
@@ -153,6 +153,7 @@ export default {
       Lista: [],
       producto: [],
       precio: 0,
+      precioManoObra: 0,
       precioRepuesto:0,
       precioTotal: 0,
       repuestoSelected: '',
@@ -179,9 +180,9 @@ export default {
     },
     guardarLista(){
             console.log(JSON.stringify(this.repuestoSelected));
-            //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
             if(this.repuestoSelected && this.precio > 0 && this.num > 0){
                 this.precioRepuesto = parseInt(this.precioRepuesto) + parseInt(this.precio);
+                this.precioTotal = parseInt(this.precioRepuesto) + parseInt(this.precioManoObra);
                 this.presupuestoProducto.producto = this.repuestoSelected;
                 this.presupuestoProducto.cantidad = this.num;
                 this.presupuestoProducto.precio = this.precio;
@@ -219,7 +220,8 @@ export default {
             alertWarningLimiteOne();
           } else {
             this.num--;
-            this.precio = parseInt(this.repuestoSelected.precio) * parseInt(this.num)
+            this.precio = parseInt(this.repuestoSelected.precio) * parseInt(this.num);
+
           }
       }
     },
@@ -230,7 +232,8 @@ export default {
       console.log(indice);
       //Resta al Precio Total el precio del Producto eliminado de la lista.
       var index = this.Lista.indexOf(producto);
-      this.precioRepuesto = this.precioRepuesto - this.Lista[index].precio
+      this.precioRepuesto = this.precioRepuesto - this.Lista[index].precio;
+      this.precioTotal = parseInt(this.precioTotal) - this.Lista[index].precio  ;
       if (index > -1) {
           this.Lista.splice(index, 1);
       }
@@ -245,14 +248,15 @@ export default {
              }
            }
        },
-       precioManoObra(){
-         this.precioTotal = parseInt(this.precioRepuesto) + parseInt(this.presupuesto.precioManoObra);
+       cambiarPrecioManoObra(){
+         this.precioTotal = parseInt(this.precioRepuesto) + parseInt(this.precioManoObra);
        },
 
     nuevoPresupuesto(){
-                  if (this.Lista.length > 0 ){
+                  if (this.Lista.length > 0 && this.precioManoObra && this.precioTotal ){
                       this.presupuesto.arreglo = this.ida;
                       this.presupuesto.estado = 'EN ESPERA';
+                      this.presupuesto.precioManoObra = this.precioManoObra;
                       this.presupuesto.precioTotal = this.precioTotal;
                       axios.post('http://localhost:3000/presupuesto',
                           {
