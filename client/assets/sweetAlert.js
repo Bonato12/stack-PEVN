@@ -100,3 +100,7 @@ export function alertEditSucessProducto(){
 export function alertEditSucessCliente(){
   Swal.fire('Editado!','El Cliente ha sido Editado!','success');
 }
+
+export function alertSucessMail(){
+  Swal.fire('Exito!','Mail Enviado Correctamente','success');
+}

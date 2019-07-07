@@ -22,7 +22,6 @@
                 skipDiacritics: true,
                 placeholder: 'Buscar Producto',
               }"
-              @on-row-click="onRowClick"
               :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -39,6 +38,16 @@
                 }"
 
                 theme="default">
+                <template slot="table-row" slot-scope="props">
+                  <span v-if="props.column.field == 'opciones'">
+                    <button @click="eliminarArreglo(props.row.id_arreglo)" class="btn btn-danger"  title="Eliminar Cliente">
+                          <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button @click="verPresupuesto(props.row.id_arreglo)" class="btn btn-dark" title="Editar Cliente">
+                          <i class="fas fa-coins"></i>
+                    </button>
+                  </span>
+                </template>
          </vue-good-table>
          <div>
               <transition v-if="showModal" class="animation fadeInLeft" name="modal">
@@ -143,7 +152,11 @@ export default {
         {
           label: 'Condicion',
           field: 'condicion',
-        }
+        },
+        {
+          label: 'Opciones',
+          field: 'opciones',
+        },
       ],
       id_presupuesto:''
 		}
@@ -160,7 +173,7 @@ export default {
           console.log(this.arreglo);
         });
     },
-    eliminarArreglo(){
+    eliminarArreglo(id_arreglo){
             this.$swal({
                 title: 'Estas Seguro?',
                 text: "No se podran recuperar los datos!",
@@ -171,7 +184,7 @@ export default {
                 confirmButtonText: 'Si, Borrar!'
                 }).then((result) => {
                 if (result.value) {
-                  axios.delete('http://localhost:3000/arreglo/'+this.ida).then((data)=>{
+                  axios.delete('http://localhost:3000/arreglo/'+id_arreglo).then((data)=>{
                     console.log(data)
                     if (data.data.status == 200){
                       this.$swal(
@@ -198,8 +211,9 @@ export default {
         this.ida = params.row.id_arreglo;
 
     },
-    verPresupuesto(){
-      console.log(this.ida)
+    verPresupuesto(id_arreglo){
+      console.log(id_arreglo);
+      this.ida = id_arreglo
       axios.get('http://localhost:3000/arreglo/'+this.ida).then((response) =>{
         this.control(response.data[0])
       });

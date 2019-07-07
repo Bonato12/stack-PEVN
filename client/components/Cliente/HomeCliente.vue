@@ -45,6 +45,9 @@
                 <button @click="editar(props.row)" class="btn btn-warning" title="Editar Cliente">
                       <i class="fas fa-edit"></i>
                 </button>
+                <button  class="btn btn-success" @click="modalMail(props.row)" title="Enviar Mail">
+                    <i class="fas fa-envelope fa-1x"></i>
+                </button>
               </span>
             </template>
      </vue-good-table>
@@ -126,6 +129,41 @@
            </div>
          </div>
        </transition>
+       <transition v-if="showModalMail" class="animation fadeInLeft" name="modal">
+         <div class="modal-mask">
+           <div class="modal-wrapper">
+             <div class="modal-container animated fadeInLeft">
+               <div class="modal-header" style="background-color:#424242;">
+                 <slot name="header">
+                   <h2 style="color:white; text-align:left;">
+                     <i class="fas fa-id-card"></i>
+                     Enviar Mail
+                   </h2>
+                   <button class="modal-default-button" @click="hide()">
+                    <i class="far fa-times-circle"></i>
+                   </button>
+                 </slot>
+               </div>
+               <div class="modal-body" style="background-color:#f1f8e9;">
+                 <form @submit.prevent="enviarMail()">
+                 <div class="input-group form-group">
+                       <h4>Para : {{cliente.mail}} </h4>
+                 </div>
+                 <div class="input-group form-group">
+                     <textarea required type="text" v-model="mensaje" class="form-control" placeholder="Ingrese Mensaje"></textarea>
+                 </div>
+                 <button type="submit" class="btn btn-success"  title="Enviar Mail">
+                     <i class="far fa-save fa-1x"></i>
+                     Enviar
+                 </button>
+               </form>
+               </div>
+               <div class="modal-header" style="background-color:#FEC404;" >
+              </div>
+             </div>
+           </div>
+         </div>
+       </transition>
     <div>
         <br>
         <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn btn-warning" style="float: left;"  >
@@ -163,7 +201,7 @@ import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import Cliente from '../../models/Cliente';
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete,alertError,alertWarningFK } from '../../assets/sweetAlert.js';
+import { alertSucessDelete,alertError,alertWarningFK,alertSucessMail } from '../../assets/sweetAlert.js';
 
 
 
@@ -178,6 +216,9 @@ export default {
   data () {
     return {
       showModal: false,
+      showModalMail: false,
+      destinatario: '',
+      mensaje: '',
         datos: [],
         Lista: [],
         cliente:  new Cliente(),
@@ -208,7 +249,7 @@ export default {
         {
           label: 'Opciones',
           field: 'opciones',
-        },
+        }
       ],
       columns1: [
             {
@@ -260,6 +301,7 @@ export default {
             })
 
     },
+    /*
     enviarMail() {
         axios.get('http://localhost:3000/cliente/'+this.cliente.id_cliente).then((response) =>{
           this.cliente = new Cliente(this.cliente.id_cliente,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
@@ -267,6 +309,7 @@ export default {
             this.cliente
           )});
     },
+    */
     exportarPdf(){
         var columnas = [
           {title: "DNI", dataKey:"dni"},
@@ -320,11 +363,31 @@ export default {
     },
     hide(){
       this.showModal = false;
+      this.showModalMail = false;
     },
     editar(params){
       console.log(JSON.stringify(params));
       this.$router.push('/EditarCliente/'+params.id_cliente)
-    }
+    },
+    modalMail(cliente){
+      console.log(cliente);
+      this.showModalMail = true;
+      this.destinatario = cliente.mail
+    },
+    enviarMail() {
+          axios.post('http://localhost:3000/email',
+            {
+              mensaje: this.mensaje,
+              destinatario : this.destinatario
+            },
+            {
+            headers:{
+            'Access-Control-Allow-Origin': 'http://localhost:3000/mail',
+            'Content-Type': 'application/json'
+             }
+        }).then(alertSucessMail());
+    },
+
 
   }
 }

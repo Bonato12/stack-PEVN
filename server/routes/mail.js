@@ -18,9 +18,9 @@ var nodemailer = require('nodemailer');
 // Definimos el email
     var mailOptions = {
         from: '"Sebastian Bonato sebabonato12@gmail.com>',
-        to: req.body.mail,
+        to: req.body.destinatario,
         subject: 'Telnovo',
-        text: 'Estimado '+ req.body.nombre+' '+req.body.apellido +', la reparacion de su equipo a sido completada con exito!!'
+        text: req.body.mensaje
     };
 // Enviamos el email
       transporter.sendMail(mailOptions, function(error, info){
