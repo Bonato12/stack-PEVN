@@ -13,32 +13,41 @@
         </div>
     </div>
     <div v-if="datos.length" style="tabla">
-        <vue-good-table
-              :columns="columns"
-              :rows="datos"
-              title="Ver Opciones y Detalles"
-              :search-options="{
-                  enabled: true,
-                  skipDiacritics: true,
-                  placeholder: 'Buscar Cliente',
-              }"
-              @on-row-click="detalleCliente"
-              :pagination-options="{
-                  enabled: true,
-                  mode: 'records',
-                  perPage: 5,
-                  perPageDropdown: [3, 7, 9],
-                  dropdownAllowAll: false,
-                  setCurrentPage: 1,
-                  nextLabel: 'Siguiente',
-                  prevLabel: 'Anterior',
-                  rowsPerPageLabel: 'Filas por paginas',
-                  ofLabel: 'of',
-                  pageLabel: 'page', // for 'pages' mode
-                  allLabel: 'All',
-              }"
-              theme="default">
-       </vue-good-table>
+      <vue-good-table
+            :columns="columns"
+            :rows="datos"
+            :search-options="{
+                enabled: true,
+                skipDiacritics: true,
+                placeholder: 'Buscar Cliente',
+            }"
+            @on-row-click="detalleCliente"
+            :pagination-options="{
+                enabled: true,
+                mode: 'records',
+                perPage: 5,
+                perPageDropdown: [3, 7, 9],
+                dropdownAllowAll: false,
+                setCurrentPage: 1,
+                nextLabel: 'Siguiente',
+                prevLabel: 'Anterior',
+                rowsPerPageLabel: 'Filas por paginas',
+                ofLabel: 'of',
+                pageLabel: 'page', // for 'pages' mode
+                allLabel: 'All',
+            }"
+            theme="default">
+            <template slot="table-row" slot-scope="props">
+              <span v-if="props.column.field == 'opciones'">
+                <button @click="eliminarCliente(props.row)" class="btn btn-danger"  title="Eliminar Cliente">
+                      <i class="fas fa-trash-alt"></i>
+                </button>
+                <button @click="editar(props.row)" class="btn btn-warning" title="Editar Cliente">
+                      <i class="fas fa-edit"></i>
+                </button>
+              </span>
+            </template>
+     </vue-good-table>
      </div>
        <transition v-if="showModal" class="animation fadeInLeft" name="modal">
          <div class="modal-mask">
@@ -48,7 +57,7 @@
                  <slot name="header">
                    <h2 style="color:white; text-align:left;">
                      <i class="fas fa-id-card"></i>
-                     Detalles
+                     Detalle del Cliente #{{cliente.id_cliente}}
                    </h2>
                    <button class="modal-default-button" @click="hide()">
                     <i class="far fa-times-circle"></i>
@@ -57,11 +66,6 @@
                </div>
                <div class="modal-body" style="background-color:#f1f8e9;">
                  <slot name="body">
-                   <b-row class="mb-1">
-                      <b-col cols="3">ID:</b-col>
-                        <b-col>{{cliente.id_cliente}}</b-col>
-                    </b-row>
-                    <hr>
                     <b-row class="mb-1">
                       <b-col cols="3">Dni:</b-col>
                         <b-col>{{cliente.dni}}</b-col>
@@ -201,6 +205,25 @@ export default {
           label: 'Mail',
           field: 'mail',
         },
+        {
+          label: 'Opciones',
+          field: 'opciones',
+        },
+      ],
+      columns1: [
+            {
+              label: 'Brand Name',
+              field: 'nombre',
+            },
+             {
+              label: 'Brand Desc',
+              field: 'apellido',
+            },
+            {
+              label: 'Actions',
+              field: 'actions',
+              sortable: false,
+            }
        ]
       }
   },
@@ -306,6 +329,10 @@ export default {
     },
     hide(){
       this.showModal = false;
+    },
+    editar(params){
+      console.log(JSON.stringify(params));
+      this.$router.push('/EditarCliente/'+params.id_cliente)
     }
 
   }

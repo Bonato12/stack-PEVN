@@ -13,7 +13,7 @@
                   </div>
                     </hr style="color:black;">
                   <div class="card-body">
-                    <form style="margin-left: 30px; margin-top:30px;">
+                    <form style="margin-left: 30px; margin-top:10px;">
                             <div class="input-group form-group" style="width:1007px;">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Repuesto</span>
@@ -52,13 +52,13 @@
                           <i class="fas fa-tools fa"></i>
                         </button>
                     </div>
-                    <br>
-                  <hr style="background-color:black;"/>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;  border-radius: 5px;">
-                                <i class="fas fa-mobile-alt fa-3x"></i>
-                                <i class="fas fa-tools fa-3x"></i>
                                 <br>
-                                <br>
+                                <h4>
+                                  <i class="fas fa-mobile-alt"></i>
+                                  <i class="fas fa-tools"></i>
+                                  Lista de Repuestos:
+                                </h4>
                                 <table class="table" style="background-color:white;   border-radius: 5px;">
                                   <thead style="background-color:white;   border-radius: 5px;">
                                     <tr>
@@ -124,7 +124,7 @@
                           <br>
                           <br>
                           <br>
-                          <div class="d-flex justify-content-end" style="padding-right:50px;">
+                          <div class="d-flex justify-content-end" style="padding-right:31px;">
                               <router-link to="/HomeArreglo" tag="button" class="botones"  style="background:white;">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
