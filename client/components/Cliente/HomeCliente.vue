@@ -235,7 +235,8 @@ export default {
           //console.table(this.datos);
         });
     },
-    eliminarCliente(id) {
+    eliminarCliente(cliente) {
+        console.log(JSON.stringify(cliente.id_cliente));
         this.$swal({
             title: 'Estas Seguro?',
             text: "No se podran recuperar los datos!",
@@ -246,25 +247,15 @@ export default {
             confirmButtonText: 'Si, Borrar!'
             }).then((result) => {
             if (result.value) {
-              axios.delete('http://localhost:3000/cliente/' + id).then((data)=>{
+              axios.delete('http://localhost:3000/cliente/' + cliente.id_cliente).then((data)=>{
                 console.log("Hola");
                 console.log(data);
-                if (data.data.status == 200){
                   this.$swal(
                     'Eliminado!',
                     'El Cliente ha sido eliminado.',
                     'success'
-                  );
-                  this.getCliente();
-                }else {
-                  if(data.data.status == 23503){
-                    alertWarningFK()
-                  }else{
-                    alertError();
-                  }
-                }
-              }).then(this.hide());
-
+                  ).then(this.getCliente())
+              })
             }
             })
 
@@ -300,7 +291,7 @@ export default {
       },
 
     detalleCliente(params) {
-        this.showModal = true;
+        //this.showModal = true;
         console.log(params);
         this.cliente.id_cliente = params.row.id_cliente;
         this.cliente.dni = params.row.dni;
