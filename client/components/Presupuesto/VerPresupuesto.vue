@@ -2,8 +2,6 @@
   <div>
     <div class="container animated zoomIn">
       <br>
-      <br>
-      <div>
           <div class="card-header" style="background-color:#FFD700; ">
             <h2 style="text-align:center; color:black;">
                 <i class="fas fa-tools"></i>
@@ -21,15 +19,13 @@
                  <b-col cols="3">Arreglo:</b-col>
                    <b-col>{{presupuesto.arreglo}}</b-col>
                </b-row>
-               <hr>
                <b-row class="mb-1">
                  <b-col cols="3">Observacion:</b-col>
                    <b-col>{{presupuesto.observacion}}</b-col>
                </b-row>
-               <hr>
                <b-row class="mb-1">
                  <b-col cols="3">precioTotal:</b-col>
-                   <b-col>{{presupuesto.preciototal}}</b-col>
+                   <b-col>{{presupuesto.preciototal}}$</b-col>
                </b-row>
                <hr>
             </slot>
@@ -38,10 +34,8 @@
           <div class="modal-body" style="background-color:#f1f8e9;">
               <h4>
                 <i class="fas fa-toolbox"></i>
-                Presupuesto de Mano de Obra:</h4>
-              <br>
-                {{presupuesto.preciomanoobra}}
-              <br>
+                Presupuesto de Mano de Obra: {{presupuesto.preciomanoobra}}$</h4>
+              <hr>
           </div>
           <div class="modal-body" style="background-color:#f1f8e9;">
               <h4>
@@ -58,7 +52,7 @@
                       </thead>
                       <tbody>
                           <tr v-for="item in this.presupuestoProducto">
-                            <td scope="col">{{item.producto}}</td>
+                            <td scope="col">{{item.modelo}}</td>
                             <td scope="col">{{item.cantidad}}</td>
                             <td scope="col"> {{item.precio}}</td>
                           </tr>
@@ -70,10 +64,11 @@
                     </tbody>
               </table>
           </div>
-          <div class="modal-body" style="background-color:#f1f8e9;">
+          <div class="modal-body" style="background-color:#f1f8e9; margin-bottom:20px;">
               <h4>
                 <i class="fas fa-info-circle"></i>
                 Estado del Presupuesto:</h4>
+                <hr>
             <form @submit.prevent="cambiarEstado()">
               <div class="input-group form-group">
                   <div class="input-group-prepend">
@@ -85,11 +80,6 @@
                  </select>
               </div>
               <div>
-                <button class="btn btn-danger" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" title="Eliminar Cliente">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-              </div>
-              <div>
                 <button type="submit" class="btn"  title="Guardar" >
                       <i class="far fa-save fa-1x"></i>
                       Guardar
@@ -98,6 +88,10 @@
                     <i class="fas fa-arrow-left"></i>
                       Volver
                 </router-link>
+                <button class="btn btn-danger" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" style="color:black;" title="Eliminar Cliente">
+                    <i class="fas fa-trash-alt"></i>
+                    Eliminar
+                </button>
             </div>
           </form>
           </div>

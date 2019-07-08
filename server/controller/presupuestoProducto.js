@@ -18,7 +18,7 @@ config= {
           getPresupuestoProducto(req,res){
             var pool = new pg.Pool(config)
             pool.connect(function(err, client, done) {
-              client.query("SELECT  * FROM presupuestoProducto")
+              client.query("SELECT PP.id_presupuestoproducto,PR.modelo FROM presupuestoProducto PP, producto PR WHERE PP.producto = PR.id_producto")
                 .then(response => {
                   pool.end()
                   res.json(response.rows)
@@ -33,13 +33,13 @@ config= {
           getIdPresupuestoProducto(req,res){
               var pool = new pg.Pool(config)
               pool.connect(function(err, client, done) {
-                client.query('SELECT  PP.id_presupuestoProducto, PP.presupuesto, PP.producto, PP.cantidad, PP.precio  FROM presupuesto P, presupuestoProducto PP WHERE PP.presupuesto = P.id_presupuesto AND PP.presupuesto =($1)', [req.params.id_presupuesto])
+                client.query('SELECT PP.id_presupuestoproducto,PR.modelo,PP.cantidad,PP.precio FROM presupuestoProducto PP, producto PR WHERE PP.producto = PR.id_producto AND PP.presupuesto =($1)', [req.params.id_presupuesto])
                   .then(response => {
-                    pool.end()
+                    pool.end();
                     res.json(response.rows)
                   })
                   .catch(error => {
-                    pool.end()
+                    pool.end();
                     console.log(error.stack)
                   })
                 done()

@@ -246,3 +246,7 @@ select * from reparacion where fecha_fin  is not null
 select * from arreglo
 
 select * from reparacion where id_reparacion=8
+
+SELECT PP.id_presupuestoproducto,PR.modelo,PP.cantidad,PP.precio FROM presupuestoProducto PP, producto PR WHERE PP.producto = PR.id_producto
+
+SELECT * FROM presupuestoproducto;
