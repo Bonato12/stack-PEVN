@@ -238,6 +238,11 @@ export default {
 
         },
         {
+          label: 'Direccion',
+          field: 'direccion',
+
+        },
+        {
           label: 'Telefono',
           field: 'telefono',
 
@@ -251,21 +256,6 @@ export default {
           field: 'opciones',
         }
       ],
-      columns1: [
-            {
-              label: 'Brand Name',
-              field: 'nombre',
-            },
-             {
-              label: 'Brand Desc',
-              field: 'apellido',
-            },
-            {
-              label: 'Actions',
-              field: 'actions',
-              sortable: false,
-            }
-       ]
       }
   },
   methods: {

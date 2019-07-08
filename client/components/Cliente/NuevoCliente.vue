@@ -16,7 +16,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number" v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                        <input required type="number" v-model="cliente.dni" min="1" max="99999999"  class="form-control" placeholder="Ingrese Dni" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -40,7 +40,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required  type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                        <input required  type="number"  v-model="cliente.telefono"  min="1" max="99999999999999" class="form-control" placeholder="Ingrese Telefono" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -58,11 +58,6 @@
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>
-                        <!--
-                        <div v-if="loading" class="d-flex justify-content-left mb-2">
-                          <b-spinner label="Loading..."></b-spinner>
-                        </div>
-                      -->
                     </div>
               </form>
               <div>
