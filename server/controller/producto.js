@@ -74,7 +74,10 @@ module.exports = {
        req.body.stock,req.body.precio])
          .then(response => {
            pool.end();
-           res.json(response.rows)
+           //res.json(response.rows);
+           res.json({
+             status: 200
+           });
          })
          .catch(error => {
            pool.end();

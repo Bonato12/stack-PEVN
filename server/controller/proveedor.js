@@ -33,7 +33,9 @@ module.exports = {
                 client.query("INSERT INTO proveedor (dni,nombre,apellido,direccion,telefono,mail,descripcion) VALUES($1,$2,$3,$4,$5,$6,$7)",[req.body.dni,req.body.nombre,req.body.apellido,
                 req.body.direccion,req.body.telefono,req.body.mail,req.body.descripcion]).then(response => {
                     pool.end();
-                    res.json(response.rows)
+                    res.json({
+                      status: 200
+                    });
                   })
                   .catch(error => {
                     pool.end();
