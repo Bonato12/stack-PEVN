@@ -12,9 +12,8 @@
                        Nueva Compra
                      </h2>
                   </div>
-                  <hr style="color:black;">
                   <div class="card-body">
-                    <form style="margin-left: 30px; margin-top:30px;">
+                    <form style="margin-left: 30px; margin-top: 15px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Proveedor</span>
@@ -264,7 +263,7 @@ h1, h2 {
 height: auto;
 margin-bottom: auto;
 width: 1650px;
-background-color: #696969;
+background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }
@@ -298,7 +297,7 @@ width:500px;
   color:black;
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .input-group-text{
 width: auto;

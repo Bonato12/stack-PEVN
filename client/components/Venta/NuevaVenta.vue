@@ -282,7 +282,7 @@ h1, h2 {
 height: auto;
 margin-bottom: auto;
 width: 1650px;
-background-color: #696969;
+background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }
