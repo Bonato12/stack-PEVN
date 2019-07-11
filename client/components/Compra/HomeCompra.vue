@@ -64,7 +64,8 @@
                                         <th scope="col">Marca</th>
                                         <th scope="col">Modelo</th>
                                         <th scope="col">Cantidad</th>
-                                        <th scope="col">Precio</th>
+                                        <th scope="col">Precio Unitario</th>
+                                        <th scope="col">Precio Total</th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -76,7 +77,8 @@
                                         <td scope="col">{{item.marca}}</td>
                                         <td scope="col">{{item.modelo}}</td>
                                         <td scope="col"> {{item.cantidad}}</td>
-                                        <td scope="col">{{item.precio}}</td>
+                                        <td scope="col">{{item.preciounitario}}</td>
+                                        <td scope="col">{{item.preciototal}}</td>
                                       </tr>
                                 </tbody>
                           </table>

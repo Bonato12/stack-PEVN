@@ -153,6 +153,7 @@ export default {
       productoSelected: '',
       proveedorSelected: '',
       num: '',
+      id_compra: ''
 
 		}
   },
@@ -259,7 +260,6 @@ export default {
                       this.compra.total = this.precioTotal;
                       axios.post('http://localhost:3000/compra',
                           {
-                          lista: this.Lista,
                           compra: this.compra
                           },
                           {
@@ -268,12 +268,32 @@ export default {
                             'Access-Control-Allow-Methods': 'POST',
                             'Content-Type': 'application/json'
                              }
-                        }).then(alertSucessCompra());
-                          //this.compraProducto = new CompraProducto();
-
+                        }).then(response=>{
+                          console.log(response.data.id);
+                          this.id_compra = response.data.id
+                          this.postCompraProducto(this.id_compra)
+                        }).then();
+                          alertSucessCompra();
                   }else {
-                    alertCompletarCampos();
+                     alertWarningCompletarCampos()
                   }
+
+    },
+    postCompraProducto(id){
+      console.log("El id es:",id)
+      axios.post('http://localhost:3000/compraProducto',
+          {
+          id_compra: id,
+          compra: this.Lista
+          },
+          {
+            headers:{
+            'Access-Control-Allow-Origin': 'http://localhost:3000/compraProducto',
+            'Content-Type': 'application/json'
+             }
+        }).then(response=>{
+          console.log(response.data)
+        });
 
     }
   }
