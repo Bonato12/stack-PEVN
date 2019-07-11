@@ -25,13 +25,13 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                        <input  type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Nombre</span>
                         </div>
-                        <input  type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                        <input   type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -49,7 +49,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input   type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                        <input    type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -103,6 +103,7 @@ export default {
   methods: {
             nuevoCliente(){
                     this.errors = [];
+                    /*
                     if (!this.cliente.dni){
                       this.errors.push('Dni no puede ser Vacio');
                     }
@@ -121,6 +122,7 @@ export default {
                     if (!this.cliente.mail){
                       this.errors.push('Mail Vacio');
                     }
+                    */
                     var _this = this;
                     if (this.errors.length == 0){
                             axios.post('http://localhost:3000/cliente',

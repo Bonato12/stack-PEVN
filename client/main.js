@@ -14,12 +14,6 @@ import {store} from './store.js';
 import Datepicker from 'vuejs-datepicker';
 
 
-
-/*
-import 'materialize-css';
-import 'materialize-css/dist/css/materialize.css'
-import 'materialize-css/dist/js/materialize.js'
-*/
 Vue.use(VueGoodTablePlugin);
 Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue);

@@ -12,42 +12,50 @@
             </div>
             </hr style="color:black;">
             <div class="card-body" >
+              <p v-if="errors.length">
+                <ul  class="list-group" v-for="error in errors">
+                    <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
+                      {{ error }}
+                    </li>
+                    <br>
+                </ul>
+              </p>
               <form @submit.prevent="editarCliente()" style="width:780px; margin-top:-20px; margin:0px auto;">
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Dni</span>
                     </div>
-                    <input required type="number" v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                    <input  type="number" v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Nombre</span>
                     </div>
-                    <input required  type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                    <input  type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Apellido</span>
                     </div>
-                    <input required  type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
+                    <input   type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Direccion</span>
                     </div>
-                    <input required type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" >
+                    <input  type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Telefono</span>
                     </div>
-                    <input required  type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                    <input   type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Mail</span>
                     </div>
-                    <input required type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
+                    <input type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
                 </div>
                 <br>
                   <div style="margin-left:250px;">
@@ -85,19 +93,17 @@ export default {
       idc: this.$route.params.id,
       datos: [],
       cliente:  new Cliente(),
+      errors: []
 		}
   },
   mounted(){
 
   },
   computed:{
-    validation() {
-        return this.dni
-      }
+
   },
   methods: {
       rellenarCliente(){
-         //console.log(this.idc);
          axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
            console.log(response.data);
            this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
@@ -105,15 +111,33 @@ export default {
 
       },
       editarCliente(){
-          if (this.cliente.dni && this.cliente.nombre && this.cliente.apellido && this.cliente.direccion && this.cliente.telefono && this.cliente.mail){
+        this.errors = [];
+        if (!this.cliente.dni){
+          this.errors.push('Dni no puede ser Vacio');
+        }
+        if (!this.cliente.nombre){
+          this.errors.push('Nombre Vacio');
+        }
+        if (!this.cliente.apellido){
+          this.errors.push('Apellido Vacio');
+        }
+        if (!this.cliente.direccion){
+          this.errors.push('Direccion Vacia');
+        }
+        if (!this.cliente.telefono){
+          this.errors.push('Telefono Vacio');
+        }
+        if (!this.cliente.mail){
+          this.errors.push('Mail Vacio');
+        }
+        var _this = this;
+          if (this.errors.length == 0){
             axios.put('http://localhost:3000/cliente/'+ this.idc,
                 this.cliente,
                 { headers: {
                   'Content-Type': 'application/json',
                 }
-            }).then((data) => console.log(data)).then(alertEditSucessCliente()).then(this.$router.push('/HomeCliente'));
-          }else{
-            alertCompletarCampos();
+            }).then((data) => console.log(data)).then(alertEditSucessCliente());
           }
       }
   }

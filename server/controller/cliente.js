@@ -56,7 +56,7 @@ config= {
                          .catch(error => {
                            pool.end()
                            console.log(error)
-                           res.send({ msg: 'Error del Servidor No se pudieron guardar losd atos!' });
+                           res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
                          })
                        done()
                      })
@@ -75,7 +75,7 @@ config= {
                })
                .catch(error => {
                  pool.end()
-                 console.log(error.stack)
+                 console.log(error)
 
                })
              done()
@@ -92,29 +92,34 @@ config= {
                    })
                    .catch(error => {
                      pool.end()
-                     console.log(error.stack)
+                     console.log(error)
 
                    })
                  done()
                })
         },
         updateCliente(req,res){
-             var pool = new pg.Pool(config)
-             pool.connect(function(err, client, done) {
-               client.query("UPDATE cliente SET dni=($1), nombre=($2), apellido=($3), direccion=($4), telefono=($5), mail=($6) WHERE id_cliente=($7)", [req.body.dni, req.body.nombre, req.body.apellido,req.body.direccion,req.body.telefono,req.body.mail,req.params.id_cliente])
-                 .then(response => {
-                   pool.end()
-                   res.json(response.rows)
+            const errors = validationResult(req);
+             if (!errors.isEmpty()) {
+                    return res.json(errors.array());
+             } else {
+                 var pool = new pg.Pool(config)
+                 pool.connect(function(err, client, done) {
+                   client.query("UPDATE cliente SET dni=($1), nombre=($2), apellido=($3), direccion=($4), telefono=($5), mail=($6) WHERE id_cliente=($7)", [req.body.dni, req.body.nombre, req.body.apellido,req.body.direccion,req.body.telefono,req.body.mail,req.params.id_cliente])
+                     .then(response => {
+                       pool.end()
+                       res.json(response.rows)
 
+                     })
+                     .catch(error => {
+                       pool.end()
+                       console.log(error)
+                       res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
+
+                     })
+                   done()
                  })
-                 .catch(error => {
-                   pool.end()
-                   console.log(error.stack)
-
-                 })
-               done()
-             })
-
+              }
             }
 
 }

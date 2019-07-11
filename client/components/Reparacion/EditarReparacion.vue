@@ -19,7 +19,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Fecha Inicial</span>
                         </div>
-                        <datepicker  class="datepicker"  v-model="dateIni" name="fecha"
+                        <datepicker  class="datepicker" :language="es"  v-model="dateIni" name="fecha"
                             @opened="datepickerAbierto"
                             @selected="fechaSeleccionada"
                             @closed="datepickerCerrado">
