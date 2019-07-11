@@ -65,13 +65,13 @@
                                 <input  type="number" min="0"  v-model="precioTotalP"  class="form-control">
                             </div>
                           </div>
-                          <div class="col-" style="padding-left:30px;">
-                            <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:100px; border-radius:20px;" title="Añadir al Carrito">
-                                <i class="fas fa-cart-plus"></i>
-                            </button>
-                          </div>
                         </div>
                     </form>
+                    <div class="col-" style="padding-left:30px;">
+                      <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:100px; border-radius:20px;" title="Añadir al Carrito">
+                          <i class="fas fa-cart-plus"></i>
+                      </button>
+                    </div>
                     <br>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
                                 <i class="fas fa-shopping-cart fa-3x"></i>
@@ -87,7 +87,7 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr v-for="item in this.Lista" :key="item">
+                                    <tr v-for="item in this.Lista">
                                       <th class="centered">{{item.producto.modelo}}</th>
                                       <td>{{item.cantidad}}</td>
                                       <td>{{item.precioUnitario}}</td>

@@ -18,7 +18,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Cliente</span>
                                 </div>
-                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect" @change="onChangeCliente($event)"   v-model="venta.cliente">
+                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="venta.cliente">
                                   <template slot="option" slot-scope="option">
                                       {{ option.dni }}-{{ option.nombre }}-{{ option.apellido }}
                                   </template>
