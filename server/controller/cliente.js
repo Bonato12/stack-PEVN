@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
+const {check, validationResult} = require('express-validator');
+
 
 config= {
   user: 'postgres',
@@ -39,21 +41,28 @@ config= {
                 mail: req.body.mail
               }
 
-             var pool = new pg.Pool(config)
-             pool.connect(function(err, client, done) {
-               client.query("INSERT INTO cliente(dni,nombre,apellido,direccion,telefono,mail) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_cliente",[cliente.dni,cliente.nombre,cliente.apellido,
-               cliente.direccion,cliente.telefono,cliente.mail])
-                 .then(response => {
-                   pool.end()
-                   res.json(response.rows)
-                 })
-                 .catch(error => {
-                   pool.end()
-                   console.log(error.stack)
+               const errors = validationResult(req);
+               if (!errors.isEmpty()) {
+                     return res.json(errors.array());
+                   } else {
+                     var pool = new pg.Pool(config)
+                     pool.connect(function(err, client, done) {
+                       client.query("INSERT INTO cliente(dni,nombre,apellido,direccion,telefono,mail) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_cliente",[cliente.dni,cliente.nombre,cliente.apellido,
+                       cliente.direccion,cliente.telefono,cliente.mail])
+                         .then(response => {
+                           pool.end()
+                           res.json(response.rows)
+                         })
+                         .catch(error => {
+                           pool.end()
+                           console.log(error)
+                           res.send({ msg: 'Error del Servidor No se pudieron guardar losd atos!' });
+                         })
+                       done()
+                     })
+                   }
 
-                 })
-               done()
-             })
+
 
         },
         getIdCliente(req,res){
