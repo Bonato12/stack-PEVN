@@ -19,11 +19,11 @@ module.exports = {
               pool.connect(function(err, client, done) {
                 client.query("SELECT cl.nombre, cl.apellido,to_char( vt.fecha, 'DD-MM-YYYY') as fecha, vt.total, vt.id_venta FROM cliente cl,  venta vt WHERE cl.id_cliente = vt.id_cliente")
                   .then(response => {
-                    pool.end()
+                    pool.end();
                     res.json(response.rows)
                   })
                   .catch(error => {
-                    pool.end()
+                    pool.end();
                     console.log(error.stack)
                   })
                 done()
@@ -35,9 +35,6 @@ module.exports = {
                   pool.query("INSERT INTO venta(id_cliente,fecha,total) VALUES($1,$2,$3) RETURNING id_venta",[req.body.venta.cliente.id_cliente,req.body.venta.fecha,req.body.venta.total]).then(response=> {
                       pool.end();
                       res.json(response.rows);
-                      res.json({
-                        id:response.rows[0].id_venta
-                      })
                   }).catch((error) =>{
                       pool.end();
                       console.log(error);
@@ -51,11 +48,10 @@ module.exports = {
                   }
               for (var i=0 ; i < req.body.venta.length ; i++) {
               var pool = new pg.Pool(config)
-              pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4) RETURNING cantidad",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
-                  res.json(response.data)
+              pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
+                res.json(response.rows)
               }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.venta[i].cantidad,req.body.venta[i].producto.id_producto]).then(response =>{
                                     pool.end();
-                                    res.json(response.data)
                               })).catch((error) =>{
                                 pool.end();
                                 console.log(error);

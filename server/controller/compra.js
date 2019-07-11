@@ -31,49 +31,13 @@ module.exports = {
                 done()
               })
           },
-          /*
-        postCompra(req, res){
 
-            for (var i=0; i < req.body.lista.length; i++){
-                console.log(req.body.lista[i]);
-            }
-            var pool = new pg.Pool(config)
-            pool.connect(function(err, client, done) {
-              client.query("INSERT INTO compra(id_proveedor,fecha,total) VALUES($1,$2,$3) RETURNING id_compra",[req.body.compra.proveedor.id_proveedor,req.body.compra.fecha,req.body.compra.total]).then(response=> {
-                  id = parseInt(response.rows[0].id_compra);
-                  //pool.end();
-                  console.log("EL ID INSERTADO ES:"+id);
-                        for (var i=0 ; i < req.body.lista.length ; i++) {
-                            client.query("INSERT INTO compraProducto(id_compra,id_producto,cantidad,precioUnitario,precioTotal) VALUES($1,$2,$3,$4,$5) RETURNING id_compra",[id,req.body.lista[i].producto.id_producto,req.body.lista[i].cantidad,req.body.lista[i].precioUnitario,req.body.lista[i].precioTotal]).then(response=> {
-                              //  pool.end();
-                                console.log(response);
-                            }).then(
-                              client.query("UPDATE producto SET stock = stock + $1, precio = ($2)  WHERE id_producto=($3)",[req.body.lista[i].cantidad,req.body.lista[i].precioUnitario,req.body.lista[i].producto.id_producto]).then(response =>{
-                                  // pool.end();
-                                   console.log(response);
-                                 })
-                            ).catch((error) =>{
-                                pool.end();
-                                console.log(error);
-                            });
-                        }
-                      }).catch((error) =>{
-                          pool.end();
-                          console.log(error);
-                      });
-              done()
-            })
-
-        },
-        */
         postCompra(req, res){
                 var pool = new pg.Pool(config)
                 pool.query("INSERT INTO compra(id_proveedor,fecha,total) VALUES($1,$2,$3) RETURNING id_compra",[req.body.compra.proveedor.id_proveedor,req.body.compra.fecha,req.body.compra.total]).then(response=> {
                     pool.end();
-                    //res.json(response.rows);
-                    res.json({
-                      id:response.rows[0].id_compra
-                    })
+                    console.log(response.rows)
+                    res.json(response.rows);
                 }).catch((error) =>{
                     pool.end();
                     console.log(error);
@@ -91,7 +55,7 @@ module.exports = {
                         res.json(response.data)
                     }).then(pool.query("UPDATE producto SET stock = stock + $1, precio = ($2)  WHERE id_producto=($3)",[req.body.compra[i].cantidad,req.body.compra[i].precioUnitario,req.body.compra[i].producto.id_producto]).then(response =>{
                                           pool.end();
-                                          res.json(response.rows)
+
                                     })).catch((error) =>{
                                       pool.end();
                                       console.log(error);

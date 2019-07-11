@@ -68,16 +68,13 @@
                                   </thead>
                                   <tbody>
                                       <tr v-for="item in this.ventasProducto">
-                                        <!--
-                                        <th scope="col">{{item.id_ventaproducto}}</th>
-                                        <td scope="col">{{item.id_venta}}</td>
-                                      -->
                                         <td scope="col">{{item.marca}}</td>
                                         <td scope="col">{{item.modelo}}</td>
                                         <td scope="col"> {{item.cantidad}}</td>
                                         <td scope="col">{{item.precio}}</td>
                                       </tr>
                                       <tr>
+                                        <td scope="col"></td>
                                         <td scope="col"></td>
                                         <td scope="col"></td>
                                         <td scope="col"></td>

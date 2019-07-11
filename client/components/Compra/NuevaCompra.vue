@@ -269,8 +269,8 @@ export default {
                             'Content-Type': 'application/json'
                              }
                         }).then(response=>{
-                          console.log(response.data.id);
-                          this.id_compra = response.data.id
+                          console.log(response.data[0]);
+                          this.id_compra = response.data[0].id_compra
                           this.postCompraProducto(this.id_compra)
                         }).then();
                           alertSucessCompra();

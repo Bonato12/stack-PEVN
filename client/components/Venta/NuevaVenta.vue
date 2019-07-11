@@ -241,7 +241,7 @@ nuevaVenta(){
                                               'Content-Type': 'application/json'
                                                }
                                           }).then(response=>{
-                                            console.log(response.data[0].id_venta);
+                                            console.log(response.data);
                                             this.id_venta = response.data[0].id_venta
                                             this.postVentaProducto(this.id_venta)
                                           }).then();
