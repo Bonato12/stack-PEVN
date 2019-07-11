@@ -115,7 +115,8 @@ CREATE TABLE compraProducto(
 	id_compra INTEGER NOT NULL,
 	id_producto INTEGER NOT NULL,
 	cantidad INTEGER NOT NULL,
-	precio INTEGER NOT NULL,
+	precioUnitario INTEGER NOT NULL,
+	precioTotal INTEGER NOT NULL,
 	CONSTRAINT pk_idcompraProducto PRIMARY KEY(id_compraProducto),
 	CONSTRAINT fk_id_compra FOREIGN KEY(id_compra) REFERENCES compra(id_compra)  ON DELETE CASCADE,
 	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)

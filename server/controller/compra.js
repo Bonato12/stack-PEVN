@@ -65,7 +65,7 @@ module.exports = {
                   pool.end();
                   console.log("EL ID INSERTADO ES:"+id);
                         for (var i=0 ; i < req.body.lista.length ; i++) {
-                            db.query("INSERT INTO compraProducto(id_compra,id_producto,cantidad,precio) VALUES($1,$2,$3,$4) RETURNING id_compra",[id,req.body.lista[i].producto.id_producto,req.body.lista[i].cantidad,req.body.lista[i].precio]).then(response=> {
+                            db.query("INSERT INTO compraProducto(id_compra,id_producto,cantidad,precioUnitario,precioTotal) VALUES($1,$2,$3,$4,$5) RETURNING id_compra",[id,req.body.lista[i].producto.id_producto,req.body.lista[i].cantidad,req.body.lista[i].precioUnitario,req.body.lista[i].precioTotal]).then(response=> {
                                 pool.end();
                                 console.log(response);
                             }).then(

@@ -10,7 +10,7 @@
                   Editar Cliente
                </h2>
             </div>
-              </hr style="color:black;">
+            </hr style="color:black;">
             <div class="card-body" >
               <form @submit.prevent="editarCliente()" style="width:780px; margin-top:-20px; margin:0px auto;">
                 <div class="input-group form-group">

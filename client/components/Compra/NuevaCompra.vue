@@ -34,49 +34,55 @@
                                   </template>
                                 </v-select>
                             </div>
-                            <div>
-                              <span style="color:white; font-weight: bold;">Precio Unitario: {{this.productoSelected.precio}} </span>
+
+                        <div class="row">
+                          <div class="col-">
+                            <b-input-group prepend="Cantidad" style="padding-left:15px;">
+                              <b-form-input v-model="num" min="0" readonly></b-form-input>
+                              <b-input-group-append>
+                                <b-button variant="info" @click="decrementarCantidad()">
+                                      <i class="fas fa-minus"></i>
+                                </b-button>
+                                <b-button variant="info" @click="incrementarCantidad()">
+                                      <i class="fas fa-plus"></i>
+                                </b-button>
+                              </b-input-group-append>
+                            </b-input-group>
+                          </div>
+                          <div class="col-">
+                            <div class="input-group form-group" style="padding-left:20px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Precio Unitario</span>
+                                </div>
+                                <input  type="number" min="0" @change="onChangePrecioUnitario()"  v-model="precioUnitario"  class="form-control">
                             </div>
-                            <br>
-                            <div class="caja">
-                              <b-input-group prepend="Cantidad">
-                                <b-form-input v-model="num" min="0" readonly></b-form-input>
-                                <b-input-group-append>
-                                  <b-button variant="info" @click="decrementarCantidad()">
-                                        <i class="fas fa-minus"></i>
-                                  </b-button>
-                                  <b-button variant="info" @click="incrementarCantidad()">
-                                        <i class="fas fa-plus"></i>
-                                  </b-button>
-                                </b-input-group-append>
-                              </b-input-group>
+                          </div>
+                          <div class="col-">
+                            <div class="input-group form-group" style="padding-left:10px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Precio Total</span>
+                                </div>
+                                <input  type="number" min="0"  v-model="precioTotalP"  class="form-control">
                             </div>
-                            <div class="caja">
-                              <div class="input-group form-group" style="width:537px; padding-left:25px;">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text">Precio</span>
-                                  </div>
-                                  <input  type="number" min="0"  v-model="precio"  class="form-control">
-                              </div>
-                            </div>
+                          </div>
+                          <div class="col-" style="padding-left:30px;">
+                            <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:50px;" title="Añadir al Carrito">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                          </div>
+                        </div>
                     </form>
-                    <div>
-                        <br>
-                        <button class="btn" v-on:click="guardarLista()" style="margin-left:32px; background-color:#FFD700;" title="Añadir al Carrito">
-                            <i class="fas fa-cart-plus"></i>
-                        </button>
-                    </div>
                     <br>
-                  <hr style="background-color:black;"/>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
-                                <i class="fas fa-shopping-cart fa-5x"></i>
+                                <i class="fas fa-shopping-cart fa-3x"></i>
                                 <br>
                                 <table class="table" style="background-color:white;">
                                   <thead>
                                     <tr >
                                       <th scope="col">Modelo</th>
                                       <th scope="col">Cantidad</th>
-                                      <th scope="col">Precio</th>
+                                      <th scope="col">Precio Unitario</th>
+                                      <th scope="col">Precio Total</th>
                                       <th scope="col">Opciones</th>
                                     </tr>
                                   </thead>
@@ -84,7 +90,8 @@
                                     <tr v-for="item in this.Lista" :key="item">
                                       <th class="centered">{{item.producto.modelo}}</th>
                                       <td>{{item.cantidad}}</td>
-                                      <td>{{item.precio}}</td>
+                                      <td>{{item.precioUnitario}}</td>
+                                      <td>{{item.precioTotal}}</td>
                                       <td>
                                           <button v-on:click="borrar(item)" class="btn btn-danger">
                                               <i class="fas fa-trash-alt"></i>
@@ -139,7 +146,8 @@ export default {
       compraProducto: new CompraProducto(),
       proveedor: [],
       producto: [],
-      precioUnitario:'',
+      precioUnitario: '',
+      precioTotalP: '',
       precio: '',
       precioTotal: 0,
       productoSelected: '',
@@ -167,11 +175,12 @@ export default {
     },
     guardarLista(){
             //Funcion Que Guarda Los Productos Seleccionados a comprar en una Lista Dinamica
-            if(this.productoSelected && this.precio > 0 && this.num > 0){
-                this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
+            if(this.productoSelected && this.precioUnitario && this.precioTotalP > 0 && this.num > 0){
+                this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precioTotalP);
                 this.compraProducto.producto = this.productoSelected;
                 this.compraProducto.cantidad = this.num;
-                this.compraProducto.precio = this.precio;
+                this.compraProducto.precioUnitario = this.precioUnitario;
+                this.compraProducto.precioTotal = this.precioTotalP;
                 this.Lista.push(this.compraProducto);
                 //Una Vez añadido al carrito Actializamos el Stock de la Lista Productos
                 var index = this.producto.indexOf(this.productoSelected);
@@ -181,7 +190,7 @@ export default {
                 //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
                 this.productoSelected = '';
                 this.num = '';
-                this.precio = '';
+                this.precioTotalP = '';
                 this.compraProducto = new CompraProducto();
 
             }else {
@@ -193,7 +202,7 @@ export default {
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
           if(this.productoSelected.precio){
                   this.num++;
-                  this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+                  this.precioTotalP = parseInt(this.precioUnitario) * parseInt(this.num)
           }
     },
     decrementarCantidad() {
@@ -203,7 +212,7 @@ export default {
             alertWarningLimiteOne();
           } else {
             this.num--;
-            this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+            this.precioTotalP = parseInt(this.precioUnitario) * parseInt(this.num)
           }
       }
     },
@@ -215,11 +224,30 @@ export default {
       console.log(indice);
       //Resta al Precio Total el precio del Producto eliminado de la lista.
       var index = this.Lista.indexOf(producto);
-      this.precioTotal = this.precioTotal - this.Lista[index].precio
+      this.precioTotal = this.precioTotal - this.Lista[index].precioTotal
       if (index > -1) {
           this.Lista.splice(index, 1);
       }
     },
+
+    onChange(event) {
+           var actual = JSON.stringify(event);
+           var viejo = JSON.stringify(this.productoSelected);
+           if (viejo){
+             if (actual == viejo){
+               this.num = 0;
+               this.precioTotalP = '';
+               this.precioUnitario = '';
+               this.precioUnitario = this.productoSelected.precio;
+             }
+           }
+       },
+
+       onChangePrecioUnitario(){
+          this.num = 0;
+          this.precioTotalP = 0;
+
+       },
 
     nuevaCompra(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
@@ -284,7 +312,7 @@ border:0 !important;
 }
 .caja {
 float:left;
-width:500px;
+width:300px;
 }
 .botones{
   margin-left: 2px;
@@ -305,6 +333,11 @@ background-color: #FFD700;
 color: black;
 border: none;
 }
+
+.input-group{
+  width: 300px;
+}
+
 input{
   background-color: white;
 }
