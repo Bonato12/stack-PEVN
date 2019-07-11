@@ -42,6 +42,8 @@ background-repeat: no-repeat;
 height: 100%;
 background-color: lightgray;
 background-blend-mode: multiply;
+
+
 }
 
 

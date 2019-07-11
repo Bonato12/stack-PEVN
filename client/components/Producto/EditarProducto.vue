@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br>
     <div class="container">
         <div class="d-flex justify-content-left">
       		<div class="card animated fadeInDown">
@@ -11,7 +12,7 @@
         			</div>
                 </hr style="color:black;">
         			<div class="card-body" >
-            				<form @submit.prevent="editarProducto()" style="width:1025px; margin-top:-25px;">
+            				<form @submit.prevent="editarProducto()" style="width:780px; margin-top:-20px; margin:0px auto;">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Modelo</span>
@@ -121,6 +122,12 @@ export default {
 </script>
 
 <style scoped>
+
+select{
+  display: block !important;
+}
+
+
 h1, h2 {
   font-weight: normal;
 }
@@ -146,7 +153,7 @@ border: none;
 }
 
 .input-group{
-  width: 950px;
+  width: 700px;
 }
 
 input:focus{
@@ -155,12 +162,13 @@ input:focus{
 
 .card{
 height: auto;
-margin-top: 30px;
+margin-top: 50px;
 margin-bottom: auto;
-width: 1100px;
+width: 900px;
 background-color: rgb(70,90,101);
-border: 1px solid;
 border-radius: 5px;
+border:1px solid;
+margin:0 auto;
 }
 
 button{
@@ -168,7 +176,7 @@ button{
   cursor:pointer;
   display:inline-block;
   float:right;
-  width:150px;
+  width:120px;
   height:50px;
   margin-top:-10px;
   border:none;
@@ -296,5 +304,6 @@ form{
     width: 62%;
     padding: 30px 40px;
 }
+
 
 </style>

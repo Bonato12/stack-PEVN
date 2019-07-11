@@ -1,9 +1,10 @@
 <template>
   <div>
+    </br>
     <div class="container">
         <div class="d-flex justify-content-left">
       		<div class="card animated fadeInDown">
-        			<div class="card-header" style="background-color:#FFD700; ">
+        			<div class="card-header" style="background-color:#FFD700;">
                 <h2 style="text-align:center; color:black;">
                   <i class="fas fa-mobile-alt"></i>
                    Nuevo Producto
@@ -11,7 +12,7 @@
         			</div>
                 </hr style="color:black;">
         			<div class="card-body" >
-            				<form @submit.prevent="nuevoProducto()" style="width:1025px; margin-top:-25px;"">
+            				<form @submit.prevent="nuevoProducto()" style="width:780px; margin-top:-20px; margin:0px auto;">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Modelo</span>
@@ -151,7 +152,7 @@ border: none;
 }
 
 .input-group{
-  width: 950px;
+  width: 700px;
 }
 
 input:focus{
@@ -160,12 +161,13 @@ input:focus{
 
 .card{
 height: auto;
-margin-top: 30px;
+margin-top: 50px;
 margin-bottom: auto;
-width: 1100px;
+width: 900px;
 background-color: rgb(70,90,101);
-border: 1px solid;
 border-radius: 5px;
+border:1px solid;
+margin:0 auto;
 }
 
 button{
@@ -173,7 +175,7 @@ button{
   cursor:pointer;
   display:inline-block;
   float:right;
-  width:150px;
+  width:120px;
   height:50px;
   margin-top:-10px;
   border:none;

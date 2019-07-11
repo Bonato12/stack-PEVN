@@ -1,7 +1,6 @@
 <template>
       <div>
         <br>
-        <br>
         <div class="container">
             <div class="d-flex justify-content-center">
               <div class="card animated fadeInDown">
@@ -14,8 +13,8 @@
                   </div>
                     </hr style="color:black;">
                   <div class="card-body">
-                    <form style="margin-left: 30px; margin-top:30px;">
-                            <div class="input-group form-group">
+                    <form style="margin-left: 30px; margin-top:15px;">
+                            <div class="input-group form-group" style="width:500px;">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Cliente</span>
                                 </div>
@@ -25,7 +24,7 @@
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="input-group form-group">
+                            <div class="input-group form-group" style="width:500px;" >
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Producto</span>
                                 </div>
@@ -49,7 +48,7 @@
                               </b-input-group>
                             </div>
                             <div class="caja">
-                              <div class="input-group form-group" style="width:537px; padding-left:25px;">
+                              <div class="input-group form-group" style="width:500px; padding-left:25px;">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text">Precio</span>
                                   </div>
@@ -64,9 +63,8 @@
                         </button>
                     </div>
                     <br>
-                  <hr style="background-color:black;"/>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
-                                <i class="fas fa-shopping-cart fa-5x"></i>
+                                <i class="fas fa-shopping-cart fa-3x"></i>
                                 <br>
                                 <table class="table" style="background-color:white;">
                                   <thead>
@@ -91,7 +89,6 @@
                                   </tbody>
                                 </table>
                           </div>
-                          <br>
                           <div v-if="this.precioTotal" style="text-align:right; margin-right:50px; color:white;">
                             <h3>Total $: {{this.precioTotal}} </h3>
                           </div>

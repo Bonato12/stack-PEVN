@@ -2,14 +2,14 @@
   <div>
     <div class="container animated zoomIn">
       <br>
-          <div class="card-header" style="background-color:#FFD700; ">
+          <div class="card-header" style="background-color:#f1f8e9; ">
             <h2 style="text-align:center; color:black;">
                 <i class="fas fa-tools"></i>
                 <i class="fas fa-clipboard-list"></i>
                 Presupuesto {{presupuesto.id_presupuesto}}
              </h2>
           </div>
-          <div class="modal-body" style="background-color:#f1f8e9;">
+          <div class="modal-body" style="background-color: #f1f8e9; color:black;">
             <h4>
               <i class="fas fa-file-invoice-dollar"></i>
               Detalle del Presupuesto:</h4>
@@ -31,13 +31,13 @@
             </slot>
           </div>
           </hr>
-          <div class="modal-body" style="background-color:#f1f8e9;">
+          <div class="modal-body" style="background-color: #f1f8e9;">
               <h4>
                 <i class="fas fa-toolbox"></i>
                 Presupuesto de Mano de Obra: {{presupuesto.preciomanoobra}}$</h4>
               <hr>
           </div>
-          <div class="modal-body" style="background-color:#f1f8e9;">
+          <div class="modal-body" style="background-color: #f1f8e9;">
               <h4>
                 <i class="fas fa-tools"></i>
                 Lista de Repuestos Utilizados:</h4>

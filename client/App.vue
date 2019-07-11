@@ -116,6 +116,8 @@ background-color: lightgray;
 background-blend-mode: multiply;
 }
 
+
+
 .navbar{background:#222222;}
 .nav-item::after{content:'';display:block;width:0px;height:1px;background:#fec400;transition: 0.2s;}
 .nav-item:hover::after{width:100%;}

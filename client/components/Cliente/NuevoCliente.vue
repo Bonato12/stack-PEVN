@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br>
     <div class="container">
       <div class="d-flex justify-content-left">
         <div class="card animated fadeInDown">
@@ -9,14 +10,13 @@
                   Nuevo Cliente
                </h2>
             </div>
-              </hr style="color:black;">
             <div class="card-body" >
-                  <form @submit.prevent="nuevoCliente()" style="width:1025px; margin-top:-25px;">
+                  <form @submit.prevent="nuevoCliente()" style="width:780px; margin-top:-25px; margin:0px auto;">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number" v-model="cliente.dni" min="1" max="99999999"  class="form-control" placeholder="Ingrese Dni" >
+                        <input required type="number" v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -40,7 +40,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required  type="number"  v-model="cliente.telefono"  min="1" max="99999999999999" class="form-control" placeholder="Ingrese Telefono" >
+                        <input required  type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -219,7 +219,7 @@ border: none;
 }
 
 .input-group{
-  width: 950px;
+  width: 700px;
 }
 
 input:focus{
@@ -228,12 +228,13 @@ input:focus{
 
 .card{
 height: auto;
-margin-top: 30px;
+margin-top: 50px;
 margin-bottom: auto;
-width: 1100px;
+width: 900px;
 background-color: rgb(70,90,101);
-border: 1px solid;
 border-radius: 5px;
+border:none;
+margin:0 auto;
 }
 
 .btn{
@@ -241,14 +242,14 @@ border-radius: 5px;
   cursor:pointer;
   display:inline-block;
   float:right;
-  width:150px;
+  width:120px;
   height:50px;
   margin-top:-10px;
   border:none;
   background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 button:hover{

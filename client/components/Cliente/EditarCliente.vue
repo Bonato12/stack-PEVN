@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <br>
     <div class="container">
       <div class="d-flex justify-content-left">
         <div class="card animated fadeInDown">
@@ -11,59 +12,54 @@
             </div>
               </hr style="color:black;">
             <div class="card-body" >
-                  <form @submit.prevent="editarCliente()" style="width:1025px; margin-top:-25px;"">
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Dni</span>
-                        </div>
-                        <input required type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+              <form @submit.prevent="editarCliente()" style="width:780px; margin-top:-20px; margin:0px auto;">
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Dni</span>
                     </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Nombre</span>
-                        </div>
-                        <input required type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                    <input required type="number" v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Nombre</span>
                     </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Apellido</span>
-                        </div>
-                        <input required type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
+                    <input required  type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Apellido</span>
                     </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Direccion</span>
-                        </div>
-                        <input required type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" >
+                    <input required  type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Direccion</span>
                     </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Telefono</span>
-                        </div>
-                        <input required type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                    <input required type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" >
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Telefono</span>
                     </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Mail</span>
-                        </div>
-                        <input required type="mail"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
+                    <input required  type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Mail</span>
                     </div>
-                    <br>
-                      <div style="margin-left:250px;">
-                        <button type="submit"  title="Guardar Cliente" >
-                              <i class="far fa-save fa-1x"></i>
-                              Guardar
-                        </button>
-                        <router-link to="/HomeCliente" tag="button"  title="Volver a HomeCliente" >
-                            <i class="fas fa-arrow-left"></i>
-                              Volver
-                        </router-link>
-                        <!--
-                        <div v-if="loading" class="d-flex justify-content-left mb-2">
-                          <b-spinner label="Loading..."></b-spinner>
-                        </div>
-                      -->
-                    </div>
+                    <input required type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
+                </div>
+                <br>
+                  <div style="margin-left:250px;">
+                    <button type="submit" class="btn"  title="Guardar Cliente" >
+                          <i class="far fa-save fa-1x"></i>
+                          Guardar
+                    </button>
+                    <router-link to="/HomeCliente" tag="button" class="btn"  title="Volver a HomeCliente" >
+                        <i class="fas fa-arrow-left"></i>
+                          Volver
+                    </router-link>
+                </div>
               </form>
             </div>
         </div>
@@ -126,69 +122,6 @@ export default {
 
 <style scoped>
 
-h1, h2 {
-  font-weight: normal;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-.input-group-prepend span{
-width: 120px;
-background-color: #FFD700;
-color: black;
-border: none;
-
-
-}
-
-.input-group{
-  width: 950px;
-}
-
-input:focus{
-  background-color: white;
-}
-
-.card{
-height: auto;
-margin-top: 30px;
-margin-bottom: auto;
-width: 1100px;
-background-color: rgb(70,90,101);
-border: 1px solid;
-border-radius: 5px;
-}
-
-button{
-  margin-left: 2px;
-  cursor:pointer;
-  display:inline-block;
-  float:right;
-  width:150px;
-  height:50px;
-  margin-top:-10px;
-  border:none;
-  background-color: #FFD700  !important;
-  -webkit-transition:.5s;
-  transition:.5s;
-  border-radius: 10px;
-}
-
-button:hover{
-     background-color: white  !important;
-     /*color: white;*/
-}
-
-/*Sirve para desabilitar las flechas en los inputs numer*/
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-}
 
 form input:focus:invalid{
     background: url('../../assets/invalid.png') no-repeat 95% 50%;
@@ -201,9 +134,77 @@ form input:required:focus:valid{
   background-color: white;
 }
 
-.form-control {
-    border: 0;
-    box-shadow: none;
+
+h1, h2 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+
+.input-group-prepend span{
+width: 120px;
+background-color: #FFD700;
+color: black;
+border: none;
+
+
+}
+
+.input-group{
+  width: 700px;
+}
+
+input:focus{
+  background-color: white;
+}
+
+.card{
+height: auto;
+margin-top: 50px;
+margin-bottom: auto;
+width: 900px;
+background-color: rgb(70,90,101);
+border-radius: 5px;
+border:none;
+margin:0 auto;
+}
+
+.btn{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:50px;
+  margin-top:-10px;
+  border:none;
+  background-color: #FFD700  !important;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+}
+
+button:hover{
+     background-color: white  !important;
+     /*color: white;*/
+}
+
+
+/*Sirve para desabilitar las flechas en los inputs numBer*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 .formulario{
@@ -216,12 +217,65 @@ form input:required:focus:valid{
     border-radius: 10px;
 }
 
+/* Informacion de Contacto*/
+
+.info::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #FEC404;
+    opacity: 0.9;
+}
 
 
-/* Formulario de contacto*/
 form {
     width: 62%;
     padding: 30px 40px;
+}
+
+
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  float: right;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 300px;
+  height: auto;
+  margin-left: 900px;
+  background-color: #fff;
+  transition: all .3s ease;
+  border-radius: 8px;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 
