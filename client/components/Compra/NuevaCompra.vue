@@ -66,7 +66,7 @@
                             </div>
                           </div>
                           <div class="col-" style="padding-left:30px;">
-                            <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:50px;" title="Añadir al Carrito">
+                            <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:100px; border-radius:20px;" title="Añadir al Carrito">
                                 <i class="fas fa-cart-plus"></i>
                             </button>
                           </div>

@@ -86,12 +86,11 @@ config= {
                pool.connect(function(err, client, done) {
                  client.query("DELETE FROM arreglo WHERE id_arreglo=($1)",[req.params.id_arreglo])
                    .then(response => {
-                     pool.end()
-                     res.json(response.rows)
+                     pool.end();
                    })
                    .catch(error => {
                      pool.end()
-                     console.log(error.stack)
+                     console.log(error)
                    })
                  done()
                })
