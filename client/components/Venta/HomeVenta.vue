@@ -22,7 +22,6 @@
                 skipDiacritics: true,
                 placeholder: 'Buscar Producto',
               }"
-              @on-row-click="onRowClick"
               :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -37,8 +36,15 @@
                   pageLabel: 'page', // for 'pages' mode
                   allLabel: 'All',
                 }"
-
                 theme="default">
+                <template slot="table-row" slot-scope="props" >
+                  <span v-if="props.column.field == 'opciones'">
+                    <button @click="verMas(props.row)" class="btn btn-info" style="width:150px;"  title="Ver Mas" >
+                        <i class="fas fa-clipboard-list"></i>
+                        Ver Mas
+                    </button>
+                  </span>
+                </template>
          </vue-good-table>
          <div>
               <transition v-if="showModal" class="animation fadeInLeft" name="modal">
@@ -164,6 +170,10 @@ export default {
         {
           label: 'Total',
           field: 'total',
+        },
+        {
+          label: 'Opciones',
+          field: 'opciones',
         }
       ],
 		}
@@ -205,18 +215,15 @@ export default {
           })
 
     },
-    onRowClick(params) {
-        this.showModal = true;
-        console.log(params.row);
-            this.idv =  params.row.id_venta;
-            axios.get('http://localhost:3000/ventaProducto/'+ params.row.id_venta).then((response) =>{
-              this.ventasProducto = response.data;
-              this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
-              console.log(this.fecha);
-              console.log(this.ventasProducto);
-            });
-
-
+    verMas(venta){
+      this.showModal = true;
+      console.log(venta.id_venta);
+      axios.get('http://localhost:3000/ventaProducto/'+ venta.id_venta).then((response) =>{
+        this.ventasProducto = response.data;
+        this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
+        console.log(this.fecha);
+        console.log(this.ventasProducto);
+      });
     },
     hideModal(){
       this.showModal = false;
@@ -251,55 +258,5 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-
-#formulario{
-  background-color: rgba(0,0,0,0.8);
-  width: 450px;
-}
-
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-  display: table;
-  transition: opacity .3s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-
-}
-
-.modal-container {
-  width: 1000px;
-  height: auto;
-  margin: 0px auto;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
-  border-radius: 10px;
-}
-
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-
-
 
 </style>
