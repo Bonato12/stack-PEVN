@@ -12,6 +12,14 @@
             </div>
               </hr style="color:black;">
             <div class="card-body" >
+                  <p v-if="errors.length">
+                    <ul  class="list-group" v-for="error in errors">
+                        <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
+                          {{ error }}
+                        </li>
+                        <br>
+                    </ul>
+                  </p>
                   <form @submit.prevent="nuevoProveedor()" style="width:780px; margin-top:-30px; margin:0px auto;">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -88,7 +96,8 @@ export default {
   },
   data () {
     return {
-      proveedor: new Proveedor()
+      proveedor: new Proveedor(),
+      errors: []
 		}
   },
   mounted(){
@@ -97,7 +106,30 @@ export default {
   },
   methods: {
     nuevoProveedor(){
-            if (this.proveedor.dni && this.proveedor.nombre && this.proveedor.apellido && this.proveedor.direccion && this.proveedor.telefono && this.proveedor.mail && this.proveedor.descripcion){
+      this.errors = [];
+      if (!this.proveedor.dni){
+        this.errors.push('Dni Vacio');
+      }
+      if (!this.proveedor.nombre){
+        this.errors.push('Nombre Vacio');
+      }
+      if (!this.proveedor.apellido){
+        this.errors.push('Apellido Vacio');
+      }
+      if (!this.proveedor.direccion){
+        this.errors.push('Direccion Vacia');
+      }
+      if (!this.proveedor.telefono){
+        this.errors.push('Telefono Vacio');
+      }
+      if (!this.proveedor.mail){
+        this.errors.push('Mail Vacio');
+      }
+      if (!this.proveedor.descripcion){
+        this.errors.push('Descripcion Vacia');
+      }
+      var _this = this;
+      if(this.errors.length == 0 ){
               console.log(this.proveedor);
               axios.post('http://localhost:3000/proveedor',
               this.proveedor,
@@ -105,9 +137,21 @@ export default {
                 'Access-Control-Allow-Origin': 'http://localhost:3000/proveedor',
                 'Content-Type': 'application/json',
               },
-              }).then(this.proveedor = new Proveedor()).then(alertSucessProveedor());
-            }else{
-                alertCompletarCampos();
+              }).then(function(response){
+                  console.log(response);
+                  if (response.data == "OK"){
+                     alertSucessProveedor();
+                    _this.proveedor = new Proveedor();
+                  }else {
+                     if (response.data.length > 0) {
+                       for (var i = 0; i < response.data.length ; i++) {
+                              _this.errors.push(response.data[i].msg);
+                        }
+                     }else {
+                         _this.errors.push(response.data.msg);
+                     }
+                  }
+                })
             }
         }
 
