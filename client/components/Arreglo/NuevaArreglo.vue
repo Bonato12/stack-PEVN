@@ -53,12 +53,12 @@
                     </form>
                     <br>
                           <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeArreglo" tag="button" class="botones"  style="background:white;">
+                              <router-link to="/HomeArreglo" tag="button" class="btn btn-info" title="Volver a Home Arreglo" >
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:5px;"></div>
-                              <button v-on:click="nuevoArreglo()" class="botones" style="width:115px; background-color:#fec400;">
+                              <button v-on:click="nuevoArreglo()" class="btn btn-success" title="Guardar Arreglo">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -72,8 +72,8 @@
 <script>
 
 import axios from 'axios'
-import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
-import { alertWarningLimiteOne,alertWarningLimite,alertSucessArreglo } from '../../assets/sweetAlert.js'
+import { alertCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertSucessArreglo } from '../../assets/sweetAlert.js'
 import Arreglo from '../../models/Arreglo';
 
 export default {
@@ -140,11 +140,9 @@ export default {
 
 <style scoped>
 
-
 h1, h2 {
   font-weight: normal;
 }
-
 
 .card{
 height: auto;
@@ -153,13 +151,6 @@ width: 1650px;
 background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
-}
-
-
-
-.venta_btn:hover{
-color: black;
-background-color: white;
 }
 
 .input-group-prepend span{
@@ -174,31 +165,27 @@ border:0 !important;
     background-color: white;
 }
 
-
-
-.botones{
+btn{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
   float:right;
-  width:100px;
-  height:50px;
+  width:120px;
+  height:40px;
   margin-top:-10px;
   border:none;
-  color:black;
+  /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
+  color: black !important;
 }
-
 
 
 .input-group-text{
 width: auto;
 background-color: #FFD700;
 border: none;
-
-
 }
 
 input{

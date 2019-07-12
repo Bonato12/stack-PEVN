@@ -94,12 +94,12 @@
                           </div>
                           <br>
                           <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeVenta" tag="button" class="botones"  style="background:white;">
+                              <router-link to="/HomeVenta" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:5px;"></div>
-                              <button v-on:click="nuevaVenta()" class="botones" style="width:115px; background-color:#fec400;">
+                              <button v-on:click="nuevaVenta()" class="btn btn-success">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -298,20 +298,28 @@ border:0 !important;
 float:left;
 width:500px;
 }
-.botones{
+
+btn{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
   float:right;
-  width:100px;
-  height:50px;
+  width:120px;
+  height:40px;
   margin-top:-10px;
   border:none;
-  color:black;
+  /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
+  color: black !important;
 }
+
+button:hover{
+     background-color: white  !important;
+     color: black;
+}
+
 .input-group-text{
 width: auto;
 background-color: #FFD700;

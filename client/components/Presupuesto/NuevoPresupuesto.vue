@@ -125,12 +125,12 @@
                           <br>
                           <br>
                           <div class="d-flex justify-content-end" style="padding-right:31px;">
-                              <router-link to="/HomeArreglo" tag="button" class="botones"  style="background:white;">
+                              <router-link to="/HomeArreglo" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:5px;"></div>
-                              <button v-on:click="nuevoPresupuesto()" class="botones" style="width:115px; background-color:#fec400;">
+                              <button v-on:click="nuevoPresupuesto()" class="btn btn-success">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -312,6 +312,7 @@ export default {
 </script>
 
 <style scoped>
+
 h1, h2 {
   font-weight: normal;
 }
@@ -323,21 +324,20 @@ background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }
-.venta_btn:hover{
-color: black;
-background-color: white;
-}
+
 .input-group-prepend span{
 width: auto;
 background-color: #FFD700;
 color: black;
 border:0 !important;
 }
+
 .form-control {
     border: 0;
     box-shadow: none;
     background-color: white;
 }
+
 .caja {
 float:left;
 width:500px;
@@ -347,26 +347,35 @@ width:500px;
 float:left;
 width:350px;
 }
-.botones{
+
+btn{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
   float:right;
-  width:100px;
-  height:50px;
+  width:120px;
+  height:40px;
   margin-top:-10px;
   border:none;
-  color:black;
+  /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
+  color: black;
 }
+
+btn:hover{
+     background-color: white  !important;
+     color: black;
+}
+
 .input-group-text{
 width: auto;
 background-color: #FFD700;
 color: black;
 border: none;
 }
+
 input{
   background-color: white;
 }

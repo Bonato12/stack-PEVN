@@ -62,11 +62,11 @@
             					</div>
                       <br>
                         <div style="margin-left:250px;">
-                          <button type="submit"  title="Editar Producto" style="background-color:#fec400">
+                          <button  class="btn btn-success" type="submit"  title="Editar Producto">
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                           </button>
-                          <router-link to="/HomeProducto" tag="button" title="Volver a HomeProducto" style="background:white;">
+                          <router-link class="btn btn-info" to="/HomeProducto" tag="button" title="Volver a HomeProducto">
                               <i class="fas fa-arrow-left"></i>
                                 Volver
                           </router-link>
@@ -217,18 +217,19 @@ button{
   display:inline-block;
   float:right;
   width:120px;
-  height:50px;
+  height:40px;
   margin-top:-10px;
   border:none;
-  background-color: #FFD700  !important;
+  /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
+  color: black;
 }
 
 button:hover{
      background-color: white  !important;
-     /*color: white;*/
+     color: black;
 }
 
 /*Sirve para desabilitar las flechas en los inputs numer*/

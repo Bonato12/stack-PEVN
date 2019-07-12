@@ -31,13 +31,13 @@
             </slot>
           </div>
           </hr>
-          <div class="modal-body" style="background-color: #f1f8e9;">
+          <div class="modal-body" style="background-color: #f1f8e9; margin-top:-30px;">
               <h4>
                 <i class="fas fa-toolbox"></i>
                 Presupuesto de Mano de Obra: {{presupuesto.preciomanoobra}}$</h4>
               <hr>
           </div>
-          <div class="modal-body" style="background-color: #f1f8e9;">
+          <div class="modal-body" style="background-color: #f1f8e9; margin-top:-30px;">
               <h4>
                 <i class="fas fa-tools"></i>
                 Lista de Repuestos Utilizados:</h4>
@@ -64,7 +64,7 @@
                     </tbody>
               </table>
           </div>
-          <div class="modal-body" style="background-color:#f1f8e9; margin-bottom:20px;">
+          <div class="modal-body" style="background-color:#f1f8e9; margin-top:-45px;" >
               <h4>
                 <i class="fas fa-info-circle"></i>
                 Estado del Presupuesto:</h4>
@@ -79,19 +79,20 @@
                     <option  v-for="item in estadoP">{{ item.name }}</option>
                  </select>
               </div>
-              <div>
-                <button type="submit" class="btn"  title="Guardar" >
+              <div class="modal-body" style="background-color:#f1f8e9;">
+                <button type="submit" class="btn btn-success"  title="Guardar Estado" >
                       <i class="far fa-save fa-1x"></i>
                       Guardar
                 </button>
-                <router-link to="/HomeArreglo" tag="button" class="btn"  title="Volver a HomeCliente" >
+                <router-link to="/HomeArreglo" tag="button" class="btn btn-info"  title="Volver a Home Arreglo" >
                     <i class="fas fa-arrow-left"></i>
                       Volver
                 </router-link>
-                <button class="btn btn-danger" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" style="color:black;" title="Eliminar Cliente">
+                <button class="btn btn-danger" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" title="Eliminar Arreglo">
                     <i class="fas fa-trash-alt"></i>
                     Eliminar
                 </button>
+                <br>
             </div>
           </form>
           </div>
@@ -240,14 +241,25 @@ li {
 }
 
 
-.btn{
-  background-color: #FFD700  !important;
+button{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  /*background-color: #FFD700  !important;*/
+  -webkit-transition:.5s;
+  transition:.5s;
   border-radius: 5px;
+  color: black;
 }
 
 button:hover{
      background-color: white  !important;
-     /*color: white;*/
+     color: black;
 }
 
 
