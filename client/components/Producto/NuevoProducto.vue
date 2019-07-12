@@ -12,6 +12,14 @@
         			</div>
                 </hr style="color:black;">
         			<div class="card-body" >
+                    <p v-if="errors.length">
+                      <ul  class="list-group" v-for="error in errors">
+                          <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
+                            {{ error }}
+                          </li>
+                          <br>
+                      </ul>
+                    </p>
             				<form @submit.prevent="nuevoProducto()" style="width:780px; margin-top:-20px; margin:0px auto;">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
@@ -84,6 +92,7 @@ export default {
   data () {
     return {
       producto:  new Producto(),
+      errors: [],
       tipoProductos : [{name:"Celular"},
                        {name:"Tablet"},
                        {name:"Accesorio"},
@@ -97,25 +106,55 @@ export default {
 
   },
   methods: {
-    isNumeric(n){
-        var digito =  /^\d*$/;
-        return digito.test(n);
-    },
-    nuevoProducto(){
-            if(this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio ){
-                  console.log(this.producto);
-                  axios.post('http://localhost:3000/producto',
-                  this.producto, // the data to posthttp://localhost:3000/producto
-                  { headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
-                    'Content-Type': 'application/json',
-                  },
-                }).then(this.producto = new Producto()).then(alertSucessProducto());
-            }else{
-                alertWarningCompletarCampos();
-            }
 
-        }
+      nuevoProducto(){
+              this.errors = [];
+              if (!this.producto.modelo){
+                this.errors.push('Modelo Vacio');
+              }
+              if (!this.producto.marca){
+                this.errors.push('Marca Vacia');
+              }
+              if (!this.producto.descripcion){
+                this.errors.push('Descripcion Vacia');
+              }
+              if (!this.producto.tipoProducto){
+                this.errors.push('Tipo Producto Vacia');
+              }
+              if (!this.producto.stock){
+                this.errors.push('Stock Vacio');
+              }
+              if (!this.producto.precio){
+                this.errors.push('Precio Vacio');
+              }
+              var _this = this;
+              if(this.errors.length == 0 ){
+                    console.log(this.producto);
+                    axios.post('http://localhost:3000/producto',
+                    this.producto, // the data to posthttp://localhost:3000/producto
+                    { headers: {
+                      'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
+                      'Content-Type': 'application/json',
+                    },
+                  }).then(function(response){
+                    console.log(response);
+                    if (response.data.status == 200){
+                      alertSucessProducto();
+                      this.producto = new Producto();
+                    }else {
+                       if (response.data.length > 0) {
+                         for (var i = 0; i < response.data.length ; i++) {
+                                _this.errors.push(response.data[i].msg);
+                          }
+                       }else {
+                           _this.errors.push(response.data.msg);
+                       }
+
+                    }
+                  })
+              }
+
+          }
   }
 }
 </script>

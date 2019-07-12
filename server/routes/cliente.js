@@ -8,7 +8,7 @@ router.get('/cliente', clienteController.getCliente);
 router.post('/cliente',[
 check('dni').not().isEmpty().withMessage('El Dni no puede ser vacio'),
 check('dni').isInt().withMessage('El Dni debe ser un numero entero'),
-//check('dni').isLength({ max: 9 }).withMessage('El Dni no puede tener mas de 9 digitos'),
+check('dni').isLength({ max: 9 }).withMessage('El Dni no puede tener mas de 9 digitos'),
 check('nombre').not().isEmpty().withMessage('El Nombre no puede ser vacio'),
 check('apellido').not().isEmpty().withMessage('El Apellido no puede ser vacio'),
 check('direccion').not().isEmpty().withMessage('La Direccion no puede ser vacio'),

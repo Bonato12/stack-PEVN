@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+const pg = require('pg')
+const {check, validationResult} = require('express-validator');
+
 
 config= {
   user: 'postgres',
@@ -9,10 +12,6 @@ config= {
   password: '1234',
   port: 5432,
 }
-
-const pg = require('pg')
-
-
 
 module.exports = {
 
@@ -68,23 +67,29 @@ module.exports = {
         },
 
       postProducto(req, res){
-      var pool = new pg.Pool(config)
-      pool.connect(function(err, client, done) {
-       client.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
-       req.body.stock,req.body.precio])
-         .then(response => {
-           pool.end();
-           //res.json(response.rows);
-           res.json({
-             status: 200
-           });
-         })
-         .catch(error => {
-           pool.end();
-           console.log(error.stack)
-         })
-       done()
-     })
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+              return res.json(errors.array());
+        }else{
+                var pool = new pg.Pool(config)
+                pool.connect(function(err, client, done) {
+                 client.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
+                 req.body.stock,req.body.precio])
+                   .then(response => {
+                     pool.end();
+                     //res.json(response.rows);
+                     res.json({
+                       status: 200
+                     });
+                   })
+                   .catch(error => {
+                     pool.end();
+                     console.log(error)
+                     res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
+                   })
+                 done()
+               })
+       }
     },
 
    getIdProducto(req,res){

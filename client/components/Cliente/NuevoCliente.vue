@@ -12,14 +12,14 @@
                </h2>
             </div>
             <div class="card-body" >
-              <p v-if="errors.length">
-                <ul  class="list-group" v-for="error in errors">
-                    <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
-                      {{ error }}
-                    </li>
-                    <br>
-                </ul>
-              </p>
+                  <p v-if="errors.length">
+                    <ul  class="list-group" v-for="error in errors">
+                        <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
+                          {{ error }}
+                        </li>
+                        <br>
+                    </ul>
+                  </p>
                   <form @submit.prevent="nuevoCliente()" style="width:780px; margin-top:-25px; margin:0px auto;">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -103,7 +103,6 @@ export default {
   methods: {
             nuevoCliente(){
                     this.errors = [];
-                    /*
                     if (!this.cliente.dni){
                       this.errors.push('Dni no puede ser Vacio');
                     }
@@ -122,7 +121,6 @@ export default {
                     if (!this.cliente.mail){
                       this.errors.push('Mail Vacio');
                     }
-                    */
                     var _this = this;
                     if (this.errors.length == 0){
                             axios.post('http://localhost:3000/cliente',
