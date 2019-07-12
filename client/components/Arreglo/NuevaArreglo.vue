@@ -14,6 +14,14 @@
                   </div>
                     </hr style="color:black;">
                   <div class="card-body">
+                    <p v-if="errors.length">
+                      <ul  class="list-group" v-for="error in errors">
+                          <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
+                            {{ error }}
+                          </li>
+                          <br>
+                      </ul>
+                    </p>
                     <form style="margin-left: 30px; margin-top:30px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
@@ -78,6 +86,7 @@ export default {
     return {
       cliente:'',
       producto:'',
+      errors: [],
       arreglo : new Arreglo()
 		}
   },
@@ -100,17 +109,29 @@ export default {
       },
       nuevoArreglo(){
           this.arreglo.condicion = 'EN ESPERA DE PRESUPUESTO';
-          console.log(this.arreglo);
-          if (this.arreglo.cliente && this.arreglo.producto && this.arreglo.observacion && this.arreglo.condicion){
-              axios.post('http://localhost:3000/arreglo',
-              {
-              arreglo: this.arreglo
-              },
-              { headers: {
-                'Content-Type': 'application/json',
-              },
-            }).then(alertSucessArreglo()).then(this.arreglo = new Arreglo())
-         }
+          this.errors = [];
+          if (!this.arreglo.cliente){
+            this.errors.push('El Cliente no puede ser vacio');
+          }
+          if (!this.arreglo.producto){
+            this.errors.push('El Producto no puede ser vacio');
+          }
+          if (!this.arreglo.observacion){
+            this.errors.push('La Observacion no puede ser vacia');
+          }
+          if (!this.arreglo.condicion){
+            this.errors.push('La Condicion No puede ser vacia');
+          }
+          if (this.errors.length == 0){
+                axios.post('http://localhost:3000/arreglo',
+                {
+                arreglo: this.arreglo
+                },
+                { headers: {
+                  'Content-Type': 'application/json',
+                },
+              }).then(alertSucessArreglo()).then(this.arreglo = new Arreglo())
+           }
       }
     }
 }
@@ -129,7 +150,7 @@ h1, h2 {
 height: auto;
 margin-bottom: auto;
 width: 1650px;
-background-color: #696969;
+background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }
@@ -167,7 +188,7 @@ border:0 !important;
   color:black;
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 

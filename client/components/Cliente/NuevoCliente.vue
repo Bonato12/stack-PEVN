@@ -92,7 +92,6 @@ export default {
     return {
       cliente: new Cliente(),
       errors: [],
-      showModal: false,
 
 		}
   },
@@ -147,14 +146,9 @@ export default {
                               }
                             })
                     }
-                  },
-          isInteger(valor) {
-                var er = /^-?[0-9]+$/;
-                return er.test(valor);
-          },
-          hideModal(){
-            this.showModal = false;
-          }
+                  }
+
+
 
 }
 }
