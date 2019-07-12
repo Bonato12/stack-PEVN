@@ -31,16 +31,17 @@
                   </div>
                   <div>
                           <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeVenta" tag="button" class="botones"  style="background:white;">
+                              <router-link to="/HomeVenta" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:5px;"></div>
-                              <button v-on:click="editarVenta()" class="botones" style="width:115px; background-color:#fec400;">
+                              <button v-on:click="editarVenta()" class="btn btn-success">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
                           </div>
+                          <br>
                   </div>
               </div>
             </div>
@@ -126,21 +127,13 @@ export default {
 
 <style scoped>
 
-
 .card{
 height: auto;
 margin-bottom: auto;
 width: 900px;
-background-color: #696969;
+background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
-}
-
-
-
-.compra_btn:hover{
-color: black;
-background-color: white;
 }
 
 .input-group-prepend span{
@@ -166,22 +159,29 @@ border:0;
   position:relative;
   display:inline-block;
   border: 2pc solid var(--white);
-
-
 }
 
-.botones{
+.btn{
+  margin-left: 2px;
   cursor:pointer;
   display:inline-block;
-  width:100px;
-  height:50px;
+  float:right;
+  width:120px;
+  height:40px;
   margin-top:-10px;
   border:none;
-  color:black;
+  /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
+  color: black !important;
 }
+
+.btn:hover{
+     background-color: white  !important;
+     color: black;
+}
+
 
 .caja{
    float:left;

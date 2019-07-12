@@ -184,14 +184,11 @@ li {
   margin: 0 10px;
 }
 
-
 .input-group-prepend span{
 width: 120px;
 background-color: #FFD700;
 color: black;
 border: none;
-
-
 }
 
 .input-group{
@@ -234,7 +231,6 @@ button:hover{
      /*color: white;*/
 }
 
-
 /*Sirve para desabilitar las flechas en los inputs numBer*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -243,78 +239,9 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-.formulario{
-    width: 1050px;
-    height: 525px;
-    margin: 40px auto;
-    display: flex;
-    background: #fff;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-/* Informacion de Contacto*/
-
-.info::before{
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #FEC404;
-    opacity: 0.9;
-}
-
-
 form {
     width: 62%;
     padding: 30px 40px;
 }
-
-
-
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  float: right;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: table;
-  transition: opacity .3s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.modal-container {
-  width: 300px;
-  height: auto;
-  margin-left: 900px;
-  background-color: #fff;
-  transition: all .3s ease;
-  border-radius: 8px;
-}
-
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-
-
 
 </style>

@@ -279,21 +279,20 @@ background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }
-.venta_btn:hover{
-color: black;
-background-color: white;
-}
+
 .input-group-prepend span{
 width: auto;
 background-color: #FFD700;
 color: black;
 border:0 !important;
 }
+
 .form-control {
     border: 0;
     box-shadow: none;
     background-color: white;
 }
+
 .caja {
 float:left;
 width:500px;
@@ -315,7 +314,7 @@ btn{
   color: black !important;
 }
 
-button:hover{
+btn:hover{
      background-color: white  !important;
      color: black;
 }
