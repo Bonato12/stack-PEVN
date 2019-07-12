@@ -61,8 +61,6 @@ config= {
                      })
                    }
 
-
-
         },
         getIdCliente(req,res){
            var pool = new pg.Pool(config)

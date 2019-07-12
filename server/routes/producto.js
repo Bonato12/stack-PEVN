@@ -22,23 +22,22 @@ check('precio').isLength({ max: 10 }).withMessage('El Precio no puede tener mas 
 productoController.postProducto);
 router.get('/producto/:id_producto',productoController.getIdProducto);
 router.delete('/producto/:id_producto',productoController.deleteProducto);
-router.put('/producto/:id_producto',productoController.updateProducto);
+router.put('/producto/:id_producto',[
+check('modelo').not().isEmpty().withMessage('El Modelo no puede ser vacio'),
+check('marca').not().isEmpty().withMessage('La Marca no puede ser vacio'),
+check('descripcion').not().isEmpty().withMessage('La Descripcion no puede ser vacio'),
+check('tipoProducto').not().isEmpty().withMessage('El TipoProducto no puede ser vacio'),
+check('stock').not().isEmpty().withMessage('El Stock no puede ser vacio'),
+check('stock').isInt().withMessage('El Stock debe ser un numero entero'),
+check('stock').isLength({ max: 10 }).withMessage('El Stock no puede tener mas de 10 digitos'),
+check('precio').not().isEmpty().withMessage('El Precio no puede ser vacio'),
+check('precio').isInt().withMessage('El Precio debe ser un numero entero'),
+check('precio').isLength({ max: 10 }).withMessage('El Precio no puede tener mas de 10 digitos'),
+],
+productoController.updateProducto);
 router.put('/productoStock/:id_producto',productoController.updateProductoStock);
 
-/*
-[
-check('modelo').not().isEmpty().withMessage('El Modelo no puede ser vacio'),
-check('marca').not().isEmpty().withMessage(('La Marca no puede ser vacio'),
-check('descripcion').not().isEmpty().withMessage('La Descripcion No puede ser Vacia'),
-//check('tipoProducto').not().isEmpty().withMessage('El TipoProducto no puede ser vacio'),
-check('stock').not().isEmpty().withMessage('El Stock no puede ser vacio'),
-//check('stock').isInt().withMessage('El Stock debe ser un numero entero'),
-//check('stock').isLength({ max: 10 }).withMessage('El Dni no puede tener mas de 10 digitos'),
-check('precio').not().isEmpty().withMessage('La Precio no puede ser vacio'),
-//check('precio').isLength({ max: 10 }).withMessage('El Precio no puede tener mas de 10 digitos'),
-//check('precio').isInt().withMessage('El Precio debe ser un numero entero'),
-]
-*/
+
 const cors = require('cors');
 app.use(cors());
 

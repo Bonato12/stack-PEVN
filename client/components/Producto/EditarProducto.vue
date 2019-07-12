@@ -12,6 +12,14 @@
         			</div>
                 </hr style="color:black;">
         			<div class="card-body" >
+                    <p v-if="errors.length">
+                      <ul  class="list-group" v-for="error in errors">
+                          <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
+                            {{ error }}
+                          </li>
+                          <br>
+                      </ul>
+                    </p>
             				<form @submit.prevent="editarProducto()" style="width:780px; margin-top:-20px; margin:0px auto;">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
@@ -87,6 +95,7 @@ export default {
     return {
       idp: this.$route.params.id,
       producto:  new Producto(),
+      errors: [],
       tipoProductos : [{name:"Celular"},
                        {name:"Tablet"},
                        {name:"Accesorio"},
@@ -106,17 +115,48 @@ export default {
          })
       },
       editarProducto(){
-        if(this.producto.modelo && this.producto.marca && this.producto.descripcion && this.producto.tipoProducto && this.producto.stock && this.producto.precio){
+        this.errors = [];
+        if (!this.producto.modelo){
+          this.errors.push('Modelo Vacio');
+        }
+        if (!this.producto.marca){
+          this.errors.push('Marca Vacia');
+        }
+        if (!this.producto.descripcion){
+          this.errors.push('Descripcion Vacia');
+        }
+        if (!this.producto.tipoProducto){
+          this.errors.push('Tipo Producto Vacia');
+        }
+        if (!this.producto.stock){
+          this.errors.push('Stock Vacio');
+        }
+        if (!this.producto.precio){
+          this.errors.push('Precio Vacio');
+        }
+        var _this = this;
+        if(this.errors.length == 0 ){
            axios.put('http://localhost:3000/producto/'+ this.idp,
              this.producto,
              { headers: {
                'Content-Type': 'application/json',
              }
-           }).then(alertEditSucessProducto()).then(this.$router.push('/HomeProducto'));
-        }else{
-          alertCompletarCampos();
-        }
+           }).then(function(response){
+             console.log(response);
+             if (response.data == "OK"){
+               alertEditSucessProducto();
+             }else {
+                if (response.data.length > 0) {
+                  for (var i = 0; i < response.data.length ; i++) {
+                         _this.errors.push(response.data[i].msg);
+                   }
+                }else {
+                    _this.errors.push(response.data.msg);
+                }
+             }
+           });
       }
+    }
    }
 }
 </script>

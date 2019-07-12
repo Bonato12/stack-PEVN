@@ -78,11 +78,6 @@ module.exports = {
                    .then(response => {
                      pool.end();
                      res.sendStatus(200);
-                     /*
-                     res.json({
-                       status: 200
-                     });
-                     */
                    })
                    .catch(error => {
                      pool.end();
@@ -126,21 +121,25 @@ module.exports = {
          })
         },
   updateProducto(req,res){
-          pool.connect()
-          .then(client => {
-           return client.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipoProducto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
-               req.body.stock,req.body.precio, req.params.id_producto])
-             .then(response => {
-
-               res.json(response.rows)
-                  client.release()
-             })
-             .catch(error => {
-
-               console.log(error.stack)
-                    client.release()
-             })
-         })
+          const errors = validationResult(req);
+          if (!errors.isEmpty()) {
+                return res.json(errors.array());
+          }else{
+                    var pool = new pg.Pool(config)
+                    pool.connect()
+                    .then(client => {
+                     return client.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipoProducto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,req.body.stock,req.body.precio, req.params.id_producto])
+                     .then(response => {
+                       pool.end();
+                       res.sendStatus(200);
+                     })
+                     .catch(error => {
+                       pool.end();
+                       console.log(error)
+                       res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
+                     })
+                    })
+            }
 
         },
 
