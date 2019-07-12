@@ -138,9 +138,9 @@ export default {
                     },
                   }).then(function(response){
                     console.log(response);
-                    if (response.data.status == 200){
+                    if (response.data == "OK"){
                       alertSucessProducto();
-                      this.producto = new Producto();
+                      _this.producto = new Producto();
                     }else {
                        if (response.data.length > 0) {
                          for (var i = 0; i < response.data.length ; i++) {

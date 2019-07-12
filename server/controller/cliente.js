@@ -40,7 +40,6 @@ config= {
                 telefono: req.body.telefono,
                 mail: req.body.mail
               }
-
                const errors = validationResult(req);
                if (!errors.isEmpty()) {
                      return res.json(errors.array());
@@ -51,7 +50,7 @@ config= {
                        cliente.direccion,cliente.telefono,cliente.mail])
                          .then(response => {
                            pool.end()
-                           res.json(response.rows)
+                           res.sendStatus(200);
                          })
                          .catch(error => {
                            pool.end()

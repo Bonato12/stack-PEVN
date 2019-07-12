@@ -130,25 +130,22 @@ export default {
                               'Access-Control-Allow-Methods': 'POST',
                               'Content-Type': 'application/json',
                             },
-                            }).then(function(data){
-                              console.log(data);
-                              if (data.data.status == 200){
-                                alertSucessCliente();
-                                this.cliente = new Cliente();
+                          }).then(function(response){
+                              console.log(response);
+                              if (response.data == "OK"){
+                                 alertSucessCliente();
+                                _this.cliente = new Cliente();
                               }else {
-                                 if (data.data.length > 0) {
-                                   for (var i = 0; i < data.data.length ; i++) {
-                                          _this.errors.push(data.data[i].msg);
+                                 if (response.data.length > 0) {
+                                   for (var i = 0; i < response.data.length ; i++) {
+                                          _this.errors.push(response.data[i].msg);
                                     }
                                  }else {
-                                     _this.errors.push(data.data.msg);
+                                     _this.errors.push(response.data.msg);
                                  }
 
-                                //_this.errors.push(data.data[0].msg);
                               }
                             })
-                    }else {
-                      //this.showModal = true;
                     }
                   },
           isInteger(valor) {
