@@ -13,6 +13,14 @@
                      </h2>
                   </div>
                   <div class="card-body">
+                    <p v-if="errors.length">
+                      <ul class="list-group" v-for="error in errors">
+                          <li class="alert alert-danger" style="width:780px; margin:0 auto;" role="alert">
+                            {{ error }}
+                          </li>
+                          <br>
+                      </ul>
+                    </p>
                     <form style="margin: 0 auto; margin-top:20px; width:780px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
@@ -162,7 +170,8 @@ export default {
       productoSelected: '',
       proveedorSelected: '',
       num: '',
-      id_compra: ''
+      id_compra: '',
+      errors: []
 
 		}
   },
@@ -262,7 +271,18 @@ export default {
     nuevaCompra(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
                   //Vamos a Comprar no es Vacia
-                  if (this.Lista.length > 0 ){
+                  this.errors = [];
+                  if (this.Lista.length > 0){
+                      if (!this.proveedorSelected){
+                          this.errors.push('El Proveedor no puede ser vacio');
+                      }
+                      if (!this.precioTotal){
+                          this.errors.push('El PrecioTotal no puede ser vacio');
+                      }
+                  }else {
+                      this.errors.push('Carrito de venta Vacio');
+                  }
+                  if (this.errors.length == 0){
                       //Asignamos el proveedor Selecionado a this.compra.proveedor
                       //Asignamos a this.compra total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a comprar
                       this.compra.proveedor = this.proveedorSelected;
@@ -283,8 +303,6 @@ export default {
                           this.postCompraProducto(this.id_compra)
                         }).then();
                           alertSucessCompra();
-                  }else {
-                     alertWarningCompletarCampos()
                   }
 
     },
