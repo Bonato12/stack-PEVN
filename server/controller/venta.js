@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+const {check, validationResult} = require('express-validator');
 var pg = require('pg');
 var id;
 
@@ -42,21 +43,26 @@ module.exports = {
             },
 
             postVentaProducto(req,res){
-              console.log(req.body);
+                  console.log(req.body);
                   for (var i=0; i < req.body.venta.length; i++){
                       console.log(req.body.venta[i]);
                   }
-              for (var i=0 ; i < req.body.venta.length ; i++) {
-              var pool = new pg.Pool(config)
-              pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
-                res.json(response.rows)
-              }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.venta[i].cantidad,req.body.venta[i].producto.id_producto]).then(response =>{
-                                    pool.end();
-                              })).catch((error) =>{
-                                pool.end();
-                                console.log(error);
-                            });
-              }
+                  const errors = validationResult(req);
+                  if (!errors.isEmpty()) {
+                        return res.json(errors.array());
+                  } else {
+                        for (var i=0 ; i < req.body.venta.length ; i++) {
+                        var pool = new pg.Pool(config)
+                        pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
+                            res.sendStatus(200);
+                        }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.venta[i].cantidad,req.body.venta[i].producto.id_producto]).then(response =>{
+                                              pool.end();
+                                        })).catch((error) =>{
+                                          pool.end();
+                                          console.log(error);
+                                      });
+                        }
+                  }
             },
 
 

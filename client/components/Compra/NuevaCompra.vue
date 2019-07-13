@@ -74,7 +74,6 @@
                     </form>
                     <br>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin:0 auto; width:780px;">
-
                                   <div>
                                       <div class="card-header" style="background-color:#FFD700; ">
                                         <h2 style="color:black;">

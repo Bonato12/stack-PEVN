@@ -13,6 +13,14 @@
                   </div>
                     </hr style="color:black;">
                   <div class="card-body">
+                    <p v-if="errors.length">
+                      <ul  class="list-group" v-for="error in errors">
+                          <li class="alert alert-danger" style="width:780px; margin:0 auto;" role="alert">
+                            {{ error }}
+                          </li>
+                          <br>
+                      </ul>
+                    </p>
                     <form style="margin: 0 auto;  margin-top:20px; width:780px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
@@ -149,8 +157,8 @@ export default {
       productoSelected: '',
       clienteSelected: '',
       num: 0,
-      id_venta: ''
-
+      id_venta: '',
+      errors: []
 		}
   },
   computed:{
@@ -238,7 +246,19 @@ export default {
          nuevaVenta(){
               //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
               //Vamos a Vender no es Vacia
-              if (this.Lista.length > 0 && this.precioTotal && this.venta.cliente){
+              this.errors = [];
+              if (this.Lista.length > 0){
+                  if (!this.venta.cliente){
+                      this.errors.push('El Cliente no puede ser vacio');
+                  }
+                  if (!this.precioTotal){
+                      this.errors.push('El PrecioTotal no puede ser vacio');
+                  }
+              }else {
+                  this.errors.push('Carrito de venta Vacio');
+              }
+
+              if (this.errors.length == 0){
                   //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
                   this.venta.total = this.precioTotal;
                                         axios.post('http://localhost:3000/venta',
@@ -255,12 +275,11 @@ export default {
                                             this.id_venta = response.data[0].id_venta
                                             this.postVentaProducto(this.id_venta)
                                           })
-                                            alertSucessVenta();
-                                    }else {
-                                       alertWarningCompletarCampos()
+
                                     }
                       },
           postVentaProducto(id){
+            var _this = this;
             console.log("El id es:",id)
             axios.post('http://localhost:3000/ventaProducto',
                 {
@@ -272,9 +291,20 @@ export default {
                   'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
                   'Content-Type': 'application/json'
                    }
-              }).then(response=>{
-                console.log(response.data)
-              });
+              }).then(function(response){
+                  console.log(response);
+                  if (response.data == "OK"){
+                    alertSucessVenta();
+                  }else {
+                     if (response.data.length > 0) {
+                       for (var i = 0; i < response.data.length ; i++) {
+                              _this.errors.push(response.data[i].msg);
+                        }
+                     }else {
+                         _this.errors.push(response.data.msg);
+                     }
+                  }
+                })
 
           }
 
