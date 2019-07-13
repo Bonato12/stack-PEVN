@@ -13,18 +13,18 @@
                   </div>
                     </hr style="color:black;">
                   <div class="card-body">
-                    <form style="margin-left: 30px; margin-top:15px;">
-                            <div class="input-group form-group" style="width:500px;">
+                    <form style="margin: 0 auto;  margin-top:20px; width:780px;">
+                            <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Cliente</span>
                                 </div>
-                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="venta.cliente">
+                                <v-select class="form-control" :options="cliente" label="dni"   v-model="venta.cliente">
                                   <template slot="option" slot-scope="option">
                                       {{ option.dni }}-{{ option.nombre }}-{{ option.apellido }}
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="input-group form-group" style="width:500px;" >
+                            <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Producto</span>
                                 </div>
@@ -34,7 +34,7 @@
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="caja">
+                            <div class="input-group form-group">
                               <b-input-group prepend="Cantidad">
                                 <b-form-input v-model="num" min="0" readonly></b-form-input>
                                 <b-input-group-append>
@@ -47,28 +47,28 @@
                                 </b-input-group-append>
                               </b-input-group>
                             </div>
-                            <div class="caja">
-                              <div class="input-group form-group" style="width:500px; padding-left:25px;">
+                            <div>
+                              <div class="input-group form-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text">Precio</span>
                                   </div>
-                                  <input  type="number" min="0"  v-model="precio"  class="form-control">
+                                  <input  type="number" min="0"  v-model="precio"  class="form-control" readonly>
                               </div>
                             </div>
+                            <div>
+                                <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:120px;" title="Añadir al Carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                    Añadir
+                                </button>
+                            </div>
                     </form>
-                    <div>
-                        <br>
-                        <button class="btn" v-on:click="guardarLista()" style="margin-left:32px; background-color:#FFD700;" title="Añadir al Carrito">
-                            <i class="fas fa-cart-plus"></i>
-                        </button>
-                    </div>
                     <br>
-                      <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
+                      <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin:0 auto; width:780px;">
                                 <i class="fas fa-shopping-cart fa-3x"></i>
                                 <br>
-                                <table class="table" style="background-color:white;">
+                                <table class="table">
                                   <thead>
-                                    <tr >
+                                    <tr style="background-color:white; border-radius:5px;">
                                       <th scope="col">Modelo</th>
                                       <th scope="col">Cantidad</th>
                                       <th scope="col">Precio</th>
@@ -81,25 +81,25 @@
                                       <td>{{item.cantidad}}</td>
                                       <td>{{item.precio}}</td>
                                       <td>
-                                          <button v-on:click="borrar(item)" class="btn btn-danger">
+                                          <button v-on:click="borrar(item)" class="btn btn-danger" title="Eliminar Producto del carrito" style="width:100px;">
                                               <i class="fas fa-trash-alt"></i>
                                           </button>
                                       </td>
                                     </tr>
                                   </tbody>
                                 </table>
-                          </div>
-                          <div v-if="this.precioTotal" style="text-align:right; margin-right:50px; color:white;">
-                            <h3>Total $: {{this.precioTotal}} </h3>
+                                <div v-if="this.precioTotal" style="text-align:right; color:white;">
+                                  <h3>Total $: {{this.precioTotal}} </h3>
+                                </div>
                           </div>
                           <br>
-                          <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeVenta" tag="button" class="btn btn-info">
+                          <div class="d-flex justify-content-end" style="margin-right:145px;">
+                              <router-link to="/HomeVenta" tag="button" class="btn btn-info" style="color:black" title="Volver a Home Venta">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:5px;"></div>
-                              <button v-on:click="nuevaVenta()" class="btn btn-success">
+                              <button v-on:click="nuevaVenta()" class="btn btn-success" style="color:black" title="Guardar Venta">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -107,6 +107,7 @@
                   </div>
               </div>
             </div>
+            <br>
        </div>
       </div>
 </template>
@@ -278,6 +279,7 @@ width: 1650px;
 background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
+margin:0 auto;
 }
 
 .input-group-prepend span{
@@ -298,7 +300,7 @@ float:left;
 width:500px;
 }
 
-btn{
+.btns{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
@@ -314,7 +316,7 @@ btn{
   color: black !important;
 }
 
-btn:hover{
+.btns:hover{
      background-color: white  !important;
      color: black;
 }
@@ -328,4 +330,10 @@ border: none;
 input{
   background-color: white;
 }
+
+.table{
+  border-radius: 5px !important;
+  background-color:white;
+}
+
 </style>

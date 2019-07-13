@@ -20,7 +20,7 @@
                         <br>
                     </ul>
                   </p>
-                  <form @submit.prevent="nuevoProveedor()" style="width:780px; margin-top:-30px; margin:0px auto;">
+                  <form @submit.prevent="nuevoProveedor()" style="width:780px; margin-top:-25px; margin:0px auto;">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
@@ -212,10 +212,10 @@ input:focus{
 height: auto;
 margin-top: 50px;
 margin-bottom: auto;
-width: 900px;
+width: 1650px;
 background-color: rgb(70,90,101);
 border-radius: 5px;
-border:none;
+border:1px solid;
 margin:0 auto;
 }
 

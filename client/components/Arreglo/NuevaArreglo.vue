@@ -22,7 +22,7 @@
                           <br>
                       </ul>
                     </p>
-                    <form style="margin-left: 30px; margin-top:30px;">
+                    <form style="margin-left: 30px; margin: 0 auto; margin-top:20px; width: 700px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Cliente</span>
@@ -48,21 +48,20 @@
                                   <span class="input-group-text">Observacion</span>
                                 </div>
                                 <textarea required type="text" v-model="arreglo.observacion" class="form-control" placeholder="Ingrese Observacion"></textarea>
-
+                            </div>
+                            <br>
+                            <div style="margin-left:250px;">
+                                <button v-on:click="nuevoArreglo()" class="btn btn-success" title="Guardar Arreglo">
+                                  <i class="far fa-save fa-1x"></i>
+                                        Guardar
+                                </button>
+                                <div style="width:5px;"></div>
+                                <router-link to="/HomeArreglo" tag="button" class="btn btn-info" title="Volver a Home Arreglo" >
+                                    <i class="fas fa-arrow-left"></i>
+                                        Volver
+                                </router-link>
                             </div>
                     </form>
-                    <br>
-                          <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeArreglo" tag="button" class="btn btn-info" title="Volver a Home Arreglo" >
-                                  <i class="fas fa-arrow-left"></i>
-                                      Volver
-                              </router-link>
-                              <div style="width:5px;"></div>
-                              <button v-on:click="nuevoArreglo()" class="btn btn-success" title="Guardar Arreglo">
-                                <i class="far fa-save fa-1x"></i>
-                                      Guardar
-                              </button>
-                          </div>
                   </div>
               </div>
             </div>
@@ -110,7 +109,6 @@ export default {
       nuevoArreglo(){
           this.arreglo.condicion = 'EN ESPERA DE PRESUPUESTO';
           this.errors = [];
-          /*
           if (!this.arreglo.cliente){
             this.errors.push('El Cliente no puede ser vacio');
           }
@@ -123,7 +121,6 @@ export default {
           if (!this.arreglo.condicion){
             this.errors.push('La Condicion No puede ser vacia');
           }
-          */
           var _this = this;
           if (this.errors.length == 0){
                 axios.post('http://localhost:3000/arreglo',
@@ -182,7 +179,7 @@ border:0 !important;
     background-color: white;
 }
 
-btn{
+.btn{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
@@ -191,13 +188,16 @@ btn{
   height:40px;
   margin-top:-10px;
   border:none;
-  /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
   color: black !important;
 }
 
+.btn:hover{
+  background-color: white;
+  color: black;
+}
 
 .input-group-text{
 width: auto;

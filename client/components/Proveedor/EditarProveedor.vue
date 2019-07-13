@@ -212,10 +212,10 @@ input:focus{
 height: auto;
 margin-top: 50px;
 margin-bottom: auto;
-width: 900px;
+width: 1650px;
 background-color: rgb(70,90,101);
 border-radius: 5px;
-border:none;
+border:1px solid;
 margin:0 auto;
 }
 

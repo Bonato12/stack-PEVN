@@ -107,13 +107,18 @@ export default {
 
 <style>
 html,body{
+/*
 background-image: url('./components/Administrar/background1.png');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
-font-family: 'Numans', sans-serif;
 background-color: lightgray;
+
 background-blend-mode: multiply;
+*/
+font-family: 'Numans', sans-serif;
+background-color: rgb(70,90,101);
+
 }
 
 
