@@ -22,7 +22,7 @@
                           <br>
                       </ul>
                     </p>
-                    <form style="margin-left: 30px; margin: 0 auto; margin-top:20px; width: 700px;">
+                    <form style="margin: 0 auto; margin-top:20px; width: 780px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Cliente</span>
