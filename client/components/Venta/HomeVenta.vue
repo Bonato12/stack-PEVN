@@ -16,7 +16,6 @@
           <vue-good-table
               :columns="columns"
               :rows="ventas"
-              title="Ver Opciones y Detalles"
               :search-options="{
                 enabled: true,
                 skipDiacritics: true,
@@ -174,6 +173,7 @@ export default {
         {
           label: 'Opciones',
           field: 'opciones',
+          width: '150px',
         }
       ],
 		}
@@ -258,5 +258,47 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+
+}
+
+.modal-container {
+  width: 1000px;
+  height: auto;
+  margin: 0px auto;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  border-radius: 10px;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 
 </style>

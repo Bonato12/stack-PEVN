@@ -39,6 +39,14 @@
                 }"
 
                 theme="default">
+                <template slot="table-row" slot-scope="props" >
+                  <span v-if="props.column.field == 'opciones'">
+                    <button @click="verMas(props.row)" class="btn btn-info" style="width:150px;"  title="Ver Mas" >
+                        <i class="fas fa-clipboard-list"></i>
+                        Ver Mas
+                    </button>
+                  </span>
+                </template>
          </vue-good-table>
          <div>
               <transition v-if="showModal" class="animation fadeInLeft" name="modal">
@@ -168,6 +176,11 @@ export default {
         {
           label: 'Total',
           field: 'total',
+        },
+        {
+          label: 'Opciones',
+          field: 'opciones',
+          width: '150px',
         }
       ],
 		}
@@ -254,18 +267,15 @@ export default {
       XLSX.utils.book_append_sheet(wb, provedores, this.compras)
       XLSX.writeFile(wb,now+'-compras.csv');
     },
-      onRowClick(params) {
-        this.showModal = true;
-        console.log(params.row);
-            this.idc =  params.row.id_compra;
-            axios.get('http://localhost:3000/compraProducto/'+ params.row.id_compra).then((response) =>{
-              this.comprasProducto = response.data;
-              this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
-              console.log(this.fecha);
-              console.log(this.comprasProducto);
-            });
 
-
+    verMas(compra){
+      this.showModal = true;
+      axios.get('http://localhost:3000/compraProducto/'+ compra.id_compra).then((response) =>{
+        this.comprasProducto = response.data;
+        this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
+        console.log(this.fecha);
+        console.log(this.comprasProducto);
+      });
     },
     hideModal(){
       this.showModal = false;
