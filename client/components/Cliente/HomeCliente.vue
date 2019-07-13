@@ -250,6 +250,7 @@ export default {
         {
           label: 'Mail',
           field: 'mail',
+          width: '50px'
         },
         {
           label: 'Opciones',

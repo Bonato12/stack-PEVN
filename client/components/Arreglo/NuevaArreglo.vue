@@ -110,6 +110,7 @@ export default {
       nuevoArreglo(){
           this.arreglo.condicion = 'EN ESPERA DE PRESUPUESTO';
           this.errors = [];
+          /*
           if (!this.arreglo.cliente){
             this.errors.push('El Cliente no puede ser vacio');
           }
@@ -122,6 +123,8 @@ export default {
           if (!this.arreglo.condicion){
             this.errors.push('La Condicion No puede ser vacia');
           }
+          */
+          var _this = this;
           if (this.errors.length == 0){
                 axios.post('http://localhost:3000/arreglo',
                 {
@@ -130,7 +133,21 @@ export default {
                 { headers: {
                   'Content-Type': 'application/json',
                 },
-              }).then(alertSucessArreglo()).then(this.arreglo = new Arreglo())
+              }).then(function(response){
+                  console.log(response);
+                  if (response.data == "OK"){
+                     alertSucessArreglo();
+                    _this.arreglo = new Arreglo();
+                  }else {
+                     if (response.data.length > 0) {
+                       for (var i = 0; i < response.data.length ; i++) {
+                              _this.errors.push(response.data[i].msg);
+                        }
+                     }else {
+                         _this.errors.push(response.data.msg);
+                     }
+                  }
+                })
            }
       }
     }

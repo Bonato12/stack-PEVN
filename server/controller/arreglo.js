@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+const {check, validationResult} = require('express-validator');
 var pg = require('pg');
 var id;
 
@@ -14,10 +15,7 @@ config= {
   port: 5432,
 }
 
-
-
-  module.exports = {
-
+module.exports = {
           getArreglo(req,res){
             var pool = new pg.Pool(config)
             pool.connect(function(err, client, done) {
@@ -66,20 +64,26 @@ config= {
           },
 
         postArreglo(req, res){
-             var pool = new pg.Pool(config)
-             pool.connect(function(err, client, done) {
-               client.query('INSERT INTO arreglo(cliente,producto,fecha,observacion,condicion) VALUES($1,$2,$3,$4,$5)',[req.body.arreglo.cliente.id_cliente,req.body.arreglo.producto.id_producto,req.body.arreglo.fecha,req.body.arreglo.observacion,req.body.arreglo.condicion])
-                 .then(response => {
-                   pool.end()
-                   res.json(response.rows)
-                 })
-                 .catch(error => {
-                   pool.end()
-                   console.log(error.stack)
-                 })
-               done()
-             })
-            },
+             const errors = validationResult(req);
+             if (!errors.isEmpty()) {
+                    return res.json(errors.array());
+             } else {
+                     var pool = new pg.Pool(config)
+                     pool.connect(function(err, client, done) {
+                       client.query('INSERT INTO arreglo(cliente,producto,fecha,observacion,condicion) VALUES($1,$2,$3,$4,$5)',[req.body.arreglo.cliente.id_cliente,req.body.arreglo.producto.id_producto,req.body.arreglo.fecha,req.body.arreglo.observacion,req.body.arreglo.condicion])
+                         .then(response => {
+                           pool.end()
+                           res.sendStatus(200);
+                         })
+                         .catch(error => {
+                           pool.end()
+                           console.log(error)
+                           res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
+                         })
+                       done()
+                     })
+             }
+        },
 
         deleteArreglo(req,res){
                var pool = new pg.Pool(config)
