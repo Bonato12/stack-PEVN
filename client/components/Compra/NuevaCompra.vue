@@ -13,7 +13,7 @@
                      </h2>
                   </div>
                   <div class="card-body">
-                    <form style="margin-left: 30px; margin-top: 15px;">
+                    <form style="margin: 0 auto; margin-top:20px; width:780px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Proveedor</span>
@@ -34,48 +34,55 @@
                                   </template>
                                 </v-select>
                             </div>
-
-                        <div class="row">
-                          <div class="col-">
-                            <b-input-group prepend="Cantidad" style="padding-left:15px;">
-                              <b-form-input v-model="num" min="0" readonly></b-form-input>
-                              <b-input-group-append>
-                                <b-button variant="info" @click="decrementarCantidad()">
-                                      <i class="fas fa-minus"></i>
-                                </b-button>
-                                <b-button variant="info" @click="incrementarCantidad()">
-                                      <i class="fas fa-plus"></i>
-                                </b-button>
-                              </b-input-group-append>
-                            </b-input-group>
-                          </div>
-                          <div class="col-">
-                            <div class="input-group form-group" style="padding-left:20px;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Precio Unitario</span>
-                                </div>
-                                <input  type="number" min="0" @change="onChangePrecioUnitario()"  v-model="precioUnitario"  class="form-control">
+                            <div class="input-group form-group">
+                              <b-input-group prepend="Cantidad">
+                                <b-form-input v-model="num" min="0" readonly></b-form-input>
+                                <b-input-group-append>
+                                  <b-button variant="info" @click="decrementarCantidad()">
+                                        <i class="fas fa-minus"></i>
+                                  </b-button>
+                                  <b-button variant="info" @click="incrementarCantidad()">
+                                        <i class="fas fa-plus"></i>
+                                  </b-button>
+                                </b-input-group-append>
+                              </b-input-group>
                             </div>
-                          </div>
-                          <div class="col-">
-                            <div class="input-group form-group" style="padding-left:10px;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Precio Total</span>
+                            <div class="row">
+                              <div class="col">
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Precio Unitario</span>
+                                    </div>
+                                    <input  type="number" min="0" @change="onChangePrecioUnitario()"  v-model="precioUnitario"  class="form-control">
                                 </div>
-                                <input  type="number" min="0"  v-model="precioTotalP"  class="form-control">
+                              </div>
+                              <div class="col">
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Precio Total</span>
+                                    </div>
+                                    <input  type="number" min="0"  v-model="precioTotalP"  class="form-control">
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
+                            <div>
+                              <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:120px; border-radius:5px;" title="Añadir al Carrito">
+                                  <i class="fas fa-cart-plus"></i>
+                                  Añadir
+                              </button>
+                            </div>
                     </form>
-                    <div class="col-" style="padding-left:30px;">
-                      <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:100px; border-radius:20px;" title="Añadir al Carrito">
-                          <i class="fas fa-cart-plus"></i>
-                      </button>
-                    </div>
                     <br>
-                      <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:1000px;">
-                                <i class="fas fa-shopping-cart fa-3x"></i>
-                                <br>
+                      <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin:0 auto; width:780px;">
+
+                                  <div>
+                                      <div class="card-header" style="background-color:#FFD700; ">
+                                        <h2 style="color:black;">
+                                          <i class="fas fa-shopping-cart"></i>
+                                          <i class="fas fa-coins"></i>
+                                          Carrito de Compra</h2>
+                                      </div>
+                                  </div>
                                 <table class="table" style="background-color:white;">
                                   <thead>
                                     <tr >
@@ -100,13 +107,16 @@
                                     </tr>
                                   </tbody>
                                 </table>
+                                <br>
+                                <div v-if="this.precioTotal" style="text-align:right; color:white;">
+                                  <h3>
+                                    <i class="fas fa-coins"></i>
+                                    <i class="fas fa-money-bill-alt"></i>
+                                    Total $: {{this.precioTotal}} </h3>
+                                </div>
                           </div>
                           <br>
-                          <div v-if="this.precioTotal" style="text-align:right; margin-right:50px; color:white;">
-                            <h3>Total $: {{this.precioTotal}} </h3>
-                          </div>
-                          <br>
-                          <div class="d-flex justify-content-end" style="padding-right:50px;">
+                          <div class="d-flex justify-content-end" style="padding-right:142px;">
                               <router-link to="/HomeCompra" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
@@ -121,8 +131,8 @@
               </div>
             </div>
        </div>
+       <br>
       </div>
-</template>
 </template>
 <script>
 
@@ -306,7 +316,6 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-
 .card{
 height: auto;
 margin-bottom: auto;
@@ -314,6 +323,7 @@ width: 1650px;
 background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
+margin:0 auto;
 }
 
 .input-group-prepend span{
@@ -329,12 +339,7 @@ border:0 !important;
     background-color: white;
 }
 
-.caja {
-float:left;
-width:300px;
-}
-
-btn{
+.btns{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
@@ -347,12 +352,12 @@ btn{
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
-  color: black;
+  color: black !important;
 }
 
-btn:hover{
+.btns:hover{
      background-color: white  !important;
-     /*color: white;*/
+     color: black;
 }
 
 .input-group-text{
@@ -361,13 +366,13 @@ background-color: #FFD700;
 color: black;
 border: none;
 }
-
-.input-group{
-  width: 300px;
-}
-
 input{
   background-color: white;
+}
+
+.table{
+  /*border-radius: 5px !important;*/
+  background-color:white;
 }
 
 </style>

@@ -34,26 +34,30 @@
                                   </template>
                                 </v-select>
                             </div>
-                            <div class="input-group form-group">
-                              <b-input-group prepend="Cantidad">
-                                <b-form-input v-model="num" min="0" readonly></b-form-input>
-                                <b-input-group-append>
-                                  <b-button variant="info" @click="decrementarCantidad()">
-                                        <i class="fas fa-minus"></i>
-                                  </b-button>
-                                  <b-button variant="info" @click="incrementarCantidad()">
-                                        <i class="fas fa-plus"></i>
-                                  </b-button>
-                                </b-input-group-append>
-                              </b-input-group>
-                            </div>
-                            <div>
-                              <div class="input-group form-group">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text">Precio</span>
+                            <div class="row">
+                                <div class="col">
+                                  <div class="input-group form-group">
+                                    <b-input-group prepend="Cantidad">
+                                      <b-form-input v-model="num" min="0" readonly></b-form-input>
+                                      <b-input-group-append>
+                                        <b-button variant="info" @click="decrementarCantidad()">
+                                              <i class="fas fa-minus"></i>
+                                        </b-button>
+                                        <b-button variant="info" @click="incrementarCantidad()">
+                                              <i class="fas fa-plus"></i>
+                                        </b-button>
+                                      </b-input-group-append>
+                                    </b-input-group>
                                   </div>
-                                  <input  type="number" min="0"  v-model="precio"  class="form-control" readonly>
-                              </div>
+                                </div>
+                                <div class="col">
+                                  <div class="input-group form-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text">Precio</span>
+                                      </div>
+                                      <input  type="number" min="0"  v-model="precio"  class="form-control" readonly>
+                                  </div>
+                                </div>
                             </div>
                             <div>
                                 <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:120px;" title="Añadir al Carrito">
@@ -64,8 +68,14 @@
                     </form>
                     <br>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin:0 auto; width:780px;">
-                                <i class="fas fa-shopping-cart fa-3x"></i>
-                                <br>
+                                <div>
+                                    <div class="card-header" style="background-color:#FFD700; ">
+                                      <h2 style="color:black;">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <i class="fas fa-coins"></i>
+                                        Carrito de Venta</h2>
+                                    </div>
+                                </div>
                                 <table class="table">
                                   <thead>
                                     <tr style="background-color:white; border-radius:5px;">
@@ -80,8 +90,8 @@
                                       <th class="centered">{{item.producto.modelo}}</th>
                                       <td>{{item.cantidad}}</td>
                                       <td>{{item.precio}}</td>
-                                      <td>
-                                          <button v-on:click="borrar(item)" class="btn btn-danger" title="Eliminar Producto del carrito" style="width:100px;">
+                                      <td class="centered">
+                                          <button v-on:click="borrar(item)" class="btn btn-danger" title="Eliminar Producto del carrito">
                                               <i class="fas fa-trash-alt"></i>
                                           </button>
                                       </td>
@@ -89,7 +99,10 @@
                                   </tbody>
                                 </table>
                                 <div v-if="this.precioTotal" style="text-align:right; color:white;">
-                                  <h3>Total $: {{this.precioTotal}} </h3>
+                                  <h3>
+                                    <i class="fas fa-coins"></i>
+                                    <i class="fas fa-money-bill-alt"></i>
+                                    Total $: {{this.precioTotal}} </h3>
                                 </div>
                           </div>
                           <br>
