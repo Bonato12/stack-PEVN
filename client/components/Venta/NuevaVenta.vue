@@ -21,7 +21,7 @@
                           <br>
                       </ul>
                     </p>
-                    <form style="margin: 0 auto;  margin-top:20px; width:780px;">
+                    <form  @submit.prevent="guardarLista()" style="margin: 0 auto;  margin-top:20px; width:780px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Cliente</span>
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             <div>
-                                <button class="btn" v-on:click="guardarLista()" style="background-color:#FFD700; width:120px;" title="Añadir al Carrito">
+                                <button class="btn" type="submit"  style="background-color:#FFD700; width:120px;" title="Añadir al Carrito">
                                     <i class="fas fa-cart-plus"></i>
                                     Añadir
                                 </button>
