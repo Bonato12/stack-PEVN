@@ -25,37 +25,37 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">Dni</span>
                     </div>
-                    <input  type="number" v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                    <input required  type="number" v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Nombre</span>
                     </div>
-                    <input  type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                    <input required  type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Apellido</span>
                     </div>
-                    <input   type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
+                    <input required   type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Direccion</span>
                     </div>
-                    <input  type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" >
+                    <input required  type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Telefono</span>
                     </div>
-                    <input   type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                    <input required   type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Mail</span>
                     </div>
-                    <input type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
+                    <input required  type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
                 </div>
                 <br>
                   <div class="d-flex justify-content-end">
@@ -138,7 +138,20 @@ export default {
                 { headers: {
                   'Content-Type': 'application/json',
                 }
-            }).then((data) => console.log(data)).then(alertEditSucessCliente());
+            }).then(function(response){
+                console.log(response);
+                if (response.data == "OK"){
+                     alertEditSucessCliente();
+                }else {
+                     if (response.data.length > 0) {
+                       for (var i = 0; i < response.data.length ; i++) {
+                              _this.errors.push(response.data[i].msg);
+                        }
+                     }else {
+                         _this.errors.push(response.data.msg);
+                     }
+                }
+              })
           }
       }
   }
