@@ -7,37 +7,37 @@
                 <div class="navbar-collapse" style="margin-left:250px;">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
-                            <router-link class="item"   tag="a" active-class="activo" id="cliente"   to="/HomeCliente">
+                            <router-link class="item"   tag="a" :class="{ 'router-link-active': isActiveCliente }" active-class="activo"   to="/HomeCliente">
                               <i class="fas fa-wheelchair"></i>
                               Clientes
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  class="item" tag="a" active-class="activo"   to="/HomeProducto">
+                            <router-link  class="item" tag="a" :class="{ 'router-link-active': isActiveProducto }" active-class="activo"   to="/HomeProducto">
                               <i class="fas fa-mobile-alt"></i>
                               Productos
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="item"  tag="a" active-class="activo"   to="/HomeVenta">
+                            <router-link class="item" :class="{ 'router-link-active': isActiveVenta }"  tag="a" active-class="activo"   to="/HomeVenta">
                               <i class="fas fa-shopping-cart"></i>
                               Ventas
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="item"  tag="a" active-class="activo"   to="/HomeCompra">
+                            <router-link class="item" :class="{ 'router-link-active': isActiveCompra }" tag="a" active-class="activo"   to="/HomeCompra">
                               <i class="fas fa-coins"></i>
                               Compras
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="item"   tag="a"active-class="activo"   to="/HomeArreglo">
+                            <router-link class="item" :class="{ 'router-link-active': isActiveArreglo }"   tag="a"active-class="activo"   to="/HomeArreglo">
                               <i class="fas fa-tools"></i>
                               Arreglos
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  class="item" tag="a" active-class="activo"   to="/HomeProveedor">
+                            <router-link  class="item" tag="a" :class="{ 'router-link-active': isActiveProveedor }" active-class="activo"   to="/HomeProveedor">
                               <i class="fas fa-people-carry"></i>
                               Proveedores
                             </router-link>
@@ -78,6 +78,27 @@ export default {
 
 
   },
+  computed:{
+    isActiveVenta() {
+    return this.$route.matched.some(route => route.name === 'NuevaVenta' ||  route.name === 'EditarVenta' )
+    },
+    isActiveProducto() {
+    return this.$route.matched.some(route => route.name === 'NuevoProducto' ||  route.name === 'EditarProducto' )
+    },
+    isActiveCliente() {
+    return this.$route.matched.some(route => route.name === 'NuevoCliente' ||  route.name === 'EditarCliente' )
+    },
+    isActiveProveedor() {
+    return this.$route.matched.some(route => route.name === 'NuevoProveedor' ||  route.name === 'EditarProveedor' )
+    },
+    isActiveCompra() {
+    return this.$route.matched.some(route => route.name === 'NuevaCompra' ||  route.name === 'EditarCompra' )
+    },
+    isActiveArreglo() {
+    return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto')
+    },
+
+  },
   methods: {
     control(){
       let usuario = firebase.auth().currentUser;
@@ -98,7 +119,9 @@ export default {
            console.log(error);
         });
 
-  }
+    },
+
+
 }
 
 
@@ -137,6 +160,15 @@ background-color: rgb(70,90,101);
     width:auto;
     margin-top:-55;
 
+
+}
+
+.router-link-active{
+  background-color: #fec400;
+  color: black;
+  height: 123%;
+  width:auto;
+  margin-top:-55;
 
 }
 

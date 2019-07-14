@@ -243,14 +243,7 @@ export default {
               });
         doc.save(now+'-compras.pdf');
       },
-      detalleCompra(params) {
-        this.showModal = true;
-        console.log(params);
-        this.compra.id_proveedor = params.row.id_proveedor;
-        this.proveedor.dni = params.row.dni;
-        this.proveedor.nombre = params.row.nombre;
-        this.proveedor.apellido = params.row.apellido;
-    },
+
     exportarXls() {
       var fecha = new Date();
       var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
@@ -270,6 +263,7 @@ export default {
 
     verMas(compra){
       this.showModal = true;
+      this.idc = compra.id_compra;
       axios.get('http://localhost:3000/compraProducto/'+ compra.id_compra).then((response) =>{
         this.comprasProducto = response.data;
         this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");

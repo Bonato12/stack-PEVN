@@ -188,7 +188,6 @@ export default {
         axios.get('http://localhost:3000/venta').then((response) =>{
           this.ventas = response.data;
           console.log(this.ventas);
-
         });
     },
     eliminarVenta(){
@@ -218,6 +217,7 @@ export default {
     verMas(venta){
       this.showModal = true;
       console.log(venta.id_venta);
+      this.idv = venta.id_venta
       axios.get('http://localhost:3000/ventaProducto/'+ venta.id_venta).then((response) =>{
         this.ventasProducto = response.data;
         this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");

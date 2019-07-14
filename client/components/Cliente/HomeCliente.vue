@@ -166,7 +166,7 @@
        </transition>
     <div>
         <br>
-        <router-link to="/HomeCliente/NuevoCliente" tag="button" class="btn btn-warning" style="float: left;"  >
+        <router-link to="/NuevoCliente" tag="button" class="btn btn-warning" style="float: left;"  >
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Cliente
         </router-link>

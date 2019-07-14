@@ -122,7 +122,7 @@
       </transition>
     <div class="card-footer">
       <br>
-      <router-link tag="button" to="/HomeProveedor/NuevoProveedor" class="btn btn-warning" style="float:left;">
+      <router-link tag="button" to="/NuevoProveedor" class="btn btn-warning" style="float:left;">
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Proveedor
       </router-link>

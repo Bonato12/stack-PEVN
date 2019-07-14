@@ -99,7 +99,7 @@
                   <div style="width:5px;">
                   </div>
                   <div>
-                    <router-link class="btn btn-dark" :to="/editarProducto/+producto.id_producto"  tag="button" title="Editar Producto">
+                    <router-link class="btn btn-dark" :to="/EditarProducto/+producto.id_product"  tag="button" title="Editar Producto">
                       <i class="far fa-edit fa-1x"></i>
                     </router-link>
                   </div>
@@ -110,7 +110,7 @@
       </div>
     </transition>
     <br>
-    <router-link to="HomeProducto/NuevoProducto" tag="button" class="btn btn-warning" title="Ir a Nuevo Producto" style="float:left;">
+    <router-link to="/NuevoProducto" tag="button" class="btn btn-warning" title="Ir a Nuevo Producto" style="float:left;">
       <i class="fas fa-plus-circle fa-1x">
       </i>
       Nuevo Producto

@@ -45,73 +45,91 @@ const rutas = new VueRouter({
             },
             {
               path:'/HomeCliente',
+              name:'/HomeCliente',
               component: HomeCliente,
             },
             {
-              path:'/HomeCliente/NuevoCliente',
+              path:'/NuevoCliente',
+              name:'NuevoCliente',
               component: NuevoCliente
             },
             {
               path:'/EditarCliente/:id',
-              component:EditarCliente},
+              name:'EditarCliente',
+              component:EditarCliente
+            },
             {
               path:'/Login',
               component:Login
             },
             {
               path: '/HomeProducto',
+              name:'HomeProducto',
               component: HomeProducto,
             },
             {
-              path:'/HomeProducto/NuevoProducto',
+              path:'/NuevoProducto',
+              name: 'NuevoProducto',
               component: NuevoProducto
             },
             {
               path:'/EditarProducto/:id',
+              name:'EditarProducto',
               component:EditarProducto
             },
             {
               path: '/HomeProveedor',
+              name:'HomeProveedor',
               component: HomeProveedor,
             },
             {
-              path: '/HomeProveedor/NuevoProveedor',
+              path: '/NuevoProveedor',
+              name: 'NuevoProveedor',
               component: NuevoProveedor
             },
             {
               path: '/EditarProveedor/:id',
+              name:'EditarProveedor',
               component: EditarProveedor
             },
             {
               path:'/HomeVenta',
+              name:'HomeVenta',
               component: HomeVenta
             },
             {
               path:'/NuevaVenta',
+              name: 'NuevaVenta',
               component: NuevaVenta
             },
             {
               path:'/EditarVenta/:id',
+              name: 'EditarVenta',
               component: EditarVenta
             },
             {
               path:'/HomeCompra',
+              name:'HomeCompra',
               component: HomeCompra
             },
             {
               path:'/NuevaCompra',
+              name:'NuevaCompra',
               component: NuevaCompra
             },
             {
               path:'/EditarCompra/:id',
+              name:'EditarCompra',
               component: EditarCompra
             },
             {
               path:'/HomeArreglo',
+              name:'HomeArreglo',
               component: HomeArreglo
             },
             {
               path:'/NuevoArreglo',
+              name:'NuevoArreglo',
               component: NuevoArreglo
             },
             {
@@ -120,6 +138,7 @@ const rutas = new VueRouter({
             },
             {
               path:'/NuevoPresupuesto/:id',
+              name:'NuevoPresupuesto',
               component: NuevoPresupuesto
             },
             {
