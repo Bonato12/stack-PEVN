@@ -50,16 +50,16 @@
                                 <textarea required type="text" v-model="arreglo.observacion" class="form-control" placeholder="Ingrese Observacion"></textarea>
                             </div>
                             <br>
-                            <div style="margin-left:250px;">
-                                <button v-on:click="nuevoArreglo()" class="btn btn-success" title="Guardar Arreglo">
-                                  <i class="far fa-save fa-1x"></i>
-                                        Guardar
-                                </button>
-                                <div style="width:5px;"></div>
+                            <div class="d-flex justify-content-end">
                                 <router-link to="/HomeArreglo" tag="button" class="btn btn-info" title="Volver a Home Arreglo" >
                                     <i class="fas fa-arrow-left"></i>
                                         Volver
                                 </router-link>
+                                <div style="width:3px;"></div>
+                                <button v-on:click="nuevoArreglo()" class="btn btn-success" title="Guardar Arreglo">
+                                  <i class="far fa-save fa-1x"></i>
+                                        Guardar
+                                </button>
                             </div>
                     </form>
                   </div>
@@ -203,6 +203,7 @@ border:0 !important;
 width: auto;
 background-color: #FFD700;
 border: none;
+color:black;
 }
 
 input{

@@ -10,7 +10,7 @@
                   Nuevo Proveedor
                </h2>
             </div>
-              </hr style="color:black;">
+            </hr style="color:black;">
             <div class="card-body" >
                   <p v-if="errors.length">
                     <ul  class="list-group" v-for="error in errors">
@@ -64,18 +64,18 @@
                         <input required type="text"   v-model="proveedor.descripcion"  class="form-control" placeholder="Ingrese Descripcion" >
                     </div>
                     <br>
-                    <div style="margin-left:250px;">
-                      <button type="submit" class="btn btn-success"  title="Guardar Cliente" >
-                            <i class="far fa-save fa-1x"></i>
-                            Guardar
-                      </button>
-                      <router-link to="/HomeProveedor" tag="button" class="btn btn-info"  title="Volver a HomeCliente" >
-                          <i class="fas fa-arrow-left"></i>
-                            Volver
-                      </router-link>
+                    <div class="d-flex justify-content-end">
+                        <router-link to="/HomeProveedor" tag="button" class="btn btn-info"  title="Volver a Home Proveedor" >
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
+                        <button type="submit" class="btn btn-success"  title="Guardar Proveedor" >
+                              <i class="far fa-save fa-1x"></i>
+                              Guardar
+                        </button>
                     </div>
-                        </form>
-                    </div>
+                  </form>
+                </div>
             </div>
         </div>
       </div>

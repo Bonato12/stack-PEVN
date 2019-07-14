@@ -61,15 +61,15 @@
               						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
             					</div>
                       <br>
-                        <div style="margin-left:250px;">
-                          <button type="submit" class="btn btn-success" title="Guardar Producto">
-                              <i class="far fa-save fa-1x"></i>
-                              Guardar
-                          </button>
+                        <div class="d-flex justify-content-end">
                           <router-link class="btn btn-info" to="/HomeProducto" tag="button" title="Volver a HomeProducto">
                               <i class="fas fa-arrow-left"></i>
                                 Volver
                           </router-link>
+                          <button type="submit" class="btn btn-success" title="Guardar Producto">
+                              <i class="far fa-save fa-1x"></i>
+                              Guardar
+                          </button>
                       </div>
         				</form>
         			</div>

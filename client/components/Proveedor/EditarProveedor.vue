@@ -64,15 +64,15 @@
                         <input required type="text"   v-model="proveedor.descripcion"  class="form-control" placeholder="Ingrese Descripcion" >
                     </div>
                     <br>
-                    <div style="margin-left:250px;">
-                      <button type="submit" class="btn btn-success"  title="Editar Proveedor" >
-                            <i class="far fa-save fa-1x"></i>
-                            Guardar
-                      </button>
+                    <div class="d-flex justify-content-end">
                       <router-link to="/HomeProveedor" tag="button" class="btn btn-info"  title="Volver a HomeProveedor" >
                           <i class="fas fa-arrow-left"></i>
                             Volver
                       </router-link>
+                      <button type="submit" class="btn btn-success"  title="Editar Proveedor" >
+                            <i class="far fa-save fa-1x"></i>
+                            Guardar
+                      </button>
                     </div>
               </form>
             </div>

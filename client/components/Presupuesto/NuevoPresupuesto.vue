@@ -130,7 +130,7 @@
                                       <i class="fas fa-arrow-left"></i>
                                           Volver
                                   </router-link>
-                                  <div style="width:5px;"></div>
+                                  <div style="width:3px;"></div>
                                   <button v-on:click="nuevoPresupuesto()" class="btn btn-success" title="Guardar Nuevo Repuesto">
                                     <i class="far fa-save fa-1x"></i>
                                           Guardar

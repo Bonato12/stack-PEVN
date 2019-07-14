@@ -123,12 +123,12 @@
                                 </div>
                           </div>
                           <br>
-                          <div class="d-flex justify-content-end" style="padding-right:142px;">
+                          <div class="d-flex justify-content-end" style="margin:0 auto; width:780px;">
                               <router-link to="/HomeCompra" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
-                              <div style="width:5px;"></div>
+                              <div style="width:3px;"></div>
                               <button v-on:click="nuevaCompra()" class="btn btn-success">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar

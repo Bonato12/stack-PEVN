@@ -114,12 +114,12 @@
                                 </div>
                           </div>
                           <br>
-                          <div class="d-flex justify-content-end" style="margin-right:145px;">
+                          <div class="d-flex justify-content-end" style="margin:0 auto; width:780px;">
                               <router-link to="/HomeVenta" tag="button" class="btn btn-info" style="color:black" title="Volver a Home Venta">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
-                              <div style="width:5px;"></div>
+                              <div style="width:3px;"></div>
                               <button v-on:click="nuevaVenta()" class="btn btn-success" style="color:black" title="Guardar Venta">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
