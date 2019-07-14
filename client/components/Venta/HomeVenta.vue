@@ -130,14 +130,15 @@
             </button>
         </div>
   </div>
-  </div>
+  <br>
+</div>
 </template>
 
 <script>
 
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import { alertSucessDelete,alertError,alertWarningFK } from '../../assets/sweetAlert.js';
 import moment from 'moment';
 
 export default {
@@ -191,7 +192,7 @@ export default {
         });
     },
     eliminarVenta(){
-      this.$swal({
+          this.$swal({
           title: 'Estas Seguro?',
           text: "No se podran recuperar los datos!",
           type: 'warning',
@@ -201,18 +202,18 @@ export default {
           confirmButtonText: 'Si, Borrar!'
           }).then((result) => {
           if (result.value) {
-            axios.delete('http://localhost:3000/venta/'+this.idv).then((data)=>{
-              console.log(data)
-              this.getVenta()
-            }).then(alertSucessDelete()).then(this.hideModal());
-            this.$swal(
-              'Eliminado!',
-              'La venta ha sido eliminada.',
-              'success'
-            )
+              axios.delete('http://localhost:3000/venta/'+this.idv).then((response) => {
+              console.log(response);
+              if (response.data == "OK"){
+                  this.hideModal();
+                  alertSucessDelete();
+                  this.getVenta();
+              }else {
+                  alertError();
+              }
+            })
           }
           })
-
     },
     verMas(venta){
       this.showModal = true;

@@ -207,7 +207,7 @@ export default {
       })
     },
     eliminarProducto(id) {
-          this.$swal({
+              this.$swal({
               title: 'Estas Seguro?',
               text: "No se podran recuperar los datos!",
               type: 'warning',
@@ -217,29 +217,26 @@ export default {
               confirmButtonText: 'Si, Borrar!'
               }).then((result) => {
               if (result.value) {
-                axios.delete('http://localhost:3000/producto/' + id).then((data) => {
-                  console.log(data);
-                  if (data.data.status == 200){
-                    this.$swal(
-                      'Eliminado!',
-                      'El Producto ha sido eliminado.',
-                      'success'
-                    );
-                    this.getProducto();
-                    this.hideModal()
+                axios.delete('http://localhost:3000/producto/' + id).then((response) => {
+                  console.log(response);
+                  if (response.data == "OK"){
+                      this.hideModal();
+                      this.$swal(
+                        'Eliminado!',
+                        'El Producto ha sido eliminado.',
+                        'success'
+                      );
+                      this.getProducto();
                   }else {
-                    if(data.data.status == 23503){
-                      alertWarningFK()
-                    }else{
-                      alertError();
-                    }
+                      if(response.data == 23503){
+                          alertWarningFK()
+                      }else{
+                          alertError();
+                      }
                   }
-                }).then(this.hide());
-
+                })
               }
               })
-
-
     },
     detalleProducto(params) {
         this.showModal = true;
@@ -311,6 +308,7 @@ export default {
       XLSX.utils.book_append_sheet(wb, productos, this.productos);
       XLSX.writeFile(wb, now + '-productos.csv');
     },
+
     hideModal(){
       this.showModal = false;
     }

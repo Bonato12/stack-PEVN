@@ -85,12 +85,12 @@ config= {
                  client.query("DELETE FROM cliente WHERE id_cliente=($1)",[req.params.id_cliente])
                    .then(response => {
                      pool.end()
-                     res.json(response.rows)
+                     res.sendStatus(200);
                    })
                    .catch(error => {
                      pool.end()
                      console.log(error)
-
+                     res.json(error.code);
                    })
                  done()
                })

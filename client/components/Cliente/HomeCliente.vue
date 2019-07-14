@@ -21,7 +21,6 @@
                 skipDiacritics: true,
                 placeholder: 'Buscar Cliente',
             }"
-            @on-row-click="detalleCliente"
             :pagination-options="{
                 enabled: true,
                 mode: 'records',
@@ -279,28 +278,26 @@ export default {
             confirmButtonText: 'Si, Borrar!'
             }).then((result) => {
             if (result.value) {
-              axios.delete('http://localhost:3000/cliente/' + cliente.id_cliente).then((data)=>{
-                console.log("Hola");
-                console.log(data);
-                  this.$swal(
-                    'Eliminado!',
-                    'El Cliente ha sido eliminado.',
-                    'success'
-                  ).then(this.getCliente())
-              })
-            }
+              axios.delete('http://localhost:3000/cliente/' + cliente.id_cliente).then((response)=>{
+               console.log(response);
+               if (response.data == "OK"){
+                 this.$swal(
+                   'Eliminado!',
+                   'El Cliente ha sido eliminado.',
+                   'success'
+                 );
+                 this.getCliente();
+               }else {
+                 if(response.data == 23503){
+                   alertWarningFK()
+                 }else{
+                   alertError();
+                 }
+               }
+             })
+             }
             })
-
     },
-    /*
-    enviarMail() {
-        axios.get('http://localhost:3000/cliente/'+this.cliente.id_cliente).then((response) =>{
-          this.cliente = new Cliente(this.cliente.id_cliente,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
-          axios.post('http://localhost:3000/email',
-            this.cliente
-          )});
-    },
-    */
     exportarPdf(){
         var columnas = [
           {title: "DNI", dataKey:"dni"},
@@ -323,19 +320,6 @@ export default {
               });
         doc.save(now+'-clientes.pdf');
       },
-
-    detalleCliente(params) {
-        //this.showModal = true;
-        console.log(params);
-        this.cliente.id_cliente = params.row.id_cliente;
-        this.cliente.dni = params.row.dni;
-        this.cliente.nombre = params.row.nombre;
-        this.cliente.apellido = params.row.apellido;
-        this.cliente.ciudad = params.row.ciudad;
-        this.cliente.direccion = params.row.direccion;
-        this.cliente.telefono = params.row.telefono;
-        this.cliente.mail = params.row.mail;
-    },
     exportarXls() {
       var fecha = new Date();
       var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
@@ -378,8 +362,6 @@ export default {
              }
         }).then(alertSucessMail());
     },
-
-
   }
 }
 </script>

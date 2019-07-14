@@ -49,38 +49,6 @@
                   </span>
                 </template>
          </vue-good-table>
-         <div>
-              <transition v-if="showModal" class="animation fadeInLeft" name="modal">
-                <div class="modal-mask">
-                  <div class="modal-wrapper">
-                    <div class="modal-container animated fadeInLeft">
-                      <div class="modal-header" style="background-color:#424242;">
-                        <slot name="header">
-                          <h2 style="color:white; text-align:left;"></h2>
-                          <button class="modal-default-button" @click="hide()">
-                           <i class="far fa-times-circle"></i>
-                          </button>
-                        </slot>
-                      </div>
-                      <div class="modal-body" style="background-color:#f1f8e9;">
-                        <button class="btn btn-danger" v-on:click="eliminarArreglo()" title="Eliminar Arreglo">
-                            <i class="fas fa-trash-alt fa-5x"></i>
-                        </button>
-                        <button class="btn btn-dark" v-on:click="verPresupuesto()" title="Ver Prepuesto">
-                              <i class="fas fa-coins fa-5x"></i>
-                        </button>
-                      </div>
-                      <div class="modal-header" style="background-color:#FEC404;">
-                        <h2 class="opciones" style="color:white;"></h2>
-                        <div class="row" style="float:right; padding-right:15px;">
-
-                         </div>
-                     </div>
-                    </div>
-                  </div>
-                </div>
-              </transition>
-        </div>
      </div>
     </br>
         <router-link to="/NuevoArreglo" tag="button" class="btn btn-warning" style="float: left;">
@@ -174,42 +142,28 @@ export default {
         });
     },
     eliminarArreglo(id_arreglo){
-            this.$swal({
-                title: 'Estas Seguro?',
-                text: "No se podran recuperar los datos!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Borrar!'
-                }).then((result) => {
-                if (result.value) {
-                  axios.delete('http://localhost:3000/arreglo/'+id_arreglo).then((data)=>{
-                    console.log(data)
-                    if (data.data.status == 200){
-                      this.$swal(
-                        'Eliminado!',
-                        'El Arreglo ha sido eliminado.',
-                        'success'
-                      );
-                     this.getArreglo()
-                    }else {
-                      if(data.data.status == 23503){
-                        alertWarningArregloFK()
-                      }else{
-                        alertError();
-                      }
-                    }
-                  }).then(this.hide());
-
-                }
-                })
-    },
-    onRowClick(params) {
-        this.showModal = true;
-        //console.log(params.row);
-        this.ida = params.row.id_arreglo;
-
+      this.$swal({
+      title: 'Estas Seguro?',
+      text: "No se podran recuperar los datos!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Borrar!'
+      }).then((result) => {
+      if (result.value) {
+          axios.delete('http://localhost:3000/arreglo/'+id_arreglo).then((response) => {
+          console.log(response);
+          if (response.data == "OK"){
+              this.hide();
+              alertSucessDelete();
+              this.getArreglo();
+          }else {
+              alertError();
+          }
+        })
+      }
+      })
     },
     verPresupuesto(id_arreglo){
       console.log(id_arreglo);

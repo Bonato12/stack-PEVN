@@ -71,10 +71,12 @@ module.exports = {
                   client.query("DELETE FROM proveedor WHERE id_proveedor=($1)",[req.params.id_proveedor])
                     .then(response => {
                       pool.end();
+                      res.sendStatus(200);
                     })
                     .catch(error => {
                       pool.end();
-                      console.log(error.stack);
+                      console.log(error);
+                      res.json(error.code);
                     })
                   done()
                 })

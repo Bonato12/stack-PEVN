@@ -68,12 +68,13 @@ module.exports = {
                 pool.connect(function(err, client, done) {
                   client.query("DELETE FROM compra WHERE id_compra=($1)",[req.params.id_compra])
                     .then(response => {
-                      pool.end()
-                      res.json(response.rows)
+                      pool.end();
+                      res.sendStatus(200);
                     })
                     .catch(error => {
-                      pool.end()
-                      console.log(error.stack)
+                      pool.end();
+                      console.log(error)
+                      res.json(error);
                     })
                   done()
                 })

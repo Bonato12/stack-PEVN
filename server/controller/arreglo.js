@@ -91,10 +91,12 @@ module.exports = {
                  client.query("DELETE FROM arreglo WHERE id_arreglo=($1)",[req.params.id_arreglo])
                    .then(response => {
                      pool.end();
+                     res.sendStatus(200);
                    })
                    .catch(error => {
-                     pool.end()
-                     console.log(error)
+                     pool.end();
+                     console.log(error);
+                     res.json(error);
                    })
                  done()
                })

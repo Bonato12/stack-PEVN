@@ -73,11 +73,11 @@ module.exports = {
                   client.query("DELETE FROM venta WHERE id_venta=($1)",[req.params.id_venta])
                     .then(response => {
                       pool.end()
-                      res.json(response.rows)
+                      res.sendStatus(200);
                     })
                     .catch(error => {
-                      pool.end()
-                      console.log(error.stack)
+                      pool.end();
+                      res.json(error);
                     })
                   done()
                 })

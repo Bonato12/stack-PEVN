@@ -111,12 +111,13 @@ module.exports = {
           .then(client => {
            return client.query("DELETE FROM producto WHERE id_producto=($1)",[req.params.id_producto])
              .then(response => {
-              pool.end()
-               res.json(response.rows)
+              pool.end();
+              res.sendStatus(200);
              })
              .catch(error => {
-                pool.end()
-                console.log(error.stack)
+                pool.end();
+                console.log(error);
+                res.json(error.code);
              })
          })
         },

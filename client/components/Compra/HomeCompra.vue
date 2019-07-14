@@ -37,7 +37,6 @@
                   pageLabel: 'page', // for 'pages' mode
                   allLabel: 'All',
                 }"
-
                 theme="default">
                 <template slot="table-row" slot-scope="props" >
                   <span v-if="props.column.field == 'opciones'">
@@ -61,14 +60,15 @@
                           </button>
                         </slot>
                       </div>
-                      <div class="modal-body" style="background-color:#f1f8e9;">
+                      <div class="modal-body" style="background-color:#f1f8e9; color:black;">
+                          <h3>
+                            <i class="fas fa-clipboard-list"></i>
+                            <i class="fas fa-mobile-alt"></i>
+                            Lista de Productos
+                          </h3>
                           <table class="table" style="color:black">
                                 <thead>
                                       <tr>
-                                        <!--
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Id_Venta</th>
-                                      -->
                                         <th scope="col">Marca</th>
                                         <th scope="col">Modelo</th>
                                         <th scope="col">Cantidad</th>
@@ -78,10 +78,6 @@
                                   </thead>
                                   <tbody>
                                       <tr v-for="item in this.comprasProducto" :key="item">
-                                        <!--
-                                        <th scope="col">{{item.id_ventaproducto}}</th>
-                                        <td scope="col">{{item.id_venta}}</td>
-                                      -->
                                         <td scope="col">{{item.marca}}</td>
                                         <td scope="col">{{item.modelo}}</td>
                                         <td scope="col"> {{item.cantidad}}</td>
@@ -134,6 +130,7 @@
             </button>
         </div>
   </div>
+  <br>
   </div>
 </template>
 
@@ -144,7 +141,7 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
-import { alertEliminarCompra } from '../../assets/sweetAlert.js';
+import { alertSucessDelete } from '../../assets/sweetAlert.js';
 import moment from 'moment';
 
 export default {
@@ -200,25 +197,27 @@ export default {
     },
     eliminarCompra(){
       this.$swal({
-          title: 'Estas Seguro?',
-          text: "No se podran recuperar los datos!",
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, Borrar!'
-          }).then((result) => {
-          if (result.value) {
-            axios.delete('http://localhost:3000/compra/'+this.idc).then((data)=>{
-              this.getCompra()
-            }).then(
-            this.$swal(
-              'Eliminado!',
-              'La Compra ha sido eliminada.',
-              'success'
-            )).then(this.hideModal())
+      title: 'Estas Seguro?',
+      text: "No se podran recuperar los datos!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Borrar!'
+      }).then((result) => {
+      if (result.value) {
+          axios.delete('http://localhost:3000/compra/'+this.idc).then((response) => {
+          console.log(response);
+          if (response.data == "OK"){
+              this.hideModal();
+              alertSucessDelete();
+              this.getCompra();
+          }else {
+              alertError();
           }
-          })
+        })
+      }
+      })
 
     },
     exportarPdf(){

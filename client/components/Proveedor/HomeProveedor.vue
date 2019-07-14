@@ -158,7 +158,7 @@ import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete } from '../../assets/sweetAlert.js';
+import { alertSucessDelete, alertWarningFK } from '../../assets/sweetAlert.js';
 
 export default {
   created(){
@@ -212,9 +212,32 @@ export default {
         });
   },
   eliminarProveedor(id) {
-        axios.delete('http://localhost:3000/proveedor/' + id).then((data)=>{
-              this.getProveedor();
-        }).then(alertSucessDelete()).then(this.hideModal());
+        this.$swal({
+        title: 'Estas Seguro?',
+        text: "No se podran recuperar los datos!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Borrar!'
+        }).then((result) => {
+        if (result.value) {
+          axios.delete('http://localhost:3000/proveedor/' + id).then((response) => {
+            console.log(response);
+            if (response.data == "OK"){
+                this.hideModal();
+                alertSucessDelete();
+                this.getProveedor();
+            }else {
+                if(response.data == 23503){
+                    alertWarningFK()
+                }else{
+                    alertError();
+                }
+            }
+          })
+        }
+        })
   },
   exportarPdf(){
       var columnas = [
