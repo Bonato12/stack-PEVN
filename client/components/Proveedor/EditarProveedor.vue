@@ -79,7 +79,8 @@
         </div>
       </div>
   </div>
-  </div>
+  <br>
+</div>
 </template>
 
 <script>
