@@ -29,7 +29,7 @@
                     prevLabel: 'Anterior',
                     rowsPerPageLabel: 'Filas por paginas',
                     ofLabel: 'of',
-                    pageLabel: 'page', // for 'pages' mode
+                    pageLabel: 'page',
                     allLabel: 'All',
                     }"
                 theme="default">
@@ -39,7 +39,7 @@
                       <span class="waitingForConnection" style="color:red;">Sin Stock</span>
                     </div>
                     <div v-else>
-                      <span  v-if="">{{props.row.stock}}</span>
+                      <span>{{props.row.stock}}</span>
                     </div>
                   </span>
 
@@ -186,11 +186,10 @@ export default {
           filterOptions: {
             enabled: true, // enable filter for this column
             placeholder: 'Filtrar Todo', // placeholder for filter input
-            filterDropdownItems: ['Smartphone', 'Iphone'], // dropdown (with selected values) instead of text input
+            filterDropdownItems: ['Celular', 'Repuesto'], // dropdown (with selected values) instead of text input
             trigger: 'enter', //only trigger on enter not on keyup
           },
           */
-
         },
         {
           label: 'Stock',

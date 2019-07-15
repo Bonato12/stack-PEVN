@@ -40,10 +40,10 @@
                 theme="default">
                 <template slot="table-row" slot-scope="props">
                   <span v-if="props.column.field == 'opciones'">
-                    <button @click="eliminarArreglo(props.row.id_arreglo)" class="btn btn-danger"  title="Eliminar Cliente">
+                    <button @click="eliminarArreglo(props.row.id_arreglo)" class="btn btn-danger"  title="Eliminar Arreglo">
                           <i class="fas fa-trash-alt"></i>
                     </button>
-                    <button @click="verPresupuesto(props.row.id_arreglo)" class="btn btn-dark" title="Editar Cliente">
+                    <button @click="verPresupuesto(props.row.id_arreglo)" class="btn btn-dark" title="Editar Presupuesto">
                           <i class="fas fa-coins"></i>
                     </button>
                   </span>

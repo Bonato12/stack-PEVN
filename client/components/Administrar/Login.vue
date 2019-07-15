@@ -139,14 +139,14 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Numans');
-html,body{
-background-image: url('./background.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
-background-color: #063A5E;
-background-blend-mode: multiply;
+body{
+  background-image: url('./background1.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  background-color: lightgray;
+  background-blend-mode: multiply;
+  font-family: 'Numans', sans-serif;
 }
 .container{
 height: 100%;
@@ -157,7 +157,8 @@ height: auto;
 margin-top: 30px;
 margin-bottom: auto;
 width: 450px;
-background-color: rgb(70,90,101);
+/*background-color: rgb(70,90,101);*/
+background-image: url('./background1.png');
 border-radius: 5px;
 }
 .card-header h3{

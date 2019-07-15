@@ -124,7 +124,7 @@ body{
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('./background.jpg');
+background-color: rgb(70,90,101);
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -142,7 +142,8 @@ height: auto;
 margin-top: 30px;
 margin-bottom: auto;
 width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+/*background-color: rgb(70,90,101);*/
+background-image: url('./background1.png');
 }
 
 .social_icon span{

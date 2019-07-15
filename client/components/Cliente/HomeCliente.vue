@@ -146,7 +146,7 @@
                <div class="modal-body" style="background-color:#f1f8e9;">
                  <form @submit.prevent="enviarMail()">
                  <div class="input-group form-group">
-                       <h4>Para : {{cliente.mail}} </h4>
+                       <h4>Para : {{ destinatario }} </h4>
                  </div>
                  <div class="input-group form-group">
                      <textarea required type="text" v-model="mensaje" class="form-control" placeholder="Ingrese Mensaje"></textarea>
