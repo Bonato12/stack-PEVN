@@ -49,7 +49,6 @@ module.exports = {
 
         },
 
-
         getProductoStock(req,res){
             var pool = new pg.Pool(config)
             pool.connect()
@@ -141,7 +140,6 @@ module.exports = {
                      })
                     })
             }
-
         },
 
         updateProductoStock(req,res){
@@ -158,6 +156,5 @@ module.exports = {
                    })
                })
           }
-
 
 }

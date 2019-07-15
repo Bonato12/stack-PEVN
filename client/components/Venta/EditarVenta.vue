@@ -12,36 +12,34 @@
                        Editar Venta
                      </h2>
                   </div>
-                  <hr style="color:black;">
                   <div class="card-body">
-                    <form style="margin-left: 30px; margin-top:30px;">
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">Fecha</span>
-                                <div>
-                                </div>
-                                <datepicker v-model="date" name="fecha"
+                    <form @submit.prevent="editarVenta()" style="margin-left: 30px; margin-top:30px; width:500px;">
+                      <div class="form-group row">
+                        <label for="example-date-input" class="col col-form-label">Fecha</label>
+                        <div class="col-10">
+                          <datepicker :bootstrap-styling="true" v-model="date" :language="es" name="fecha"
                                     @opened="datepickerAbierto"
                                     @selected="fechaSeleccionada"
                                     @closed="datepickerCerrado">
-                                </datepicker>
-                            </div>
+                          </datepicker>
+                        </div>
                       </div>
-                    </form>
-                  </div>
-                  <div>
-                          <div class="d-flex justify-content-end" style="padding-right:50px;">
+                      <br>
+                      <br>
+                      <div>
+                          <div class="d-flex justify-content-end" style="margin:0 auto; width:500px;">
                               <router-link to="/HomeVenta" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
-                              <div style="width:5px;"></div>
-                              <button v-on:click="editarVenta()" class="btn btn-success">
+                              <button  type="submit"  class="btn btn-success">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
                           </div>
                           <br>
+                    </div>
+                    </form>
                   </div>
               </div>
             </div>
@@ -56,6 +54,8 @@ import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAler
 import { alertEditSucessVenta } from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 import moment from 'moment';
+import {en, es} from 'vuejs-datepicker/dist/locale'
+
 
 export default {
   name: 'EditarVenta',
@@ -70,6 +70,8 @@ export default {
       num: '',
       fecha: '',
       date: '',
+      en: en,
+      es: es
 		}
   },
   computed:{
@@ -130,7 +132,7 @@ export default {
 .card{
 height: auto;
 margin-bottom: auto;
-width: 900px;
+width: 700px;
 background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
@@ -155,11 +157,7 @@ border:0;
     box-shadow: none;
 }
 
-.btn-ghost{
-  position:relative;
-  display:inline-block;
-  border: 2pc solid var(--white);
-}
+
 
 .btn{
   margin-left: 2px;
@@ -183,20 +181,11 @@ border:0;
 }
 
 
-.caja{
-   float:left;
-   margin-left:5px;
-   height: 100px;
-
-}
-
 .input-group-text{
 width: auto;
 background-color: #FFD700;
 color: black;
 border: none;
-
-
 }
 
 input{

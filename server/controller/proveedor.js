@@ -90,11 +90,11 @@ module.exports = {
                     pool.connect(function(err, client, done) {
                       client.query("UPDATE proveedor SET dni=($1), nombre=($2), apellido=($3), direccion=($4), telefono=($5), mail=($6), descripcion=($7) WHERE id_proveedor=($8)", [req.body.dni, req.body.nombre, req.body.apellido,req.body.direccion,req.body.telefono,req.body.mail,req.body.descripcion,req.params.id_proveedor])
                         .then(response => {
-                          pool.end()
+                          pool.end();
                           res.sendStatus(200);
                         })
                         .catch(error => {
-                          pool.end()
+                          pool.end();
                           res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
                         })
                       done()

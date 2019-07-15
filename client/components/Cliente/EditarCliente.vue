@@ -109,7 +109,6 @@ export default {
            console.log(response.data);
            this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
          });
-
       },
       editarCliente(){
         this.errors = [];

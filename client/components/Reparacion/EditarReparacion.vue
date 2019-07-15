@@ -7,48 +7,49 @@
               <div class="card animated fadeInDown">
                   <div class="card-header" style="background-color:#FFD700;">
                     <h2 style="text-align:center; color:black;">
-                      <i class="fas fa-cart-plus"></i>
+                      <i class="fas fa-tools"></i>
                       <i class="fas fa-cog"></i>
                        Editar Reparacion
                      </h2>
                   </div>
-                  <hr style="color:black;">
                   <div class="card-body">
-                  <form style="margin-left: 30px; margin-top:30px;">
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Fecha Inicial</span>
-                        </div>
-                        <datepicker  class="datepicker" :language="es"  v-model="dateIni" name="fecha"
-                            @opened="datepickerAbierto"
-                            @selected="fechaSeleccionada"
-                            @closed="datepickerCerrado">
-                        </datepicker>
-                      </div>
-                      <div class="input-group form-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Fecha Final</span>
-                          </div>
-                          <datepicker  class="datepicker"  v-model="dateFin" name="fecha"
-                              @opened="datepickerAbierto"
-                              @selected="fechaSeleccionada"
-                              @closed="datepickerCerrado">
+                    <form @submit.prevent="editarCompra()" style="margin-left: 30px; margin-top:30px; width:500px;">
+                      <div class="form-group row">
+                        <label  class="col">Fecha Inicial</label>
+                        <div class="col-10">
+                          <datepicker :bootstrap-styling="true" v-model="dateIni" :language="es" name="fecha"
+                                    @opened="datepickerAbierto"
+                                    @selected="fechaSeleccionada"
+                                    @closed="datepickerCerrado">
                           </datepicker>
                         </div>
-                    </form>
-                  </div>
-                  <div>
-                          <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeReparacion" tag="button" class="botones"  style="background:white;">
+                      </div>
+                      <div class="form-group row">
+                        <label class="col">Fecha Final</label>
+                        <div class="col-10">
+                          <datepicker :bootstrap-styling="true" v-model="dateFin" :language="es" name="fecha"
+                                    @opened="datepickerAbierto"
+                                    @selected="fechaSeleccionada"
+                                    @closed="datepickerCerrado">
+                          </datepicker>
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+                      <div>
+                          <div class="d-flex justify-content-end" style="margin:0 auto; width:500px;">
+                              <router-link to="/HomeVenta" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
-                              <div style="width:5px;"></div>
-                              <button v-on:click="editarReparacion()" class="botones" style="width:115px; background-color:#fec400;">
+                              <button  type="submit"  class="btn btn-success">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
                           </div>
+                          <br>
+                    </div>
+                    </form>
                   </div>
               </div>
             </div>
@@ -134,22 +135,15 @@ export default {
 
 <style scoped>
 
-
 .card{
 height: auto;
 margin-bottom: auto;
-width: 900px;
-background-color: #696969;
+width: 700px;
+background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }
 
-
-
-.compra_btn:hover{
-color: black;
-background-color: white;
-}
 
 .input-group-prepend span{
 padding: 5px;
@@ -174,28 +168,27 @@ border:0;
   position:relative;
   display:inline-block;
   border: 2pc solid var(--white);
-
-
 }
 
-.botones{
+.btn{
+  margin-left: 2px;
   cursor:pointer;
   display:inline-block;
-  width:100px;
-  height:50px;
+  float:right;
+  width:120px;
+  height:40px;
   margin-top:-10px;
   border:none;
-  color:black;
+  /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
-  border-radius: 10px;
+  border-radius: 5px;
+  color: black !important;
 }
 
-.caja{
-   float:left;
-   margin-left:5px;
-   height: 100px;
-
+.btn:hover{
+     background-color: white  !important;
+     color: black;
 }
 
 .input-group-text{

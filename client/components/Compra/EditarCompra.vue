@@ -14,32 +14,33 @@
                   </div>
                   <hr style="color:black;">
                   <div class="card-body">
-                  <form style="margin-left: 30px; margin-top:30px;">
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Fecha Compra</span>
+                    <form @submit.prevent="editarCompra()" style="margin-left: 30px; margin-top:30px; width:500px;">
+                      <div class="form-group row">
+                        <label for="example-date-input" class="col col-form-label">Fecha</label>
+                        <div class="col-10">
+                          <datepicker :bootstrap-styling="true" v-model="date" :language="es" name="fecha"
+                                    @opened="datepickerAbierto"
+                                    @selected="fechaSeleccionada"
+                                    @closed="datepickerCerrado">
+                          </datepicker>
                         </div>
-                        <datepicker  class="datepicker"  v-model="date" name="fecha"
-                            @opened="datepickerAbierto"
-                            @selected="fechaSeleccionada"
-                            @closed="datepickerCerrado">
-                        </datepicker>
                       </div>
-                    </form>
-                  </div>
-                  <div>
-                          <div class="d-flex justify-content-end" style="padding-right:50px;">
-                              <router-link to="/HomeCompra" tag="button" class="btn btn-info">
+                      <br>
+                      <br>
+                      <div>
+                          <div class="d-flex justify-content-end" style="margin:0 auto; width:500px;">
+                              <router-link to="/HomeVenta" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
-                              <div style="width:5px;"></div>
-                              <button v-on:click="editarCompra()" class="btn btn-success">
+                              <button  type="submit"  class="btn btn-success">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
                           </div>
                           <br>
+                    </div>
+                    </form>
                   </div>
               </div>
             </div>
@@ -117,16 +118,14 @@ export default {
 
 <style scoped>
 
-
 .card{
 height: auto;
 margin-bottom: auto;
-width: 900px;
+width: 700px;
 background-color: rgb(70,90,101);
 border: 1px solid;
 border-radius: 5px;
 }
-
 
 .input-group-prepend span{
 padding: 5px;
@@ -145,12 +144,6 @@ border:0;
 .form-control {
     border: 0;
     box-shadow: none;
-}
-
-.btn-ghost{
-  position:relative;
-  display:inline-block;
-  border: 2pc solid var(--white);
 }
 
 .btn{
@@ -172,13 +165,6 @@ border:0;
 .btn:hover{
      background-color: white  !important;
      color: black;
-}
-
-.caja{
-   float:left;
-   margin-left:5px;
-   height: 100px;
-
 }
 
 .input-group-text{
