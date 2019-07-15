@@ -33,6 +33,17 @@
                     allLabel: 'All',
                     }"
                 theme="default">
+                <template slot="table-row" slot-scope="props">
+                  <span v-if="props.column.field == 'stock'">
+                    <div v-if="props.row.stock == 0 ">
+                      <span class="waitingForConnection" style="color:red;">Sin Stock {{props.row.stock}}</span>
+                    </div>
+                    <div v-else>
+                      <span  v-if="">{{props.row.stock}}</span>
+                    </div>
+                  </span>
+
+                </template>
       </vue-good-table>
     </div>
     <transition v-if="showModal" class="animation fadeInLeft" name="modal">
@@ -388,4 +399,10 @@ li {
 .opciones{
   text-align:left !important;
 }
+
+@-webkit-keyframes blinker { from { opacity: 1.0; } to { opacity: 0.0; } }
+
+.waitingForConnection { -webkit-animation-name: blinker; -webkit-animation-iteration-count: infinite; -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1); -webkit-animation-duration: 1.1s; }
+
+
 </style>
