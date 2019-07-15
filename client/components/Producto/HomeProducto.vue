@@ -36,7 +36,7 @@
                 <template slot="table-row" slot-scope="props">
                   <span v-if="props.column.field == 'stock'">
                     <div v-if="props.row.stock == 0 ">
-                      <span class="waitingForConnection" style="color:red;">Sin Stock {{props.row.stock}}</span>
+                      <span class="waitingForConnection" style="color:red;">Sin Stock</span>
                     </div>
                     <div v-else>
                       <span  v-if="">{{props.row.stock}}</span>
