@@ -93,6 +93,7 @@
                                 <table class="table" style="background-color:white;">
                                   <thead>
                                     <tr>
+                                      <th scope="col">#</th>
                                       <th scope="col">Modelo</th>
                                       <th scope="col">Cantidad</th>
                                       <th scope="col">Precio Unitario</th>
@@ -101,8 +102,9 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr v-for="item in this.Lista">
-                                      <th class="centered">{{item.producto.modelo}}</th>
+                                    <tr v-for="(item,key) in this.Lista">
+                                      <td>{{ key + 1 }}</td>
+                                      <td class="centered">{{item.producto.modelo}}</td>
                                       <td>{{item.cantidad}}</td>
                                       <td>{{item.precioUnitario}}</td>
                                       <td>{{item.precioTotal}}</td>
@@ -112,9 +114,10 @@
                                           </button>
                                       </td>
                                     </tr>
+                                    <tr>
+                                    </tr>
                                   </tbody>
                                 </table>
-                                <br>
                                 <div v-if="this.precioTotal" style="text-align:right; color:white;">
                                   <h3>
                                     <i class="fas fa-coins"></i>
@@ -193,6 +196,7 @@ export default {
       });
     },
     guardarLista(){
+
             //Funcion Que Guarda Los Productos Seleccionados a comprar en una Lista Dinamica
             if(this.productoSelected && this.precioUnitario && this.precioTotalP > 0 && this.num > 0){
                 this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precioTotalP);
@@ -211,7 +215,7 @@ export default {
                 this.num = '';
                 this.precioTotalP = '';
                 this.compraProducto = new CompraProducto();
-
+                console.log(this.Lista);
             }else {
               alert("Completar los Campos");
             }
@@ -390,6 +394,10 @@ input{
 .table{
   /*border-radius: 5px !important;*/
   background-color:white;
+}
+
+.table td,th {
+   text-align: center;
 }
 
 </style>

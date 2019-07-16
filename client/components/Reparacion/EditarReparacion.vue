@@ -13,7 +13,7 @@
                      </h2>
                   </div>
                   <div class="card-body">
-                    <form @submit.prevent="editarCompra()" style="margin-left: 30px; margin-top:30px; width:500px;">
+                    <form @submit.prevent="editarReparacion()" style="margin-left: 30px; margin-top:30px; width:500px;">
                       <div class="form-group row">
                         <label  class="col">Fecha Inicial</label>
                         <div class="col-10">

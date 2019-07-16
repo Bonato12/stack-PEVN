@@ -69,6 +69,7 @@
                                 <table class="table" style="background-color:white;   border-radius: 5px;">
                                   <thead style="background-color:white;   border-radius: 5px;">
                                     <tr>
+                                      <th scope="col">#</th>
                                       <th scope="col">Modelo</th>
                                       <th scope="col">Cantidad</th>
                                       <th scope="col">Precio</th>
@@ -76,8 +77,9 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr v-for="item in this.Lista">
-                                      <th class="centered">{{item.producto.modelo}}</th>
+                                    <tr v-for="(item,key) in this.Lista">
+                                      <td>{{key + 1}}</td>
+                                      <td>{{item.producto.modelo}}</td>
                                       <td>{{item.cantidad}}</td>
                                       <td>{{item.precio}}</td>
                                       <td>
@@ -382,4 +384,9 @@ border: none;
 input{
   background-color: white;
 }
+
+.table td,th {
+   text-align: center;
+}
+
 </style>
