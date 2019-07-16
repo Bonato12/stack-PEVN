@@ -103,6 +103,7 @@ export default {
     control(){
       let usuario = firebase.auth().currentUser;
       if (usuario != null){
+          console.log(usuario);
           this.autenticado = true;
           this.$router.push('/Home');
           this.user = usuario.email;

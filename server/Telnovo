@@ -2,8 +2,18 @@ CREATE TABLE usuario(
 	id_usuario SERIAL NOT NULL,
 	mail VARCHAR(30) NOT NULL,
 	contraseña VARCHAR(30) NOT NULL,
-	CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario)
+	rol INTEGER NOT NULL,
+	CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario),
+	CONSTRAINT fk_id_rol FOREIGN KEY(rol) REFERENCES rol(id_rol)
 );
+
+CREATE TABLE rol(
+	id_rol SERIAL NOT NULL,
+	perfil VARCHAR(30) NOT NULL,
+	CONSTRAINT pk_id_rol PRIMARY KEY (id_rol),
+)
+
+SELECT * FROM usuario;
 
 
 CREATE TABLE cliente(

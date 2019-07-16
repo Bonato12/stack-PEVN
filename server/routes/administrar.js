@@ -4,7 +4,7 @@ var app = express();
 var nodemailer = require('nodemailer');
 const adminController = require('../controller/admin');
 
-
+router.get('/usuario', adminController.getUsuario);
 router.post('/usuario',adminController.postUsuario);
 
 

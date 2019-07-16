@@ -30,6 +30,8 @@ import firebase from 'firebase'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 Vue.use(firebase);
+import axios from 'axios'
+
 
 
 const rutas = new VueRouter({
@@ -37,6 +39,7 @@ const rutas = new VueRouter({
             routes: [
             {
               path:'/Home',
+              name: 'Home',
               component:Home,
             },
             {
@@ -160,22 +163,31 @@ const rutas = new VueRouter({
          ]
 })
 
-//rutas protegidas
-rutas.beforeEach((to, from, next) => {
-        let usuario = firebase.auth().currentUser;
-        let autorizacion = to.matched.some(record => record.meta.autenticado);
-        if(to.path != '/Login' && to.path != '/Registrar' && to.path != '*')  {
-            if (autorizacion && !usuario){
-                next(false);
-            }else if(!autorizacion && usuario){
-                next();
-            }
-        }else{
-          next();
-        }
 
-})
+axios.get('http://localhost:3000/usuario').then((response) =>{
+  var mail = response.data[0].mail;
+  var perfil = response.data[0].perfil;
+  //console.log(response.data[0]);
+  rutas.beforeEach((to, from, next) => {
+          let usuario = firebase.auth().currentUser;
+          console.log(usuario);
+          let autorizacion = to.matched.some(record => record.meta.autenticado);
+          if(to.path != '/Login' && to.path != '/Registrar' && to.path != '*'){
+                    if (autorizacion && !usuario){
+                        next(false);
+                    }else if(!autorizacion && usuario){
+                        if (perfil == 'ADMINISTRADOR'){
+                              next();
+                        }else {
+                          if (to.path == '/Login' || to.path == '/Home' )
+                              next();
+                        }
+                    }
+          }else{
+              next();
+          }
 
-
+  })
+});
 
 export default rutas;
