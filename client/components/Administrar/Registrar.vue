@@ -69,7 +69,8 @@ export default {
     return {
       usuario: '',
       password: '',
-      password1: ''
+      password1: '',
+      uuid: ''
 
 		}
   },
@@ -81,9 +82,19 @@ export default {
           if (this.password ==  this.password1){
               firebase.auth().createUserWithEmailAndPassword(this.usuario,this.password).
               then((response)=>{
-                    console.log(response);
-                    alert("Exitoso Registro");
+                  //  console.log(response);
+                    //alert("Exitoso Registro");
                     this.$router.replace('/Login');
+                    console.log("Hola");
+                    //console.log(response);
+                    console.log(response.user.uid)
+                    this.uuid == response.user.uid
+                    axios.post('http://localhost:3000/usuario',
+                    {
+                    usuario: this.usuario,
+                    contraseña: this.password,
+                    uuid: response.user.uid
+                    })
               })
               .catch((error)=> {
               console.log(error);
@@ -92,12 +103,9 @@ export default {
                   title: 'Error',
                   text: error,
                 });
-              });
-              axios.post('http://localhost:3000/usuario',
-              {
-              usuario: this.usuario,
-              contraseña: this.password
               })
+
+
           }else {
             this.$swal.fire({
                 type: 'error',

@@ -1,5 +1,6 @@
 CREATE TABLE usuario(
 	id_usuario SERIAL NOT NULL,
+	uuid VARCHAR(100) NOT NULL UNIQUE,
 	mail VARCHAR(30) NOT NULL,
 	contraseña VARCHAR(30) NOT NULL,
 	rol INTEGER NOT NULL,
@@ -7,11 +8,20 @@ CREATE TABLE usuario(
 	CONSTRAINT fk_id_rol FOREIGN KEY(rol) REFERENCES rol(id_rol)
 );
 
+SELECT US.id_usuario, US.mail, RO.perfil FROM usuario US, rol RO WHERE US.rol = RO.id_rol
+
+SELECT * FROM usuario;
+
 CREATE TABLE rol(
 	id_rol SERIAL NOT NULL,
 	perfil VARCHAR(30) NOT NULL,
-	CONSTRAINT pk_id_rol PRIMARY KEY (id_rol),
-)
+	CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
+);
+
+
+INSERT INTO rol VALUES(DEFAULT,'INVITADO');
+
+SELECT * FROM rol
 
 SELECT * FROM usuario;
 

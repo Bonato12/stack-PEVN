@@ -24,7 +24,8 @@ import Registrar from './components/Administrar/Registrar.vue'
 import NotFound from './components/Administrar/error404.vue'
 import HomeReparacion from './components/Reparacion/HomeReparacion.vue'
 import EditarReparacion from './components/Reparacion/EditarReparacion.vue'
-
+import HomeUsuario from './components/Usuario/HomeUsuario.vue'
+import EditarUsuario from './components/Usuario/EditarUsuario.vue'
 import Vue from 'vue'
 import firebase from 'firebase'
 import VueRouter from 'vue-router'
@@ -47,8 +48,18 @@ const rutas = new VueRouter({
               component:Registrar,
             },
             {
+              path:'/HomeUsuario',
+              name:'HomeUsuario',
+              component: HomeUsuario,
+            },
+            {
+              path:'/EditarUsuario',
+              name:'EditarUsuario',
+              component: EditarUsuario
+            },
+            {
               path:'/HomeCliente',
-              name:'/HomeCliente',
+              name:'HomeCliente',
               component: HomeCliente,
             },
             {
