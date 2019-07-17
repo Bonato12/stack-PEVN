@@ -17,7 +17,7 @@ module.exports = {
   getUsuario(req,res){
      var pool = new pg.Pool(config)
      pool.connect(function(err, client, done) {
-       client.query("SELECT US.id_usuario, US.mail, RO.perfil FROM usuario US, rol RO WHERE US.rol = RO.id_rol")
+       client.query("SELECT US.id_usuario,US.uuid, US.mail, RO.perfil FROM usuario US, rol RO WHERE US.rol = RO.id_rol")
          .then(response => {
            pool.end()
            res.json(response.rows)
