@@ -36,6 +36,13 @@
                 allLabel: 'All',
             }"
             theme="default">
+            <template slot="table-row" slot-scope="props">
+              <span v-if="props.column.field == 'opciones'">
+                <button @click="editarUsuario(props.row)" class="btn btn-warning" title="Editar Cliente">
+                      <i class="fas fa-edit"></i>
+                </button>
+              </span>
+            </template>
      </vue-good-table>
        </div>
     </div>
@@ -49,6 +56,9 @@ import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete,alertError,alertWarningFK,alertSucessMail } from '../../assets/sweetAlert.js';
+import firebase from 'firebase'
+//import * as admin from "firebase-admin";
+
 
 export default {
   created(){
@@ -69,12 +79,8 @@ export default {
           field: 'mail',
         },
         {
-          label: 'Contraseña',
-          field: 'contraseña',
-        },
-        {
           label: 'Rol',
-          field: 'rol',
+          field: 'perfil',
 
         },
         {
@@ -90,6 +96,9 @@ export default {
           this.datos = response.data;
           console.log(this.datos);
         });
+    },
+    editarUsuario(usuario){
+
     }
   }
 }
