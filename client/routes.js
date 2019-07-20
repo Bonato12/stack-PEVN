@@ -65,7 +65,10 @@ const rutas = new VueRouter({
             {
               path:'/NuevoCliente',
               name:'NuevoCliente',
-              component: NuevoCliente
+              components: {
+                default: NuevoProveedor,
+                b: NuevoCliente,
+              }
             },
             {
               path:'/EditarCliente/:id',

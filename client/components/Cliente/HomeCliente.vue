@@ -189,6 +189,8 @@
          </div>
        </div>
     </div>
+    <router-view class="view three" name="b"></router-view>
+
   </div>
 </template>
 
