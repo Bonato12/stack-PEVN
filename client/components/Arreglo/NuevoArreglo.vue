@@ -22,7 +22,7 @@
                           <br>
                       </ul>
                     </p>
-                    <form style="margin: 0 auto; margin-top:20px; width: 780px;">
+                    <form @submit.prevent="nuevoArreglo()" style="margin: 0 auto; margin-top:20px; width: 780px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Cliente</span>
@@ -56,7 +56,7 @@
                                         Volver
                                 </router-link>
                                 <div style="width:3px;"></div>
-                                <button v-on:click="nuevoArreglo()" class="btn btn-success" title="Guardar Arreglo">
+                                <button type="submit" class="btn btn-success" title="Guardar Arreglo">
                                   <i class="far fa-save fa-1x"></i>
                                         Guardar
                                 </button>
