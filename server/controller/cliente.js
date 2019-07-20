@@ -2,18 +2,12 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
+var config = require('../database');
 const {check, validationResult} = require('express-validator');
 
 
-config= {
-  user: 'postgres',
-  host: '127.0.0.1',
-  database: 'Telnovo',
-  password: '1234',
-  port: 5432,
-}
 
-  module.exports = {
+module.exports = {
 
           getCliente(req,res){
              var pool = new pg.Pool(config)

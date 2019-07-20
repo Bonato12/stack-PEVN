@@ -3,17 +3,8 @@ var router = express.Router();
 var app = express();
 const {check, validationResult} = require('express-validator');
 var pg = require('pg');
-var id;
+var config = require('../database');
 
-
-
-config= {
-  user: 'postgres',
-  host: '127.0.0.1',
-  database: 'Telnovo',
-  password: '1234',
-  port: 5432,
-}
 
 module.exports = {
           getArreglo(req,res){

@@ -2,26 +2,24 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 var pg = require('pg');
-
-config= {
-  user: 'postgres',
-  host: '127.0.0.1',
-  database: 'Telnovo',
-  password: '1234',
-  port: 5432,
-}
+var config = require('../database');
 
 
-  module.exports = {
-
+module.exports = {
           getCompraProducto(req,res){
-              db.query("SELECT * FROM compraProducto").then(response=> {
-                console.log(response.rows)
-                //Muestra los resultados en forma de JSON en nuestro HTML
-                res.json(response.rows);
-              }).catch(error =>{
-                console.log(error);
-              })
+            var pool = new pg.Pool(config)
+            pool.connect(function(err, client, done) {
+              client.query("SELECT * FROM compraProducto")
+                .then(response => {
+                  pool.end()
+                  res.json(response.rows)
+                })
+                .catch(error => {
+                  pool.end()
+                  console.log(error.stack)
+                })
+              done()
+            })
           },
           getIdCompraProducto(req,res){
               var pool = new pg.Pool(config);
@@ -38,8 +36,5 @@ config= {
                 done()
               })
 
-            },
-
-
-
-       }
+            }
+  }

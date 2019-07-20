@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const Pool = require('pg').Pool
-
 
 config= {
   user: 'postgres',
@@ -11,10 +9,5 @@ config= {
   port: 5432,
 }
 
-const db = new Pool(config);
 
-
-
-
-
-module.exports = db;
+module.exports = config ;
