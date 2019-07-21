@@ -200,12 +200,17 @@ export default {
           label: 'Stock',
           field: 'stock',
           type: 'number',
-          width: '100px'
+          width: '100px',
+          tdClass: 'text-left',
+          thClass: 'text-left',
         },
         {
           label: 'Precio',
           field: 'precio',
           type: 'number',
+          tdClass: 'text-left',
+          thClass: 'text-left',
+          width: '130px',
         },
         {
           label: 'Opciones',

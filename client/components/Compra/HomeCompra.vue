@@ -22,7 +22,6 @@
                 skipDiacritics: true,
                 placeholder: 'Buscar Producto',
               }"
-              @on-row-click="onRowClick"
               :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -273,9 +272,6 @@ export default {
     hideModal(){
       this.showModal = false;
     }
-
-
-
 }
 }
 </script>
