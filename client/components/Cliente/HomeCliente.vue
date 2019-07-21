@@ -371,7 +371,6 @@ export default {
 <style scoped>
 
 html,body{
-background-image: url('../Administrar/background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -380,12 +379,7 @@ background-color: #063A5E;
 background-blend-mode: multiply;
 }
 
-.image{
-  background-image: url('../Administrar/background.jpg');
-  background-color: #063A5E;
-  background-blend-mode: luminosity;
 
-}
 
 #app {
   -webkit-font-smoothing: antialiased;

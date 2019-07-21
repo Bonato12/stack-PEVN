@@ -52,8 +52,8 @@
       		</div>
       	</div>
 </div>
-  </br>
-  </div>
+</br>
+</div>
 </template>
 
 <script>
@@ -151,7 +151,7 @@ margin-top: 30px;
 margin-bottom: auto;
 width: 400px;
 /*background-color: rgb(70,90,101);*/
-background-image: url('./background1.png');
+background-image: url('../../assets/background.png');
 }
 
 .social_icon span{

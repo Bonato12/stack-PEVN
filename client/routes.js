@@ -20,11 +20,11 @@ import EditarCompra from './components/Compra/EditarCompra.vue'
 import HomePresupuesto from './components/Presupuesto/HomePresupuesto.vue'
 import NuevoPresupuesto from './components/Presupuesto/NuevoPresupuesto.vue'
 import VerPresupuesto from './components/Presupuesto/VerPresupuesto.vue'
-import Registrar from './components/Administrar/Registrar.vue'
 import NotFound from './components/Administrar/error404.vue'
 import HomeReparacion from './components/Reparacion/HomeReparacion.vue'
 import EditarReparacion from './components/Reparacion/EditarReparacion.vue'
 import HomeUsuario from './components/Usuario/HomeUsuario.vue'
+import NuevoUsuario from './components/Usuario/NuevoUsuario.vue'
 import EditarUsuario from './components/Usuario/EditarUsuario.vue'
 import Vue from 'vue'
 import firebase from 'firebase'
@@ -44,13 +44,14 @@ const rutas = new VueRouter({
               component:Home,
             },
             {
-              path:'/Registrar',
-              component:Registrar,
-            },
-            {
               path:'/HomeUsuario',
               name:'HomeUsuario',
               component: HomeUsuario,
+            },
+            {
+              path:'/NuevoUsuario',
+              name:'NuevoUsuario',
+              component: NuevoUsuario,
             },
             {
               path:'/EditarUsuario',

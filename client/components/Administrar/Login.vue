@@ -41,7 +41,7 @@
             				</div>
                     <div class="d-flex justify-content-center links">
                         <div style="color:white;"> No estas Registrado?</div>
-                        <router-link  to="Registrar" tag="a" style="color: #FFC312;"><i style="margin-left:10px;"></i>Registrar</router-link>
+                        <router-link  to="/NuevoUsuario" tag="a" style="color: #FFC312;"><i style="margin-left:10px;"></i>Registrar</router-link>
                     </div>
         			</div>
       		</div>
@@ -140,7 +140,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Numans');
 body{
-  background-image: url('./background1.png');
+  background-image: url('../../assets/background.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
@@ -157,8 +157,7 @@ height: auto;
 margin-top: 30px;
 margin-bottom: auto;
 width: 450px;
-/*background-color: rgb(70,90,101);*/
-background-image: url('./background1.png');
+background-color: black;
 border-radius: 5px;
 }
 .card-header h3{

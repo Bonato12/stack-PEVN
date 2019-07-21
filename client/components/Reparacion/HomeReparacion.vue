@@ -20,7 +20,6 @@
                 skipDiacritics: true,
                 placeholder: 'Buscar Reparacion',
               }"
-              @on-row-click="detalleReparacion"
               :pagination-options="{
                   enabled: true,
                   mode: 'records',
@@ -37,6 +36,14 @@
                 }"
 
                 theme="default">
+                <template slot="table-row" slot-scope="props" >
+                  <span v-if="props.column.field == 'opciones'">
+                    <button @click="verMas(props.row)" class="btn btn-info" style="width:150px;"  title="Ver Mas" >
+                        <i class="fas fa-clipboard-list"></i>
+                        Ver Mas
+                    </button>
+                  </span>
+                </template>
          </vue-good-table>
        </div>
        <transition v-if="showModal" class="animation fadeInLeft" name="modal">
@@ -156,6 +163,11 @@
           label: 'Presupuesto',
           field: 'id_presupuesto',
         },
+        {
+          label: 'Opciones',
+          field: 'opciones',
+          width: '150px',
+        }
       ],
 		}
   },
@@ -166,10 +178,10 @@
           console.log(this.reparacion);
         });
     },
-    detalleReparacion(params) {
+    verMas(reparacion) {
         this.showModal = true;
-        console.log(params);
-          this.reparacion.id_reparacion = params.row.id_reparacion;
+        console.log(reparacion);
+        this.reparacion.id_reparacion = reparacion.id_reparacion;
     },
     hideModal(){
       this.showModal = false;

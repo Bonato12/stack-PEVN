@@ -5,6 +5,7 @@ Node.js y Express.js Para Backend.
 PostgreSQL Para la Base de Datos Relacional.
 Firebase Para la Autentificaciones.
 
+<!--
 Capturas de Pantalla
 
 Login
@@ -21,9 +22,7 @@ Alert
 
 Detalles
 ![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/detalles.png)
-
-
-
+-->
 
 ## Build Setup
 
@@ -31,9 +30,10 @@ Detalles
 
 
 
-# install dependencies
-
+#install dependencies
 npm install
+#create database Telnovo in PostgreSQL and import database query
+../server/Telnovo
 # serve with hot reload at localhost:8080
 npm run dev
 # build for production with minification

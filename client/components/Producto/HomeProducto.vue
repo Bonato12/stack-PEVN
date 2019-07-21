@@ -17,7 +17,7 @@
                 enabled: true,
                 skipDiacritics: true,
                 placeholder: 'Buscar Producto',
-              }" @on-row-click="detalleProducto"
+                }"
                   :pagination-options="{
                     enabled: true,
                     mode: 'records',
@@ -42,7 +42,14 @@
                       <span>{{props.row.stock}}</span>
                     </div>
                   </span>
-
+                </template>
+                <template slot="table-row" slot-scope="props" >
+                  <span v-if="props.column.field == 'opciones'">
+                    <button @click="verMas(props.row)" class="btn btn-info" style="width:150px;"  title="Ver Mas" >
+                        <i class="fas fa-clipboard-list"></i>
+                        Ver Mas
+                    </button>
+                  </span>
                 </template>
       </vue-good-table>
     </div>
@@ -175,13 +182,11 @@ export default {
           label: 'Marca',
           field: 'marca',
         },
-        {
-          label: 'Descripcion',
-          field: 'descripcion',
-        },
+
         {
           label: 'TipoProducto',
           field: 'tipoproducto',
+          width: '150px'
           /*
           filterOptions: {
             enabled: true, // enable filter for this column
@@ -195,12 +200,18 @@ export default {
           label: 'Stock',
           field: 'stock',
           type: 'number',
+          width: '100px'
         },
         {
           label: 'Precio',
           field: 'precio',
           type: 'number',
         },
+        {
+          label: 'Opciones',
+          field: 'opciones',
+          width: '150px',
+        }
       ],
     }
   },
@@ -248,16 +259,16 @@ export default {
               }
               })
     },
-    detalleProducto(params) {
+    verMas(producto) {
         this.showModal = true;
-        console.log(params);
-        this.producto.id_producto = params.row.id_producto;
-        this.producto.modelo = params.row.modelo;
-        this.producto.marca = params.row.marca;
-        this.producto.descripcion = params.row.descripcion;
-        this.producto.tipoproducto = params.row.tipoproducto;
-        this.producto.stock = params.row.stock;
-        this.producto.precio = params.row.precio;
+        console.log(producto);
+        this.producto.id_producto = producto.id_producto;
+        this.producto.modelo = producto.modelo;
+        this.producto.marca = producto.marca;
+        this.producto.descripcion = producto.descripcion;
+        this.producto.tipoproducto = producto.tipoproducto;
+        this.producto.stock = producto.stock;
+        this.producto.precio = producto.precio;
 
     },
     exportarPdf() {
