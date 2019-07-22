@@ -33,10 +33,9 @@
                                 </v-select>
                             </div>
                             <div class="input-group form-group">
-                                <div class="input-group-prepend">
+                                <div class="input-group-prepend" style="border-right: 5px solid white">
                                     <span class="input-group-text">Producto</span>
                                 </div>
-
                                 <model-list-select class="form-control" :list="producto"
                                                    v-model="productoSelected"
                                                    option-value="id_producto"
@@ -168,8 +167,6 @@ export default {
       num: 0,
       id_venta: '',
       errors: [],
-      precioUnitario: '',
-      productoViejo: ''
       }
 
   },
@@ -402,6 +399,8 @@ input{
     min-width: 0 !important;
     width: 25px !important;
     border: none !important;
+    margin-left: -3px !important;
+    border-left: -3px solid !important;
 }
 
 </style>
