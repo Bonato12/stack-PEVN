@@ -12,18 +12,15 @@ import 'vue-good-table/dist/vue-good-table.css'
 import {store} from './store.js';
 import Datepicker from 'vuejs-datepicker';
 import { firebase } from './firebase.js'
+
 Vue.use(VueGoodTablePlugin);
 Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue);
 Vue.component('v-select', vSelect);
 Vue.component('datepicker', Datepicker)
-
-
-  Vue.component('modal', {
+Vue.component('modal', {
     template: '#modal-template'
-  })
-
-
+})
 
 firebase.auth().onAuthStateChanged((user)=>{
   new Vue({

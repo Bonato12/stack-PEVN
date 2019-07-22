@@ -43,6 +43,7 @@
     "vue-json-to-excel": "0.0.8",
     "vue-material": "^1.0.0-beta-11",
     "vue-router": "^3.0.6",
+    "vue-search-select": "^2.8.3",
     "vue-select": "^2.6.4",
     "vue-spinner": "^1.0.3",
     "vue-sweetalert2": "^1.6.4",

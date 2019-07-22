@@ -15,7 +15,7 @@
                   <div class="card-body">
                     <p v-if="errors.length">
                       <ul  class="list-group" v-for="error in errors">
-                          <li class="alert alert-danger" style="width:780px; margin:0 auto;" role="alert">
+                          <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
                             {{ error }}
                           </li>
                           <br>
@@ -36,11 +36,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Producto</span>
                                 </div>
-                                <v-select  class="form-control" @change="onChange($event)"  :options="producto" label="modelo"  v-model="productoSelected">
-                                  <template class="form-control" slot="option" slot-scope="option">
-                                    {{ option.marca }} {{ option.modelo }} {{ option.precio }}
-                                  </template>
-                                </v-select>
+
+                                <model-list-select class="form-control" :list="producto"
+                                                   v-model="productoSelected"
+                                                   option-value="id_producto"
+                                                   :custom-text="codeAndNameAndDesc"
+                                                   placeholder="Seleccionar un Producto"
+                                                   @change="onChangePrecioUnitario()">
+                                </model-list-select>
                             </div>
                             <div class="row">
                                 <div class="col">
@@ -136,6 +139,10 @@
 </template>
 <script>
 import axios from 'axios'
+import { ModelSelect } from 'vue-search-select'
+import { ModelListSelect } from 'vue-search-select'
+
+
 import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
@@ -156,18 +163,28 @@ export default {
       producto: [],
       precio: '',
       precioTotal: 0,
-      productoSelected: '',
+      productoSelected: {},
       clienteSelected: '',
       num: 0,
       id_venta: '',
-      errors: []
-		}
+      errors: [],
+      precioUnitario: '',
+      productoViejo: ''
+      }
+
   },
   computed:{
+
+
+
+
   },
   mounted(){
   },
   methods: {
+      codeAndNameAndDesc (item) {
+      return `${item.modelo} - ${item.marca} - ${item.precio}`
+      },
       getCliente(){
         axios.get('http://localhost:3000/cliente').then((response) =>{
           this.cliente = response.data;
@@ -177,7 +194,7 @@ export default {
         axios.get('http://localhost:3000/productoStock').then(response=>{
           this.producto = response.data;
         });
-},
+      },
       guardarLista(){
               console.log(JSON.stringify(this.productoSelected));
               //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
@@ -193,7 +210,7 @@ export default {
                     this.producto[index].stock = this.producto[index].stock - this.num;
                   }
                   //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
-                  this.productoSelected = '';
+                  this.productoSelected = {};
                   this.num = '';
                   this.precio = '';
                   this.ventaProducto = new VentaProducto();
@@ -235,17 +252,7 @@ export default {
             this.Lista.splice(index, 1);
         }
       },
-      onChange(event) {
-             var actual = JSON.stringify(event);
-             var viejo = JSON.stringify(this.productoSelected);
-             if (viejo){
-               if (actual == viejo){
-                 this.num = 0;
-                 this.precio = '';
-               }
-             }
-         },
-         nuevaVenta(){
+      nuevaVenta(){
               //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
               //Vamos a Vender no es Vacia
               this.errors = [];
@@ -309,6 +316,19 @@ export default {
                 })
 
           },
+      },
+      components: {
+      ModelSelect,
+      ModelListSelect
+    },
+    watch: {
+        productoSelected:{
+          handler () {
+            this.num = 0;
+            this.precio = '';
+          },
+          deep: true
+        }
       }
 }
 </script>
@@ -339,11 +359,6 @@ border:0 !important;
     background-color: white;
 }
 
-.caja {
-float:left;
-width:500px;
-}
-
 .btns{
   margin-left: 2px;
   cursor:pointer;
@@ -353,7 +368,6 @@ width:500px;
   height:40px;
   margin-top:-10px;
   border:none;
-  /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
@@ -384,5 +398,10 @@ input{
    text-align: center;
 }
 
+.search{
+    min-width: 0 !important;
+    width: 25px !important;
+    border: none !important;
+}
 
 </style>
