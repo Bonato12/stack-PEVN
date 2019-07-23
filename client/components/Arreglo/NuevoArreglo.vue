@@ -101,10 +101,10 @@ export default {
   },
   methods: {
       codeAndNameAndDesc (item) {
-        return `${item.modelo} - ${item.marca} - ${item.precio}`
+        return `${item.modelo} ${item.marca} ${item.precio}`
       },
       textCliente(item){
-        return `${item.dni} - ${item.nombre} - ${item.apellido}`
+        return `${item.dni} ${item.nombre} ${item.apellido}`
       },
       getCliente(){
         axios.get('http://localhost:3000/cliente').then((response) =>{

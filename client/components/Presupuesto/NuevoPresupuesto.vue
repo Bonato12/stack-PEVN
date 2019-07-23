@@ -15,14 +15,15 @@
                   <div class="card-body">
                     <form style="margin: 0 auto; width:780px; margin-top:10px;">
                             <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Repuesto</span>
+                                <div class="input-group-prepend" style="border-right: 5px solid white">
+                                    <span class="input-group-text">Producto</span>
                                 </div>
-                                <v-select  class="form-control" @change="onChange($event)"  :options="producto" label="modelo"  v-model="repuestoSelected">
-                                  <template class="form-control" slot="option" slot-scope="option">
-                                    {{ option.marca }} {{ option.modelo }} {{ option.precio }}
-                                  </template>
-                                </v-select>
+                                <model-list-select class="form-control" :list="producto"
+                                                   v-model="repuestoSelected"
+                                                   option-value="id_producto"
+                                                   :custom-text="codeAndNameAndDesc"
+                                                   >
+                                </model-list-select>
                             </div>
                             <div class="row">
                               <div class="col">
@@ -55,7 +56,7 @@
                                   Añadir
                                 </button>
                             </div>
-                    </form>
+                    </form @submit.prevent="nuevoPresupuesto()">
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:780px; border-radius: 5px;">
                                 <br>
                                 <div>
@@ -133,7 +134,7 @@
                                           Volver
                                   </router-link>
                                   <div style="width:3px;"></div>
-                                  <button v-on:click="nuevoPresupuesto()" class="btn btn-success" title="Guardar Nuevo Repuesto">
+                                  <button type="button" class="btn btn-success" title="Guardar Nuevo Repuesto">
                                     <i class="far fa-save fa-1x"></i>
                                           Guardar
                                   </button>
@@ -148,6 +149,8 @@
 </template>
 <script>
 import axios from 'axios'
+import { ModelSelect } from 'vue-search-select'
+import { ModelListSelect } from 'vue-search-select'
 import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessPresupuesto} from '../../assets/sweetAlert.js'
@@ -172,7 +175,7 @@ export default {
       precioManoObra: 0,
       precioRepuesto:0,
       precioTotal: 0,
-      repuestoSelected: '',
+      repuestoSelected: {},
       num: 0,
       id_presupuesto:''
 
@@ -183,6 +186,9 @@ export default {
   mounted(){
   },
   methods: {
+    codeAndNameAndDesc (item) {
+      return `${item.modelo} - ${item.marca} - ${item.precio}`
+    },
     getArreglo(){
       axios.get('http://localhost:3000/arreglo/'+this.ida).then(response=>{
         this.arreglo = response.data[0];
@@ -192,6 +198,7 @@ export default {
     getProducto(){
       axios.get('http://localhost:3000/productoRepuesto').then(response=>{
         this.producto = response.data;
+        console.log(this.producto)
       });
     },
     guardarLista(){
@@ -218,6 +225,7 @@ export default {
             }
     },
     incrementarCantidad(){
+
           console.log(this.repuestoSelected)
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
           if(this.repuestoSelected.precio){
@@ -254,16 +262,7 @@ export default {
           this.Lista.splice(index, 1);
       }
     },
-    onChange(event) {
-           var actual = JSON.stringify(event);
-           var viejo = JSON.stringify(this.repuestoSelected);
-           if (viejo){
-             if (actual == viejo){
-               this.num = 0;
-               this.precio = '';
-             }
-           }
-       },
+
        cambiarPrecioManoObra(){
          this.precioTotal = parseInt(this.precioRepuesto) + parseInt(this.precioManoObra);
        },
@@ -311,7 +310,21 @@ export default {
         });
 
    }
-  }
+ },
+ components: {
+   ModelSelect,
+   ModelListSelect
+ },
+ watch: {
+     repuestoSelected:{
+       handler () {
+         this.num = 0;
+        this.precio = '';
+       },
+       deep: true
+     },
+
+   }
 }
 
 </script>
@@ -343,15 +356,6 @@ border:0 !important;
     background-color: white;
 }
 
-.caja {
-float:left;
-width:500px;
-}
-
-.caja1 {
-float:left;
-width:350px;
-}
 
 btn{
   margin-left: 2px;
@@ -388,5 +392,14 @@ input{
 .table td,th {
    text-align: center;
 }
+
+.search{
+    min-width: 0 !important;
+    width: 25px !important;
+    border: none !important;
+    margin-left: -3px !important;
+    border-left: -3px solid !important;
+}
+
 
 </style>

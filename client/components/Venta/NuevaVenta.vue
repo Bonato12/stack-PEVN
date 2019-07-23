@@ -178,7 +178,7 @@ export default {
   },
   methods: {
       codeAndNameAndDesc (item) {
-      return `${item.modelo} - ${item.marca} - ${item.precio}`
+        return `${item.modelo} - ${item.marca} - ${item.precio}`
       },
       textCliente(item){
         return `${item.dni} - ${item.nombre} - ${item.apellido}`
@@ -217,6 +217,7 @@ export default {
               }
       },
       incrementarCantidad(){
+            console.log(this.productoSelected);
         //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
             if(this.productoSelected.precio){
                 if (this.num ==  this.productoSelected.stock){
