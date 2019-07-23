@@ -24,8 +24,9 @@ module.exports = {
           },
 
           postVenta(req, res){
+                  console.log(req.body)
                   var pool = new pg.Pool(config)
-                  pool.query("INSERT INTO venta(id_cliente,fecha,total) VALUES($1,$2,$3) RETURNING id_venta",[req.body.venta.cliente.id_cliente,req.body.venta.fecha,req.body.venta.total]).then(response=> {
+                  pool.query("INSERT INTO venta(id_cliente,fecha,total) VALUES($1,$2,$3) RETURNING id_venta",[req.body.venta.cliente,req.body.venta.fecha,req.body.venta.total]).then(response=> {
                       pool.end();
                       res.json(response.rows);
                   }).catch((error) =>{

@@ -23,14 +23,15 @@
                     </p>
                     <form  @submit.prevent="guardarLista()" style="margin: 0 auto;  margin-top:20px; width:780px;">
                             <div class="input-group form-group">
-                                <div class="input-group-prepend">
+                                <div class="input-group-prepend" style="border-right: 5px solid white">
                                     <span class="input-group-text">Cliente</span>
                                 </div>
-                                <v-select class="form-control" :options="cliente" label="dni"   v-model="venta.cliente">
-                                  <template slot="option" slot-scope="option">
-                                      {{ option.dni }}-{{ option.nombre }}-{{ option.apellido }}
-                                  </template>
-                                </v-select>
+                                <model-list-select class="form-control" :list="cliente"
+                                                   v-model="venta.cliente"
+                                                   option-value="id_cliente"
+                                                   :custom-text="textCliente"
+                                                   >
+                                </model-list-select>
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend" style="border-right: 5px solid white">
@@ -40,8 +41,7 @@
                                                    v-model="productoSelected"
                                                    option-value="id_producto"
                                                    :custom-text="codeAndNameAndDesc"
-                                                   placeholder="Seleccionar un Producto"
-                                                   @change="onChangePrecioUnitario()">
+                                                   >
                                 </model-list-select>
                             </div>
                             <div class="row">
@@ -140,8 +140,6 @@
 import axios from 'axios'
 import { ModelSelect } from 'vue-search-select'
 import { ModelListSelect } from 'vue-search-select'
-
-
 import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
@@ -181,6 +179,9 @@ export default {
   methods: {
       codeAndNameAndDesc (item) {
       return `${item.modelo} - ${item.marca} - ${item.precio}`
+      },
+      textCliente(item){
+        return `${item.dni} - ${item.nombre} - ${item.apellido}`
       },
       getCliente(){
         axios.get('http://localhost:3000/cliente').then((response) =>{
