@@ -24,24 +24,26 @@
                     </p>
                     <form @submit.prevent="nuevoArreglo()" style="margin: 0 auto; margin-top:20px; width: 680px;">
                             <div class="input-group form-group">
-                                <div class="input-group-prepend">
+                                <div class="input-group-prepend" style="border-right: 5px solid white">
                                     <span class="input-group-text">Cliente</span>
                                 </div>
-                                <v-select  class="form-control" :options="cliente" label="dni" id="clienteSelect"  v-model="arreglo.cliente">
-                                  <template slot="option" slot-scope="option">
-                                      {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
-                                  </template>
-                                </v-select>
+                                <model-list-select class="form-control" :list="cliente"
+                                                   v-model="arreglo.cliente"
+                                                   option-value="id_cliente"
+                                                   :custom-text="textCliente"
+                                                   >
+                                </model-list-select>
                             </div>
                             <div class="input-group form-group">
-                                <div class="input-group-prepend">
+                                <div class="input-group-prepend" style="border-right: 5px solid white">
                                     <span class="input-group-text">Producto</span>
                                 </div>
-                                <v-select  class="form-control"  :options="producto" label="modelo"  v-model="arreglo.producto">
-                                  <template class="form-control" slot="option" slot-scope="option">
-                                    {{ option.marca }} {{ option.modelo }} {{ option.precio }}
-                                  </template>
-                                </v-select>
+                                <model-list-select class="form-control" :list="producto"
+                                                   v-model="arreglo.producto"
+                                                   option-value="id_producto"
+                                                   :custom-text="codeAndNameAndDesc"
+                                                   >
+                                </model-list-select>
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
@@ -71,6 +73,8 @@
 <script>
 
 import axios from 'axios'
+import { ModelSelect } from 'vue-search-select'
+import { ModelListSelect } from 'vue-search-select'
 import { alertCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertSucessArreglo } from '../../assets/sweetAlert.js'
 import Arreglo from '../../models/Arreglo';
@@ -83,8 +87,8 @@ export default {
   },
   data () {
     return {
-      cliente:'',
-      producto:'',
+      cliente:[],
+      producto:[],
       errors: [],
       arreglo : new Arreglo()
 		}
@@ -96,6 +100,12 @@ export default {
 
   },
   methods: {
+      codeAndNameAndDesc (item) {
+        return `${item.modelo} - ${item.marca} - ${item.precio}`
+      },
+      textCliente(item){
+        return `${item.dni} - ${item.nombre} - ${item.apellido}`
+      },
       getCliente(){
         axios.get('http://localhost:3000/cliente').then((response) =>{
           this.cliente = response.data;
@@ -147,6 +157,10 @@ export default {
                 })
            }
       }
+    },
+    components: {
+      ModelSelect,
+      ModelListSelect
     }
 }
 
@@ -208,6 +222,14 @@ color:black;
 
 input{
   background-color: white;
+}
+
+.search{
+    min-width: 0 !important;
+    width: 25px !important;
+    border: none !important;
+    margin-left: -3px !important;
+    border-left: -3px solid !important;
 }
 
 </style>

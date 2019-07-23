@@ -61,7 +61,7 @@ module.exports = {
              } else {
                      var pool = new pg.Pool(config)
                      pool.connect(function(err, client, done) {
-                       client.query('INSERT INTO arreglo(cliente,producto,fecha,observacion,condicion) VALUES($1,$2,$3,$4,$5)',[req.body.arreglo.cliente.id_cliente,req.body.arreglo.producto.id_producto,req.body.arreglo.fecha,req.body.arreglo.observacion,req.body.arreglo.condicion])
+                       client.query('INSERT INTO arreglo(cliente,producto,fecha,observacion,condicion) VALUES($1,$2,$3,$4,$5)',[req.body.arreglo.cliente,req.body.arreglo.producto,req.body.arreglo.fecha,req.body.arreglo.observacion,req.body.arreglo.condicion])
                          .then(response => {
                            pool.end()
                            res.sendStatus(200);
