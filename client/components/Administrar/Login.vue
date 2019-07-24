@@ -76,17 +76,11 @@ export default {
             firebase.auth().signInWithEmailAndPassword(this.usuario,this.password)
             .then((user)=>{
               this.$router.replace('/Home');
-              axios.post('http://localhost:3000/usuario',
-              {
-              uss: this.usuario
-              })
-
             })
             .catch((error)=>{
                 console.log(error);
                 this.$swal( 'Error!','Usuario y Password Incorrecta','error');
             });
-            axios.post('http://localhost:3000/user');
         }else{
           this.$swal( 'Error!','Completa los Campos Vacios','error');
         }

@@ -28,7 +28,7 @@ module.exports = {
         console.log(req.body);
         var pool = new pg.Pool(config)
         pool.connect(function(err, client, done) {
-          client.query("INSERT INTO usuario(uuid,mail,contraseña,rol) VALUES($1,$2,$3,'2')",[req.body.uuid,req.body.usuario,req.body.contraseña])
+          client.query("INSERT INTO usuario(uuid,mail,contraseña,rol) VALUES($1,$2,$3,$4)",[req.body.uuid,req.body.usuario,req.body.contraseña,req.body.perfil])
             .then(response => {
               pool.end()
               res.sendStatus(200);

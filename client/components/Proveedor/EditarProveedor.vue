@@ -146,6 +146,7 @@ export default {
                     console.log(response);
                     if (response.data == "OK"){
                          alertEditSucessProveedor();
+                         _this.$router.push('/HomeProveedor');
                     }else {
                          if (response.data.length > 0) {
                              for (var i = 0; i < response.data.length ; i++) {

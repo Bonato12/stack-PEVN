@@ -70,7 +70,8 @@ export default {
       usuario: '',
       password: '',
       password1: '',
-      uuid: ''
+      uuid: '',
+      perfil: '',
 
 		}
   },
@@ -82,19 +83,16 @@ export default {
           if (this.password ==  this.password1){
               firebase.auth().createUserWithEmailAndPassword(this.usuario,this.password).
               then((response)=>{
-                  //  console.log(response);
-                    //alert("Exitoso Registro");
-                    this.$router.replace('/Login');
-                    console.log("Hola");
-                    //console.log(response);
                     console.log(response.user.uid)
                     this.uuid == response.user.uid
+                    this.perfil = 2;
                     axios.post('http://localhost:3000/usuario',
                     {
                     usuario: this.usuario,
                     contraseña: this.password,
-                    uuid: response.user.uid
-                    })
+                    uuid: response.user.uid,
+                    perfil: this.perfil
+                  }).then(this.$router.replace('/Login'))
               })
               .catch((error)=> {
               console.log(error);
@@ -104,8 +102,6 @@ export default {
                   text: error,
                 });
               })
-
-
           }else {
             this.$swal.fire({
                 type: 'error',
@@ -149,24 +145,14 @@ align-content: center;
 height: auto;
 margin-top: 30px;
 margin-bottom: auto;
-width: 400px;
-/*background-color: rgb(70,90,101);*/
-background-image: url('../../assets/background.png');
+width: 450px;
+background-color: black;
+border-radius: 5px;
 }
-
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
-}
-
-
 
 .card-header h3{
 color: white;
 }
-
-
 
 .input-group-prepend span{
 width: 50px;
@@ -179,18 +165,6 @@ input:focus{
 outline: 0 0 0 0  !important;
 box-shadow: 0 0 0 0 !important;
 
-}
-
-.remember{
-color: white;
-}
-
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
 }
 
 .registrar_btn{
@@ -210,6 +184,5 @@ color: white;
 .links a{
 margin-left: 4px;
 }
-
 
 </style>
