@@ -36,7 +36,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Producto</span>
                                 </div>
-                                <v-select  class="form-control" @change="onChange($event)"  :options="producto" label="modelo"  v-model="productoSelected">
+                                <v-select  class="form-control"  :options="producto" label="modelo"  v-model="productoSelected">
                                   <template class="form-control" slot="option" slot-scope="option">
                                     {{ option.marca }} {{ option.modelo }}
                                   </template>
@@ -61,7 +61,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Precio Unitario</span>
                                     </div>
-                                    <input  type="number" min="0" @change="onChangePrecioUnitario()"  v-model="precioUnitario"  class="form-control">
+                                    <input  type="number" min="0" v-model="precioUnitario"  class="form-control">
                                 </div>
                               </div>
                               <div class="col">
@@ -253,24 +253,6 @@ export default {
       }
     },
 
-    onChange(event) {
-           var actual = JSON.stringify(event);
-           var viejo = JSON.stringify(this.productoSelected);
-           if (viejo){
-             if (actual == viejo){
-               this.num = 0;
-               this.precioTotalP = '';
-               this.precioUnitario = '';
-               this.precioUnitario = this.productoSelected.precio;
-             }
-           }
-       },
-
-       onChangePrecioUnitario(){
-          this.num = 0;
-          this.precioTotalP = 0;
-
-       },
 
     nuevaCompra(){
                   //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
@@ -327,6 +309,23 @@ export default {
         });
 
     }
+  },
+  watch: {
+      productoSelected:{
+        handler () {
+          this.num = 0;
+          this.precioTotalP = '';
+          this.precioUnitario = '';
+          this.precioUnitario = this.productoSelected.precio;
+        },
+        deep: true
+      },
+      precioUnitario:{
+        handler () {
+            this.precioTotalP = parseInt(this.precioUnitario) * parseInt(this.num)
+        },
+        deep: true
+      }
   }
 }
 

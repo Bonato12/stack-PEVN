@@ -178,8 +178,8 @@ const rutas = new VueRouter({
 
 axios.get('http://localhost:3000/usuario').then((response) =>{
   //var mail = response.data[1].mail;
-  var perfil = response.data[2].perfil;
-  console.log(response.data[2].perfil);
+  var perfil = response.data[0].perfil;
+  console.log(response.data[0].perfil);
   rutas.beforeEach((to, from, next) => {
           let usuario = firebase.auth().currentUser;
           console.log(usuario);

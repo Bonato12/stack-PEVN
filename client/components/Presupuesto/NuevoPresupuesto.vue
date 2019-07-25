@@ -13,7 +13,7 @@
                   </div>
                     </hr style="color:black;">
                   <div class="card-body">
-                    <form style="margin: 0 auto; width:780px; margin-top:10px;">
+                    <form @submit.prevent="guardarLista()" style="margin: 0 auto; width:780px; margin-top:10px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend" style="border-right: 5px solid white">
                                     <span class="input-group-text">Producto</span>
@@ -51,12 +51,12 @@
                               </div>
                             </div>
                             <div>
-                                <button class="btn" v-on:click="guardarLista()" style="width:110px; border-radius:5px; background-color:#FFD700;" title="Ingrese Observacion">
+                                <button class="btn" type="submit"  style="width:110px; border-radius:5px; background-color:#FFD700;" title="Ingrese Observacion">
                                   <i class="fas fa-tools fa"></i>
                                   Añadir
                                 </button>
                             </div>
-                    </form @submit.prevent="nuevoPresupuesto()">
+                    </form>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:780px; border-radius: 5px;">
                                 <br>
                                 <div>
@@ -108,7 +108,7 @@
                                              Precio Mano Obra
                                           </span>
                                       </div>
-                                      <input @change="cambiarPrecioManoObra()" type="number" min="0"  v-model="precioManoObra"  class="form-control">
+                                      <input type="number" min="0"  v-model="precioManoObra"  class="form-control">
                                   </div>
                                 </div>
                                 <div class="col">
@@ -116,7 +116,7 @@
                                       <div class="input-group-prepend">
                                           <span class="input-group-text">Precio Repuesto</span>
                                       </div>
-                                      <input @change="cambiarPrecioManoObra()"  type="number" min="0"  v-model="precioRepuesto"  class="form-control" readonly>
+                                      <input type="number" min="0"  v-model="precioRepuesto"  class="form-control" readonly>
                                   </div>
                                 </div>
                               </div>
@@ -134,7 +134,7 @@
                                           Volver
                                   </router-link>
                                   <div style="width:3px;"></div>
-                                  <button type="button" class="btn btn-success" title="Guardar Nuevo Repuesto">
+                                  <button v-on:click="nuevoPresupuesto()" class="btn btn-success" title="Guardar Nuevo Repuesto">
                                     <i class="far fa-save fa-1x"></i>
                                           Guardar
                                   </button>
@@ -216,7 +216,7 @@ export default {
                   this.producto[index].stock = this.producto[index].stock - this.num;
                 }
                 //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
-                this.repuestoSelected = '';
+                this.repuestoSelected = {};
                 this.num = '';
                 this.precio = '';
                 this.presupuestoProducto = new PresupuestoProducto();
@@ -225,7 +225,6 @@ export default {
             }
     },
     incrementarCantidad(){
-
           console.log(this.repuestoSelected)
       //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
           if(this.repuestoSelected.precio){
@@ -250,6 +249,7 @@ export default {
       }
     },
     borrar(producto){
+      console.log(producto)
       //Funcion Que Elimina un Producto determinado de la Lista de Venta y actualiza el stock
       var indice = this.producto.indexOf(producto.producto);
       this.producto[indice].stock = this.producto[indice].stock + producto.cantidad;
@@ -262,10 +262,6 @@ export default {
           this.Lista.splice(index, 1);
       }
     },
-
-       cambiarPrecioManoObra(){
-         this.precioTotal = parseInt(this.precioRepuesto) + parseInt(this.precioManoObra);
-       },
 
     nuevoPresupuesto(){
                   if (this.Lista.length > 0 && this.precioManoObra && this.precioTotal ){
@@ -318,11 +314,23 @@ export default {
  watch: {
      repuestoSelected:{
        handler () {
-         this.num = 0;
+        this.num = 0;
         this.precio = '';
        },
        deep: true
      },
+     precioManoObra:{
+       handler () {
+       this.precioTotal = parseInt(this.precioRepuesto) + parseInt(this.precioManoObra);
+       },
+       deep: true
+     },
+     precioRepuesto:{
+       handler () {
+       this.precioTotal = parseInt(this.precioRepuesto) + parseInt(this.precioManoObra);
+       },
+       deep: true
+     }
 
    }
 }
