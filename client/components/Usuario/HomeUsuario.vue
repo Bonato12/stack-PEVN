@@ -45,6 +45,11 @@
             </template>
      </vue-good-table>
        </div>
+       <br>
+       <router-link to="/NuevoUsuario" tag="button" class="btn btn-warning" style="float: left;">
+         <i class="fas fa-plus-circle fa-1x"></i>
+         Nuevo Usuario
+       </router-link>
     </div>
   </div>
 </template>

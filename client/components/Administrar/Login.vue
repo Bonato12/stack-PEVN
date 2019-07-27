@@ -39,14 +39,10 @@
                   				</div>
                       </div>
             				</div>
-                    <div class="d-flex justify-content-center links">
-                        <div style="color:white;"> No estas Registrado?</div>
-                        <router-link  to="/NuevoUsuario" tag="a" style="color: #FFC312;"><i style="margin-left:10px;"></i>Registrar</router-link>
-                    </div>
         			</div>
       		</div>
       	</div>
-</div>
+      </div>
   </br>
   </div>
 </template>
