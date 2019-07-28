@@ -4,7 +4,7 @@
                 <div style="width:70px;">
                     <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>
-                <div class="navbar-collapse" style="margin-left:250px;">
+                <div class="navbar-collapse" style="margin-left:150px;">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
                             <router-link class="item"   tag="a" :class="{ 'router-link-active': isActiveCliente }" active-class="activo"   to="/HomeCliente">
@@ -42,12 +42,18 @@
                               Proveedores
                             </router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link  class="item" tag="a" :class="{ 'router-link-active': isActiveUsuario }" active-class="activo"   to="/HomeUsuario">
+                              <i class="fas fa-cog"></i>
+                              Configuracion
+                            </router-link>
+                        </li>
                     </ul>
-                    <div style="margin-right:0px; width:400px;">
+                    <div style="margin-right:0px; width:300px;">
                       <div class="dropdown" style="float:right;">
                         <button class="btn btn-warning">
                           <router-link   tag="a" style="color:black;"  to="/Login" v-on:click.native="logout()" title="Salir">
-                                {{ user }}
+                                {{ user | cortar }}
                                 <i class="fas fa-sign-out-alt"></i>
                           </router-link>
                         </button>
@@ -97,6 +103,9 @@ export default {
     isActiveArreglo() {
     return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto')
     },
+    isActiveUsuario() {
+    return this.$route.matched.some(route => route.name === 'NuevoUsuario' ||  route.name === 'HomeUsuario')
+    },
 
   },
   methods: {
@@ -121,9 +130,12 @@ export default {
         });
 
     },
-
-
-}
+  },
+  filters: {
+        cortar(value) {
+            return value.toLowerCase()
+        }
+    }
 
 
 }

@@ -1,59 +1,73 @@
 <template>
   <div>
+    <br>
+    <br>
     <div class="container">
-        <br>
-        <br>
-        <br>
-        <br>
-      	<div class="d-flex justify-content-center h-100 animated fadeIn">
-      		<div class="card">
-        			<div class="card-header">
-                <img src="../../assets/LogoTelnovo.png" class="input-group form-group" >
-        			</div>
-        			<div class="card-body">
-            				<form @submit.prevent="registrar()">
-            					<div class="input-group form-group">
-              						<div class="input-group-prepend">
-              							<span class="input-group-text"><i class="fas fa-user"></i></span>
-              						</div>
-              						<input required  type="email" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
-            					</div>
-            					<div class="input-group form-group">
-              						<div class="input-group-prepend">
-              							<span class="input-group-text"><i class="fas fa-key"></i></span>
-              						</div>
-              						<input  type="password" v-model="password" class="form-control" placeholder="Ingrese Contraseña" pattern=".{6,}"   required title="Debe tener 6 Caracteres como Minimo">
-            					</div>
-                      <div class="input-group form-group">
-              						<div class="input-group-prepend">
-              							<span class="input-group-text"><i class="fas fa-key"></i></span>
-              						</div>
-                          <input  type="password" v-model="password1" class="form-control" placeholder="Ingrese Otra Vez la Contraseña" pattern=".{6,}"   required title="Debe tener 6 Caracteres como Minimo">
-            					</div>
-            					<div class="form-group">
-                          <button type="submit" class="btn float-right registrar_btn" title="Registrar">
-                                <i class="fas fa-user-plus fa-1x"></i>
-                                Registrar
-                          </button>
-            					</div>
-                      <div class="form-group" style="float:left; padding-top:10px;">
-                        <router-link to="/Login" style="color: #FFC312;">Volver a Login</router-link>
-            					</div>
-        				</form>
-        			</div>
-        			<div class="card-footer">
-            				<div class="d-flex justify-content-center links">
-
-            				</div>
-            				<div class="d-flex justify-content-center">
-
-            				</div>
-        			</div>
-      		</div>
-      	</div>
-</div>
-</br>
-</div>
+      <div class="d-flex justify-content-left">
+        <div class="card animated fadeInDown">
+            <div class="card-header" style="background-color:#FFD700;">
+              <h2 style="text-align:center; color:black;">
+                  <i class="fas fa-user"></i>
+                  Nuevo Usuario
+               </h2>
+            </div>
+            <div class="card-body" >
+                  <p v-if="errors.length">
+                    <ul  class="list-group" v-for="error in errors">
+                        <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
+                          {{ error }}
+                        </li>
+                        <br>
+                    </ul>
+                  </p>
+                  <form @submit.prevent="nuevoCliente()" style="width:780px; margin-top:-25px; margin:0px auto;">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Usuario</span>
+                        </div>
+                        	<input required  type="email" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Contraseña</span>
+                        </div>
+                        <input  type="password" v-model="password" class="form-control" placeholder="Ingrese Contraseña" pattern=".{6,}"   required title="Debe tener 6 Caracteres como Minimo">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Contraseña</span>
+                        </div>
+                        <input  type="password" v-model="password1" class="form-control" placeholder="Ingrese Otra Vez la Contraseña" pattern=".{6,}"   required title="Debe tener 6 Caracteres como Minimo">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Rol</span>
+                        </div>
+                        <select required class="form-control" v-model="rol" placeholder="Elige un Tipo Producto">
+                          <option  disabled selected>Elige un Rol/option>
+                          <option  v-for="item in roles">{{ item.name }}</option>
+                       </select>
+                    </div>
+                    <br>
+                      <div class="d-flex justify-content-end">
+                        <router-link to="/HomeCliente" tag="button" class="btn btn-info"  title="Volver a HomeCliente" >
+                            <i class="fas fa-arrow-left"></i>
+                              Volver
+                        </router-link>
+                        <button type="submit" class="btn btn-success"  title="Guardar Cliente" >
+                              <i class="far fa-save fa-1x"></i>
+                              Registrar
+                        </button>
+                    </div>
+              </form>
+              <div>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  <br>
+  </div>
 </template>
 
 <script>
@@ -72,6 +86,11 @@ export default {
       password1: '',
       uuid: '',
       perfil: '',
+      errors: [],
+      roles : [{name:"ADMINISTRADOR", value: 0},
+               {name:"REPARADOR", value: 1}]
+    }
+
 
 		}
   },
@@ -116,15 +135,8 @@ export default {
 }
 </script>
 
-<style>
-/*
-body{
-  background-image: url('./TELNOVO.png');
-  background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
-*/
+<style  scoped>
+
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
