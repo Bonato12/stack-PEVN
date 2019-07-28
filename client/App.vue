@@ -37,6 +37,12 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link class="item" :class="{ 'router-link-active': isActiveReparacion }"   tag="a"active-class="activo"   to="/HomeReparacion">
+                              <i class="fas fa-tools"></i>
+                              Reparaciones
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link  class="item" tag="a" :class="{ 'router-link-active': isActiveProveedor }" active-class="activo"   to="/HomeProveedor">
                               <i class="fas fa-people-carry"></i>
                               Proveedores
@@ -49,7 +55,7 @@
                             </router-link>
                         </li>
                     </ul>
-                    <div style="margin-right:0px; width:300px;">
+                    <div style="margin-right:0px; width:200px;">
                       <div class="dropdown" style="float:right;">
                         <button class="btn btn-warning">
                           <router-link   tag="a" style="color:black;"  to="/Login" v-on:click.native="logout()" title="Salir">
@@ -106,6 +112,9 @@ export default {
     isActiveUsuario() {
     return this.$route.matched.some(route => route.name === 'NuevoUsuario' ||  route.name === 'HomeUsuario')
     },
+    isActiveReparacion() {
+    return this.$route.matched.some(route => route.name === 'HomeReparacion' ||  route.name === 'HomeUsuario')
+    },
 
   },
   methods: {
@@ -124,7 +133,7 @@ export default {
     },
     logout(){
       firebase.auth().signOut().then(function() {
-        this.$router.replace('/Login');
+          //this.autenticado = false;
         }).catch(function(error) {
            console.log(error);
         });
@@ -133,7 +142,8 @@ export default {
   },
   filters: {
         cortar(value) {
-            return value.toLowerCase()
+            var palabra = value.split("@");
+            return palabra[0];
         }
     }
 

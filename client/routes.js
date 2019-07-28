@@ -175,34 +175,7 @@ const rutas = new VueRouter({
          ]
 })
 
-/*
-rutas.beforeEach((to, from, next) => {
-          let usuario = firebase.auth().currentUser;
-          let autorizacion = to.matched.some(record => record.meta.autenticado);
-          if(to.path != '/Login' || to.path != '*'){
-                    axios.get('http://localhost:3000/usuario/'+usuario.uid).then((response) =>{
-                    console.log(response);
-                    if (autorizacion && !usuario){
-                        next(false);
-                    }else if(!autorizacion && usuario){
-                        var perfil = 'ADMINISTRADOR';
-                        if (perfil == 'ADMINISTRADOR'){
-                                  next();
-                        }else if(perfil == 'REPARADOR'){
-                              if (to.path == '/Login' || to.path == '/Home' || to.path == '/NuevoArreglo' || to.path == 'HomeArreglo' || to.path == 'HomeReparacion' || to.path == 'NuevoPresupuesto' || to.path == 'HomePresupuesto' ){
-                                  next();
-                              }
-                        }
-                    }else {
-                      next()
-                    }
-          })
-        }else {
-          next();
-        }
 
-});
-*/
 rutas.beforeEach((to, from, next) => {
         let usuario = firebase.auth().currentUser;
         let autorizacion = to.matched.some(record => record.meta.autenticado);
@@ -210,6 +183,8 @@ rutas.beforeEach((to, from, next) => {
             if (autorizacion && !usuario){
                 next(false);
             }else if(!autorizacion && usuario){
+                    //console.log(usuario.displayName);
+                    if (!usuario.displayName){
                     axios.get('http://localhost:3000/usuario/'+usuario.uid).then((response) =>{
                         console.log(response.data[0].perfil);
                         var perfil = response.data[0].perfil;
@@ -223,7 +198,11 @@ rutas.beforeEach((to, from, next) => {
                               }
                         }
                     })
-            }
+                  }else {
+                    console.log("HOLA FACE")
+                    next()
+                  }
+                  }
         }else{
           next();
         }
