@@ -20,7 +20,7 @@
                         <br>
                     </ul>
                   </p>
-                  <form @submit.prevent="nuevoCliente()" style="width:780px; margin-top:-25px; margin:0px auto;">
+                  <form @submit.prevent="registrar()" style="width:780px; margin-top:-25px; margin:0px auto;">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Usuario</span>
@@ -44,17 +44,17 @@
                           <span class="input-group-text">Rol</span>
                         </div>
                         <select required class="form-control" v-model="rol" placeholder="Elige un Tipo Producto">
-                          <option  disabled selected>Elige un Rol/option>
-                          <option  v-for="item in roles">{{ item.name }}</option>
+                          <option  disabled selected>Elige un Rol</option>
+                          <option  v-for="option in options" v-bind:value="option.value" >{{ option.text }}</option>
                        </select>
                     </div>
                     <br>
                       <div class="d-flex justify-content-end">
-                        <router-link to="/HomeCliente" tag="button" class="btn btn-info"  title="Volver a HomeCliente" >
+                        <router-link to="/HomeUsuario" tag="button" class="btn btn-info"  title="Volver a HomeCliente" >
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>
-                        <button type="submit" class="btn btn-success"  title="Guardar Cliente" >
+                        <button type="submit" class="btn btn-success"  title="Guardar Usuario" >
                               <i class="far fa-save fa-1x"></i>
                               Registrar
                         </button>
@@ -85,33 +85,32 @@ export default {
       password: '',
       password1: '',
       uuid: '',
-      perfil: '',
+      rol: '',
       errors: [],
-      roles : [{name:"ADMINISTRADOR", value: 0},
-               {name:"REPARADOR", value: 1}]
+      options: [
+      { text: 'ADMINISTRADOR', value: 0 },
+      { text: 'REPARADOR', value: 1 },
+    ]
     }
-
-
-		}
   },
   mounted(){
 
   },
   methods: {
     registrar(){
+          console.log(this.rol)
           if (this.password ==  this.password1){
               firebase.auth().createUserWithEmailAndPassword(this.usuario,this.password).
               then((response)=>{
                     console.log(response.user.uid)
                     this.uuid == response.user.uid
-                    this.perfil = 2;
                     axios.post('http://localhost:3000/usuario',
                     {
                     usuario: this.usuario,
                     contraseña: this.password,
                     uuid: response.user.uid,
-                    perfil: this.perfil
-                  }).then(this.$router.replace('/Login'))
+                    rol: this.rol
+                  })
               })
               .catch((error)=> {
               console.log(error);
@@ -128,9 +127,7 @@ export default {
                 text: 'Las Contraseñas no Coinciden',
               });
           }
-
     }
-
 }
 }
 </script>
@@ -139,62 +136,126 @@ export default {
 
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
-html,body{
-background-color: rgb(70,90,101);
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
+select{
+  display: block !important;
 }
 
-.container{
-height: 100%;
-align-content: center;
 
+h1, h2 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+
+.input-group-prepend span{
+width: 120px;
+background-color: #FFD700;
+color: black;
+border: none;
+}
+
+.input-group{
+  width: 700px;
+}
+
+input:focus{
+  background-color: white;
 }
 
 .card{
 height: auto;
-margin-top: 30px;
+margin-top: 50px;
 margin-bottom: auto;
-width: 450px;
-background-color: black;
+width: 1650px;
+background-color: rgb(70,90,101);
 border-radius: 5px;
+border:1px solid;
+margin:0 auto;
 }
 
-.card-header h3{
-color: white;
+button{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:130px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  /*background-color: #FFD700  !important;*/
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black;
 }
 
-.input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
+button:hover{
+     background-color: white  !important;
+     color: black;
 }
 
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
+/*Sirve para desabilitar las flechas en los inputs numer*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+form select:focus:invalid{
+    background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
 
 }
 
-.registrar_btn{
-color: black;
-background-color: #FFC312;
+form select:required:focus:valid{
+  background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
+
+
 }
 
-.registrar_btn:hover{
-color: black;
-background-color: white;
+
+form input:focus:invalid{
+    background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
+
 }
 
-.links{
-color: white;
+
+form input:required:focus:valid{
+  background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
+
 }
 
-.links a{
-margin-left: 4px;
+.form-control {
+    border: 0;
+    box-shadow: none;
 }
+
+
+form textarea:focus:invalid{
+    background: url('../../assets/invalid.png') no-repeat 95% 50%;
+    background-color: white;
+}
+
+
+form textarea:required:focus:valid{
+  background: url('../../assets/valid.png') no-repeat 95% 50%;
+  background-color: white;
+
+}
+
+
 
 </style>

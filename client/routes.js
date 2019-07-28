@@ -175,31 +175,59 @@ const rutas = new VueRouter({
          ]
 })
 
-
-axios.get('http://localhost:3000/usuario').then((response) =>{
-  //var mail = response.data[1].mail;
-  var perfil = response.data[0].perfil;
-  console.log(response.data[0].perfil);
-  rutas.beforeEach((to, from, next) => {
+/*
+rutas.beforeEach((to, from, next) => {
           let usuario = firebase.auth().currentUser;
-          console.log(usuario);
           let autorizacion = to.matched.some(record => record.meta.autenticado);
-          if(to.path != '/Login' && to.path != '/NuevoUsuario' && to.path != '*'){
+          if(to.path != '/Login' || to.path != '*'){
+                    axios.get('http://localhost:3000/usuario/'+usuario.uid).then((response) =>{
+                    console.log(response);
                     if (autorizacion && !usuario){
                         next(false);
                     }else if(!autorizacion && usuario){
+                        var perfil = 'ADMINISTRADOR';
+                        if (perfil == 'ADMINISTRADOR'){
+                                  next();
+                        }else if(perfil == 'REPARADOR'){
+                              if (to.path == '/Login' || to.path == '/Home' || to.path == '/NuevoArreglo' || to.path == 'HomeArreglo' || to.path == 'HomeReparacion' || to.path == 'NuevoPresupuesto' || to.path == 'HomePresupuesto' ){
+                                  next();
+                              }
+                        }
+                    }else {
+                      next()
+                    }
+          })
+        }else {
+          next();
+        }
+
+});
+*/
+rutas.beforeEach((to, from, next) => {
+        let usuario = firebase.auth().currentUser;
+        let autorizacion = to.matched.some(record => record.meta.autenticado);
+        if(to.path != '/Login' && to.path != '/Registrar' && to.path != '*')  {
+            if (autorizacion && !usuario){
+                next(false);
+            }else if(!autorizacion && usuario){
+                    axios.get('http://localhost:3000/usuario/'+usuario.uid).then((response) =>{
+                        console.log(response.data[0].perfil);
+                        var perfil = response.data[0].perfil;
                         if (perfil == 'ADMINISTRADOR'){
                               next();
-                        }else {
-                          if (to.path == '/Login' || to.path == '/Home' || to.path == '/NuevoUsuario')
-                              next();
+                        }else if(perfil == 'REPARADOR') {
+                              if (to.path == '/HomeVenta' || to.path == '/HomeCompra' || to.path == '/NuevaCompra' || to.path == '/NuevaVenta' || to.path == '/HomeUsuario' || to.path == '/NuevoUsuario' ){
+                                  next(false);
+                              }else {
+                                next();
+                              }
                         }
-                    }
-          }else{
-              next();
-          }
+                    })
+            }
+        }else{
+          next();
+        }
 
-  })
-});
+})
 
 export default rutas;
