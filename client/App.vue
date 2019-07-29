@@ -32,7 +32,7 @@
                         </li>
                         <li class="nav-item">
                             <router-link class="item" :class="{ 'router-link-active': isActiveArreglo }"   tag="a"active-class="activo"   to="/HomeArreglo">
-                              <i class="fas fa-tools"></i>
+                              <i class="fas fa-toolbox"></i>
                               Arreglos
                             </router-link>
                         </li>
@@ -113,7 +113,7 @@ export default {
     return this.$route.matched.some(route => route.name === 'NuevoUsuario' ||  route.name === 'HomeUsuario')
     },
     isActiveReparacion() {
-    return this.$route.matched.some(route => route.name === 'HomeReparacion' ||  route.name === 'HomeUsuario')
+    return this.$route.matched.some(route => route.name === 'HomeReparacion')
     },
 
   },

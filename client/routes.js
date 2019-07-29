@@ -183,8 +183,6 @@ rutas.beforeEach((to, from, next) => {
             if (autorizacion && !usuario){
                 next(false);
             }else if(!autorizacion && usuario){
-                    //console.log(usuario.displayName);
-                    if (!usuario.displayName){
                     axios.get('http://localhost:3000/usuario/'+usuario.uid).then((response) =>{
                         console.log(response.data[0].perfil);
                         var perfil = response.data[0].perfil;
@@ -198,10 +196,6 @@ rutas.beforeEach((to, from, next) => {
                               }
                         }
                     })
-                  }else {
-                    console.log("HOLA FACE")
-                    next()
-                  }
                   }
         }else{
           next();

@@ -25,7 +25,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Usuario</span>
                         </div>
-                        	<input required  type="email" v-model="usuario" class="form-control" placeholder="Ingrese Usuario">
+                        	<input required  type="email" v-model="user" class="form-control" placeholder="Ingrese Usuario">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -74,6 +74,7 @@
 
 import axios from 'axios'
 import firebase from 'firebase'
+import Usuario from '../../models/Usuario';
 
 export default {
   created(){
@@ -81,16 +82,17 @@ export default {
   },
   data () {
     return {
-      usuario: '',
+      usuario : new Usuario(),
+      user: '',
       password: '',
       password1: '',
       uuid: '',
       rol: '',
       errors: [],
       options: [
-      { text: 'ADMINISTRADOR', value: 0 },
-      { text: 'REPARADOR', value: 1 },
-    ]
+      { text: 'ADMINISTRADOR', value: 1 },
+      { text: 'REPARADOR', value: 2 },
+      ]
     }
   },
   mounted(){
@@ -100,18 +102,14 @@ export default {
     registrar(){
           console.log(this.rol)
           if (this.password ==  this.password1){
-              firebase.auth().createUserWithEmailAndPassword(this.usuario,this.password).
-              then((response)=>{
-                    console.log(response.user.uid)
-                    this.uuid == response.user.uid
-                    axios.post('http://localhost:3000/usuario',
-                    {
-                    usuario: this.usuario,
-                    contraseña: this.password,
-                    uuid: response.user.uid,
-                    rol: this.rol
-                  })
-              })
+                    this.usuario.mail = this.user
+                    this.usuario.password = this.password
+                    this.usuario.rol = this.rol
+                    axios.post('http://localhost:3000/usuario',this.usuario).then(response=>{
+                      if (response.data == "OK"){
+                        alert("Registro Exitoso");
+                      }
+                    })
               .catch((error)=> {
               console.log(error);
               this.$swal.fire({

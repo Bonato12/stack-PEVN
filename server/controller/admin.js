@@ -3,6 +3,15 @@ var router = express.Router();
 var app = express();
 var pg = require('pg');
 var config = require('../database');
+var admin = require('firebase-admin');
+serviceAccount = require('./adminSDK.json')
+
+
+administrador = admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://ionic-3e984.firebaseio.com"
+})
+
 
 
 module.exports = {
@@ -24,9 +33,8 @@ module.exports = {
 },
 
 getIdUsuario(req,res){
-   console.log("HOLA")
-   var pool = new pg.Pool(config);
-   pool.connect(function(err, client, done) {
+    var pool = new pg.Pool(config);
+    pool.connect(function(err, client, done) {
      client.query("SELECT US.id_usuario,US.uuid, US.mail, RO.perfil FROM usuario US, rol RO WHERE US.rol = RO.id_rol AND US.uuid = ($1)",[req.params.uuid])
        .then(response => {
          pool.end()
@@ -39,25 +47,38 @@ getIdUsuario(req,res){
        })
      done()
    })
-},
-
+  },
   postUsuario(req, res){
         console.log("Peticion POST");
         console.log(req.body);
-        var pool = new pg.Pool(config)
-        pool.connect(function(err, client, done) {
-          client.query("INSERT INTO usuario(uuid,mail,contraseña,rol) VALUES($1,$2,$3,$4)",[req.body.uuid,req.body.usuario,req.body.contraseña,req.body.rol])
-            .then(response => {
-              pool.end()
-              res.sendStatus(200);
-            })
-            .catch(error => {
-              pool.end()
-              console.log(error)
-              res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
-            })
-          done()
+        administrador.auth().createUser({
+            email: req.body.mail,
+            emailVerified: false,
+            password: req.body.password,
+            displayName: 'null',
+            photoURL:  'http://www.example.com/12345678/photo.png',
+            disabled: false
         })
-  },
+        .then(function(userRecord) {
+          console.log(userRecord);
+          var pool = new pg.Pool(config)
+          pool.connect(function(err, client, done) {
+            client.query("INSERT INTO usuario(uuid,mail,contraseña,rol) VALUES($1,$2,$3,$4)",[userRecord.uid,req.body.mail,req.body.password,req.body.rol])
+              .then(response => {
+                pool.end()
+                res.sendStatus(200);
+              })
+              .catch(error => {
+                pool.end()
+                console.log(error)
+                res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
+              })
+            done()
+          })
+        })
+        .catch(function(error) {
+          console.log('Error creating new user:', error);
+        });
+  }
 
 }
