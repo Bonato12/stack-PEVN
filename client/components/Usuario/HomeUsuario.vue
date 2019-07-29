@@ -41,6 +41,9 @@
                 <button @click="editarUsuario(props.row)" class="btn btn-warning" title="Editar Cliente">
                       <i class="fas fa-edit"></i>
                 </button>
+                <button @click="editarUsuario(props.row)" class="btn btn-danger" title="Editar Cliente">
+                      <i class="fas fa-trash"></i>
+                </button>
               </span>
             </template>
      </vue-good-table>

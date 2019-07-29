@@ -12,8 +12,6 @@ administrador = admin.initializeApp({
   databaseURL: "https://ionic-3e984.firebaseio.com"
 })
 
-
-
 module.exports = {
 
   getUsuario(req,res){
@@ -79,6 +77,16 @@ getIdUsuario(req,res){
         .catch(function(error) {
           console.log('Error creating new user:', error);
         });
+  },
+
+  deleteUser(req,res){
+    admin.auth().deleteUser(uid)
+          .then(function() {
+            console.log('Successfully deleted user');
+          })
+          .catch(function(error) {
+            console.log('Error deleting user:', error);
+          });
   }
 
 }
