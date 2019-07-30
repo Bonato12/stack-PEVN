@@ -70,9 +70,6 @@ module.exports = {
                       pool.query("INSERT INTO presupuesto(arreglo,observacion,estado,precioManoObra,precioTotal) VALUES($1,$2,$3,$4,$5) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.estado,req.body.presupuesto.precioManoObra,req.body.presupuesto.precioTotal]).then(response=> {
                           pool.end();
                           res.json(response.rows);
-                          res.json({
-                            id:response.rows[0].id_presupuesto
-                          })
                       }).catch((error) =>{
                           pool.end();
                           console.log(error);

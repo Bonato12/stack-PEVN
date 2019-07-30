@@ -264,7 +264,7 @@ export default {
     },
 
     nuevoPresupuesto(){
-                  if (this.Lista.length > 0 && this.precioManoObra && this.precioTotal ){
+                  if (this.precioManoObra && this.precioTotal ){
                       this.presupuesto.arreglo = this.ida;
                       this.presupuesto.estado = 'EN ESPERA';
                       this.presupuesto.precioManoObra = this.precioManoObra;
@@ -279,10 +279,13 @@ export default {
                             'Content-Type': 'application/json'
                              }
                         }).then(response=>{
-                          console.log(response.data[0].id_venta);
-                          this.id_presupuesto = response.data[0].id_presupuesto
-                          this.postPresupuestoProducto(this.id_presupuesto)
-                        }).then();
+                          if (this.Lista.length){
+                            console.log(response.data[0].id_venta);
+                            this.id_presupuesto = response.data[0].id_presupuesto
+                            this.postPresupuestoProducto(this.id_presupuesto)
+                          }
+
+                        })
                           alertSucessVenta()
                   }else {
                      alertWarningCompletarCampos()

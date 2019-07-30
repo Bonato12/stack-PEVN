@@ -66,7 +66,7 @@
                               <i class="fas fa-arrow-left"></i>
                                 Volver
                           </router-link>
-                          <button type="submit" class="btn btn-success" title="Guardar Producto">
+                          <button type="submit" class="but" title="Guardar Producto">
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                           </button>
@@ -210,7 +210,23 @@ border:1px solid;
 margin:0 auto;
 }
 
-button{
+.but{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #FFD700  !important;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black;
+}
+
+.btn{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;

@@ -59,11 +59,11 @@
                     </div>
                     <br>
                       <div class="d-flex justify-content-end">
-                        <router-link to="/HomeCliente" tag="button" class="btn btn-info"  title="Volver a HomeCliente" >
+                        <router-link to="/HomeCliente" tag="button" class="btn"  title="Volver a HomeCliente" >
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>
-                        <button type="submit" class="btn btn-success"  title="Guardar Cliente" >
+                        <button type="submit" class="btn"  title="Guardar Cliente" >
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                         </button>
@@ -221,7 +221,7 @@ margin:0 auto;
   height:40px;
   margin-top:-10px;
   border:none;
-  /*background-color: #FFD700  !important;*/
+  background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;

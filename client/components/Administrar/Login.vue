@@ -113,10 +113,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 @import url('https://fonts.googleapis.com/css?family=Numans');
-body{
-  background-image: url('../../assets/background.png');
+body,html{
+  background-image: url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;

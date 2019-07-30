@@ -287,8 +287,9 @@ export default {
                           console.log(response.data[0]);
                           this.id_compra = response.data[0].id_compra
                           this.postCompraProducto(this.id_compra)
-                        }).then();
-                          alertSucessCompra();
+                        }).catch(error=>{
+                          console.log(error)
+                        })
                   }
 
     },
@@ -306,6 +307,9 @@ export default {
              }
         }).then(response=>{
           console.log(response.data)
+          alertSucessCompra();
+          this.compra = new Compra();
+          this.compraProducto = new compraProducto();
         });
 
     }
