@@ -154,6 +154,8 @@ export default {
                          _this.errors.push(response.data.msg);
                      }
                   }
+                }).catch(error=>{
+                  console.log(error);
                 })
            }
       }
