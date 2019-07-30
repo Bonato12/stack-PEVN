@@ -193,13 +193,17 @@ export default {
       axios.get('http://localhost:3000/arreglo/'+this.ida).then(response=>{
         this.arreglo = response.data[0];
         console.log(this.arreglo);
-      });
+      }).catch(error=>{
+        console.log(error);
+      })
     },
     getProducto(){
       axios.get('http://localhost:3000/productoRepuesto').then(response=>{
         this.producto = response.data;
         console.log(this.producto)
-      });
+      }).catch(error=>{
+        console.log(error);
+      })
     },
     guardarLista(){
             console.log(JSON.stringify(this.repuestoSelected));
@@ -271,7 +275,6 @@ export default {
                       this.presupuesto.precioTotal = this.precioTotal;
                       axios.post('http://localhost:3000/presupuesto',
                           {
-                          //lista: this.Lista,
                           presupuesto: this.presupuesto
                           },
                           {
@@ -282,33 +285,33 @@ export default {
                           if (this.Lista.length){
                             console.log(response.data[0].id_venta);
                             this.id_presupuesto = response.data[0].id_presupuesto
-                            this.postPresupuestoProducto(this.id_presupuesto)
+                            axios.post('http://localhost:3000/presupuestoProducto',
+                                {
+                                id_presupuesto: this.id_presupuesto,
+                                presupuesto: this.Lista
+                                },
+                                {
+                                  headers:{
+                                  'Content-Type': 'application/json'
+                                   }
+                              }).then(response=>{
+                                console.log(response.data)
+                                if (response.data == "OK"){
+                                  alert("exito")
+                                }else {
+                                  alert("ERROR")
+                                }
+                              });
                           }
-
+                        }).catch(error=>{
+                          console.log(error);
                         })
-                          alertSucessVenta()
                   }else {
                      alertWarningCompletarCampos()
                   }
 
-    },
-    postPresupuestoProducto(id){
-      console.log("El id es:",id)
-      axios.post('http://localhost:3000/presupuestoProducto',
-          {
-          id_presupuesto: id,
-          presupuesto: this.Lista
-          },
-          {
-            headers:{
-            'Access-Control-Allow-Origin': 'http://localhost:3000/presupuestoProducto',
-            'Content-Type': 'application/json'
-             }
-        }).then(response=>{
-          console.log(response.data)
-        });
+    }
 
-   }
  },
  components: {
    ModelSelect,

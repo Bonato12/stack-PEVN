@@ -6,63 +6,68 @@
             <h2 style="text-align:center; color:black;">
                 <i class="fas fa-tools"></i>
                 <i class="fas fa-clipboard-list"></i>
-                Presupuesto {{presupuesto.id_presupuesto}}
+                Detalle del Presupuesto: {{presupuesto.id_presupuesto}}
              </h2>
           </div>
           <div class="modal-body" style="background-color: #f1f8e9; color:black;">
-            <h4>
-              <i class="fas fa-file-invoice-dollar"></i>
-              Detalle del Presupuesto:</h4>
-            <slot name="body">
-               <hr>
-               <b-row class="mb-1">
-                 <b-col cols="3">Arreglo:</b-col>
-                   <b-col>{{presupuesto.arreglo}}</b-col>
-               </b-row>
-               <b-row class="mb-1">
-                 <b-col cols="3">Observacion:</b-col>
-                   <b-col>{{presupuesto.observacion}}</b-col>
-               </b-row>
-               <b-row class="mb-1">
-                 <b-col cols="3">precioTotal:</b-col>
-                   <b-col>{{presupuesto.preciototal}}$</b-col>
-               </b-row>
-               <hr>
-            </slot>
+            <div class="row">
+              <div class="col-md">
+                  <slot name="body">
+                     <b-row class="mb-1">
+                       <b-col cols="3">Arreglo:</b-col>
+                         <b-col>{{presupuesto.arreglo}}</b-col>
+                     </b-row>
+                     <b-row class="mb-1">
+                       <b-col cols="3">Observacion:</b-col>
+                         <b-col>{{presupuesto.observacion}}</b-col>
+                     </b-row>
+                     <b-row class="mb-1">
+                       <b-col cols="3">Precio Total:</b-col>
+                         <b-col>{{presupuesto.preciototal}}$</b-col>
+                     </b-row>
+                     <b-row class="mb-1">
+                       <b-col cols="3">Mano de Obra:</b-col>
+                         <b-col>{{presupuesto.preciomanoobra}}$$</b-col>
+                     </b-row>
+                     <hr>
+                  </slot>
+              </div>
+              <div class="col-sm">
+
+              </div>
+            </div>
           </div>
           </hr>
-          <div class="modal-body" style="background-color: #f1f8e9; margin-top:-30px;">
-              <h4>
-                <i class="fas fa-toolbox"></i>
-                Presupuesto de Mano de Obra: {{presupuesto.preciomanoobra}}$</h4>
-              <hr>
-          </div>
           <div class="modal-body" style="background-color: #f1f8e9; margin-top:-30px;">
               <h4>
                 <i class="fas fa-tools"></i>
                 Lista de Repuestos Utilizados:</h4>
               <br>
-              <table class="table" style="color:black">
-                    <thead>
-                          <tr>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Precio</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr v-for="item in this.presupuestoProducto">
-                            <td scope="col">{{item.modelo}}</td>
-                            <td scope="col">{{item.cantidad}}</td>
-                            <td scope="col"> {{item.precio}}</td>
-                          </tr>
-                          <tr>
-                            <td scope="col"></td>
-                            <td scope="col"></td>
-                            <td scope="col"></td>
-                          </tr>
-                    </tbody>
-              </table>
+              <div class="row">
+                <div class="col-md">
+                  <table class="table" style="color:black">
+                        <thead>
+                              <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr v-for="item in this.presupuestoProducto">
+                                <td scope="col">{{item.modelo}}</td>
+                                <td scope="col">{{item.cantidad}}</td>
+                                <td scope="col"> {{item.precio}}</td>
+                              </tr>
+                              <tr>
+                                <td scope="col"></td>
+                                <td scope="col"></td>
+                                <td scope="col"></td>
+                              </tr>
+                        </tbody>
+                  </table>
+                </div>
+              </div>
           </div>
           <div class="modal-body" style="background-color:#f1f8e9; margin-top:-45px;" >
               <h4>
@@ -136,20 +141,32 @@ export default {
           console.log(this.presupuesto);
           this.estado = response.data[0].estado
           this.control(this.presupuesto.id_presupuesto)
-
-        });
+        }).catch(error=>{
+          console.log(error)
+        })
   },
     control(id){
-      axios.get('http://localhost:3000/presupuestoProducto/'+id).then((response) =>{
-        console.log(response.data)
-        this.presupuestoProducto = response.data;
-      })
+        axios.get('http://localhost:3000/presupuestoProducto/'+id).then((response) =>{
+          console.log(response.data)
+          this.presupuestoProducto = response.data;
+        }).catch(error=>{
+          console.log(error);
+        });
     },
     eliminarPresupuesto(){
         axios.delete('http://localhost:3000/presupuesto/'+this.idp).then((data)=>{
           console.log(data)
           this.getArreglo()
-        }).then(alertSucessDelete()).then(this.$router.push('/HomeArreglo'));
+        }).then(response =>{
+          if (response.data == "OK"){
+              alertSucessDelete();
+              this.$router.push('/HomeArreglo');
+          }else {
+              alert("error");
+          }
+        }).catch(error=>{
+            console.log(error);
+        })
     },
     cambiarEstado(){
       axios.put('http://localhost:3000/presupuesto/'+ this.idp,

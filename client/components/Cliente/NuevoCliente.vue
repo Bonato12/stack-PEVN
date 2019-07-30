@@ -76,7 +76,7 @@
       </div>
   </div>
   <br>
-  </div>
+</div>
 </template>
 
 <script>

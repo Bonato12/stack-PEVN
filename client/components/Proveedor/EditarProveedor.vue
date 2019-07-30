@@ -111,7 +111,7 @@ export default {
           console.log(response.data);
           this.proveedor = new Proveedor(this.idp,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail,response.data[0].descripcion);
         }).catch(error=>{
-           console.log(error);  
+           console.log(error);
         })
       },
       editarProveedor(){
