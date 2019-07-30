@@ -196,8 +196,6 @@ export default {
       });
     },
     guardarLista(){
-
-            //Funcion Que Guarda Los Productos Seleccionados a comprar en una Lista Dinamica
             if(this.productoSelected && this.precioUnitario && this.precioTotalP > 0 && this.num > 0){
                 this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precioTotalP);
                 this.compraProducto.producto = this.productoSelected;
@@ -205,12 +203,10 @@ export default {
                 this.compraProducto.precioUnitario = this.precioUnitario;
                 this.compraProducto.precioTotal = this.precioTotalP;
                 this.Lista.push(this.compraProducto);
-                //Una Vez añadido al carrito Actializamos el Stock de la Lista Productos
                 var index = this.producto.indexOf(this.productoSelected);
                 if (index > -1) {
                   this.producto[index].stock = this.producto[index].stock - this.num;
                 }
-                //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
                 this.productoSelected = '';
                 this.num = '';
                 this.precioTotalP = '';
@@ -222,41 +218,34 @@ export default {
     },
 
     incrementarCantidad(){
-      //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
           if(this.productoSelected.precio){
                   this.num++;
                   this.precioTotalP = parseInt(this.precioUnitario) * parseInt(this.num)
           }
     },
     decrementarCantidad() {
-      //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
-      if(this.productoSelected){
-          if (this.num == 1) {
-            alertWarningLimiteOne();
-          } else {
-            this.num--;
-            this.precioTotalP = parseInt(this.precioUnitario) * parseInt(this.num)
-          }
-      }
+        if(this.productoSelected){
+            if (this.num == 1) {
+                alertWarningLimiteOne();
+            } else {
+                this.num--;
+                this.precioTotalP = parseInt(this.precioUnitario) * parseInt(this.num)
+            }
+        }
     },
 
     borrar(producto){
-      //Funcion Que Elimina un Producto determinado de la Lista de Compra y actualiza el stock
-      var indice = this.producto.indexOf(producto.producto);
-      this.producto[indice].stock = this.producto[indice].stock + producto.cantidad;
-      console.log(indice);
-      //Resta al Precio Total el precio del Producto eliminado de la lista.
-      var index = this.Lista.indexOf(producto);
-      this.precioTotal = this.precioTotal - this.Lista[index].precioTotal
-      if (index > -1) {
-          this.Lista.splice(index, 1);
-      }
+        var indice = this.producto.indexOf(producto.producto);
+        this.producto[indice].stock = this.producto[indice].stock + producto.cantidad;
+        console.log(indice);
+        var index = this.Lista.indexOf(producto);
+        this.precioTotal = this.precioTotal - this.Lista[index].precioTotal
+        if (index > -1) {
+            this.Lista.splice(index, 1);
+        }
     },
 
-
     nuevaCompra(){
-                  //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
-                  //Vamos a Comprar no es Vacia
                   this.errors = [];
                   if (this.Lista.length > 0){
                       if (!this.proveedorSelected){
@@ -269,49 +258,33 @@ export default {
                       this.errors.push('Carrito de venta Vacio');
                   }
                   if (this.errors.length == 0){
-                      //Asignamos el proveedor Selecionado a this.compra.proveedor
-                      //Asignamos a this.compra total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a comprar
                       this.compra.proveedor = this.proveedorSelected;
                       this.compra.total = this.precioTotal;
                       axios.post('http://localhost:3000/compra',
                           {
                           compra: this.compra
-                          },
-                          {
-                            headers:{
-                            'Access-Control-Allow-Origin': 'http://localhost:3000/compra',
-                            'Access-Control-Allow-Methods': 'POST',
-                            'Content-Type': 'application/json'
-                             }
-                        }).then(response=>{
-                          console.log(response.data[0]);
-                          this.id_compra = response.data[0].id_compra
-                          this.postCompraProducto(this.id_compra)
-                        }).catch(error=>{
-                          console.log(error)
+                          }).then(response=>{
+                                  this.id_compra = response.data[0].id_compra
+                                  axios.post('http://localhost:3000/compraProducto',
+                                      {
+                                        id_compra: this.id_compra,
+                                        compra: this.Lista
+                                      })
+                                  .then(response=>{
+                                  console.log(response.data);
+                                  if (response.data == "OK"){
+                                    alertSucessCompra();
+                                    this.compra = new Compra();
+                                    this.Lista = []
+                                  }else {
+                                    alert("ERROR");
+                                  }
+                            }).catch(error=>{
+                              console.log(error)
+                            })
                         })
+
                   }
-
-    },
-    postCompraProducto(id){
-      console.log("El id es:",id)
-      axios.post('http://localhost:3000/compraProducto',
-          {
-          id_compra: id,
-          compra: this.Lista
-          },
-          {
-            headers:{
-            'Access-Control-Allow-Origin': 'http://localhost:3000/compraProducto',
-            'Content-Type': 'application/json'
-             }
-        }).then(response=>{
-          console.log(response.data)
-          alertSucessCompra();
-          this.compra = new Compra();
-          this.compraProducto = new compraProducto();
-        });
-
     }
   },
   watch: {
