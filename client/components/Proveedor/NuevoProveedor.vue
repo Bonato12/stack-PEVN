@@ -134,7 +134,6 @@ export default {
               axios.post('http://localhost:3000/proveedor',
               this.proveedor,
               { headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000/proveedor',
                 'Content-Type': 'application/json',
               },
               }).then(function(response){
@@ -151,7 +150,9 @@ export default {
                          _this.errors.push(response.data.msg);
                      }
                   }
-                })
+                }).catch(error=>{
+                  console.log(error);
+                });
             }
         }
 

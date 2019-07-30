@@ -209,7 +209,9 @@ export default {
     getProveedor(){
         axios.get('http://localhost:3000/proveedor').then((response) =>{
           this.datos = response.data;
-        });
+        }).catch(error=>{
+           console.log(error);
+        })
   },
   eliminarProveedor(id) {
         this.$swal({
@@ -237,6 +239,8 @@ export default {
             }
           })
         }
+        }).catch(error=>{
+           console.log(error);
         })
   },
   exportarPdf(){
