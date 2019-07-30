@@ -221,27 +221,27 @@ export default {
 
     },
     exportarPdf(){
-        var columnas = [
-          {title: "NOMBRE", dataKey:"nombre"},
-          {title: "APELLIDO", dataKey:"apellido"},
-          {title: "FECHA", dataKey:"fecha"},
-          {title: "TOTAL", dataKey:"total"}
-          ]
-        var doc = new jsPDF();
-        var fecha = new Date();
-        var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
-        doc.addImage(imgData, 'JPEG', 15, 5, 80, 40);
-        doc.text(15,60,'Lista Compras')
-        doc.text(15, 70, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
-        doc.text(65, 70, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
-        doc.autoTable(columnas,this.compras, {
-        				theme : 'grid',
-        				margin : {
-        					top : 75
-        				}
-              });
-        doc.save(now+'-compras.pdf');
-      },
+          var columnas = [
+            {title: "NOMBRE", dataKey:"nombre"},
+            {title: "APELLIDO", dataKey:"apellido"},
+            {title: "FECHA", dataKey:"fecha"},
+            {title: "TOTAL", dataKey:"total"}
+            ]
+          var doc = new jsPDF();
+          var fecha = new Date();
+          var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+          doc.addImage(imgData, 'JPEG', 15, 5, 80, 40);
+          doc.text(15,60,'Lista Compras')
+          doc.text(15, 70, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
+          doc.text(65, 70, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
+          doc.autoTable(columnas,this.compras, {
+          				theme : 'grid',
+          				margin : {
+          					top : 75
+          				}
+                });
+          doc.save(now+'-compras.pdf');
+        },
 
     exportarXls() {
       var fecha = new Date();
@@ -256,7 +256,7 @@ export default {
       var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
       var proveedores = XLSX.utils.json_to_sheet(this.compras)
       var wb = XLSX.utils.book_new() // make Workbook of Excel
-      XLSX.utils.book_append_sheet(wb, provedores, this.compras)
+      XLSX.utils.book_append_sheet(wb, proveedores, this.compras)
       XLSX.writeFile(wb,now+'-compras.csv');
     },
 
