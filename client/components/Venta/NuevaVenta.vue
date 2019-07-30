@@ -161,7 +161,6 @@ export default {
       precio: '',
       precioTotal: 0,
       productoSelected: {},
-      clienteSelected: '',
       num: 0,
       id_venta: '',
       errors: [],

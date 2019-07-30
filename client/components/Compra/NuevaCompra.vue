@@ -23,53 +23,57 @@
                     </p>
                     <form  @submit.prevent="guardarLista()" style="margin: 0 auto; margin-top:20px; width:780px;">
                             <div class="input-group form-group">
-                                <div class="input-group-prepend">
+                                <div class="input-group-prepend" style="border-right: 5px solid white">
                                     <span class="input-group-text">Proveedor</span>
                                 </div>
-                                <v-select  class="form-control" :options="proveedor" label="dni" id="proveedorSelect" v-model="proveedorSelected">
-                                  <template slot="option" slot-scope="option">
-                                      {{ option.dni }} {{ option.nombre }}  {{ option.apellido }}
-                                  </template>
-                                </v-select>
+                                <model-list-select class="form-control" :list="proveedor"
+                                                   v-model="proveedorSelected"
+                                                   option-value="id_proveedor"
+                                                   :custom-text="textCliente"
+                                                  >
+                                </model-list-select>
                             </div>
                             <div class="input-group form-group">
-                                <div class="input-group-prepend">
+                                <div class="input-group-prepend" style="border-right: 5px solid white">
                                     <span class="input-group-text">Producto</span>
                                 </div>
-                                <v-select  class="form-control"  :options="producto" label="modelo"  v-model="productoSelected">
-                                  <template class="form-control" slot="option" slot-scope="option">
-                                    {{ option.marca }} {{ option.modelo }}
-                                  </template>
-                                </v-select>
+                                <model-list-select class="form-control" :list="producto"
+                                                   v-model="productoSelected"
+                                                   option-value="id_producto"
+                                                   :custom-text="codeAndNameAndDesc"
+                                                   >
+                                </model-list-select>
                             </div>
-                            <div class="input-group form-group">
-                              <b-input-group prepend="Cantidad">
-                                <b-form-input v-model="num" min="0" readonly></b-form-input>
-                                <b-input-group-append>
-                                  <b-button variant="info" @click="decrementarCantidad()">
-                                        <i class="fas fa-minus"></i>
-                                  </b-button>
-                                  <b-button variant="info" @click="incrementarCantidad()">
-                                        <i class="fas fa-plus"></i>
-                                  </b-button>
-                                </b-input-group-append>
-                              </b-input-group>
-                            </div>
-                            <div class="row">
-                              <div class="col">
-                                <div class="input-group form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Precio Unitario</span>
-                                    </div>
-                                    <input  type="number" min="0" v-model="precioUnitario"  class="form-control">
-                                </div>
+                            <div>
+                              <div class="input-group form-group">
+                                <b-input-group prepend="Cantidad">
+                                  <b-form-input v-model="num" min="0" readonly></b-form-input>
+                                  <b-input-group-append>
+                                    <b-button variant="info" @click="decrementarCantidad()">
+                                          <i class="fas fa-minus"></i>
+                                    </b-button>
+                                    <b-button variant="info" @click="incrementarCantidad()">
+                                          <i class="fas fa-plus"></i>
+                                    </b-button>
+                                  </b-input-group-append>
+                                </b-input-group>
                               </div>
-                              <div class="col">
-                                <div class="input-group form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Precio Total</span>
-                                    </div>
-                                    <input  type="number" min="0"  v-model="precioTotalP"  class="form-control">
+                              <div class="row">
+                                <div class="col">
+                                  <div class="input-group form-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text">Precio Unitario</span>
+                                      </div>
+                                      <input  type="number" min="0" v-model="precioUnitario"  class="form-control">
+                                  </div>
+                                </div>
+                                <div class="col">
+                                  <div class="input-group form-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text">Precio Total</span>
+                                      </div>
+                                      <input  type="number" min="0"  v-model="precioTotalP"  class="form-control">
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -147,6 +151,8 @@
 <script>
 
 import axios from 'axios'
+import { ModelSelect } from 'vue-search-select'
+import { ModelListSelect } from 'vue-search-select'
 import { alertWarningLimiteStock } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
 import { alertSucessCompra,alertCompletarCampos} from '../../assets/sweetAlert.js'
@@ -170,12 +176,11 @@ export default {
       precioTotalP: '',
       precio: '',
       precioTotal: 0,
-      productoSelected: '',
-      proveedorSelected: '',
-      num: '',
+      productoSelected: {},
+      proveedorSelected: {},
+      num: 0,
       id_compra: '',
       errors: []
-
 		}
   },
   computed:{
@@ -185,6 +190,12 @@ export default {
 
   },
   methods: {
+    codeAndNameAndDesc (item) {
+      return `${item.modelo} - ${item.marca} - ${item.precio}`
+    },
+    textCliente(item){
+      return `${item.dni} - ${item.nombre} - ${item.apellido}`
+    },
     getProveedor(){
       axios.get('http://localhost:3000/proveedor').then((response) =>{
         this.proveedor = response.data;
@@ -207,7 +218,7 @@ export default {
                 if (index > -1) {
                   this.producto[index].stock = this.producto[index].stock - this.num;
                 }
-                this.productoSelected = '';
+                this.productoSelected = {};
                 this.num = '';
                 this.precioTotalP = '';
                 this.compraProducto = new CompraProducto();
@@ -303,6 +314,10 @@ export default {
         },
         deep: true
       }
+  },
+  components: {
+    ModelSelect,
+    ModelListSelect
   }
 }
 
@@ -324,10 +339,10 @@ margin:0 auto;
 }
 
 .input-group-prepend span{
-width: auto;
+width: 150px;
 background-color: #FFD700;
 color: black;
-border:0 !important;
+border: none;
 }
 
 .form-control {
@@ -374,6 +389,14 @@ input{
 
 .table td,th {
    text-align: center;
+}
+
+.search{
+    min-width: 0 !important;
+    width: 25px !important;
+    border: none !important;
+    margin-left: -3px !important;
+    border-left: -3px solid !important;
 }
 
 </style>
