@@ -45,15 +45,17 @@ module.exports = {
                         return res.json(errors.array());
                   } else {
                         for (var i=0 ; i < req.body.venta.length ; i++) {
-                        var pool = new pg.Pool(config)
-                        pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
-                            res.sendStatus(200);
-                        }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.venta[i].cantidad,req.body.venta[i].producto.id_producto]).then(response =>{
-                                              pool.end();
-                                        })).catch((error) =>{
-                                          pool.end();
-                                          console.log(error);
-                                      });
+                            var pool = new pg.Pool(config)
+                            pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
+                                  pool.end();
+                                  res.sendStatus(200);
+                            }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.venta[i].cantidad,req.body.venta[i].producto.id_producto]).then(response =>{
+                                  pool.end();
+                                  res.sendStatus(200);
+                            })).catch((error) =>{
+                                  pool.end();
+                                  console.log(error);
+                            });
                         }
                   }
             },

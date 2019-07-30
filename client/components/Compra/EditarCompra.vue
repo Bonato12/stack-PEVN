@@ -84,7 +84,7 @@ export default {
           var mes =  moment(response.data[0].fecha).format("M");;
           var anio =  moment(response.data[0].fecha).format("YYYY");;
           this.date = new Date(anio,mes-1,dia);
-      });
+      })
     },
     editarCompra(){
                       if (this.date){
@@ -93,8 +93,6 @@ export default {
                           this.compra,
                           {
                             headers:{
-                            'Access-Control-Allow-Origin': 'http://localhost:3000/compra/'+this.idc,
-                            'Access-Control-Allow-Methods': 'PUT',
                             'Content-Type': 'application/json'
                              }
                         }).then(alertEditSucessCompra());

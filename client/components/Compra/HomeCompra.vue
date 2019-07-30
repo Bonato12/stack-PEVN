@@ -195,6 +195,7 @@ export default {
         });
     },
     eliminarCompra(){
+      this.showModal = false;
       this.$swal({
       title: 'Estas Seguro?',
       text: "No se podran recuperar los datos!",
@@ -307,7 +308,6 @@ li {
 
 .modal-mask {
   position: fixed;
-  z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;

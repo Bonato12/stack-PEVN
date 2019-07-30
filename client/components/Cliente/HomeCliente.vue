@@ -261,12 +261,12 @@ export default {
       }
   },
   methods: {
-
     getCliente(){
         axios.get('http://localhost:3000/cliente').then((response) =>{
           this.datos = response.data;
-          //console.table(this.datos);
-        });
+        }).catch(error=>{
+          console.log(error);
+        })
     },
     eliminarCliente(cliente) {
         console.log(JSON.stringify(cliente.id_cliente));

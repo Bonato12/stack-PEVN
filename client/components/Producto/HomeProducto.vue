@@ -233,6 +233,7 @@ export default {
       })
     },
     eliminarProducto(id) {
+              this.showModal = false;
               this.$swal({
               title: 'Estas Seguro?',
               text: "No se podran recuperar los datos!",
@@ -260,7 +261,9 @@ export default {
                           alertError();
                       }
                   }
-                })
+                }).catch(error=>{
+                    console.log(error);
+                });
               }
               })
     },

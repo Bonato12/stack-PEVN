@@ -11,7 +11,6 @@ check('venta.*.precio').isLength({ max: 9 }).withMessage('El Precio no puede ten
 check('venta.*.precio').isInt().withMessage('El Precio debe ser un numero entero'),
 check('venta.*.cantidad').isInt().withMessage('La Cantidad debe ser un numero entero'),
 check('venta.*.cantidad').not().isEmpty().withMessage('La Cantidad no puede ser vacio'),
-
 ],ventaController.postVentaProducto);
 router.delete('/venta/:id_venta',ventaController.deleteVenta);
 router.get('/venta/:id_venta', ventaController.getIdVenta);

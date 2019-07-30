@@ -92,8 +92,7 @@ export default {
   data () {
     return {
       cliente: new Cliente(),
-      errors: [],
-
+      errors: []
 		}
   },
   mounted(){
@@ -124,10 +123,8 @@ export default {
                     var _this = this;
                     if (this.errors.length == 0){
                             axios.post('http://localhost:3000/cliente',
-                            this.cliente, // the data to posthttp://localhost:3000/cliente
+                            this.cliente,
                             { headers: {
-                              'Access-Control-Allow-Origin': 'http://localhost:3000/cliente',
-                              'Access-Control-Allow-Methods': 'POST',
                               'Content-Type': 'application/json',
                             },
                           }).then(function(response){
@@ -135,7 +132,6 @@ export default {
                               if (response.data == "OK"){
                                  alertSucessCliente();
                                 _this.cliente = new Cliente();
-                                //_this.$router.push('/HomeCliente');
                               }else {
                                  if (response.data.length > 0) {
                                    for (var i = 0; i < response.data.length ; i++) {
@@ -144,8 +140,9 @@ export default {
                                  }else {
                                      _this.errors.push(response.data.msg);
                                  }
-
                               }
+                            }).catch(function(error){
+                              console.log(error);
                             })
                     }
                   }

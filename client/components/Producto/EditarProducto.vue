@@ -113,6 +113,8 @@ export default {
          axios.get('http://localhost:3000/producto/'+this.idp).then((response) =>{
            console.log(response.data);
            this.producto = new Producto(this.idp,response.data[0].modelo,response.data[0].marca,response.data[0].descripcion,response.data[0].tipoproducto,response.data[0].stock,response.data[0].precio);
+         }).catch(error=>{
+           console.log(error);
          })
       },
       editarProducto(){
@@ -155,7 +157,9 @@ export default {
                     _this.errors.push(response.data.msg);
                 }
              }
-           });
+           }).catch(error=>{
+             console.log(error);
+           })
       }
     }
    }

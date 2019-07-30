@@ -273,7 +273,6 @@ dropbtn {
 .salir{
   width: 220px;
   height:5px;
-  z-index:999
 }
 
 </style>
