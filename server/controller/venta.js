@@ -48,7 +48,6 @@ module.exports = {
                             var pool = new pg.Pool(config)
                             pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
                                   pool.end();
-                                  res.sendStatus(200);
                             }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.venta[i].cantidad,req.body.venta[i].producto.id_producto]).then(response =>{
                                   pool.end();
                                   res.sendStatus(200);

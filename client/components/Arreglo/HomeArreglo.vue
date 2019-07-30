@@ -55,10 +55,6 @@
           <i class="fas fa-plus-circle fa-1x"></i>
           Nuevo Arreglo
         </router-link>
-        <router-link  to="/HomeReparacion" tag="button" class="btn btn-success" style="float: left; margin-left:4px;">
-          <i class="fas fa-tools"></i>
-          Reparaciones
-        </router-link>
         <div class="row" style="float:right; padding-right:15px;">
             <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
                 <i class="fa fa-file-pdf" aria-hidden="true"></i>
