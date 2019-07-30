@@ -112,10 +112,10 @@
           Nueva Venta
         </router-link>
         <div class="row" style="float:right; padding-right:15px;">
-            <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
-                <i class="fa fa-file-pdf" aria-hidden="true"></i>
-                Exportar Pdf
-            </button>
+          <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
+              <i class="fa fa-file-pdf" aria-hidden="true"></i>
+              Exportar Pdf
+          </button>
             <div style="width:5px;">
             </div>
             <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
@@ -137,9 +137,13 @@
 <script>
 
 import axios from 'axios'
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete,alertError,alertWarningFK } from '../../assets/sweetAlert.js';
 import moment from 'moment';
+
 
 export default {
   name: 'HomeVenta',
@@ -230,14 +234,52 @@ export default {
             console.log(this.fecha);
             console.log(this.ventasProducto);
         }).catch(error=>{
-          console.log(error)
+            console.log(error)
         })
     },
     hideModal(){
       this.showModal = false;
-    }
+    },
 
+    exportarPdf(){
+          var columnas = [
+            {title: "NOMBRE", dataKey:"nombre"},
+            {title: "APELLIDO", dataKey:"apellido"},
+            {title: "FECHA", dataKey:"fecha"},
+            {title: "TOTAL", dataKey:"total"}
+            ]
+          var doc = new jsPDF();
+          var fecha = new Date();
+          var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+          doc.addImage(imgData, 'JPEG', 15, 5, 80, 40);
+          doc.text(15,60,'Lista Ventas')
+          doc.text(15, 70, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
+          doc.text(65, 70, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
+          doc.autoTable(columnas,this.ventas, {
+                  theme : 'grid',
+                  margin : {
+                    top : 75
+                  }
+                });
+          doc.save(now+'-ventas.pdf');
+    },
 
+    exportarXls() {
+        var fecha = new Date();
+        var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+        var clientes = XLSX.utils.json_to_sheet(this.ventas);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, clientes, this.ventas);
+        XLSX.writeFile(wb,now+'-venta.xlsx');
+    },
+    exportarCsv() {
+        var fecha = new Date();
+        var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+        var clientes = XLSX.utils.json_to_sheet(this.ventas);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb,clientes, this.ventas);
+        XLSX.writeFile(wb,now+'-venta.csv');
+    },
 
 }
 }

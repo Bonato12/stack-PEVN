@@ -9,13 +9,13 @@ var config = require('../database');
           getReparacion(req,res){
               var pool = new pg.Pool(config)
               pool.connect(function(err, client, done) {
-                client.query("SELECT * FROM reparacion")
+                client.query("SELECT id_reparacion, producto.id_producto, presupuesto.observacion,presupuesto.preciototal, cliente.dni, to_char( fecha_ini, 'DD-MM-YYYY') as fecha_ini,to_char( fecha_fin, 'DD-MM-YYYY') as fecha_fin FROM reparacion,producto, arreglo, presupuesto,cliente where (arreglo.id_arreglo=presupuesto.arreglo)and(presupuesto.id_presupuesto=reparacion.id_presupuesto)and(arreglo.cliente=cliente.id_cliente)and(arreglo.producto=producto.id_producto)")
                   .then(response => {
                     pool.end()
                     res.json(response.rows)
                   })
                   .catch(error => {
-                    pool.end()
+                    pool.end();
                     console.log(error.stack)
                   })
                 done()

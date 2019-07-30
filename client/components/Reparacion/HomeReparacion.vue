@@ -124,6 +124,25 @@
            </div>
          </div>
        </transition>
+       <br>
+       <div class="row" style="float:right; padding-right:15px;">
+         <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
+             <i class="fa fa-file-pdf" aria-hidden="true"></i>
+             Exportar Pdf
+         </button>
+           <div style="width:5px;">
+           </div>
+           <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+             <i class="fa fa-file-excel" aria-hidden="true"></i>
+               Exportar Excel
+           </button>
+           <div style="width:5px;">
+           </div>
+           <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+             <i class="fa fa-file-csv" aria-hidden="true"></i>
+               Exportar Csv
+           </button>
+       </div>
     </div>
 
   </div>
@@ -131,6 +150,9 @@
 
 <script>
   import axios from 'axios'
+  import * as jsPDF from 'jspdf';
+  import 'jspdf-autotable';
+  import XLSX from 'xlsx'
   import { imgData } from '../../assets/imagenPDF';
   import { alertSucessDelete,alertError,alertWarningArregloFK } from '../../assets/sweetAlert.js';
   import moment from 'moment';
@@ -148,8 +170,12 @@
       reparacion: [],
       columns: [
         {
-          label: 'Reparacion',
-          field: 'id_reparacion',
+          label: 'Cliente',
+          field: 'dni',
+        },
+        {
+          label: 'Producto',
+          field: 'id_producto',
         },
         {
           label: 'Fecha Inicial',
@@ -161,12 +187,17 @@
         },
         {
           label: 'Presupuesto',
-          field: 'id_presupuesto',
+          field: 'observacion',
+        },
+        {
+          label: 'Precio Total',
+          field: 'preciototal',
+          width: '150px',
         },
         {
           label: 'Opciones',
           field: 'opciones',
-          width: '150px',
+          width: '110px',
         }
       ],
 		}
@@ -185,7 +216,50 @@
     },
     hideModal(){
       this.showModal = false;
-    }
+    },
+
+    exportarPdf(){
+          var columnas = [
+            {title: "CLIENTE", dataKey:"dni"},
+            {title: "PRODUCTO", dataKey:"id_producto"},
+            {title: "FECHA INICIAL", dataKey:"fecha_ini"},
+            {title: "FECHA FINAL", dataKey:"fecha_fin"},
+            {title: "TOTAL", dataKey:"preciototal"}
+            ]
+          var doc = new jsPDF();
+          var fecha = new Date();
+          var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+          doc.addImage(imgData, 'JPEG', 15, 5, 80, 40);
+          doc.text(15,60,'Lista de Reparaciones')
+          doc.text(15, 70, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
+          doc.text(65, 70, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
+          doc.autoTable(columnas,this.reparacion, {
+          				theme : 'grid',
+          				margin : {
+          					top : 75
+          				}
+                });
+          doc.save(now+'-reparacion.pdf');
+        },
+
+    exportarXls() {
+      var fecha = new Date();
+      var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+      var reparar = XLSX.utils.json_to_sheet(this.reparacion)
+      var wb = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, reparar, this.reparacion)
+      XLSX.writeFile(wb,now+'-reparacion.xlsx');
+    },
+    exportarCsv() {
+      var fecha = new Date();
+      var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+      var reparar = XLSX.utils.json_to_sheet(this.reparacion)
+      var wb = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, reparar, this.reparacion)
+      XLSX.writeFile(wb,now+'-reparacion.csv');
+    },
+
+
 
 
 }

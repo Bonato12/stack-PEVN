@@ -271,3 +271,12 @@ select * from reparacion where id_reparacion=8
 SELECT PP.id_presupuestoproducto,PR.modelo,PP.cantidad,PP.precio FROM presupuestoProducto PP, producto PR WHERE PP.producto = PR.id_producto
 
 SELECT * FROM presupuestoproducto;
+
+
+
+SELECT id_reparacion,presupuesto.id_presupuesto, cliente.dni, to_char( fecha_ini, 'DD-MM-YYYY') as fecha_ini,to_char( fecha_fin, 'DD-MM-YYYY') as fecha_fin
+FROM reparacion, arreglo, presupuesto,cliente
+where (arreglo.id_arreglo=presupuesto.arreglo)and(presupuesto.id_presupuesto=reparacion.id_presupuesto)and(arreglo.cliente=cliente.id_cliente)
+
+
+SELECT * FROM presupuesto

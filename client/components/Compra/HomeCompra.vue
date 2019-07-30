@@ -191,8 +191,9 @@ export default {
         axios.get('http://localhost:3000/compra').then((response) =>{
           this.compras = response.data;
           console.log(this.compras);
-
-        });
+        }).catch(error=>{
+          console.log(error);
+        })
     },
     eliminarCompra(){
       this.showModal = false;
