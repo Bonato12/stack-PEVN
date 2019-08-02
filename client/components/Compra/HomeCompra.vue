@@ -104,33 +104,35 @@
                 </div>
               </transition>
         </div>
-     </div>
+    </div>
     <br>
         <router-link to="/NuevaCompra" tag="button" class="btn btn-warning" style="float: left;">
           <i class="fas fa-plus-circle fa-1x"></i>
           Nueva Compra
         </router-link>
-        <div class="row" style="float:right; padding-right:15px;">
+        <div class="row" style="float:right;">
+          <div class="col">
             <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
                 <i class="fa fa-file-pdf" aria-hidden="true"></i>
-                Exportar Pdf
+                Exportar
             </button>
-            <div style="width:5px;">
-            </div>
-            <button type="button" class="btn btn-success"  v-on:click="exportarXls()" >
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success" v-on:click="exportarXls()" >
               <i class="fa fa-file-excel" aria-hidden="true"></i>
-                Exportar Excel
+                Exportar
             </button>
-            <div style="width:5px;">
-            </div>
-            <button type="button" class="btn btn-info"  v-on:click="exportarCsv()">
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-info" v-on:click="exportarCsv()">
               <i class="fa fa-file-csv" aria-hidden="true"></i>
-                Exportar Csv
+                Exportar
             </button>
+          </div>
         </div>
   </div>
   <br>
-  </div>
+</div>
 </template>
 
 <script>

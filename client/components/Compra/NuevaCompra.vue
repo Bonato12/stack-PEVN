@@ -45,20 +45,22 @@
                                 </model-list-select>
                             </div>
                             <div>
-                              <div class="input-group form-group">
-                                <b-input-group  prepend="Cantidad">
-                                  <b-form-input v-model="num" min="0" readonly></b-form-input>
-                                  <b-input-group-append>
-                                    <b-button variant="info" @click="decrementarCantidad()">
-                                          <i class="fas fa-minus"></i>
-                                    </b-button>
-                                    <b-button variant="info" @click="incrementarCantidad()">
-                                          <i class="fas fa-plus"></i>
-                                    </b-button>
-                                  </b-input-group-append>
-                                </b-input-group>
-                              </div>
                               <div class="row">
+                                <div class="col">
+                                  <div class="input-group form-group">
+                                    <b-input-group  prepend="Cantidad">
+                                      <b-form-input v-model="num" min="0" readonly></b-form-input>
+                                      <b-input-group-append>
+                                        <b-button variant="info" @click="decrementarCantidad()">
+                                              <i class="fas fa-minus"></i>
+                                        </b-button>
+                                        <b-button variant="info" @click="incrementarCantidad()">
+                                              <i class="fas fa-plus"></i>
+                                        </b-button>
+                                      </b-input-group-append>
+                                    </b-input-group>
+                                  </div>
+                                </div>
                                 <div class="col">
                                   <div class="input-group form-group">
                                       <div class="input-group-prepend">
@@ -72,7 +74,7 @@
                                       <div class="input-group-prepend">
                                           <span class="input-group-text">Precio Total</span>
                                       </div>
-                                      <input  type="number" min="0"  v-model="precioTotalP"  class="form-control">
+                                      <input  type="number" min="0"  v-model="precioTotalP"  class="form-control" readonly>
                                   </div>
                                 </div>
                               </div>

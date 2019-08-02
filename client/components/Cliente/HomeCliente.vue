@@ -51,83 +51,6 @@
             </template>
      </vue-good-table>
      </div>
-       <transition v-if="showModal" class="animation fadeInLeft" name="modal">
-         <div class="modal-mask">
-           <div class="modal-wrapper">
-             <div class="modal-container animated fadeInLeft">
-               <div class="modal-header" style="background-color:#424242;">
-                 <slot name="header">
-                   <h2 style="color:white; text-align:left;">
-                     <i class="fas fa-id-card"></i>
-                     Detalle del Cliente #{{cliente.id_cliente}}
-                   </h2>
-                   <button class="modal-default-button" @click="hide()">
-                    <i class="far fa-times-circle"></i>
-                   </button>
-                 </slot>
-               </div>
-               <div class="modal-body" style="background-color:#f1f8e9;">
-                 <slot name="body">
-                    <b-row class="mb-1">
-                      <b-col cols="3">Dni:</b-col>
-                        <b-col>{{cliente.dni}}</b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Nombre:</b-col>
-                        <b-col>{{cliente.nombre}}</b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Apellido:</b-col>
-                        <b-col>{{cliente.apellido}}</b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Direccion:</b-col>
-                        <b-col>{{cliente.direccion}}</b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Telefono:</b-col>
-                        <b-col>{{cliente.telefono}}</b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Mail:</b-col>
-                        <b-col>{{cliente.mail}}</b-col>
-                    </b-row>
-                 </slot>
-               </div>
-               <div class="modal-header" style="background-color:#FEC404;" >
-                 <h2 class="opciones" style="color:white;">Opciones</h2>
-                 <div class="row" style="float:right; padding-right:15px;">
-                      <div>
-                        <button class="btn btn-danger" v-on:click="eliminarCliente(cliente.id_cliente)" title="Eliminar Cliente">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                      </div>
-                      <div style="width:5px;">
-                      </div>
-                      <div>
-                        <router-link class="btn btn-dark" :to="/EditarCliente/+cliente.id_cliente" tag="button" title="Editar Cliente">
-                            <i class="fas fa-edit fa-1x"></i>
-
-                        </router-link>
-                      </div>
-                      <div style="width:5px;">
-                      </div>
-                      <div>
-                        <button  class="btn btn-success" v-on:click="enviarMail()" title="Enviar Mail">
-                            <i class="fas fa-envelope fa-1x"></i>
-                        </button>
-                      </div>
-                  </div>
-              </div>
-             </div>
-           </div>
-         </div>
-       </transition>
        <transition v-if="showModalMail" class="animation fadeInLeft" name="modal">
          <div class="modal-mask">
            <div class="modal-wrapper">
@@ -163,34 +86,34 @@
            </div>
          </div>
        </transition>
-    <div>
+       <div>
         <br>
         <router-link to="/NuevoCliente" tag="button" class="btn btn-warning" style="float: left;"  >
             <i class="fas fa-plus-circle fa-1x"></i>
             Nuevo Cliente
         </router-link>
-        <div class="row" style="float:right; padding-right:15px;">
+        <div class="row" style="float:right;">
+          <div class="col">
             <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
                 <i class="fa fa-file-pdf" aria-hidden="true"></i>
-                Exportar Pdf
+                Exportar
             </button>
-            <div style="width:5px;">
-            </div>
+          </div>
+          <div class="col">
             <button type="button" class="btn btn-success" v-on:click="exportarXls()" >
               <i class="fa fa-file-excel" aria-hidden="true"></i>
-                Exportar Excel
+                Exportar
             </button>
-            <div style="width:5px;">
-            </div>
+          </div>
+          <div class="col">
             <button type="button" class="btn btn-info" v-on:click="exportarCsv()">
               <i class="fa fa-file-csv" aria-hidden="true"></i>
-                Exportar Csv
+                Exportar
             </button>
+          </div>
          </div>
        </div>
     </div>
-    <router-view class="view three" name="b"></router-view>
-
   </div>
 </template>
 
@@ -326,7 +249,7 @@ export default {
       var fecha = new Date();
       var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
       var clientes = XLSX.utils.json_to_sheet(this.datos)
-      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      var wb = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(wb, clientes, this.datos)
       XLSX.writeFile(wb,now+'-clientes.xlsx');
     },
@@ -334,7 +257,7 @@ export default {
       var fecha = new Date();
       var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
       var clientes = XLSX.utils.json_to_sheet(this.datos)
-      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      var wb = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(wb, clientes, this.datos)
       XLSX.writeFile(wb,now+'-clientes.csv');
     },
@@ -362,7 +285,7 @@ export default {
             'Access-Control-Allow-Origin': 'http://localhost:3000/mail',
             'Content-Type': 'application/json'
              }
-        }).then(alertSucessMail());
+        }).then(this.showModalMail = false, alertSucessMail());
     },
   }
 }
