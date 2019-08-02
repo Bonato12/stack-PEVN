@@ -40,7 +40,7 @@
                                 <model-list-select class="form-control" :list="producto"
                                                    v-model="productoSelected"
                                                    option-value="id_producto"
-                                                   :custom-text="codeAndNameAndDesc"
+                                                   :custom-text="textProducto"
                                                    >
                                 </model-list-select>
                             </div>
@@ -169,14 +169,12 @@ export default {
   },
   computed:{
 
-
-
-
   },
   mounted(){
+
   },
   methods: {
-      codeAndNameAndDesc (item) {
+      textProducto(item) {
         return `${item.modelo} - ${item.marca} - ${item.precio}`
       },
       textCliente(item){
@@ -216,14 +214,14 @@ export default {
               }
       },
       incrementarCantidad(){
-            console.log(this.productoSelected);
-        //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
-            if(this.productoSelected.precio){
-                if (this.num ==  this.productoSelected.stock){
-                    alertWarningLimiteStock();
-                }else{
-                    this.num++;
-                    this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+          console.log(this.productoSelected);
+          //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
+          if(this.productoSelected.precio){
+              if (this.num ==  this.productoSelected.stock){
+                  alertWarningLimiteStock();
+              }else{
+                  this.num++;
+                  this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
                 }
             }
       },
@@ -268,52 +266,48 @@ export default {
               if (this.errors.length == 0){
                   //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
                   this.venta.total = this.precioTotal;
-                                        axios.post('http://localhost:3000/venta',
-                                            {
-                                            venta: this.venta
-                                            },
-                                            {
-                                              headers:{
-                                              'Access-Control-Allow-Origin': 'http://localhost:3000/venta',
-                                              'Content-Type': 'application/json'
-                                               }
-                                          }).then(response=>{
-                                            console.log(response.data);
-                                            this.id_venta = response.data[0].id_venta
-                                            this.postVentaProducto(this.id_venta)
-                                          })
-
-                                    }
+                  axios.post('http://localhost:3000/venta',
+                      {
+                        venta: this.venta
                       },
-          postVentaProducto(id){
-            var _this = this;
-            console.log("El id es:",id)
-            axios.post('http://localhost:3000/ventaProducto',
-                {
-                id_venta: id,
-                venta: this.Lista
-                },
-                {
-                  headers:{
-                  'Access-Control-Allow-Origin': 'http://localhost:3000/ventaProducto',
-                  'Content-Type': 'application/json'
-                   }
-              }).then(function(response){
-                  console.log(response);
-                  if (response.data == "OK"){
-                    alertSucessVenta();
-                  }else {
-                     if (response.data.length > 0) {
-                       for (var i = 0; i < response.data.length ; i++) {
-                              _this.errors.push(response.data[i].msg);
-                        }
-                     }else {
-                         _this.errors.push(response.data.msg);
-                     }
-                  }
-                })
-
+                      {
+                      headers:{
+                        'Content-Type': 'application/json'
+                      }
+                  }).then(response=>{
+                          console.log(response.data);
+                          this.id_venta = response.data[0].id_venta
+                          axios.post('http://localhost:3000/ventaProducto',
+                              {
+                              id_venta: this.id_venta,
+                              venta: this.Lista
+                              },
+                              {
+                                headers:{
+                                'Content-Type': 'application/json'
+                                 }
+                              }).then(function(response){
+                                console.log(response);
+                                if (response.data == "OK"){
+                                    alertSucessVenta();
+                                }else {
+                                     if (response.data.length > 0) {
+                                       for (var i = 0; i < response.data.length ; i++) {
+                                            _this.errors.push(response.data[i].msg);
+                                        }
+                                     }else {
+                                         _this.errors.push(response.data.msg);
+                                     }
+                                }
+                              }).catch(error =>{
+                                console.log(error);
+                              })
+                      }).catch(error=>{
+                        console.log(error);
+                      })
+              }
           },
+
       },
       components: {
       ModelSelect,

@@ -275,6 +275,7 @@ export default {
                           {
                           compra: this.compra
                           }).then(response=>{
+                                  console.log(response.data);
                                   this.id_compra = response.data[0].id_compra
                                   axios.post('http://localhost:3000/compraProducto',
                                       {

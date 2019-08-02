@@ -90,60 +90,60 @@ export default {
 
   },
   computed:{
-    isActiveVenta() {
-    return this.$route.matched.some(route => route.name === 'NuevaVenta' ||  route.name === 'EditarVenta' )
-    },
-    isActiveProducto() {
-    return this.$route.matched.some(route => route.name === 'NuevoProducto' ||  route.name === 'EditarProducto' )
-    },
-    isActiveCliente() {
-    return this.$route.matched.some(route => route.name === 'NuevoCliente' ||  route.name === 'EditarCliente' )
-    },
-    isActiveProveedor() {
-    return this.$route.matched.some(route => route.name === 'NuevoProveedor' ||  route.name === 'EditarProveedor' )
-    },
-    isActiveCompra() {
-    return this.$route.matched.some(route => route.name === 'NuevaCompra' ||  route.name === 'EditarCompra' )
-    },
-    isActiveArreglo() {
-    return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto')
-    },
-    isActiveUsuario() {
-    return this.$route.matched.some(route => route.name === 'NuevoUsuario' ||  route.name === 'HomeUsuario')
-    },
-    isActiveReparacion() {
-    return this.$route.matched.some(route => route.name === 'HomeReparacion')
-    },
+      isActiveVenta() {
+          return this.$route.matched.some(route => route.name === 'NuevaVenta' ||  route.name === 'EditarVenta' )
+      },
+      isActiveProducto() {
+          return this.$route.matched.some(route => route.name === 'NuevoProducto' ||  route.name === 'EditarProducto' )
+      },
+      isActiveCliente() {
+          return this.$route.matched.some(route => route.name === 'NuevoCliente' ||  route.name === 'EditarCliente' )
+      },
+      isActiveProveedor() {
+          return this.$route.matched.some(route => route.name === 'NuevoProveedor' ||  route.name === 'EditarProveedor' )
+      },
+      isActiveCompra() {
+          return this.$route.matched.some(route => route.name === 'NuevaCompra' ||  route.name === 'EditarCompra' )
+      },
+      isActiveArreglo() {
+          return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto')
+      },
+      isActiveUsuario() {
+          return this.$route.matched.some(route => route.name === 'NuevoUsuario' ||  route.name === 'HomeUsuario')
+      },
+      isActiveReparacion() {
+          return this.$route.matched.some(route => route.name === 'HomeReparacion')
+      },
 
   },
   methods: {
-    control(){
-      let usuario = firebase.auth().currentUser;
-      if (usuario != null){
-          console.log(usuario);
-          this.autenticado = true;
-          this.$router.push('/Home');
-          this.user = usuario.email;
+      control(){
+        let usuario = firebase.auth().currentUser;
+        if (usuario != null){
+            console.log(usuario);
+            this.autenticado = true;
+            this.$router.push('/Home');
+            this.user = usuario.email;
 
-      }
-      else {
-        this.$router.push('/Login');
-      }
-    },
-    logout(){
-      firebase.auth().signOut().then(function() {
-          //this.autenticado = false;
-        }).catch(function(error) {
-           console.log(error);
-        });
+        }
+        else {
+          this.$router.push('/Login');
+        }
+      },
+      logout(){
+        firebase.auth().signOut().then(function() {
+            //this.autenticado = false;
+          }).catch(function(error) {
+             console.log(error);
+          });
 
-    },
+      },
   },
   filters: {
-        cortar(value) {
-            var palabra = value.split("@");
-            return palabra[0];
-        }
+      cortar(value){
+          var palabra = value.split("@");
+          return palabra[0];
+      }
     }
 
 

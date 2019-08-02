@@ -12,12 +12,12 @@ module.exports = {
               pool.connect(function(err, client, done) {
                 client.query("SELECT pr.nombre, pr.apellido,to_char( c.fecha, 'DD-MM-YYYY') as fecha, c.total, c.id_compra FROM proveedor pr,  compra c WHERE pr.id_proveedor = c.id_proveedor")
                   .then(response => {
-                    pool.end()
-                    res.json(response.rows)
+                    pool.end();
+                    res.send(response.rows)
                   })
                   .catch(error => {
-                    pool.end()
-                    console.log(error.stack)
+                    pool.end();
+                    console.log(error.stack);
                   })
                 done()
               })
@@ -28,7 +28,7 @@ module.exports = {
                 pool.query("INSERT INTO compra(id_proveedor,fecha,total) VALUES($1,$2,$3) RETURNING id_compra",[req.body.compra.proveedor.id_proveedor,req.body.compra.fecha,req.body.compra.total]).then(response=> {
                     pool.end();
                     console.log(response.rows)
-                    res.json(response.rows);
+                    res.send(response.rows);
                 }).catch((error) =>{
                     pool.end();
                     console.log(error);
