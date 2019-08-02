@@ -184,7 +184,6 @@ rutas.beforeEach((to, from, next) => {
                 next(false);
             }else if(!autorizacion && usuario){
                     axios.get('http://localhost:3000/usuario/'+usuario.uid).then((response) =>{
-                        console.log(response.data[0].perfil);
                         var perfil = response.data[0].perfil;
                         if (perfil == 'ADMINISTRADOR'){
                               next();

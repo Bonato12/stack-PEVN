@@ -17,20 +17,16 @@
                       <div class="form-group row">
                         <label  class="col">Fecha Inicial</label>
                         <div class="col-10">
-                          <datepicker :bootstrap-styling="true" v-model="dateIni" :language="es" name="fecha"
-                                    @opened="datepickerAbierto"
-                                    @selected="fechaSeleccionada"
-                                    @closed="datepickerCerrado">
+                          <datepicker :bootstrap-styling="true" v-model="dateIni"  name="fecha"
+                                  >
                           </datepicker>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label class="col">Fecha Final</label>
                         <div class="col-10">
-                          <datepicker :bootstrap-styling="true" v-model="dateFin" :language="es" name="fecha"
-                                    @opened="datepickerAbierto"
-                                    @selected="fechaSeleccionada"
-                                    @closed="datepickerCerrado">
+                          <datepicker :bootstrap-styling="true" v-model="dateFin"  name="fecha"
+                                  >
                           </datepicker>
                         </div>
                       </div>
@@ -38,7 +34,7 @@
                       <br>
                       <div>
                           <div class="d-flex justify-content-end" style="margin:0 auto; width:500px;">
-                              <router-link to="/HomeVenta" tag="button" class="btn btn-info">
+                              <router-link to="/HomeReparacion" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
@@ -76,7 +72,8 @@ export default {
       reparacion: new Reparacion(),
       fecha: '',
       dateIni: '',
-      dateFin: ''
+      dateFin: '',
+      mail: ''
 		}
   },
   computed:{
@@ -89,17 +86,18 @@ export default {
     getIdReparacion(){
       console.log(this.idr);
       axios.get('http://localhost:3000/reparacion/'+this.idr).then((response) =>{
-          var diaIni =  moment(response.data[0].fecha_ini).format("D");;
-          var mesIni =  moment(response.data[0].fecha_ini).format("M");;
+          this.mail = response.data[0].mail;
+          console.log(this.mail);
+          var diaIni =  moment(response.data[0].fecha_ini).format("D");
+          var mesIni =  moment(response.data[0].fecha_ini).format("M");
           var anioIni =  moment(response.data[0].fecha_ini).format("YYYY");
+          this.dateIni = new Date(anioIni,mesIni-1,diaIni);
           if (response.data[0].fecha_fin){
-            var diaFin =  moment(response.data[0].fecha_fin).format("D");;
-            var mesFin =  moment(response.data[0].fecha_fin).format("M");;
+            var diaFin =  moment(response.data[0].fecha_fin).format("D");
+            var mesFin =  moment(response.data[0].fecha_fin).format("M");
             var anioFin =  moment(response.data[0].fecha_fin).format("YYYY");
             this.dateFin = new Date(anioFin,mesFin-1,diaFin);
           }
-
-          this.dateIni = new Date(anioIni,mesIni-1,diaIni);
 
       });
     },
@@ -111,23 +109,27 @@ export default {
                           this.reparacion,
                           {
                             headers:{
-                            'Access-Control-Allow-Methods': 'PUT',
                             'Content-Type': 'application/json'
                              }
-                        }).then(alertEditSucessCompra());
+                        }).then(this.enviarMail());
                       }else {
                         alertCompletarCampos();
                       }
               },
-                  datepickerAbierto: function() {
-                        console.log('El datepicker ha sido abierto');
-                   },
-                   fechaSeleccionada: function() {
-                       console.log('Una fecha ha sido seleccionada');
-                   },
-                   datepickerCerrado: function() {
-                       console.log('El datepicker ha sido cerrado');
-                   }
+              enviarMail() {
+                    console.log(this.mail);
+                    axios.post('http://localhost:3000/emailConfirmar',
+                      {
+                        mensaje: 'ESTIMADO SU REPARACION ESTA HECHA',
+                        destinatario : this.mail
+                      },
+                      {
+                      headers:{
+                      'Content-Type': 'application/json'
+                       }
+                  }).then();
+              },
+
   }
 }
 

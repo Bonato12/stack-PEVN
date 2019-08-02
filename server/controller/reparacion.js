@@ -24,7 +24,7 @@ var config = require('../database');
           getIdReparacion(req,res){
               var pool = new pg.Pool(config)
               pool.connect(function(err, client, done) {
-                client.query('SELECT * FROM reparacion WHERE id_reparacion=($1)', [req.params.id_reparacion])
+                client.query("SELECT id_reparacion, producto.id_producto, presupuesto.observacion,presupuesto.preciototal, cliente.dni,cliente.mail, fecha_ini, fecha_fin FROM reparacion,producto, arreglo, presupuesto,cliente where (arreglo.id_arreglo=presupuesto.arreglo)and(presupuesto.id_presupuesto=reparacion.id_presupuesto)and(arreglo.cliente=cliente.id_cliente)and(arreglo.producto=producto.id_producto) AND id_reparacion=($1)", [req.params.id_reparacion])
                   .then(response => {
                     pool.end();
                     res.json(response.rows);

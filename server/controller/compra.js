@@ -27,7 +27,6 @@ module.exports = {
                 var pool = new pg.Pool(config)
                 pool.query("INSERT INTO compra(id_proveedor,fecha,total) VALUES($1,$2,$3) RETURNING id_compra",[req.body.compra.proveedor.id_proveedor,req.body.compra.fecha,req.body.compra.total]).then(response=> {
                     pool.end();
-                    console.log(response.rows)
                     res.send(response.rows);
                 }).catch((error) =>{
                     pool.end();

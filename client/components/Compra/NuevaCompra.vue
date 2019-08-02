@@ -40,13 +40,13 @@
                                 <model-list-select class="form-control" :list="producto"
                                                    v-model="productoSelected"
                                                    option-value="id_producto"
-                                                   :custom-text="codeAndNameAndDesc"
+                                                   :custom-text="textProducto"
                                                    >
                                 </model-list-select>
                             </div>
                             <div>
                               <div class="input-group form-group">
-                                <b-input-group prepend="Cantidad">
+                                <b-input-group  prepend="Cantidad">
                                   <b-form-input v-model="num" min="0" readonly></b-form-input>
                                   <b-input-group-append>
                                     <b-button variant="info" @click="decrementarCantidad()">
@@ -190,7 +190,7 @@ export default {
 
   },
   methods: {
-    codeAndNameAndDesc (item) {
+    textProducto (item) {
       return `${item.modelo} - ${item.marca} - ${item.precio}`
     },
     textCliente(item){
@@ -344,6 +344,10 @@ width: 150px;
 background-color: #FFD700;
 color: black;
 border: none;
+}
+
+b-input-group{
+  width: 150px;
 }
 
 .form-control {
