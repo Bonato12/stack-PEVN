@@ -57,7 +57,7 @@
 import axios from 'axios'
 import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertEditSucessCompra } from '../../assets/sweetAlert.js'
+import { alertEditSucessReparacion } from '../../assets/sweetAlert.js'
 import Reparacion from '../../models/Reparacion';
 import moment from 'moment';
 
@@ -111,14 +111,15 @@ export default {
                             headers:{
                             'Content-Type': 'application/json'
                              }
-                        }).then(this.enviarMail());
+                        }).then(alertEditSucessReparacion(),
+                        this.enviarMail());
                       }else {
                         alertCompletarCampos();
                       }
               },
               enviarMail() {
                     console.log(this.mail);
-                    axios.post('http://localhost:3000/emailConfirmar',
+                    axios.post('http://localhost:3000/email',
                       {
                         mensaje: 'ESTIMADO SU REPARACION ESTA HECHA',
                         destinatario : this.mail
@@ -127,7 +128,7 @@ export default {
                       headers:{
                       'Content-Type': 'application/json'
                        }
-                  }).then();
+                  })
               },
 
   }

@@ -9,7 +9,7 @@ const {check, validationResult} = require('express-validator');
 
 module.exports = {
 
-          getCliente(req,res){
+        getCliente(req,res){
              var pool = new pg.Pool(config)
              pool.connect(function(err, client, done) {
                client.query("SELECT * FROM cliente")

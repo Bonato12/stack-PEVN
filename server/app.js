@@ -47,10 +47,6 @@ app.use('/', presupuestoRouter);
 app.use('/', presupuestoProductoRouter);
 app.use('/', reparacionRouter);
 
-//app.use('/',adminRouter);
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

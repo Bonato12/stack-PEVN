@@ -27,11 +27,13 @@ export function alertEditSucessCompra(){
 export function alertEditSucessVenta(){
   Swal.fire( 'Exito!','Venta Editada Correctamente!','success');
 }
+
+export function alertEditSucessReparacion(){
+  Swal.fire( 'Exito!','Reparacion Editada Correctamente!','success');
+}
 export function alertError(){
    Swal.fire( 'Error!','No Se Pudo Guardar Correctamente!','error');
 }
-
-
 
 export function alertSucessProveedor(){
    Swal.fire( 'Exito!','Nuevo Proveedor Añadido!','success');
