@@ -161,7 +161,7 @@ export default {
       precio: '',
       precioTotal: 0,
       productoSelected: {},
-      num: 0,
+      num: '',
       id_venta: '',
       errors: [],
       }
@@ -316,8 +316,8 @@ export default {
     watch: {
         productoSelected:{
           handler () {
-            this.num = 0;
-            this.precio = '';
+            this.num = 1;
+            this.precio = this.productoSelected.precio;
           },
           deep: true
         }

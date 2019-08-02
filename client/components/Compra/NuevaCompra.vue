@@ -62,7 +62,7 @@
                                 <div class="col">
                                   <div class="input-group form-group">
                                       <div class="input-group-prepend">
-                                          <span class="input-group-text">Precio Unitario</span>
+                                          <span class="input-group-text">Precio</span>
                                       </div>
                                       <input  type="number" min="0" v-model="precioUnitario"  class="form-control">
                                   </div>
@@ -78,12 +78,13 @@
                               </div>
                             </div>
                             <div>
-                              <button class="btn" type="submit"  style="background-color:#FFD700; width:120px; border-radius:5px;" title="Añadir al Carrito">
+                              <button class="btn" type="submit"  style="float:left; background-color:#FFD700; width:120px; border-radius:5px;" title="Añadir al Carrito">
                                   <i class="fas fa-cart-plus"></i>
                                   Añadir
                               </button>
                             </div>
                     </form>
+                    <br>
                     <br>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin:0 auto; width:780px;">
                                   <div>
@@ -118,25 +119,25 @@
                                           </button>
                                       </td>
                                     </tr>
-                                    <tr>
-                                    </tr>
                                   </tbody>
                                 </table>
-                                <div v-if="this.precioTotal" style="text-align:right; color:white;">
-                                  <h3>
-                                    <i class="fas fa-coins"></i>
-                                    <i class="fas fa-money-bill-alt"></i>
-                                    Total $: {{this.precioTotal}} </h3>
+                                <div style="margin-top:-17px;">
+                                  <div class="card-header" style="background-color:#04B45F; border-radius:none; color:black; text-align:right; " v-if="this.precioTotal">
+                                    <h3>
+                                      <i class="fas fa-coins"></i>
+                                      <i class="fas fa-money-bill-alt"></i>
+                                      Total $: {{this.precioTotal}} </h3>
+                                  </div>
                                 </div>
                           </div>
                           <br>
                           <div class="d-flex justify-content-end" style="margin:0 auto; width:780px;">
-                              <router-link to="/HomeCompra" tag="button" class="btn btn-info">
+                              <router-link to="/HomeCompra" tag="button" class="btn" style="color:black; background-color:#FFD700;">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:3px;"></div>
-                              <button v-on:click="nuevaCompra()" class="btn btn-success">
+                              <button v-on:click="nuevaCompra()" class="btn" style="color:black; background-color:#FFD700;">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -178,7 +179,7 @@ export default {
       precioTotal: 0,
       productoSelected: {},
       proveedorSelected: {},
-      num: 0,
+      num: '',
       id_compra: '',
       errors: []
 		}
@@ -302,7 +303,7 @@ export default {
   watch: {
       productoSelected:{
         handler () {
-          this.num = 0;
+          this.num = 1;
           this.precioTotalP = '';
           this.precioUnitario = '';
           this.precioUnitario = this.productoSelected.precio;
@@ -340,7 +341,7 @@ margin:0 auto;
 }
 
 .input-group-prepend span{
-width: 150px;
+width: auto;
 background-color: #FFD700;
 color: black;
 border: none;
@@ -356,23 +357,19 @@ b-input-group{
     background-color: white;
 }
 
-.btns{
-  margin-left: 2px;
+.btn{
   cursor:pointer;
   display:inline-block;
-  float:right;
-  width:120px;
-  height:40px;
-  margin-top:-10px;
+  width:auto;
+  height:auto;
   border:none;
   /*background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
-  color: black !important;
 }
 
-.btns:hover{
+.btn:hover{
      background-color: white  !important;
      color: black;
 }
