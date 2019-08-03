@@ -13,6 +13,7 @@ import {store} from './store.js';
 import Datepicker from 'vuejs-datepicker';
 import { firebase } from './firebase.js'
 
+
 Vue.use(VueGoodTablePlugin);
 Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue);
