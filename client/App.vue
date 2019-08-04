@@ -4,7 +4,7 @@
                 <div style="width:70px;">
                     <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
                 </div>
-                <div class="navbar-collapse" style="margin-left:150px;">
+                <div class="navbar-collapse" style="margin-left:200px;">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
                             <router-link class="item"   tag="a" :class="{ 'router-link-active': isActiveCliente }" active-class="activo"   to="/HomeCliente">
@@ -31,16 +31,20 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="item" :class="{ 'router-link-active': isActiveArreglo }"   tag="a"active-class="activo"   to="/HomeArreglo">
-                              <i class="fas fa-toolbox"></i>
-                              Arreglos
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="item" :class="{ 'router-link-active': isActiveReparacion }"   tag="a"active-class="activo"   to="/HomeReparacion">
-                              <i class="fas fa-tools"></i>
-                              Reparaciones
-                            </router-link>
+                                <router-link class="item" id="arreglo" :class="{ 'router-link-active': isActiveArreglo }"   tag="a"active-class="activo"   to="/HomeArreglo">
+                                 <i class="fas fa-toolbox"></i>
+                                 Arreglos
+                               </router-link>
+                            <div class="dropdown-content">
+                                <router-link class="item" :class="{ 'router-link-active': isActiveArreglo }"   tag="a"active-class="activo"   to="/HomeArreglo">
+                                 <i class="fas fa-toolbox"></i>
+                                 Arreglos
+                               </router-link>
+                               <router-link class="item" :class="{ 'router-link-active': isActiveReparacion }"   tag="a"active-class="activo"   to="/HomeReparacion">
+                                 <i class="fas fa-tools"></i>
+                                 Reparaciones
+                               </router-link>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <router-link  class="item" tag="a" :class="{ 'router-link-active': isActiveProveedor }" active-class="activo"   to="/HomeProveedor">
@@ -67,7 +71,9 @@
                     </div>
                 </div>
             </nav>
-        <router-view></router-view>
+        <router-view>
+          <vue-snotify></vue-snotify>
+        </router-view>
   </div>
 </template>
 <script>
@@ -149,8 +155,40 @@ export default {
 
 }
 </script>
-
 <style>
+
+.dropbtn {
+
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+#item a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.nav-item:hover .dropdown-content {display: block;}
+
+
 body,html{
   background-image: url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');
   background-size: cover;
@@ -159,18 +197,18 @@ body,html{
   font-family: 'Numans', sans-serif;
 }
 
-
+/*
 .navbar{background:#222222;}
 .nav-item::after{content:'';display:block;width:0px;height:1px;background:#fec400;transition: 0.2s;}
 .nav-item:hover::after{width:100%;}
 .nav-link{padding:15px 5px;transition:0.2s;}
-
+*/
 
 
 .activo{
     background-color: #fec400;
     color: black;
-    height: 123%;
+    height: 163%;
     width:auto;
     margin-top:-55;
 
@@ -180,7 +218,7 @@ body,html{
 .router-link-active{
   background-color: #fec400;
   color: black;
-  height: 123%;
+  height: 153%;
   width:auto;
   margin-top:-55;
 

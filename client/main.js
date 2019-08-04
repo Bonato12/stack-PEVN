@@ -12,8 +12,11 @@ import 'vue-good-table/dist/vue-good-table.css'
 import {store} from './store.js';
 import Datepicker from 'vuejs-datepicker';
 import { firebase } from './firebase.js'
+import Snotify from 'vue-snotify';
+import 'vue-snotify/styles/material.css';
 
 
+Vue.use(Snotify);
 Vue.use(VueGoodTablePlugin);
 Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue);

@@ -131,7 +131,8 @@ export default {
                           }).then(function(response){
                               console.log(response);
                               if (response.data == "OK"){
-                                alertSucessCliente();
+                                _this.displayNotification();
+
                                 _this.cliente = new Cliente();
 
                               }else {
@@ -147,6 +148,13 @@ export default {
                               console.log(error);
                             })
                     }
+                  },
+                  displayNotification() {
+                      this.$snotify.success({
+                        body: 'Success Body',
+                        title: 'Success Title',
+                        config: {}
+                      });
                   }
 
 
