@@ -77,7 +77,6 @@
   </div>
 </template>
 <script>
-
 import firebase from 'firebase'
 import {mapMutations} from 'vuex'
 export default {
@@ -92,8 +91,6 @@ export default {
     }
   },
   mounted(){
-
-
   },
   computed:{
       isActiveVenta() {
@@ -120,7 +117,6 @@ export default {
       isActiveReparacion() {
           return this.$route.matched.some(route => route.name === 'HomeReparacion')
       },
-
   },
   methods: {
       control(){
@@ -130,7 +126,6 @@ export default {
             this.autenticado = true;
             this.$router.push('/Home');
             this.user = usuario.email;
-
         }
         else {
           this.$router.push('/Login');
@@ -142,7 +137,6 @@ export default {
           }).catch(function(error) {
              console.log(error);
           });
-
       },
   },
   filters: {
@@ -151,16 +145,11 @@ export default {
           return palabra[0];
       }
     }
-
-
 }
 </script>
 <style>
-
 .dropbtn {
-
 }
-
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
@@ -174,7 +163,6 @@ export default {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-
 /* Links inside the dropdown */
 .dropdown-content a {
   color: black;
@@ -182,13 +170,9 @@ export default {
   text-decoration: none;
   display: block;
 }
-
 #item a:hover {background-color: #ddd;}
-
 /* Show the dropdown menu on hover */
 .nav-item:hover .dropdown-content {display: block;}
-
-
 body,html{
   background-image: url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');
   background-size: cover;
@@ -196,70 +180,52 @@ body,html{
   height: 100%;
   font-family: 'Numans', sans-serif;
 }
-
 /*
 .navbar{background:#222222;}
 .nav-item::after{content:'';display:block;width:0px;height:1px;background:#fec400;transition: 0.2s;}
 .nav-item:hover::after{width:100%;}
 .nav-link{padding:15px 5px;transition:0.2s;}
 */
-
-
 .activo{
     background-color: #fec400;
     color: black;
     height: 163%;
     width:auto;
     margin-top:-55;
-
-
 }
-
 .router-link-active{
   background-color: #fec400;
   color: black;
   height: 153%;
   width:auto;
   margin-top:-55;
-
 }
-
 .dropdown{
 }
-
 a{
-
   height: 10%;
   display: inline-block;
-
 }
-
 .item{
   height: 120%;
   display: inline-block;
 }
-
 a:link
 {
 text-decoration:none;
 color:white;
 }
-
 a:hover{
   color:white;
 }
-
-
 nav a{
     color: white;
     padding: 4px 1px 4px 1px;
 }
-
 nav{
      height: 60px;
      text-align:center;
 }
-
 /*nuevo boton*/
 .btns{
   border: 1px solid black;
@@ -273,15 +239,12 @@ nav{
   position: relative;
   overflow: hidden;
 }
-
 .btns1{
   color: #fec400;
 }
-
 .btns1:hover{
   color: #fff;
 }
-
 .btns::before{
   content: "";
   position: absolute;
@@ -296,21 +259,17 @@ nav{
   top: 0;
   border-radius: 0 0 50% 50%;
 }
-
 .btns1:hover::before{
   height: 180%;
 }
-
 dropbtn {
   background-color: rgba(0,0,0,0.7);
   color: white;
   font-size: 16px;
   border: none;
 }
-
 .salir{
   width: 220px;
   height:5px;
 }
-
 </style>

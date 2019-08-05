@@ -66,7 +66,7 @@
                    </button>
                  </slot>
                </div>
-               <div class="modal-body" style="background-color:#f1f8e9;">
+               <div class="modal-body" style="background-color:#f1f8e9; border-radius:5px;">
                  <form @submit.prevent="enviarMail()">
                  <div class="input-group form-group">
                        <h4>Para : {{ destinatario }} </h4>
@@ -80,8 +80,6 @@
                  </button>
                </form>
                </div>
-               <div class="modal-header" style="background-color:#FEC404;" >
-              </div>
              </div>
            </div>
          </div>
@@ -302,7 +300,9 @@ background-color: #063A5E;
 background-blend-mode: multiply;
 }
 
-
+textarea{
+  height: 250px;
+}
 
 #app {
   -webkit-font-smoothing: antialiased;
