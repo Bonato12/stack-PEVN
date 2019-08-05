@@ -33,7 +33,7 @@
                   prevLabel: 'Anterior',
                   rowsPerPageLabel: 'Filas por paginas',
                   ofLabel: 'of',
-                  pageLabel: 'page', // for 'pages' mode
+                  pageLabel: 'page',
                   allLabel: 'All',
                 }"
                 theme="default">
@@ -86,9 +86,10 @@
                                 </tbody>
                           </table>
                       </div>
-                      <div class="modal-header" style="background-color:#FEC404;">
-                        <h2 class="opciones" style="color:white;">Opciones</h2>
-                        <div class="row" style="float:right; padding-right:15px;">
+                      <div class="" style="background-color:#FEC404; height:90px; border-bottom-radius:5px;">
+                        <br>
+                        <h2 class="opciones" style="color:white; float:left; padding-left:25px;">Opciones</h2>
+                        <div class="row" style="float:right; padding-right:35px;">
                              <button class="btn btn-danger" v-on:click="eliminarCompra()" title="Eliminar Compra">
                                  <i class="fas fa-trash-alt"></i>
                              </button>

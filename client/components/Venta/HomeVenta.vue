@@ -87,19 +87,22 @@
                                 </tbody>
                           </table>
                       </div>
-                      <div class="modal-header" style="background-color:#FEC404;">
-                        <h2 class="opciones" style="color:white;">Opciones</h2>
-                        <div class="row" style="float:right; padding-right:15px;">
-                             <button class="btn btn-danger" v-on:click="eliminarVenta()" title="Eliminar Venta">
-                                 <i class="fas fa-trash-alt"></i>
-                             </button>
-                             <div style="width:5px;">
-                             </div>
-                             <router-link class="btn btn-dark" :to="/EditarVenta/+this.idv" tag="button" title="Editar Venta">
-                                 <i class="fas fa-edit fa-1x"></i>
-                             </router-link>
-                         </div>
-                     </div>
+                      <div class="d-flex bd-highlight" style="background-color:#FEC404;">
+                        <br>
+                        <div class="p-2 flex-grow-1 bd-highlight">
+                          <h2 class="opciones" style="color:white; float:left; padding-left:25px;">Opciones</h2>
+                        </div>
+                        <div class="p-2 bd-highlight"style="padding-right:-10px;">
+                          <button class="btn btn-danger" v-on:click="eliminarVenta()" title="Eliminar Venta">
+                              <i class="fas fa-trash-alt"></i>
+                          </button>
+                        </div>
+                        <div class="p-2 bd-highlight" style="margin-right:10px;">
+                          <router-link class="btn btn-dark" :to="/EditarVenta/+this.idv" tag="button" title="Editar Venta">
+                              <i class="fas fa-edit fa-1x"></i>
+                          </router-link>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

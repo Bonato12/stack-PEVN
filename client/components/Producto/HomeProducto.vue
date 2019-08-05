@@ -57,7 +57,7 @@
       <div class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container  animated fadeInLeft">
-            <div class="modal-header" style="background-color:#424242;">
+            <div class="modal-header" style="background-color:#424242; border-top-radius:5px;">
               <slot name="header">
                 <h2 style="color:white; text-align:left;">
                   <i class="far fa-list-alt"></i>
