@@ -8,7 +8,7 @@
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
                             <router-link class="item"   tag="a" :class="{ 'router-link-active': isActiveCliente }" active-class="activo"   to="/HomeCliente">
-                              <i class="fas fa-wheelchair"></i>
+                              <i class="fas fa-user"></i>
                               Clientes
                             </router-link>
                         </li>

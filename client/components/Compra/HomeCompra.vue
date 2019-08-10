@@ -6,8 +6,7 @@
       <div>
           <div class="card-header" style="background-color:#FFD700; ">
             <h2 style="text-align:center; color:black;">
-                <i class="fas fa-cart-plus"></i>
-                <i class="fas fa-clipboard-list"></i>
+                <i class="fas fa-coins"></i>
                 Compras
              </h2>
           </div>

@@ -134,12 +134,12 @@
                           </div>
                           <br>
                           <div class="d-flex justify-content-end" style="margin:0 auto; width:780px;">
-                              <router-link to="/HomeCompra" tag="button" class="btn" style="color:black; background-color:#FFD700;">
+                              <router-link to="/HomeCompra" tag="button" class="btn" style="color:black; background-color:#FFD700; width:120px; height:40px;">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:3px;"></div>
-                              <button v-on:click="nuevaCompra()" class="btn" style="color:black; background-color:#FFD700;">
+                              <button v-on:click="nuevaCompra()" class="btn" style="color:black; background-color:#FFD700; width:120px; height:40px;">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
