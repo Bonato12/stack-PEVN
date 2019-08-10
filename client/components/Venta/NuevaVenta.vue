@@ -119,12 +119,12 @@
                           </div>
                           <br>
                           <div class="d-flex justify-content-end" style="margin:0 auto; width:780px;">
-                              <router-link to="/HomeVenta" tag="button" class="btn btn-info" style="color:black" title="Volver a Home Venta">
+                              <router-link to="/HomeVenta" tag="button" class="btn" style="color:black; background-color:#FFD700;" title="Volver a Home Venta">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:3px;"></div>
-                              <button v-on:click="nuevaVenta()" class="btn btn-success" style="color:black" title="Guardar Venta">
+                              <button v-on:click="nuevaVenta()" class="btn" style="color:black; background-color:#FFD700;" title="Guardar Venta">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -332,7 +332,7 @@ h1, h2 {
 height: auto;
 margin-bottom: auto;
 width: 1650px;
-background-color: rgb(70,90,101);
+background-color: #2A363B;
 border: 1px solid;
 border-radius: 5px;
 margin:0 auto;

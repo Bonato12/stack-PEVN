@@ -39,7 +39,7 @@
                 <template slot="table-row" slot-scope="props" >
                   <span v-if="props.column.field == 'opciones'">
                     <button @click="verMas(props.row)" class="btn btn-info" style="width:150px;"  title="Ver Mas" >
-                        <i class="fas fa-clipboard-list"></i>
+                        <i class="fas fa-list-alt"></i>
                         Ver Mas
                     </button>
                   </span>

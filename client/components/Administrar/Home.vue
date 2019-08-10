@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-
-  </br>
+    <img src="../../assets/LogoTelnovo.png" class="img">
+  <br>
   </div>
 </template>
 
@@ -36,8 +36,7 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 body,html{
-  /*background-image: url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');*/
-  background-color:  #2A363B;
+  background-color: #2A363B;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
@@ -56,6 +55,13 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
+}
+
+.img{
+display:block;
+margin:auto;
+margin-top:200px;
+
 }
 
 </style>
