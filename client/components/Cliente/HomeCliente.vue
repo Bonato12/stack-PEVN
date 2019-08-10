@@ -1,8 +1,8 @@
 <template>
   <div id="Cliente">
     <div class="container animated zoomIn">
-    </br>
-    </br>
+    <br>
+    <br>
     <div>
         <div class="card-header" style="background-color:#FFD700; ">
           <h2 style="text-align:center; color:black;">

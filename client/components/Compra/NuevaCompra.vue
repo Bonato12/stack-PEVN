@@ -336,7 +336,7 @@ h1, h2 {
 height: auto;
 margin-bottom: auto;
 width: 1650px;
-background-color: rgb(70,90,101);
+background-color:  #2A363B;
 border: 1px solid;
 border-radius: 5px;
 margin:0 auto;

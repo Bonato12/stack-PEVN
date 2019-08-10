@@ -7,7 +7,7 @@
             <div class="card-header" style="background-color:#FFD700; ">
               <h2 style="text-align:center; color:black;">
                   <i class="fas fa-user-cog"></i>
-                  Editar Cliente
+                  Cliente
                </h2>
             </div>
             </hr style="color:black;">

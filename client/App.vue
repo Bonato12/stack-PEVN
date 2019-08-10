@@ -174,7 +174,8 @@ export default {
 /* Show the dropdown menu on hover */
 .nav-item:hover .dropdown-content {display: block;}
 body,html{
-  background-image: url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');
+  /*background-image: url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');*/
+  background-color: rgb(205,205,205);
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;

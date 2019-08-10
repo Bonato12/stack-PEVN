@@ -8,7 +8,7 @@
             <div class="card-header" style="background-color:#FFD700;">
               <h2 style="text-align:center; color:black;">
                   <i class="fas fa-user"></i>
-                  Nuevo Cliente
+                  Cliente
                </h2>
             </div>
             <div class="card-body" >
@@ -22,6 +22,7 @@
                   </p>
                   <notifications group="foo" position="top left" />
                   <form @submit.prevent="nuevoCliente()" style="width:780px; margin-top:-25px; margin:0px auto;">
+                    <br>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
@@ -213,7 +214,7 @@ height: auto;
 margin-top: 50px;
 margin-bottom: auto;
 width: 1650px;
-background-color: rgb(70,90,101);
+background-color: #2A363B;
 border-radius: 5px;
 border:1px solid;
 margin:0 auto;

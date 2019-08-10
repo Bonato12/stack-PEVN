@@ -115,7 +115,13 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Numans');
-
+body,html{
+  background-image: url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  font-family: 'Numans', sans-serif;
+}
 .container{
 height: 100%;
 align-content: center
@@ -125,7 +131,7 @@ height: auto;
 margin-top: 30px;
 margin-bottom: auto;
 width: 450px;
-background-color: black;
+background-color: #2A363B;
 border-radius: 5px;
 }
 .card-header h3{
