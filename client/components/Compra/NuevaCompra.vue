@@ -123,8 +123,9 @@
                                     </tr>
                                   </tbody>
                                 </table>
+                                <br>
                                 <div style="margin-top:-17px;">
-                                  <div class="card-header" style="background-color:#04B45F; border-radius:none; color:black; text-align:right; " v-if="this.precioTotal">
+                                  <div style="color:white; text-align:right; " v-if="this.precioTotal">
                                     <h3>
                                       <i class="fas fa-coins"></i>
                                       <i class="fas fa-money-bill-alt"></i>

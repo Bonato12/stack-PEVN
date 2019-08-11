@@ -15,7 +15,6 @@
           <vue-good-table
                 :columns="columns"
                 :rows="datos"
-                title="Ver Opciones y Detalles"
                 :search-options="{
                   enabled: true,
                   skipDiacritics: true,

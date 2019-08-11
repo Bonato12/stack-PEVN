@@ -20,7 +20,8 @@
                         <br>
                     </ul>
                   </p>
-                  <form @submit.prevent="registrar()" style="width:780px; margin-top:-25px; margin:0px auto;">
+                  <form @submit.prevent="registrar()" style="width:700px; margin-top:-25px; margin:0px auto;">
+                    <br>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Usuario</span>
@@ -59,6 +60,7 @@
                               Registrar
                         </button>
                     </div>
+                    <br>
               </form>
               <div>
               </div>
@@ -174,7 +176,7 @@ height: auto;
 margin-top: 50px;
 margin-bottom: auto;
 width: 1650px;
-background-color: rgb(70,90,101);
+background-color: #2A363B;
 border-radius: 5px;
 border:1px solid;
 margin:0 auto;
@@ -189,7 +191,7 @@ button{
   height:40px;
   margin-top:-10px;
   border:none;
-  /*background-color: #FFD700  !important;*/
+  background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;

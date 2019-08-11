@@ -2,7 +2,7 @@
   <div id="app">
         <nav v-if="autenticado" class="navbar navbar-expand-lg animated fadeInDown" style="background-color: rgba(0,0,0,0.7);" >
                 <div style="width:70px;">
-                    <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;">
+                    <img src="./assets/LogoTelnovo.png" style="height:50px; width:150px; float:left;" @click="irHome()">
                 </div>
                 <div class="navbar-collapse" style="margin-left:200px;">
                     <ul class="navbar-nav mx-auto">
@@ -119,6 +119,9 @@ export default {
       },
   },
   methods: {
+      irHome(){
+        this.$router.push('/Home');
+      },
       control(){
         let usuario = firebase.auth().currentUser;
         if (usuario != null){
@@ -174,43 +177,34 @@ export default {
 /* Show the dropdown menu on hover */
 .nav-item:hover .dropdown-content {display: block;}
 body,html{
-  /*background-image: url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');*/
   background-color: rgb(205,205,205);
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
   font-family: 'Numans', sans-serif;
 }
-/*
-.navbar{background:#222222;}
-.nav-item::after{content:'';display:block;width:0px;height:1px;background:#fec400;transition: 0.2s;}
-.nav-item:hover::after{width:100%;}
-.nav-link{padding:15px 5px;transition:0.2s;}
-*/
+
 .activo{
     background-color: #fec400;
     color: black;
-    height: 163%;
+    height:  120%;
     width:auto;
     margin-top:-55;
 }
+
 .router-link-active{
   background-color: #fec400;
   color: black;
-  height: 153%;
+  height: 120%;
   width:auto;
   margin-top:-55;
 }
-.dropdown{
-}
+
 a{
   height: 10%;
   display: inline-block;
 }
-.item{
-  height: 120%;
-  display: inline-block;
-}
+
 a:link
 {
 text-decoration:none;
@@ -226,51 +220,5 @@ nav a{
 nav{
      height: 60px;
      text-align:center;
-}
-/*nuevo boton*/
-.btns{
-  border: 1px solid black;
-  background: none;
-  padding: 10px 20px;
-  margin-top: 10px;
-  font-size: 20px;
-  font-family: 'Numans', sans-serif;
-  cursor: pointer;
-  transition: 0.8s;
-  position: relative;
-  overflow: hidden;
-}
-.btns1{
-  color: #fec400;
-}
-.btns1:hover{
-  color: #fff;
-}
-.btns::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: #fec400;
-  z-index: -1;
-  transition: 0.8s;
-}
-.btns1::before{
-  top: 0;
-  border-radius: 0 0 50% 50%;
-}
-.btns1:hover::before{
-  height: 180%;
-}
-dropbtn {
-  background-color: rgba(0,0,0,0.7);
-  color: white;
-  font-size: 16px;
-  border: none;
-}
-.salir{
-  width: 220px;
-  height:5px;
 }
 </style>

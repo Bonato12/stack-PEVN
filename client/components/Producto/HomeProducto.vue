@@ -12,7 +12,7 @@
         </div>
     </div>
     <div v-if="this.productos.length">
-      <vue-good-table :columns="columns" :rows="productos" title="Ver Opciones y Detalles" :search-options="{
+      <vue-good-table :columns="columns" :rows="productos" :search-options="{
                 enabled: true,
                 skipDiacritics: true,
                 placeholder: 'Buscar Producto',
@@ -356,7 +356,6 @@ export default {
   text-align: center;
   font-family: 'Numans', sans-serif;
   color: white;
-  background-color: #063A5E;
 }
 
 h1,

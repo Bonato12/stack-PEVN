@@ -53,12 +53,12 @@
                             </div>
                             <br>
                             <div class="d-flex justify-content-end">
-                                <router-link to="/HomeArreglo" tag="button" class="btn btn-info" title="Volver a Home Arreglo" >
+                                <router-link to="/HomeArreglo" tag="button" class="btn" title="Volver a Home Arreglo" >
                                     <i class="fas fa-arrow-left"></i>
                                         Volver
                                 </router-link>
-                                <div style="width:3px;"></div>
-                                <button type="submit" class="btn btn-success" title="Guardar Arreglo">
+                                <div style="width:2px;"></div>
+                                <button type="submit" class="btn" title="Guardar Arreglo">
                                   <i class="far fa-save fa-1x"></i>
                                         Guardar
                                 </button>
@@ -178,7 +178,7 @@ h1, h2 {
 height: auto;
 margin-bottom: auto;
 width: 1650px;
-background-color: rgb(70,90,101);
+background-color: #2A363B;
 border: 1px solid;
 border-radius: 5px;
 }
@@ -204,6 +204,7 @@ border:0 !important;
   height:40px;
   margin-top:-10px;
   border:none;
+  background-color: #FFD700;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;

@@ -1,6 +1,7 @@
 <template>
       <div>
         <br>
+        <br>
         <div class="container">
             <div class="d-flex justify-content-center">
               <div class="card animated fadeInDown">
@@ -129,6 +130,7 @@
                                       Guardar
                               </button>
                           </div>
+                          <br>
                   </div>
               </div>
             </div>

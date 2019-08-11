@@ -2,6 +2,7 @@
   <div id="app">
     <img src="../../assets/LogoTelnovo.png" class="img">
   <br>
+  
   </div>
 </template>
 
