@@ -14,8 +14,9 @@ import Datepicker from 'vuejs-datepicker';
 import { firebase } from './firebase.js'
 import Snotify from 'vue-snotify';
 import 'vue-snotify/styles/material.css';
+import Vuelidate from 'vuelidate'
 
-
+Vue.use(Vuelidate)
 Vue.use(Snotify);
 Vue.use(VueGoodTablePlugin);
 Vue.use(VueSweetalert2);

@@ -26,19 +26,31 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input  type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" >
+                        <input  type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" :class="{ 'is-invalid': submitted && $v.cliente.dni.$error }" >
+                        <div v-if="submitted && !$v.cliente.dni.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.cliente.dni.required">Dni is required</span>
+                              <span v-if="!$v.cliente.dni.maxLength">El Dni no puede tener mas de 10 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Nombre</span>
                         </div>
-                        <input   type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                        <input   type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" :class="{ 'is-invalid': submitted && $v.cliente.nombre.$error }" >
+                        <div v-if="submitted && !$v.cliente.nombre.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.cliente.nombre.required">Nombre is required</span>
+                              <span v-if="!$v.cliente.nombre.maxLength">El Nombre no puede tener mas de 50 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Apellido</span>
                         </div>
-                        <input  type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" >
+                        <input  type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" :class="{ 'is-invalid': submitted && $v.cliente.apellido.$error }" >
+                        <div v-if="submitted && !$v.cliente.apellido.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.cliente.apellido.required">Apellido is required</span>
+                              <span v-if="!$v.cliente.apellido.maxLength">El Apellido no puede tener mas de 50 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -68,7 +80,7 @@
                               <i class="far fa-save fa-1x"></i>
                               Guardar
                         </button>
-                    </div>
+                  </div>
               </form>
               <div>
               </div>
@@ -85,6 +97,7 @@
 import axios from 'axios'
 import { alertSucessCliente,alertCompletarCampos,alertError } from '../../assets/sweetAlert.js'
 import Cliente from '../../models/Cliente';
+import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/validators";
 
 export default {
   created(){
@@ -93,36 +106,43 @@ export default {
   data () {
     return {
       cliente: new Cliente(),
-      errors: []
-		}
+      errors: [],
+      submitted: false,
+    }
+
   },
+  validations: {
+          cliente: {
+                dni: { 
+                  required,
+                  maxLength: maxLength(10)  
+                },
+                nombre:{
+                   required,
+                   maxLength: maxLength(50)  
+                },
+                apellido:{
+                   required,
+                   maxLength: maxLength(50)  
+                }
+               
+            }
+        },
   mounted(){
 
 
   },
   methods: {
-            nuevoCliente(){
+            nuevoCliente(e){
                     this.errors = [];
-                    if (!this.cliente.dni){
-                      this.errors.push('Dni no puede ser Vacio');
-                    }
-                    if (!this.cliente.nombre){
-                      this.errors.push('Nombre Vacio');
-                    }
-                    if (!this.cliente.apellido){
-                      this.errors.push('Apellido Vacio');
-                    }
-                    if (!this.cliente.direccion){
-                      this.errors.push('Direccion Vacia');
-                    }
-                    if (!this.cliente.telefono){
-                      this.errors.push('Telefono Vacio');
-                    }
-                    if (!this.cliente.mail){
-                      this.errors.push('Mail Vacio');
-                    }
-                    var _this = this;
-                    if (this.errors.length == 0){
+                    this.submitted = true;
+
+                  // stop here if form is invalid
+                  this.$v.$touch();
+                  if (this.$v.$invalid) {
+                      return;
+                  }
+                            var _this = this;
                             axios.post('http://localhost:3000/cliente',
                             this.cliente,
                             { headers: {
@@ -131,10 +151,9 @@ export default {
                           }).then(function(response){
                               console.log(response);
                               if (response.data == "OK"){
-                                _this.displayNotification();
-
                                 _this.cliente = new Cliente();
-
+                                alert("EXITO");
+                                _this.submitted = false;
                               }else {
                                  if (response.data.length > 0) {
                                    for (var i = 0; i < response.data.length ; i++) {
@@ -147,37 +166,14 @@ export default {
                             }).catch(function(error){
                               console.log(error);
                             })
-                    }
-                  },
-                  displayNotification() {
-                      this.$snotify.success({
-                        body: 'Success Body',
-                        title: 'Success Title',
-                        config: {}
-                      });
-                  }
-
-
-
-}
+                
+       }
+    }
 }
 
 </script>
 
 <style scoped>
-
-
-form input:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
-}
-
-
-form input:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
-}
-
 
 h1, h2 {
   font-weight: normal;
