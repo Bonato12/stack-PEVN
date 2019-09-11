@@ -28,7 +28,7 @@
                         </div>
                         <input  type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" :class="{ 'is-invalid': submitted && $v.cliente.dni.$error }" >
                         <div v-if="submitted && !$v.cliente.dni.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.cliente.dni.required">Dni is required</span>
+                              <span v-if="!$v.cliente.dni.required">El dni es requerido</span>
                               <span v-if="!$v.cliente.dni.maxLength">El Dni no puede tener mas de 10 digitos</span>
                         </div>
                     </div>
@@ -76,9 +76,13 @@
                             <i class="fas fa-arrow-left"></i>
                               Volver
                         </router-link>
-                        <button type="submit" class="btn"  title="Guardar Cliente" >
+                        <button v-if="editCliente === false" type="submit" class="btn"  title="Guardar Cliente"  >
                               <i class="far fa-save fa-1x"></i>
                               Guardar
+                        </button>
+                        <button v-if="editCliente === true" type="submit" class="btn"  title="Guardar Cliente"  >
+                              <i class="far fa-save fa-1x"></i>
+                              Editar
                         </button>
                   </div>
               </form>
@@ -101,13 +105,19 @@ import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/vali
 
 export default {
   created(){
+    if (this.idc) {
+            this.rellenarCliente();
 
+    }
   },
   data () {
     return {
       cliente: new Cliente(),
       errors: [],
       submitted: false,
+      idc: this.$route.params.id,
+      editCliente: false
+
     }
 
   },
@@ -132,43 +142,70 @@ export default {
 
 
   },
-  methods: {
-            nuevoCliente(e){
-                    this.errors = [];
-                    this.submitted = true;
 
-                  // stop here if form is invalid
+  
+
+
+  methods: {
+
+        rellenarCliente(){
+          this.editCliente = true;
+          axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
+            console.log(response.data);
+          this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+          //this.cliente.setDni(response.data[0].dni);
+            }).catch(error=>{
+              console.log(error);
+            })
+        },
+
+            nuevoCliente(e){
+                  this.errors = [];
+                  this.submitted = true;
                   this.$v.$touch();
+                  var _this = this;
                   if (this.$v.$invalid) {
                       return;
                   }
-                            var _this = this;
-                            axios.post('http://localhost:3000/cliente',
-                            this.cliente,
-                            { headers: {
-                              'Content-Type': 'application/json',
-                            },
-                          }).then(function(response){
-                              console.log(response);
-                              if (response.data == "OK"){
-                                _this.cliente = new Cliente();
-                                alert("EXITO");
-                                _this.submitted = false;
-                              }else {
-                                 if (response.data.length > 0) {
-                                   for (var i = 0; i < response.data.length ; i++) {
-                                          _this.errors.push(response.data[i].msg);
-                                    }
-                                 }else {
-                                     _this.errors.push(response.data.msg);
-                                 }
-                              }
-                            }).catch(function(error){
-                              console.log(error);
-                            })
-                
-       }
-    }
+                  if  (this.editCliente == false){
+                      axios.post('http://localhost:3000/cliente',
+                      this.cliente,
+                      { headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      }).then(function(response){
+                        console.log(response);
+                        if (response.data == "OK"){
+                            _this.cliente = new Cliente();
+                            alert("EXITO");
+                            _this.submitted = false;
+                        }else {
+                            _this.errors.push(response.data.msg);
+                          
+                        }
+                      }).catch(function(error){
+                        console.log(error);
+                      })
+                  }else{
+                      axios.put('http://localhost:3000/cliente/'+ this.idc,
+                      this.cliente,
+                      { headers: {
+                        'Content-Type': 'application/json',
+                      }
+                      }).then(function(response){
+                          console.log(response);
+                          if (response.data == "OK"){
+                              alertEditSucessCliente();
+                              _this.$router.push('/HomeCliente');
+                          }else {
+                              _this.errors.push(response.data.msg);
+                          }
+                        }).catch(error=>{
+                          console.log(error);
+                        })
+                }   
+            },   
+      }
 }
 
 </script>
@@ -198,6 +235,20 @@ border: none;
 
 .input-group{
   width: 700px;
+}
+
+.form-control:focus{
+    border: none;
+    box-shadow: none;
+    border-color: none;
+
+}
+
+.form-control{
+    border: none;
+    box-shadow: none;
+    border-color: none;
+
 }
 
 input:focus{

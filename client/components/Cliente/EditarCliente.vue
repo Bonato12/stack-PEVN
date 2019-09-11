@@ -107,8 +107,9 @@ export default {
       rellenarCliente(){
          axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
            console.log(response.data);
-           this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
-         }).catch(error=>{
+          // this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
+           this.cliente.setDni(response.data[0].dni);
+        }).catch(error=>{
            console.log(error);
          })
       },

@@ -264,7 +264,7 @@ export default {
     },
     editar(params){
       console.log(JSON.stringify(params));
-      this.$router.push('/EditarCliente/'+params.id_cliente)
+      this.$router.push('/NuevoCliente/'+params.id_cliente)
     },
     modalMail(cliente){
       console.log(cliente);

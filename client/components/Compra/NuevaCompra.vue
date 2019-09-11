@@ -256,7 +256,7 @@ export default {
         var index = this.Lista.indexOf(producto);
         this.precioTotal = this.precioTotal - this.Lista[index].precioTotal
         if (index > -1) {
-            this.Lista.splice(index, 1);
+           this.Lista.splice(index, 1);
         }
     },
 

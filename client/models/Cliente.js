@@ -8,4 +8,13 @@ export default class Cliente {
           this.telefono = telefono,
           this.mail = mail
     }
+
+    getDni() {
+        return this.dni;
+      }
+    
+      setDni(dni) {
+        this.dni = dni;   // validation could be checked here such as only allowing non numerical values
+      }
+
 }
