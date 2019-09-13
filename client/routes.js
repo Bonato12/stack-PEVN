@@ -88,9 +88,9 @@ const rutas = new VueRouter({
               component: NuevoProducto
             },
             {
-              path:'/EditarProducto/:id',
-              name:'EditarProducto',
-              component:EditarProducto
+              path:'/NuevoProducto/:id',
+              name:'NuevoProducto',
+              component:NuevoProducto
             },
             {
               path: '/HomeProveedor',

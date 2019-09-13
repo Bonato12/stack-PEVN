@@ -116,7 +116,7 @@
                   <div style="width:5px;">
                   </div>
                   <div>
-                    <router-link class="btn btn-dark" :to="/EditarProducto/+producto.id_producto"  tag="button" title="Editar Producto">
+                    <router-link class="btn btn-dark" :to="/NuevoProducto/+producto.id_producto"  tag="button" title="Editar Producto">
                       <i class="far fa-edit fa-1x"></i>
                     </router-link>
                   </div>

@@ -117,7 +117,6 @@ export default {
       idc: this.$route.params.id,
       editCliente: false
     }
-
   },
   validations: {
           cliente: {
@@ -133,7 +132,6 @@ export default {
                    required,
                    maxLength: maxLength(50)  
                 }
-               
             }
         },
   mounted(){

@@ -11,35 +11,35 @@
                    Nuevo Producto
                  </h2>
         			</div>
-                </hr style="color:black;">
         			<div class="card-body" >
-                    <p v-if="errors.length">
-                      <ul  class="list-group" v-for="error in errors">
-                          <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">
-                            {{ error }}
-                          </li>
-                          <br>
-                      </ul>
-                    </p>
             				<form @submit.prevent="nuevoProducto()" style="width:780px; margin-top:-20px; margin:0px auto;">
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Modelo</span>
               						</div>
-              						<input required type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo">
-            					</div>
+              						<input type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo" :class="{ 'is-invalid': submitted && $v.producto.modelo.$error }">
+            					    <div v-if="submitted && !$v.producto.modelo.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.producto.modelo.required">El modelo es requerido</span>
+                          </div>
+                      </div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Marca</span>
               						</div>
-              						<input required type="text" v-model="producto.marca" class="form-control" placeholder="Ingrese Marca">
-            					</div>
+              						<input type="text" v-model="producto.marca" class="form-control" placeholder="Ingrese Marca" :class="{ 'is-invalid': submitted && $v.producto.marca.$error }">
+            					    <div v-if="submitted && !$v.producto.marca.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.producto.marca.required">La marca es requerida</span>
+                          </div>
+                      </div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Descripcion</span>
               						</div>
-              						<textarea required type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
-            					</div>
+              						<textarea  type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
+            					    <div v-if="submitted && !$v.producto.descripcion.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.producto.descripcion.required">La descripcion es requerida</span>
+                          </div>
+                      </div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Tipo </span>
@@ -48,29 +48,42 @@
                             <option  disabled selected>Elige un Tipo Producto</option>
                             <option  v-for="item in tipoProductos">{{ item.name }}</option>
                          </select>
+                         <div v-if="submitted && !$v.producto.tipoProducto.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.producto.tipoProducto.required">El dni es requerido</span>
+                          </div>
                       </div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Stock</span>
               						</div>
-              						<input required type="number" min="0" v-model.number="producto.stock" class="form-control" placeholder="Ingrese Stock">
-            					</div>
+              						<input required type="number" min="0" v-model.number="producto.stock" class="form-control" placeholder="Ingrese Stock" :class="{ 'is-invalid': submitted && $v.producto.stock.$error }">
+            					    <div v-if="submitted && !$v.producto.stock.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.producto.stock.required">El stock es requerido</span>
+                          </div>
+                      </div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Precio</span>
               						</div>
-              						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio">
-            					</div>
+              						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio":class="{ 'is-invalid': submitted && $v.producto.precio.$error }">
+            					    <div v-if="submitted && !$v.producto.precio.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.producto.precio.required">El precio es requerido</span>
+                          </div>
+                      </div>
                       <br>
                         <div class="d-flex justify-content-end">
                           <router-link class="btn" to="/HomeProducto" tag="button" title="Volver a HomeProducto">
                               <i class="fas fa-arrow-left"></i>
                                 Volver
                           </router-link>
-                          <button type="submit" class="btn" title="Guardar Producto">
+                         <button v-if="editProducto === false" type="submit" class="btn"  title="Guardar Cliente"  >
                               <i class="far fa-save fa-1x"></i>
                               Guardar
-                          </button>
+                        </button>
+                        <button v-if="editProducto === true" type="submit" class="btn"  title="Guardar Cliente"  >
+                              <i class="far fa-save fa-1x"></i>
+                              Editar
+                        </button>
                       </div>
         				</form>
         			</div>
@@ -85,16 +98,23 @@
 import axios from 'axios'
 import { alertSucessProducto,alertCompletarCampos,alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import Producto from '../../models/Producto';
+import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/validators";
+
 
 
 export default {
   created(){
-
+    if (this.idp){
+        this.rellenarProducto();
+    }
   },
   data () {
     return {
+      idp: this.$route.params.id,
       producto:  new Producto(),
+      submitted: false,
       errors: [],
+      editProducto: false,
       tipoProductos : [{name:"Celular"},
                        {name:"Tablet"},
                        {name:"Accesorio"},
@@ -104,59 +124,86 @@ export default {
 		}
 
   },
-  mounted(){
+  validations: {
+          producto: {
+                modelo: { 
+                  required,
+                  maxLength: maxLength(50)  
+                },
+                marca:{
+                   required,
+                   maxLength: maxLength(50)  
+                },
+                descripcion:{
+                   required,
+                   maxLength: maxLength(50)  
+                },
+                tipoProducto:{
+                   required,
+                },
+                stock:{
+                  required,
+                },
+                 precio:{
+                  required,
+                }
+            }
+        },
 
-  },
   methods: {
 
-      nuevoProducto(){
-              this.errors = [];
-              if (!this.producto.modelo){
-                this.errors.push('Modelo Vacio');
-              }
-              if (!this.producto.marca){
-                this.errors.push('Marca Vacia');
-              }
-              if (!this.producto.descripcion){
-                this.errors.push('Descripcion Vacia');
-              }
-              if (!this.producto.tipoProducto){
-                this.errors.push('Tipo Producto Vacia');
-              }
-              if (!this.producto.stock){
-                this.errors.push('Stock Vacio');
-              }
-              if (!this.producto.precio){
-                this.errors.push('Precio Vacio');
-              }
-              var _this = this;
-              if(this.errors.length == 0 ){
-                    console.log(this.producto);
+      rellenarProducto(){
+         this.editProducto = true;
+         axios.get('http://localhost:3000/producto/'+this.idp).then((response) =>{
+           console.log(response.data);
+           this.producto = new Producto(this.idp,response.data[0].modelo,response.data[0].marca,response.data[0].descripcion,response.data[0].tipoproducto,response.data[0].stock,response.data[0].precio);
+         }).catch(error=>{
+           console.log(error);
+         })
+      },
+
+      nuevoProducto(e){
+                this.errors = [];
+                this.submitted = true;
+                this.$v.$touch();
+                var _this = this;
+                if (this.$v.$invalid) {
+                    return;
+                }
+                 if  (this.editProducto == false){
                     axios.post('http://localhost:3000/producto',
-                    this.producto, // the data to posthttp://localhost:3000/producto
+                    this.producto, 
                     { headers: {
                       'Access-Control-Allow-Origin': 'http://localhost:3000/producto',
                       'Content-Type': 'application/json',
                     },
-                  }).then(function(response){
-                    console.log(response);
-                    if (response.data == "OK"){
-                      alertSucessProducto();
-                      _this.producto = new Producto();
-                    }else {
-                       if (response.data.length > 0) {
-                         for (var i = 0; i < response.data.length ; i++) {
-                                _this.errors.push(response.data[i].msg);
-                          }
-                       }else {
-                           _this.errors.push(response.data.msg);
-                       }
-
-                    }
-                  })
-              }
-
-          }
+                    }).then(function(response){
+                      console.log(response);
+                      if (response.data == "OK"){
+                        alertSucessProducto();
+                        _this.producto = new Producto();
+                      }else {
+                        _this.errors.push(response.data.msg);
+                      }
+                    })
+                }else{
+                      axios.put('http://localhost:3000/producto/'+ this.idp,
+                      this.producto,
+                      { headers: {
+                        'Content-Type': 'application/json',
+                      }
+                    }).then(function(response){
+                      console.log(response);
+                      if (response.data == "OK"){
+                        alertEditSucessProducto();
+                      }else {
+                        _this.errors.push(response.data.msg);
+                      }
+                    }).catch(error=>{
+                      console.log(error);
+                    })
+                }
+            }
   }
 }
 </script>
