@@ -106,8 +106,7 @@ import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/vali
 export default {
   created(){
     if (this.idc) {
-            this.rellenarCliente();
-
+        this.rellenarCliente();
     }
   },
   data () {
@@ -117,7 +116,6 @@ export default {
       submitted: false,
       idc: this.$route.params.id,
       editCliente: false
-
     }
 
   },
@@ -142,12 +140,7 @@ export default {
 
 
   },
-
-  
-
-
   methods: {
-
         rellenarCliente(){
           this.editCliente = true;
           axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{

@@ -36,29 +36,17 @@ module.exports = {
             },
 
             postVentaProducto(req,res){
-                  console.log(req.body);
-                  for (var i=0; i < req.body.venta.length; i++){
-                      console.log(req.body.venta[i]);
-                  }
-                  const errors = validationResult(req);
-                  if (!errors.isEmpty()) {
-                        return res.json(errors.array());
-                  } else {
                         for (var i=0 ; i < req.body.venta.length ; i++) {
                             var pool = new pg.Pool(config)
                             pool.query("INSERT INTO ventaProducto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
                                   pool.end();
-                            }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.venta[i].cantidad,req.body.venta[i].producto.id_producto]).then(response =>{
-                                  pool.end();
                                   res.sendStatus(200);
-                            })).catch((error) =>{
+                            }).catch((error) =>{
                                   pool.end();
                                   console.log(error);
                             });
                         }
-                  }
             },
-
 
         deleteVenta(req,res){
                 console.log("Peticion DELETE");
@@ -71,7 +59,7 @@ module.exports = {
                     })
                     .catch(error => {
                       pool.end();
-                      res.json(error);
+                      console.log(error);
                     })
                   done()
                 })
