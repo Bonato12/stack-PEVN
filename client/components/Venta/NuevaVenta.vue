@@ -206,11 +206,13 @@ export default {
                   if (index > -1) {
                     this.producto[index].stock = this.producto[index].stock - this.num;
                   }
+
                   //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
                   this.productoSelected = {};
                   this.num = '';
                   this.precio = '';
                   this.ventaProducto = new VentaProducto();
+
               }else {
                 alert("Completar los Campos");
               }
@@ -225,7 +227,7 @@ export default {
                   this.num++;
                   this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
                 }
-            }
+          }
       },
       decrementarCantidad() {
         //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
@@ -289,17 +291,10 @@ export default {
                                 'Content-Type': 'application/json'
                                  }
                               }).then(function(response){
-                                console.log(response);
                                 if (response.data == "OK"){
                                     alertSucessVenta();
                                 }else {
-                                     if (response.data.length > 0) {
-                                       for (var i = 0; i < response.data.length ; i++) {
-                                            _this.errors.push(response.data[i].msg);
-                                        }
-                                     }else {
-                                         _this.errors.push(response.data.msg);
-                                     }
+                                    _this.errors.push(response.data.msg);
                                 }
                               }).catch(error =>{
                                 console.log(error);
@@ -318,8 +313,13 @@ export default {
     watch: {
         productoSelected:{
           handler () {
-            this.num = 1;
-            this.precio = this.productoSelected.precio;
+            if (this.productoSelected.stock > 0){
+                this.num = 1;
+                this.precio = this.productoSelected.precio;
+            }else{
+                 this.num = 0;
+                 this.precio = 0;
+            }
           },
           deep: true
         }
