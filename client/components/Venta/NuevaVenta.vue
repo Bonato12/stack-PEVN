@@ -33,6 +33,9 @@
                                                    :custom-text="textCliente"
                                                    >
                                 </model-list-select>
+                                <div style="padding-left:2px;">
+                                </div>
+                                <button type="button" @click="openModal"  class="btn btn-warning" >+</button>
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend" style="border-right: 5px solid white">
@@ -44,6 +47,9 @@
                                                    :custom-text="textProducto"
                                                    >
                                 </model-list-select>
+                                <div style="padding-left:2px;">
+                                </div>
+                                <button type="button" class="btn btn-warning">+</button>
                             </div>
                             <div class="row">
                                 <div class="col">
@@ -135,8 +141,18 @@
               </div>
             </div>
             <br>
-       </div>
-      </div>
+        <transition v-if="modalOpen" class="animation fadeInLeft" name="modal">
+         <div class="modal-mask">
+           <button class="modal-default-button" @click="hide()">
+                    <i class="far fa-times-circle"></i>
+           </button>
+           <div class="modal-wrapper">
+                <ModalCliente v-if="modalOpen" ></ModalCliente>
+           </div>
+         </div>
+       </transition>
+    </div>
+</div>
 </template>
 <script>
 import axios from 'axios'
@@ -147,6 +163,9 @@ import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAler
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 import VentaProducto from '../../models/VentaProducto';
+import ModalCliente from "../Cliente/NuevoCliente.vue";
+
+
 export default {
   name: 'NuevaVenta',
   created(){
@@ -166,16 +185,26 @@ export default {
       num: '',
       id_venta: '',
       errors: [],
+            modalOpen: false
+
       }
 
   },
   computed:{
 
   },
+
   mounted(){
 
   },
   methods: {
+      openModal() {
+         this.modalOpen = !this.modalOpen;
+      },
+      hide(){
+         this.modalOpen = false;
+         this.getCliente();
+      },
       textProducto(item) {
         return `${item.modelo} - ${item.marca} - ${item.precio}`
       },
@@ -308,7 +337,9 @@ export default {
       },
       components: {
       ModelSelect,
-      ModelListSelect
+      ModelListSelect,
+      ModalCliente
+
     },
     watch: {
         productoSelected:{
