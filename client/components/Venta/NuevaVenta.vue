@@ -163,7 +163,7 @@ import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAler
 import { alertSucessVenta} from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 import VentaProducto from '../../models/VentaProducto';
-import ModalCliente from "../Cliente/NuevoCliente.vue";
+import ModalCliente from "../Cliente/Formulario.vue";
 
 
 export default {
