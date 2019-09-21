@@ -131,6 +131,11 @@
         </div>
   </div>
   <br>
+  <br>
+  <br>
+  <Estadistica></Estadistica>
+  <br>
+  <br>
 </div>
 </template>
 
@@ -143,6 +148,8 @@ import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete } from '../../assets/sweetAlert.js';
 import moment from 'moment';
+import Estadistica from "./Estadistica.vue";
+import Torta from "./Torta.vue";
 
 export default {
   name: 'HomeCompra',
@@ -185,7 +192,13 @@ export default {
   computed:{
 
     },
+  components: {
+      Estadistica,
+      Torta
+  },
+  
   mounted(){
+
   },
   methods: {
     getCompra(){
@@ -274,12 +287,16 @@ export default {
     },
     hideModal(){
       this.showModal = false;
-    }
+    },
+
+   
+
+
 }
 }
 </script>
 
-<style>
+<style scoped>
 #HomeCompra {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

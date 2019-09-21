@@ -27,7 +27,7 @@
                         <li class="nav-item">
                             <router-link class="item" :class="{ 'router-link-active': isActiveCompra }" tag="a" active-class="activo"   to="/HomeCompra">
                               <i class="fas fa-coins"></i>
-                              Compras
+                              Compra
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -40,7 +40,7 @@
                                  <i class="fas fa-toolbox"></i>
                                  Arreglos
                                </router-link>
-                               <router-link class="item" :class="{ 'router-link-active': isActiveReparacion }"   tag="a"active-class="activo"   to="/HomeReparacion">
+                               <router-link class="item" :class="{ 'router-link-active': isActiveArreglo }"   tag="a"active-class="activo"   to="/HomeReparacion">
                                  <i class="fas fa-tools"></i>
                                  Reparaciones
                                </router-link>
@@ -109,7 +109,7 @@ export default {
           return this.$route.matched.some(route => route.name === 'NuevaCompra' ||  route.name === 'EditarCompra' )
       },
       isActiveArreglo() {
-          return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto')
+          return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto' || route.name === 'HomeReparacion' )
       },
       isActiveUsuario() {
           return this.$route.matched.some(route => route.name === 'NuevoUsuario' ||  route.name === 'HomeUsuario')
