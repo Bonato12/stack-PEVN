@@ -19,7 +19,7 @@
               						</div>
               						<input type="text" v-model="producto.modelo" class="form-control" placeholder="Ingrese Modelo" :class="{ 'is-invalid': submitted && $v.producto.modelo.$error }">
             					    <div v-if="submitted && !$v.producto.modelo.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.producto.modelo.required">El modelo es requerido</span>
+                              <span v-if="!$v.producto.modelo.required">El modelo del producto es requerido</span>
                           </div>
                       </div>
                       <div class="input-group form-group">
@@ -28,46 +28,49 @@
               						</div>
               						<input type="text" v-model="producto.marca" class="form-control" placeholder="Ingrese Marca" :class="{ 'is-invalid': submitted && $v.producto.marca.$error }">
             					    <div v-if="submitted && !$v.producto.marca.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.producto.marca.required">La marca es requerida</span>
+                              <span v-if="!$v.producto.marca.required">La marca del producto es requerida</span>
                           </div>
                       </div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Descripcion</span>
               						</div>
-              						<textarea  type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion"></textarea>
+              						<textarea type="text" v-model="producto.descripcion" class="form-control" placeholder="Ingrese Descripcion" :class="{ 'is-invalid': submitted && $v.producto.marca.$error }"></textarea>
             					    <div v-if="submitted && !$v.producto.descripcion.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.producto.descripcion.required">La descripcion es requerida</span>
+                              <span v-if="!$v.producto.descripcion.required">La descripcion del producto es requerida</span>
+                              <span v-if="!$v.producto.descripcion.maxLength">La descripcion del producto no puede tener mas de 250 caracteres</span>
                           </div>
                       </div>
             					<div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Tipo </span>
               						</div>
-                          <select required class="form-control" v-model="producto.tipoProducto" placeholder="Elige un Tipo Producto">
+                          <select class="form-control" v-model="producto.tipoProducto" placeholder="Elige un Tipo Producto" :class="{ 'is-invalid': submitted && $v.producto.tipoProducto.$error }">
                             <option  disabled selected>Elige un Tipo Producto</option>
                             <option  v-for="item in tipoProductos">{{ item.name }}</option>
                          </select>
                          <div v-if="submitted && !$v.producto.tipoProducto.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.producto.tipoProducto.required">El dni es requerido</span>
+                              <span v-if="!$v.producto.tipoProducto.required">El Tipo del producto es requerido</span>
                           </div>
                       </div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Stock</span>
               						</div>
-              						<input required type="number" min="0" v-model.number="producto.stock" class="form-control" placeholder="Ingrese Stock" :class="{ 'is-invalid': submitted && $v.producto.stock.$error }">
+              						<input type="number" min="0" v-model.number="producto.stock" class="form-control" placeholder="Ingrese Stock" :class="{ 'is-invalid': submitted && $v.producto.stock.$error }">
             					    <div v-if="submitted && !$v.producto.stock.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.producto.stock.required">El stock es requerido</span>
+                              <span v-if="!$v.producto.stock.required">El stock del producto es requerido</span>
+                              <span v-if="!$v.producto.stock.between">El stock del producto debe ser mayor que 0</span>
                           </div>
                       </div>
                       <div class="input-group form-group">
               						<div class="input-group-prepend">
               							<span class="input-group-text">Precio</span>
               						</div>
-              						<input required type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio":class="{ 'is-invalid': submitted && $v.producto.precio.$error }">
+              						<input type="number" min="0" v-model="producto.precio" class="form-control" placeholder="Ingrese Precio":class="{ 'is-invalid': submitted && $v.producto.precio.$error }">
             					    <div v-if="submitted && !$v.producto.precio.required.$error" class="invalid-feedback">
                               <span v-if="!$v.producto.precio.required">El precio es requerido</span>
+                              <span v-if="!$v.producto.precio.between">El precio debe ser mayor que 0</span>
                           </div>
                       </div>
                       <br>
@@ -98,7 +101,7 @@
 import axios from 'axios'
 import { alertSucessProducto,alertCompletarCampos,alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import Producto from '../../models/Producto';
-import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/validators";
+import { required,between, minLength,maxLength } from "vuelidate/lib/validators";
 
 
 
@@ -136,16 +139,18 @@ export default {
                 },
                 descripcion:{
                    required,
-                   maxLength: maxLength(50)  
+                   maxLength: maxLength(250)  
                 },
                 tipoProducto:{
                    required,
                 },
                 stock:{
                   required,
+                  between: between(1,1000000)
                 },
                  precio:{
                   required,
+                  between: between(1,1000000)
                 }
             }
         },
@@ -303,51 +308,20 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-form select:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
 
-}
-
-form select:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
-
-
-}
-
-
-form input:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
-
-}
-
-
-form input:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
-
-}
-
-.form-control {
-    border: 0;
+.form-control:focus{
+    border: none;
     box-shadow: none;
-}
-
-
-form textarea:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
-}
-
-
-form textarea:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
+    border-color: none;
 
 }
 
+.form-control{
+    border: none;
+    box-shadow: none;
+    border-color: none;
+
+}
 
 
 .formulario{
@@ -375,33 +349,6 @@ form textarea:required:focus:valid{
 
 }
 
-.info{
-    width: 38%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center center;
-    background-image: url('https://i0.wp.com/brunettebraid.com/wp-content/uploads/2017/11/nuevos-wallpapers-celular-noviembre-2.jpg');
-
-
-}
-
-.titulo{
-    position: relative;
-    z-index: 2;
-    color: #fff;
-}
-
-
-.titulo span{
-    font-size: 100px;
-    display: block;
-    text-align: center;
-    margin-bottom: 15px;
-}
 
 /* Formulario de contacto*/
 form{

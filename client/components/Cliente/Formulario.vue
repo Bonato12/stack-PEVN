@@ -11,7 +11,6 @@
                         <br>
                     </ul>
                   </p>
-                  <notifications group="foo" position="top left" />
                   <form @submit.prevent="nuevoCliente()" style="width:780px; margin-top:-25px; margin:0px auto;">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
