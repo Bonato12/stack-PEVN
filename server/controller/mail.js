@@ -11,7 +11,7 @@ module.exports = {
               secure: false,
                 auth: {
                     user: 'sebabonato12@gmail.com',
-                    pass: 'BONATO1296'
+                    pass: 'BOCAJUNIORS2000'
                   }
             })
             var mailOptions = {

@@ -47,38 +47,51 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Direccion</span>
                         </div>
-                        <input  type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" >
+                        <input  type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" :class="{ 'is-invalid': submitted && $v.cliente.direccion.$error }" >
+                        <div v-if="submitted && !$v.cliente.direccion.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.cliente.direccion.required">Telefono is required</span>
+                              <span v-if="!$v.cliente.direccion.maxLength">El Telefono no puede tener mas de 10 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input    type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                        <input  type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" :class="{ 'is-invalid': submitted && $v.cliente.telefono.$error }" >
+                        <div v-if="submitted && !$v.cliente.telefono.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.cliente.telefono.required">Telefono is required</span>
+                              <span v-if="!$v.cliente.telefono.maxLength">El Telefono no puede tener mas de 10 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Mail</span>
                         </div>
-                        <input  type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" >
+                        <input  type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" :class="{ 'is-invalid': submitted && $v.cliente.mail.$error }">
+                        <div v-if="submitted && !$v.cliente.telefono.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.cliente.mail.required">Mail is required</span>
+                              <span v-if="!$v.cliente.mail.email">El Mail no tiene formato</span>
+                        </div>
                     </div>
-                      <div class="d-flex justify-content-end">
-                        <router-link to="/HomeCliente" tag="button" class="btn"  title="Volver a HomeCliente" >
-                            <i class="fas fa-arrow-left"></i>
-                              Volver
-                        </router-link>
-                        <button v-if="editCliente === false" type="submit" class="btn"  title="Guardar Cliente"  >
-                              <i class="far fa-save fa-1x"></i>
-                              Guardar
-                        </button>
-                        <button v-if="editCliente === true" type="submit" class="btn"  title="Guardar Cliente"  >
-                              <i class="far fa-save fa-1x"></i>
-                              Editar
-                        </button>
-                  </div>
-              </form>
-          </div>
-        </div>
+                    <br>
+                    <div class="d-flex justify-content-end">
+                      <router-link to="/HomeCliente" tag="button" class="btn"  title="Volver a HomeCliente" >
+                          <i class="fas fa-arrow-left"></i>
+                            Volver
+                      </router-link>
+                      <button v-if="editCliente === false" type="submit" class="btn"  title="Guardar Cliente"  >
+                            <i class="far fa-save fa-1x"></i>
+                            Guardar
+                      </button>
+                      <button v-if="editCliente === true" type="submit" class="btn"  title="Guardar Cliente"  >
+                            <i class="far fa-save fa-1x"></i>
+                            Editar
+                      </button>
+                    </div>
+                </form>
+            </div>
       </div>
+    </div>
 </div>
 </template>
 
@@ -117,20 +130,28 @@ export default {
                 apellido:{
                    required,
                    maxLength: maxLength(50)  
+                },
+                direccion:{
+                   required,
+                   maxLength: maxLength(50)
+                },
+                 telefono:{
+                   required,
+                   maxLength: maxLength(50)
+                },
+                mail:{
+                  required,
+                  email
                 }
-            }
-        },
-  mounted(){
-
-
-  },
+          }
+    },
+  
   methods: {
         rellenarCliente(){
           this.editCliente = true;
           axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
             console.log(response.data);
           this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
-          //this.cliente.setDni(response.data[0].dni);
             }).catch(error=>{
               console.log(error);
             })
