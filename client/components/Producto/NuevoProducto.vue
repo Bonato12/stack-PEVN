@@ -187,6 +187,7 @@ export default {
                       if (response.data == "OK"){
                         alertSucessProducto();
                         _this.producto = new Producto();
+                        _this.submitted = false;
                       }else {
                         _this.errors.push(response.data.msg);
                       }

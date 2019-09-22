@@ -35,16 +35,6 @@
                                  <i class="fas fa-toolbox"></i>
                                  Arreglos
                                </router-link>
-                            <div class="dropdown-content">
-                                <router-link class="item" :class="{ 'router-link-active': isActiveArreglo }"   tag="a"active-class="activo"   to="/HomeArreglo">
-                                 <i class="fas fa-toolbox"></i>
-                                 Arreglos
-                               </router-link>
-                               <router-link class="item" :class="{ 'router-link-active': isActiveArreglo }"   tag="a"active-class="activo"   to="/HomeReparacion">
-                                 <i class="fas fa-tools"></i>
-                                 Reparaciones
-                               </router-link>
-                            </div>
                         </li>
                         <li class="nav-item">
                             <router-link  class="item" tag="a" :class="{ 'router-link-active': isActiveProveedor }" active-class="activo"   to="/HomeProveedor">
@@ -109,14 +99,11 @@ export default {
           return this.$route.matched.some(route => route.name === 'NuevaCompra' ||  route.name === 'EditarCompra' )
       },
       isActiveArreglo() {
-          return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto' || route.name === 'HomeReparacion' )
+          return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto')
       },
       isActiveUsuario() {
           return this.$route.matched.some(route => route.name === 'NuevoUsuario' ||  route.name === 'HomeUsuario')
-      },
-      isActiveReparacion() {
-          return this.$route.matched.some(route => route.name === 'HomeReparacion')
-      },
+      }
   },
   methods: {
       irHome(){

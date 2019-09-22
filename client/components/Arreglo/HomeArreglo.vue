@@ -49,7 +49,7 @@
                 </template>
          </vue-good-table>
      </div>
-    </br>
+     <br>
         <router-link to="/NuevoArreglo" tag="button" class="btn btn-warning" style="float: left;">
           <i class="fas fa-plus-circle fa-1x"></i>
           Nuevo Arreglo
@@ -72,6 +72,7 @@
                 Exportar Csv
             </button>
         </div>
+        <tabla-reparacion></tabla-reparacion>
   </div>
   </div>
 </template>
@@ -81,7 +82,7 @@
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete,alertError,alertWarningArregloFK } from '../../assets/sweetAlert.js';
-
+import TablaReparacion from '../Reparacion/HomeReparacion.vue'
 import moment from 'moment';
 
 export default {
@@ -124,10 +125,8 @@ export default {
       id_presupuesto:''
 		}
   },
-  computed:{
-
-    },
-  mounted(){
+  components: {
+      TablaReparacion
   },
   methods: {
     getArreglo(){

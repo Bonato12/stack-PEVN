@@ -1,15 +1,12 @@
 <template>
   <div id="HomeReparaciones">
-  <br>
-  <br>
-  <div class="container">
-          <div class="card-header" style="background-color:#FFD700; ">
-            <h2 style="text-align:center; color:black;">
-                <i class="fas fa-tools"></i>
-                <i class="fas fa-clipboard-list"></i>
-                Reparaciones
-             </h2>
-          </div>
+    <div class="card-header" style="background-color:#FFD700; ">
+      <h2 style="text-align:center; color:black;">
+          <i class="fas fa-tools"></i>
+          <i class="fas fa-clipboard-list"></i>
+          Reparaciones
+        </h2>
+    </div>
     <div v-if="this.reparacion.length">
       <vue-good-table
               :columns="columns"
@@ -143,9 +140,7 @@
                Exportar Csv
            </button>
        </div>
-    </div>
-
-  </div>
+</div>
 </template>
 
 <script>
@@ -273,6 +268,7 @@
   text-align: center;
   color: white;
   font-family: 'Numans', sans-serif;
+  margin-top:100px;
 }
 
 
