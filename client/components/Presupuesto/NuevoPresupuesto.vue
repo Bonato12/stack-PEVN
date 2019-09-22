@@ -11,7 +11,7 @@
                         Presupuesto para el Arreglo N° {{this.ida}}
                      </h2>
                   </div>
-                    </hr style="color:black;">
+                  <hr style="color:black;">
                   <div class="card-body">
                     <form @submit.prevent="guardarLista()" style="margin: 0 auto; width:780px; margin-top:10px;">
                             <div class="input-group form-group">

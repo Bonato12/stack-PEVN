@@ -9,7 +9,7 @@ module.exports = {
           getCompraProducto(req,res){
             var pool = new pg.Pool(config)
             pool.connect(function(err, client, done) {
-              client.query("SELECT * FROM compraProducto")
+              client.query("SELECT * FROM compra_producto")
                 .then(response => {
                   pool.end()
                   res.json(response.rows)
@@ -24,7 +24,7 @@ module.exports = {
           getIdCompraProducto(req,res){
               var pool = new pg.Pool(config);
               pool.connect(function(err, client, done) {
-                client.query('SELECT C.fecha, CP.id_compraProducto, C.id_compra, PR.marca, PR.modelo,CP.cantidad, CP.precioUnitario, CP.precioTotal FROM compraProducto CP, compra C, producto PR WHERE CP.id_compra = ($1) AND CP.id_compra = C.id_compra AND CP.id_producto = PR.id_producto', [req.params.id_compra])
+                client.query('SELECT C.fecha, CP.id_compra_producto, C.id_compra, PR.marca, PR.modelo,CP.cantidad, CP.precio_unitario, CP.precio_total FROM compra_producto CP, compra C, producto PR WHERE CP.id_compra = ($1) AND CP.id_compra = C.id_compra AND CP.id_producto = PR.id_producto', [req.params.id_compra])
                   .then(response => {
                     pool.end();
                     res.json(response.rows)

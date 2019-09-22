@@ -40,7 +40,7 @@ module.exports = {
 
               postPresupuesto(req, res){
                       var pool = new pg.Pool(config)
-                      pool.query("INSERT INTO presupuesto(arreglo,observacion,estado,precioManoObra,precioTotal) VALUES($1,$2,$3,$4,$5) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.estado,req.body.presupuesto.precioManoObra,req.body.presupuesto.precioTotal]).then(response=> {
+                      pool.query("INSERT INTO presupuesto(arreglo,observacion,estado,precio_mano_obra,precio_total) VALUES($1,$2,$3,$4,$5) RETURNING id_presupuesto",[req.body.presupuesto.arreglo,req.body.presupuesto.observacion,req.body.presupuesto.estado,req.body.presupuesto.precioManoObra,req.body.presupuesto.precioTotal]).then(response=> {
                           pool.end();
                           res.json(response.rows);
                       }).catch((error) =>{
@@ -53,7 +53,7 @@ module.exports = {
                   console.log(req.body);
                   for (var i=0 ; i < req.body.presupuesto.length ; i++) {
                       var pool = new pg.Pool(config)
-                      pool.query("INSERT INTO presupuestoProducto(presupuesto,producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_presupuesto,req.body.presupuesto[i].producto.id_producto,req.body.presupuesto[i].cantidad,req.body.presupuesto[i].precio]).then(response=> {
+                      pool.query("INSERT INTO presupuesto_producto(presupuesto,producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_presupuesto,req.body.presupuesto[i].producto.id_producto,req.body.presupuesto[i].cantidad,req.body.presupuesto[i].precio]).then(response=> {
                             pool.end();
                             console.log(response.data);
                       }).then(pool.query("UPDATE producto SET stock = stock - $1 WHERE id_producto=($2)",[req.body.presupuesto[i].cantidad,req.body.presupuesto[i].producto.id_producto]).then(response =>{
@@ -67,6 +67,7 @@ module.exports = {
                 },
 
               deletePresupuesto(req,res){
+                      console.log("HOLA");
                       var pool = new pg.Pool(config)
                       pool.connect(function(err, client, done) {
                         client.query("DELETE FROM presupuesto WHERE id_presupuesto=($1)",[req.params.id_presupuesto])
@@ -75,6 +76,7 @@ module.exports = {
                             res.sendStatus(200);
                           })
                           .catch(error => {
+                            console.log(error);
                             pool.end();
                             res.json(error);
                           })

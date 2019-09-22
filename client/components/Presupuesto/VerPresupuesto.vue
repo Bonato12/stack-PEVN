@@ -37,7 +37,7 @@
               </div>
             </div>
           </div>
-          </hr>
+          <hr>
           <div class="modal-body" style="background-color: #f1f8e9; margin-top:-30px;">
               <h4>
                 <i class="fas fa-tools"></i>
@@ -85,7 +85,7 @@
                  </select>
               </div>
               <div class="modal-body" style="background-color:#f1f8e9;">
-                <button type="submit" class="btn btn-success"  title="Guardar Estado" >
+                <button type="submit" class="btn"  title="Guardar Estado" >
                       <i class="far fa-save fa-1x"></i>
                       Guardar
                 </button>
@@ -102,8 +102,8 @@
           </form>
           </div>
       </div>
+      <br>
     </div>
-  </div>
 </template>
 <script>
 
@@ -156,7 +156,6 @@ export default {
     eliminarPresupuesto(){
         axios.delete('http://localhost:3000/presupuesto/'+this.idp).then((data)=>{
           console.log(data)
-          this.getArreglo()
         }).then(response =>{
           if (response.data == "OK"){
               alertSucessDelete();
@@ -267,7 +266,8 @@ button{
   height:40px;
   margin-top:-10px;
   border:none;
-  /*background-color: #FFD700  !important;*/
+    background-color: #FFD700  !important;
+
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;

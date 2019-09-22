@@ -186,7 +186,7 @@ export default {
 
         {
           label: 'TipoProducto',
-          field: 'tipoproducto',
+          field: 'tipo_producto',
           width: '150px'
           /*
           filterOptions: {

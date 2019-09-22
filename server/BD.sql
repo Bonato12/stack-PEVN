@@ -1,3 +1,9 @@
+CREATE TABLE rol(
+	id_rol SERIAL NOT NULL,
+	perfil VARCHAR(30) NOT NULL,
+	CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
+);
+
 CREATE TABLE usuario(
 	id_usuario SERIAL NOT NULL,
 	uuid VARCHAR(100) NOT NULL UNIQUE,
@@ -6,12 +12,6 @@ CREATE TABLE usuario(
 	rol INTEGER NOT NULL,
 	CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario),
 	CONSTRAINT fk_id_rol FOREIGN KEY(rol) REFERENCES rol(id_rol)
-);
-
-CREATE TABLE rol(
-	id_rol SERIAL NOT NULL,
-	perfil VARCHAR(30) NOT NULL,
-	CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
 );
 
 CREATE TABLE cliente(
@@ -44,7 +44,7 @@ CREATE TABLE producto(
 	modelo VARCHAR(30) NOT NULL,
 	marca VARCHAR(30) NOT NULL,
 	descripcion VARCHAR(30) NOT NULL,
-	tipoProducto VARCHAR(30) NOT NULL,
+	tipo_producto VARCHAR(30) NOT NULL,
 	stock INTEGER NOT NULL,
 	precio INTEGER NOT NULL,
 	check(stock>=0),
@@ -60,57 +60,14 @@ CREATE TABLE venta(
 	CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente)
 );
 
-CREATE TABLE ventaProducto(
-	id_ventaProducto SERIAL NOT NULL,
+CREATE TABLE venta_producto(
+	id_venta_producto SERIAL NOT NULL,
 	id_venta INTEGER NOT NULL,
 	id_producto INTEGER NOT NULL,
 	cantidad INTEGER NOT NULL,
 	precio INTEGER NOT NULL,
-	CONSTRAINT pk_idProducto PRIMARY KEY(id_ventaProducto),
+	CONSTRAINT pk_id_venta_producto PRIMARY KEY(id_venta_producto),
 	CONSTRAINT fk_id_venta FOREIGN KEY(id_venta) REFERENCES venta(id_venta) ON DELETE CASCADE,
-	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
-);
-
-CREATE TABLE presupuesto(
-	id_presupuesto SERIAL NOT NULL,
-	arreglo INTEGER NOT NULL,
-	observacion VARCHAR(100) NOT NULL,
-	estado VARCHAR(100) NOT NULL,
-	precioManoObra INTEGER NOT NULL,
-	precioTotal INTEGER NOT NULL,
-	CONSTRAINT pk_id_presupuesto PRIMARY KEY(id_presupuesto),
-	CONSTRAINT fk_arreglo FOREIGN KEY(arreglo) REFERENCES arreglo(id_arreglo)
-);
-
-CREATE  TABLE presupuestoProducto(
-	id_presupuestoProducto SERIAL NOT NULL,
-	presupuesto INTEGER NOT NULL,
-	producto INTEGER NOT NULL,
-	cantidad INTEGER NOT NULL,
-	precio INTEGER NOT NULL,
-	CONSTRAINT pk_id_presupuesto_producto PRIMARY KEY(id_presupuestoProducto),
-	CONSTRAINT fk_id_presupuesto FOREIGN KEY(presupuesto) REFERENCES presupuesto(id_presupuesto)  ON DELETE CASCADE,
-	CONSTRAINT fk_id_producto_presupuesto FOREIGN KEY(producto) REFERENCES producto(id_producto)
-);
-
-CREATE TABLE compra(
-	id_compra SERIAL NOT NULL,
-	id_proveedor INTEGER NOT NULL,
-	fecha DATE NOT NULL,
-	total INTEGER NOT NULL,
-	CONSTRAINT pk_id_compra PRIMARY KEY(id_compra),
-	CONSTRAINT fk_id_proveedor FOREIGN KEY(id_proveedor) REFERENCES proveedor(id_proveedor)
-);
-
-CREATE TABLE compraProducto(
-	id_compraProducto SERIAL NOT NULL,
-	id_compra INTEGER NOT NULL,
-	id_producto INTEGER NOT NULL,
-	cantidad INTEGER NOT NULL,
-	precioUnitario INTEGER NOT NULL,
-	precioTotal INTEGER NOT NULL,
-	CONSTRAINT pk_idcompraProducto PRIMARY KEY(id_compraProducto),
-	CONSTRAINT fk_id_compra FOREIGN KEY(id_compra) REFERENCES compra(id_compra)  ON DELETE CASCADE,
 	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
 );
 
@@ -126,14 +83,59 @@ CREATE TABLE arreglo(
 	CONSTRAINT fk_id_productoA FOREIGN KEY(producto) REFERENCES producto(id_producto)
 );
 
+
+CREATE TABLE presupuesto(
+	id_presupuesto SERIAL NOT NULL,
+	arreglo INTEGER NOT NULL,
+	observacion VARCHAR(100) NOT NULL,
+	estado VARCHAR(100) NOT NULL,
+	precio_mano_obra INTEGER NOT NULL,
+	precio_total INTEGER NOT NULL,
+	CONSTRAINT pk_id_presupuesto PRIMARY KEY(id_presupuesto),
+	CONSTRAINT fk_arreglo FOREIGN KEY(arreglo) REFERENCES arreglo(id_arreglo) ON DELETE CASCADE
+);
+
+CREATE  TABLE presupuesto_producto(
+	id_presupuesto_producto SERIAL NOT NULL,
+	presupuesto INTEGER NOT NULL,
+	producto INTEGER NOT NULL,
+	cantidad INTEGER NOT NULL,
+	precio INTEGER NOT NULL,
+	CONSTRAINT pk_id_presupuesto_producto PRIMARY KEY(id_presupuesto_producto),
+	CONSTRAINT fk_id_presupuesto FOREIGN KEY(presupuesto) REFERENCES presupuesto(id_presupuesto)  ON DELETE CASCADE,
+	CONSTRAINT fk_id_producto_presupuesto FOREIGN KEY(producto) REFERENCES producto(id_producto)
+);
+
+CREATE TABLE compra(
+	id_compra SERIAL NOT NULL,
+	id_proveedor INTEGER NOT NULL,
+	fecha DATE NOT NULL,
+	total INTEGER NOT NULL,
+	CONSTRAINT pk_id_compra PRIMARY KEY(id_compra),
+	CONSTRAINT fk_id_proveedor FOREIGN KEY(id_proveedor) REFERENCES proveedor(id_proveedor)
+);
+
+CREATE TABLE compra_producto(
+	id_compra_producto SERIAL NOT NULL,
+	id_compra INTEGER NOT NULL,
+	id_producto INTEGER NOT NULL,
+	cantidad INTEGER NOT NULL,
+	precio_unitario INTEGER NOT NULL,
+	precio_total INTEGER NOT NULL,
+	CONSTRAINT pk_id_compra_producto PRIMARY KEY(id_compra_producto),
+	CONSTRAINT fk_id_compra FOREIGN KEY(id_compra) REFERENCES compra(id_compra)  ON DELETE CASCADE,
+	CONSTRAINT fk_id_producto FOREIGN KEY(id_producto) REFERENCES producto(id_producto)
+);
+
+
 CREATE  TABLE reparacion(
 	id_reparacion Serial NOT NULL,
 	fecha_ini date NOT NULL,
 	fecha_fin date,
 	id_presupuesto integer NOT NULL,
-	check(fecha_fin>=fecha_ini),
-	constraint pk_reparacion primary key (id_reparacion),
-	constraint fk_presupuesto foreign key (id_presupuesto) references presupuesto(id_presupuesto)
+	CHECK (fecha_fin>=fecha_ini),
+	CONSTRAINT pk_reparacion PRIMARY KEY (id_reparacion),
+	CONSTRAINT fk_presupuesto FOREIGN KEY(id_presupuesto) REFERENCES presupuesto(id_presupuesto) ON DELETE CASCADE
 );
 
 
@@ -148,7 +150,7 @@ RETURN NEW;
 END;
 $funcemp$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_pagar_deuda AFTER INSERT ON ventaproducto
+CREATE TRIGGER trigger_pagar_deuda AFTER INSERT ON venta_producto
 FOR each row execute procedure trigger_stock()
 
 /* TRIGGER 2 */
@@ -160,7 +162,7 @@ RETURN NEW;
 END;
 $funcemp$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_eliminar_venta AFTER DELETE ON ventaproducto
+CREATE TRIGGER trigger_eliminar_venta AFTER DELETE ON venta_producto
 FOR each row execute procedure trigger_eliminar_venta()
 
 /* TRIGGER DE ACTUALIZAR STOCK DESPUES DE LA COMPRA*/
@@ -172,7 +174,7 @@ RETURN NEW;
 END;
 $funcemp$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_stock_compra AFTER INSERT ON compraproducto
+CREATE TRIGGER trigger_stock_compra AFTER INSERT ON compra_producto
 FOR each row execute procedure trigger_compra_stock()
 
 
@@ -227,8 +229,8 @@ CREATE OR REPLACE FUNCTION func_R() RETURNS TRIGGER AS $funcemp$
 DECLARE 
 BEGIN 
 IF NEW.fecha_fin is not null THEN
-    UPDATE arreglo SET condicion= 'REPARACION TERMINADA' where 
-	arreglo.id_arreglo = (select p.arreglo from presupuesto p where p.id_presupuesto=new.id_presupuesto);
+    UPDATE arreglo SET condicion= 'REPARACION TERMINADA' WHERE 
+	arreglo.id_arreglo = (SELECT P.arreglo from presupuesto P WHERE P.id_presupuesto=NEW.id_presupuesto);
 END IF;
 RETURN NEW;
 END; $funcemp$ LANGUAGE plpgsql;

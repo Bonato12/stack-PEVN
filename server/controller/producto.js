@@ -26,7 +26,7 @@ module.exports = {
         getProductoRepuesto(req,res){
           var pool = new pg.Pool(config)
           pool.connect(function(err, client, done) {
-            client.query("SELECT  * FROM producto WHERE tipoProducto = 'Repuesto' ")
+            client.query("SELECT  * FROM producto WHERE tipo_producto = 'Repuesto' ")
               .then(response => {
                 pool.end()
                 res.json(response.rows)
@@ -43,7 +43,7 @@ module.exports = {
             var pool = new pg.Pool(config)
             pool.connect()
             .then(client => {
-             return client.query("SELECT  * FROM producto WHERE stock >= 1 AND tipoProducto <>'Repuesto' ")
+             return client.query("SELECT  * FROM producto WHERE stock >= 1 AND tipo_producto <>'Repuesto' ")
                .then(response => {
                  pool.end();
                  res.json(response.rows)
@@ -58,7 +58,7 @@ module.exports = {
       postProducto(req, res){
           var pool = new pg.Pool(config)
           pool.connect(function(err, client, done) {
-            client.query("INSERT INTO producto(modelo,marca,descripcion,tipoProducto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
+            client.query("INSERT INTO producto(modelo,marca,descripcion,tipo_producto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
             req.body.stock,req.body.precio])
               .then(response => {
                 pool.end();
@@ -110,7 +110,7 @@ module.exports = {
         var pool = new pg.Pool(config)
         pool.connect()
         .then(client => {
-          return client.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipoProducto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,req.body.stock,req.body.precio, req.params.id_producto])
+          return client.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipo_producto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,req.body.stock,req.body.precio, req.params.id_producto])
           .then(response => {
             pool.end();
             res.sendStatus(200);
