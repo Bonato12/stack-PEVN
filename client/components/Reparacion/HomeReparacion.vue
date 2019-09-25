@@ -170,7 +170,7 @@
         },
         {
           label: 'Producto',
-          field: 'id_producto',
+          field: 'producto',
         },
         {
           label: 'Fecha Inicial',
@@ -186,8 +186,8 @@
         },
         {
           label: 'Precio Total',
-          field: 'preciototal',
-          width: '150px',
+          field: 'precio_total',
+          width: '100px',
         },
         {
           label: 'Opciones',

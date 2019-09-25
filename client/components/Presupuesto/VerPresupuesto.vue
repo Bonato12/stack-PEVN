@@ -8,6 +8,9 @@
                 <i class="fas fa-clipboard-list"></i>
                 Detalle del Presupuesto: {{presupuesto.id_presupuesto}}
              </h2>
+             <button class="btn btn-danger" style="float:right" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" title="Eliminar Arreglo">
+                    <i class="fas fa-trash-alt"></i>
+            </button>
           </div>
           <div class="modal-body" style="background-color: #f1f8e9; color:black;">
             <div class="row">
@@ -85,7 +88,7 @@
                  </select>
               </div>
               <div class="modal-body" style="background-color:#f1f8e9;">
-                <button type="submit" class="btn"  title="Guardar Estado" >
+                <button type="submit" class="btn btn-guardar"  title="Guardar Estado" >
                       <i class="far fa-save fa-1x"></i>
                       Guardar
                 </button>
@@ -93,10 +96,6 @@
                     <i class="fas fa-arrow-left"></i>
                       Volver
                 </router-link>
-                <button class="btn btn-danger" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" title="Eliminar Arreglo">
-                    <i class="fas fa-trash-alt"></i>
-                    Eliminar
-                </button>
                 <br>
             </div>
           </form>
@@ -154,12 +153,14 @@ export default {
         });
     },
     eliminarPresupuesto(){
+        var _this = this;
+
         axios.delete('http://localhost:3000/presupuesto/'+this.idp).then((data)=>{
           console.log(data)
         }).then(response =>{
+                        _this.$router.push('/HomeArreglo');
+
           if (response.data == "OK"){
-              alertSucessDelete();
-              this.$router.push('/HomeArreglo');
           }else {
               alert("error");
           }
@@ -167,6 +168,7 @@ export default {
             console.log(error);
         })
     },
+
     cambiarEstado(){
       axios.put('http://localhost:3000/presupuesto/'+ this.idp,
           {
@@ -257,6 +259,22 @@ li {
 }
 
 
+.btn-guardar{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #FFD700  !important;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black !important;
+}
+
 button{
   margin-left: 2px;
   cursor:pointer;
@@ -266,8 +284,6 @@ button{
   height:40px;
   margin-top:-10px;
   border:none;
-    background-color: #FFD700  !important;
-
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;

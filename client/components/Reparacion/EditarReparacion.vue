@@ -15,7 +15,7 @@
                   <div class="card-body">
                     <form @submit.prevent="editarReparacion()" style="margin-left: 30px; margin-top:30px; width:500px;">
                       <div class="form-group row">
-                        <label  class="col">Fecha Inicial</label>
+                        <label  class="col" style="color:white;">Fecha Inicial</label>
                         <div class="col-10">
                           <datepicker :bootstrap-styling="true" v-model="dateIni"  name="fecha"
                                   >
@@ -23,7 +23,7 @@
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label class="col">Fecha Final</label>
+                        <label class="col" style="color:white;">Fecha Final</label>
                         <div class="col-10">
                           <datepicker :bootstrap-styling="true" v-model="dateFin"  name="fecha"
                                   >
@@ -38,7 +38,7 @@
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
-                              <button  type="submit"  class="btn btn-success">
+                              <button  type="submit"  class="btn btn-guardar">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -142,7 +142,8 @@ export default {
 height: auto;
 margin-bottom: auto;
 width: 700px;
-background-color: rgb(70,90,101);
+background-color: #2A363B;
+
 border: 1px solid;
 border-radius: 5px;
 }
@@ -183,6 +184,22 @@ border:0;
   margin-top:-10px;
   border:none;
   /*background-color: #FFD700  !important;*/
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black !important;
+}
+
+.btn-guardar{
+ margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #FFD700  !important;*/
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;

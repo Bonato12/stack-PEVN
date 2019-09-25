@@ -15,7 +15,7 @@
                   <div class="card-body">
                     <form @submit.prevent="editarVenta()" style="margin-left: 30px; margin-top:30px; width:500px;">
                       <div class="form-group row">
-                        <label for="example-date-input" class="col col-form-label">Fecha</label>
+                        <label for="example-date-input" class="col col-form-label" style="color:white">Fecha</label>
                         <div class="col-10">
                           <datepicker :bootstrap-styling="true" v-model="date" :language="es" name="fecha"
                                     @opened="datepickerAbierto"
@@ -32,7 +32,7 @@
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
-                              <button  type="submit"  class="btn btn-success">
+                              <button  type="submit"  class="btn btn-guardar">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -133,7 +133,7 @@ export default {
 height: auto;
 margin-bottom: auto;
 width: 700px;
-background-color: rgb(70,90,101);
+background-color: #2A363B;
 border: 1px solid;
 border-radius: 5px;
 }
@@ -169,6 +169,22 @@ border:0;
   margin-top:-10px;
   border:none;
   /*background-color: #FFD700  !important;*/
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black !important;
+}
+
+.btn-guardar{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
