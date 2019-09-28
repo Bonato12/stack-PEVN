@@ -43,12 +43,12 @@ module.exports = {
                        client.query("INSERT INTO cliente(dni,nombre,apellido,direccion,telefono,mail) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_cliente",[cliente.dni,cliente.nombre,cliente.apellido,
                        cliente.direccion,cliente.telefono,cliente.mail])
                          .then(response => {
-                           pool.end()
+                           pool.end();
                            res.sendStatus(200);
                          })
                          .catch(error => {
-                           pool.end()
-                           console.log(error)
+                           pool.end();
+                           console.log(error);
                            res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
                          })
                        done()
@@ -106,7 +106,7 @@ module.exports = {
                        console.log(error);
                        res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
                      })
-                   done()
+                   done();
                  })
               }
             }

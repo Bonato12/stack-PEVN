@@ -3,14 +3,15 @@
     <div class="container animated zoomIn">
       <br>
           <div class="card-header" style="background-color:#f1f8e9; ">
-            <h2 style="text-align:center; color:black;">
+            <h2 style="text-align:left; color:black;">
                 <i class="fas fa-tools"></i>
                 <i class="fas fa-clipboard-list"></i>
                 Detalle del Presupuesto: {{presupuesto.id_presupuesto}}
+                 
              </h2>
-             <button class="btn btn-danger" style="float:right" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" title="Eliminar Arreglo">
+             <button class="btn btn-borrar" style="float:right" v-on:click="eliminarPresupuesto(presupuesto.id_presupuesto)" title="Eliminar Arreglo">
                     <i class="fas fa-trash-alt"></i>
-            </button>
+              </button>
           </div>
           <div class="modal-body" style="background-color: #f1f8e9; color:black;">
             <div class="row">
@@ -26,17 +27,14 @@
                      </b-row>
                      <b-row class="mb-1">
                        <b-col cols="3">Precio Total:</b-col>
-                         <b-col>{{presupuesto.preciototal}}$</b-col>
+                         <b-col>{{presupuesto.precio_total}}$</b-col>
                      </b-row>
                      <b-row class="mb-1">
                        <b-col cols="3">Mano de Obra:</b-col>
-                         <b-col>{{presupuesto.preciomanoobra}}$$</b-col>
+                         <b-col>{{presupuesto.precio_mano_obra}}$$</b-col>
                      </b-row>
                      <hr>
                   </slot>
-              </div>
-              <div class="col-sm">
-
               </div>
             </div>
           </div>
@@ -72,7 +70,8 @@
                 </div>
               </div>
           </div>
-          <div class="modal-body" style="background-color:#f1f8e9; margin-top:-45px;" >
+          <hr>
+          <div class="modal-body" style="background-color:#f1f8e9; margin-top:-30px;" >
               <h4>
                 <i class="fas fa-info-circle"></i>
                 Estado del Presupuesto:</h4>
@@ -128,11 +127,7 @@ export default {
                        {name:"CANCELADO"}]
 		}
   },
-  computed:{
-
-    },
-  mounted(){
-  },
+ 
   methods: {
     getPresupuesto(){
         axios.get('http://localhost:3000/presupuesto/'+this.idp).then((response) =>{
@@ -153,22 +148,34 @@ export default {
         });
     },
     eliminarPresupuesto(){
-        var _this = this;
+        var _this = this;        
+        this.$swal({
+            title: 'Estas Seguro?',
+            text: "No se podran recuperar los datos!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Borrar!'
+            }).then((result) => {
+            if (result.value) {
+              axios.delete('http://localhost:3000/presupuesto/'+this.idp).then((data)=>{
+                console.log(data)
+              }).then(response =>{
+              _this.$router.push('/HomeArreglo');
 
-        axios.delete('http://localhost:3000/presupuesto/'+this.idp).then((data)=>{
-          console.log(data)
-        }).then(response =>{
-                        _this.$router.push('/HomeArreglo');
-
-          if (response.data == "OK"){
-          }else {
-              alert("error");
-          }
-        }).catch(error=>{
-            console.log(error);
-        })
+                if (response.data == "OK"){
+                }else {
+                    alert("error");
+                }
+              }).catch(error=>{
+                  console.log(error);
+              })
+             }
+            });
     },
-
+        
+        
     cambiarEstado(){
       axios.put('http://localhost:3000/presupuesto/'+ this.idp,
           {
@@ -288,6 +295,16 @@ button{
   transition:.5s;
   border-radius: 5px;
   color: black;
+}
+
+
+.btn-borrar{
+
+width: 38px;
+background-color: red;
+margin-top: -40px;
+margin-left: 55px;
+
 }
 
 button:hover{

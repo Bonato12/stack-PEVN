@@ -143,7 +143,6 @@ height: auto;
 margin-bottom: auto;
 width: 700px;
 background-color: #2A363B;
-
 border: 1px solid;
 border-radius: 5px;
 }
