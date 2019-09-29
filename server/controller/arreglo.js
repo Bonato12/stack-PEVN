@@ -28,12 +28,12 @@ module.exports = {
              pool.connect(function(err, client, done) {
                client.query("SELECT p.id_presupuesto FROM presupuesto p  WHERE p.arreglo=($1)", [req.params.id_arreglo])
                  .then(response => {
-                   pool.end()
-                   res.json(response.rows)
+                   pool.end();
+                   res.json(response.rows);
                  })
                  .catch(error => {
-                   pool.end()
-                   console.log(error.stack)
+                   pool.end();
+                   console.log(error.stack);
                  })
                done()
              })

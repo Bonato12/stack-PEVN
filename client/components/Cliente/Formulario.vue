@@ -97,7 +97,7 @@
 <script>
 
 import axios from 'axios'
-import { alertSucessCliente,alertCompletarCampos,alertError } from '../../assets/sweetAlert.js'
+import { alertSuccess } from '../../assets/sweetAlert.js'
 import Cliente from '../../models/Cliente';
 import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/validators";
 
@@ -174,7 +174,7 @@ export default {
                         console.log(response);
                         if (response.data == "OK"){
                             _this.cliente = new Cliente();
-                            alert("EXITO");
+                             alertSuccess();
                             _this.submitted = false;
                         }else {
                             _this.errors.push(response.data.msg);

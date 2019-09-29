@@ -211,51 +211,10 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-form select:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
-
-}
-
-form select:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
-
-
-}
-
-
-form input:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
-
-}
-
-
-form input:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
-
-}
-
 .form-control {
     border: 0;
     box-shadow: none;
 }
-
-
-form textarea:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
-}
-
-
-form textarea:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
-
-}
-
 
 
 </style>

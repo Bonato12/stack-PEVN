@@ -10,7 +10,7 @@
                   Editar Proveedor
                </h2>
             </div>
-              </hr style="color:black;">
+            <hr style="color:black;">
             <div class="card-body" >
                   <p v-if="errors.length">
                     <ul  class="list-group" v-for="error in errors">
@@ -166,19 +166,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-form input:focus:invalid{
-    background: url('../../assets/invalid.png') no-repeat 95% 50%;
-    background-color: white;
-}
-
-
-form input:required:focus:valid{
-  background: url('../../assets/valid.png') no-repeat 95% 50%;
-  background-color: white;
-}
-
 
 h1, h2 {
   font-weight: normal;
