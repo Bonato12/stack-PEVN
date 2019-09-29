@@ -161,10 +161,9 @@ import { ModelSelect } from 'vue-search-select'
 import { ModelListSelect } from 'vue-search-select'
 import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertSucessVenta} from '../../assets/sweetAlert.js'
+import { alertSuccess} from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 import VentaProducto from '../../models/VentaProducto';
-import ModalCliente from "../Cliente/Formulario.vue";
 import { required,between,minLength,maxLength, sameAs } from "vuelidate/lib/validators";
 
 
@@ -291,6 +290,7 @@ export default {
               //Una Vez que le damos Guardar, Verificamos Si la Lista de Productos que
               //Vamos a Vender no es Vacia
               this.errors = [];
+              var _this = this;
               if (this.Lista.length > 0){
                   if (!this.venta.cliente){
                       this.errors.push('El Cliente no puede ser vacio');
@@ -327,7 +327,9 @@ export default {
                                  }
                               }).then(function(response){
                                 if (response.data == "OK"){
-                                    alertSucessVenta();
+                                    alertSuccess();
+                                    _this.venta = new Venta();
+                                    _this.Lista = [];
                                 }else {
                                     _this.errors.push(response.data.msg);
                                 }

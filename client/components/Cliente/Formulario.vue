@@ -97,7 +97,7 @@
 <script>
 
 import axios from 'axios'
-import { alertSuccess } from '../../assets/sweetAlert.js'
+import { alertSuccess, alertEditSuccess } from '../../assets/sweetAlert.js'
 import Cliente from '../../models/Cliente';
 import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/validators";
 
@@ -192,7 +192,7 @@ export default {
                       }).then(function(response){
                           console.log(response);
                           if (response.data == "OK"){
-                              alertEditSucessCliente();
+                              alertEditSuccess();
                               _this.$router.push('/HomeCliente');
                           }else {
                               _this.errors.push(response.data.msg);

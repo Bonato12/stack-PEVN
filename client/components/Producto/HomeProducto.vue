@@ -221,9 +221,7 @@ export default {
       ],
     }
   },
-  mounted() {
-
-  },
+ 
   methods: {
     getProducto() {
       console.log(this.productos)
@@ -233,6 +231,7 @@ export default {
         console.log(error);
       })
     },
+
     eliminarProducto(id) {
               this.showModal = false;
               this.$swal({
@@ -268,18 +267,18 @@ export default {
               }
               })
     },
+
     verMas(producto) {
         this.showModal = true;
-        console.log(producto);
         this.producto.id_producto = producto.id_producto;
         this.producto.modelo = producto.modelo;
         this.producto.marca = producto.marca;
         this.producto.descripcion = producto.descripcion;
-        this.producto.tipoproducto = producto.tipoproducto;
+        this.producto.tipoproducto = producto.tipo_producto;
         this.producto.stock = producto.stock;
         this.producto.precio = producto.precio;
-
     },
+
     exportarPdf() {
       var columnas = [{
           title: "MODELO",

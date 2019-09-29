@@ -99,7 +99,7 @@
 
 <script>
 import axios from 'axios'
-import { alertSucessProducto,alertCompletarCampos,alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertSuccess, alertEditSuccess } from '../../assets/sweetAlert.js'
 import Producto from '../../models/Producto';
 import { required,between, minLength,maxLength } from "vuelidate/lib/validators";
 
@@ -185,9 +185,9 @@ export default {
                     }).then(function(response){
                       console.log(response);
                       if (response.data == "OK"){
-                        alertSucessProducto();
                         _this.producto = new Producto();
                         _this.submitted = false;
+                        alertSuccess();
                       }else {
                         _this.errors.push(response.data.msg);
                       }
@@ -201,7 +201,7 @@ export default {
                     }).then(function(response){
                       console.log(response);
                       if (response.data == "OK"){
-                        alertEditSucessProducto();
+                        alertEditSuccess();
                       }else {
                         _this.errors.push(response.data.msg);
                       }
