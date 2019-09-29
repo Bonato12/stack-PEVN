@@ -36,6 +36,14 @@
                     allLabel: 'All',
                   }"
                   theme="default">
+                  <template slot="table-row" slot-scope="props" >
+                  <span v-if="props.column.field == 'opciones'">
+                    <button @click="verProveedor(props.row)" class="btn btn-info" style="width:150px;"  title="Ver Mas" >
+                        <i class="fas fa-clipboard-list"></i>
+                        Detalles
+                    </button>
+                  </span>
+                </template>
          </vue-good-table>
      </div>
       <transition v-if="showModal" class="animation fadeInLeft" name="modal">
@@ -96,9 +104,10 @@
                     </b-row>
                 </slot>
               </div>
-              <div class="modal-header" style="background-color:#FEC404;">
-                <h2 class="opciones" style="color:white;">Opciones</h2>
-                <div class="row" style="float:right; padding-right:13px;">
+              <div class="footer">
+                <br>
+                <h2 class="opciones" style="color:white; float:left; padding-left:25px;">Opciones</h2>
+                <div  class="row" style="float:right; padding-right:35px;">
                       <div>
                         <button class="btn btn-danger" v-on:click="eliminarProveedor(proveedor.id_proveedor)" title="Eliminar Proveedor">
                             <i class="fas fa-trash-alt"></i>
@@ -197,6 +206,11 @@ export default {
           label: 'Descripcion',
           field: 'descripcion',
         },
+        {
+          label: 'Opciones',
+          field: 'opciones',
+          width: '150px',
+        }
       ],
 
 		}
@@ -279,17 +293,18 @@ export default {
       XLSX.utils.book_append_sheet(wb, proveedores, this.datos)
       XLSX.writeFile(wb, 'proveedores.csv');
     },
-    detalleProveedor(params) {
+
+    verProveedor(proveedor) {
+        console.log(proveedor);
         this.showModal = true;
-        console.log(params);
-        this.proveedor.id_proveedor = params.row.id_proveedor;
-        this.proveedor.dni = params.row.dni;
-        this.proveedor.nombre = params.row.nombre;
-        this.proveedor.apellido = params.row.apellido;
-        this.proveedor.direccion = params.row.direccion;
-        this.proveedor.telefono = params.row.telefono;
-        this.proveedor.mail = params.row.mail;
-        this.proveedor.descripcion = params.row.descripcion;
+        this.proveedor.id_proveedor = proveedor.id_proveedor;
+        this.proveedor.dni = proveedor.dni;
+        this.proveedor.nombre = proveedor.nombre;
+        this.proveedor.apellido = proveedor.apellido;
+        this.proveedor.direccion = proveedor.direccion;
+        this.proveedor.telefono = proveedor.telefono;
+        this.proveedor.mail = proveedor.mail;
+        this.proveedor.descripcion = proveedor.descripcion;
     },
     hideModal(){
       this.showModal = false;
@@ -364,6 +379,12 @@ li {
 .opciones{
   text-align:left !important;
 }
+
+.footer{
+  background-color:#FEC404; 
+  height:90px;
+}
+
 
 
 </style>
