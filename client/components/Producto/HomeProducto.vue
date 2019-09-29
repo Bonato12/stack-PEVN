@@ -105,21 +105,18 @@
                 </b-row>
               </slot>
             </div>
-            <div class="modal-header" style="background-color:#FEC404;">
-              <h2 class="opciones" style="color:white;">Opciones</h2>
-              <div  class="row" style="float:right; padding-right:15px;">
-                  <div>
-                      <button class="btn btn-danger" v-on:click="eliminarProducto(producto.id_producto)" title="Eliminar Producto">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                  </div>
+            <div class="footer">
+              <br>
+              <h2 class="opciones" style="color:white; float:left; padding-left:25px;">Opciones</h2>
+              <div  class="row" style="float:right; padding-right:35px;">
+                  <button class="btn btn-danger" v-on:click="eliminarProducto(producto.id_producto)" title="Eliminar Producto">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
                   <div style="width:5px;">
                   </div>
-                  <div>
-                    <router-link class="btn btn-dark" :to="/NuevoProducto/+producto.id_producto"  tag="button" title="Editar Producto">
-                      <i class="far fa-edit fa-1x"></i>
-                    </router-link>
-                  </div>
+                  <router-link class="btn btn-dark" :to="/NuevoProducto/+producto.id_producto"  tag="button" title="Editar Producto">
+                    <i class="far fa-edit fa-1x"></i>
+                  </router-link>
                </div>
            </div>
           </div>
@@ -411,6 +408,13 @@ li {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+
+.footer{
+  background-color:#FEC404; 
+  height:90px;
+}
+
 
 
 .opciones{

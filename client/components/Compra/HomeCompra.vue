@@ -58,11 +58,6 @@
                         </slot>
                       </div>
                       <div class="modal-body" style="background-color:#f1f8e9; color:black;">
-                          <h3>
-                            <i class="fas fa-clipboard-list"></i>
-                            <i class="fas fa-mobile-alt"></i>
-                            Lista de Productos
-                          </h3>
                           <table class="table" style="color:black">
                                 <thead>
                                       <tr>
@@ -78,13 +73,13 @@
                                         <td scope="col">{{item.marca}}</td>
                                         <td scope="col">{{item.modelo}}</td>
                                         <td scope="col"> {{item.cantidad}}</td>
-                                        <td scope="col">{{item.preciounitario}}</td>
-                                        <td scope="col">{{item.preciototal}}</td>
+                                        <td scope="col">{{item.precio_unitario}}</td>
+                                        <td scope="col">{{item.precio_total}}</td>
                                       </tr>
                                 </tbody>
                           </table>
                       </div>
-                      <div class="" style="background-color:#FEC404; height:90px; border-bottom-radius:5px;">
+                      <div class="footer">
                         <br>
                         <h2 class="opciones" style="color:white; float:left; padding-left:25px;">Opciones</h2>
                         <div class="row" style="float:right; padding-right:35px;">
@@ -285,6 +280,7 @@ export default {
         console.log(this.comprasProducto);
       });
     },
+
     hideModal(){
       this.showModal = false;
     },
@@ -366,6 +362,11 @@ li {
   transform: scale(1.1);
 }
 
+
+.footer{
+  background-color:#FEC404; 
+  height:90px;
+}
 
 
 

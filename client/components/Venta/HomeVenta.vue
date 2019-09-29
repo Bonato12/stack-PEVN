@@ -86,17 +86,18 @@
                                 </tbody>
                           </table>
                       </div>
-                      <div class="d-flex bd-highlight" style="background-color:#FEC404;">
+                      <div class="footer">
                         <br>
                         <div class="p-2 flex-grow-1 bd-highlight">
                           <h2 class="opciones" style="color:white; float:left; padding-left:25px;">Opciones</h2>
                         </div>
-                        <div class="p-2 bd-highlight"style="padding-right:-10px;">
+                        <div class="row" style="float:right; padding-right:35px;">
+
                           <button class="btn btn-danger" v-on:click="eliminarVenta()" title="Eliminar Venta">
                               <i class="fas fa-trash-alt"></i>
                           </button>
-                        </div>
-                        <div class="p-2 bd-highlight" style="margin-right:10px;">
+                          <div style="width:5px;">
+                          </div>
                           <router-link class="btn btn-dark" :to="/EditarVenta/+this.idv" tag="button" title="Editar Venta">
                               <i class="fas fa-edit fa-1x"></i>
                           </router-link>
@@ -354,5 +355,10 @@ li {
   transform: scale(1.1);
 }
 
+
+.footer{
+  background-color:#FEC404; 
+  height:90px;
+}
 
 </style>

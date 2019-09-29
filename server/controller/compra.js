@@ -37,7 +37,7 @@ module.exports = {
           postCompraProducto(req,res){
                 for (var i=0 ; i < req.body.compra.length ; i++) {
                       var pool = new pg.Pool(config)
-                      pool.query("INSERT INTO compraProducto(id_compra,id_producto,cantidad,precioUnitario,precioTotal) VALUES($1,$2,$3,$4,$5)",[req.body.id_compra,req.body.compra[i].producto.id_producto,req.body.compra[i].cantidad,req.body.compra[i].precioUnitario,req.body.compra[i].precioTotal]).then(response=> {
+                      pool.query("INSERT INTO compra_producto(id_compra,id_producto,cantidad,precio_unitario,precio_total) VALUES($1,$2,$3,$4,$5)",[req.body.id_compra,req.body.compra[i].producto.id_producto,req.body.compra[i].cantidad,req.body.compra[i].precioUnitario,req.body.compra[i].precioTotal]).then(response=> {
                           pool.end();
                           res.sendStatus(200);
                       }).catch((error) =>{

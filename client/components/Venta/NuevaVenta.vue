@@ -393,7 +393,7 @@ border:0 !important;
 
 
 .btn-guardar{
-margin-left: 2px;
+  margin-left: 2px;
   cursor:pointer;
   display:inline-block;
   float:right;
