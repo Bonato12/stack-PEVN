@@ -135,12 +135,12 @@
                           </div>
                           <br>
                           <div class="d-flex justify-content-end" style="margin:0 auto; width:780px;">
-                              <router-link to="/HomeCompra" tag="button" class="btn" style="color:black; background-color:#FFD700; width:120px; height:40px;">
+                              <router-link to="/HomeCompra" tag="button" class="btn btn-volver" title="Volver a HomeCompra">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
                               <div style="width:3px;"></div>
-                              <button v-on:click="nuevaCompra()" class="btn" style="color:black; background-color:#FFD700; width:120px; height:40px;">
+                              <button v-on:click="nuevaCompra()" class="btn btn-guardar" title="Guardar Compra">
                                 <i class="far fa-save fa-1x"></i>
                                       Guardar
                               </button>
@@ -187,12 +187,7 @@ export default {
       errors: []
 		}
   },
-  computed:{
-
-  },
-  mounted(){
-
-  },
+ 
   methods: {
     textProducto (item) {
       return `${item.modelo} - ${item.marca} - ${item.precio}`
@@ -360,21 +355,36 @@ b-input-group{
     background-color: white;
 }
 
-.btn{
+.btn-guardar{
+  margin-left: 2px;
   cursor:pointer;
   display:inline-block;
-  width:auto;
-  height:auto;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
   border:none;
-  /*background-color: #FFD700  !important;*/
+  background-color: #FFD700  !important;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
+  color: black;
 }
 
-.btn:hover{
-     background-color: white  !important;
-     color: black;
+.btn-volver{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #5bc0de;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black;
 }
 
 .input-group-text{

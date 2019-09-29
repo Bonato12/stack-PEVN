@@ -127,12 +127,12 @@
                         </div>
                         <br>
                         <div class="d-flex justify-content-end" style="margin:0 auto; width:780px;">
-                            <router-link to="/HomeVenta" tag="button" class="btn" style="color:black; background-color:#FFD700;" title="Volver a Home Venta">
+                            <router-link to="/HomeVenta" tag="button" class="btn btn-volver" title="Volver a Home Venta">
                                 <i class="fas fa-arrow-left"></i>
                                     Volver
                             </router-link>
                             <div style="width:3px;"></div>
-                            <button v-on:click="nuevaVenta()" class="btn" style="color:black; background-color:#FFD700;" title="Guardar Venta">
+                            <button v-on:click="nuevaVenta()" class="btn btn-guardar" title="Guardar Venta">
                               <i class="far fa-save fa-1x"></i>
                                     Guardar
                             </button>
@@ -390,7 +390,25 @@ border:0 !important;
     background-color: white;
 }
 
-.btns{
+
+
+.btn-guardar{
+margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #FFD700  !important;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black;
+}
+
+.btn-volver{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
@@ -399,16 +417,13 @@ border:0 !important;
   height:40px;
   margin-top:-10px;
   border:none;
+  background-color: #5bc0de;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
-  color: black !important;
+  color: black;
 }
 
-.btns:hover{
-     background-color: white  !important;
-     color: black;
-}
 
 .input-group-text{
 width: auto;

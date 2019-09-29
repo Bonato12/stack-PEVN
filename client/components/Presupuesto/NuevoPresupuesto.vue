@@ -11,7 +11,6 @@
                         Presupuesto para el Arreglo N° {{this.ida}}
                      </h2>
                   </div>
-                  <hr style="color:black;">
                   <div class="card-body">
                     <form @submit.prevent="guardarLista()" style="margin: 0 auto; width:780px; margin-top:10px;">
                             <div class="input-group form-group">
@@ -129,12 +128,12 @@
                               <br>
                               <br>
                               <div class="d-flex justify-content-end">
-                                  <router-link to="/HomeArreglo" tag="button" class="btn btn-info" title="Volver a Home Arreglo">
+                                  <router-link to="/HomeArreglo" tag="button" class="btn btn-volver" title="Volver a Home Arreglo">
                                       <i class="fas fa-arrow-left"></i>
                                           Volver
                                   </router-link>
                                   <div style="width:3px;"></div>
-                                  <button v-on:click="nuevoPresupuesto()" class="btn btn-success" title="Guardar Nuevo Repuesto">
+                                  <button v-on:click="nuevoPresupuesto()" class="btn btn-guardar" title="Guardar Nuevo Repuesto">
                                     <i class="far fa-save fa-1x"></i>
                                           Guardar
                                   </button>
@@ -352,7 +351,7 @@ h1, h2 {
 height: auto;
 margin-bottom: auto;
 width: 1650px;
-background-color: rgb(70,90,101);
+background-color: #2A363B;
 border: 1px solid;
 border-radius: 5px;
 }
@@ -370,8 +369,23 @@ border:0 !important;
     background-color: white;
 }
 
+.btn-guardar{
+margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #FFD700  !important;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black;
+}
 
-btn{
+.btn-volver{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
@@ -380,7 +394,7 @@ btn{
   height:40px;
   margin-top:-10px;
   border:none;
-  /*background-color: #FFD700  !important;*/
+  background-color: #5bc0de;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;
