@@ -94,26 +94,7 @@ border:1px solid;
 margin:0 auto;
 }
 
-.btn{
-  margin-left: 2px;
-  cursor:pointer;
-  display:inline-block;
-  float:right;
-  width:120px;
-  height:40px;
-  margin-top:-10px;
-  border:none;
-  background-color: #FFD700  !important;
-  -webkit-transition:.5s;
-  transition:.5s;
-  border-radius: 5px;
-  color: black;
-}
 
-button:hover{
-     background-color: white  !important;
-     /*color: white;*/
-}
 
 /*Sirve para desabilitar las flechas en los inputs numBer*/
 input::-webkit-outer-spin-button,

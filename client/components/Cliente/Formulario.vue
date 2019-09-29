@@ -74,15 +74,16 @@
                     </div>
                     <br>
                     <div class="d-flex justify-content-end">
-                      <router-link to="/HomeCliente" tag="button" class="btn"  title="Volver a HomeCliente" >
+                      <router-link to="/HomeCliente" tag="button" class="btn btn-volver"  title="Volver a HomeCliente" >
                           <i class="fas fa-arrow-left"></i>
                             Volver
                       </router-link>
-                      <button v-if="editCliente === false" type="submit" class="btn"  title="Guardar Cliente"  >
+                      <div style="width:3px;"></div>
+                      <button v-if="editCliente === false" type="submit" class="btn btn-guardar"  title="Guardar Cliente"  >
                             <i class="far fa-save fa-1x"></i>
                             Guardar
                       </button>
-                      <button v-if="editCliente === true" type="submit" class="btn"  title="Guardar Cliente"  >
+                      <button v-if="editCliente === true" type="submit" class="btn btn-guardar"  title="Guardar Cliente"  >
                             <i class="far fa-save fa-1x"></i>
                             Editar
                       </button>
@@ -267,7 +268,7 @@ border:1px solid;
 margin:0 auto;
 }
 
-.btn{
+.btn-guardar{
   margin-left: 2px;
   cursor:pointer;
   display:inline-block;
@@ -283,10 +284,22 @@ margin:0 auto;
   color: black;
 }
 
-button:hover{
-     background-color: white  !important;
-     /*color: white;*/
+.btn-volver{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #5bc0de;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black;
 }
+
 
 /*Sirve para desabilitar las flechas en los inputs numBer*/
 input::-webkit-outer-spin-button,

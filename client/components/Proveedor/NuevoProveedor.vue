@@ -20,61 +20,87 @@
                         <br>
                     </ul>
                   </p>
-                  <form @submit.prevent="nuevoProveedor()" style="width:780px; margin-top:-25px; margin:0px auto;">
+                 <form @submit.prevent="nuevoProveedor()" style="width:780px; margin-top:-25px; margin:0px auto;">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Dni</span>
                         </div>
-                        <input required type="number"  v-model="proveedor.dni"  class="form-control" placeholder="Ingrese Dni" >
+                        <input  type="number"  v-model="proveedor.dni"  class="form-control" placeholder="Ingrese Dni" :class="{ 'is-invalid': submitted && $v.proveedor.dni.$error }" >
+                        <div v-if="submitted && !$v.proveedor.dni.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.proveedor.dni.required">El dni es requerido</span>
+                              <span v-if="!$v.proveedor.dni.maxLength">El Dni no puede tener mas de 10 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Nombre</span>
                         </div>
-                        <input required type="text"  v-model="proveedor.nombre"  class="form-control" placeholder="Ingrese Nombre" >
+                        <input   type="text"  v-model="proveedor.nombre"  class="form-control" placeholder="Ingrese Nombre" :class="{ 'is-invalid': submitted && $v.proveedor.nombre.$error }" >
+                        <div v-if="submitted && !$v.proveedor.nombre.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.proveedor.nombre.required">Nombre is required</span>
+                              <span v-if="!$v.proveedor.nombre.maxLength">El Nombre no puede tener mas de 50 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Apellido</span>
                         </div>
-                        <input required type="text"  v-model="proveedor.apellido"  class="form-control" placeholder="Ingrese Apellido" >
+                        <input  type="text"  v-model="proveedor.apellido"  class="form-control" placeholder="Ingrese Apellido" :class="{ 'is-invalid': submitted && $v.proveedor.apellido.$error }" >
+                        <div v-if="submitted && !$v.proveedor.apellido.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.proveedor.apellido.required">Apellido is required</span>
+                              <span v-if="!$v.proveedor.apellido.maxLength">El Apellido no puede tener mas de 50 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Direccion</span>
                         </div>
-                        <input required type="text" v-model="proveedor.direccion"  class="form-control" placeholder="Ingrese Direccion" >
+                        <input  type="text" v-model="proveedor.direccion"  class="form-control" placeholder="Ingrese Direccion" :class="{ 'is-invalid': submitted && $v.proveedor.direccion.$error }" >
+                        <div v-if="submitted && !$v.proveedor.direccion.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.proveedor.direccion.required">Telefono is required</span>
+                              <span v-if="!$v.proveedor.direccion.maxLength">El Telefono no puede tener mas de 10 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Telefono</span>
                         </div>
-                        <input required type="number"  v-model="proveedor.telefono"  class="form-control" placeholder="Ingrese Telefono" >
+                        <input  type="number"  v-model="proveedor.telefono"  class="form-control" placeholder="Ingrese Telefono" :class="{ 'is-invalid': submitted && $v.proveedor.telefono.$error }" >
+                        <div v-if="submitted && !$v.proveedor.telefono.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.proveedor.telefono.required">Telefono is required</span>
+                              <span v-if="!$v.proveedor.telefono.maxLength">El Telefono no puede tener mas de 10 digitos</span>
+                        </div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Mail</span>
                         </div>
-                        <input required type="mail"  v-model="proveedor.mail"  class="form-control" placeholder="Ingrese Mail" >
+                        <input  type="email"  v-model="proveedor.mail"  class="form-control" placeholder="Ingrese Mail" :class="{ 'is-invalid': submitted && $v.proveedor.mail.$error }">
+                        <div v-if="submitted && !$v.proveedor.mail.required.$error" class="invalid-feedback">
+                              <span v-if="!$v.proveedor.mail.required">Mail is required</span>
+                              <span v-if="!$v.proveedor.mail.email">El Mail no tiene formato</span>
+                        </div>
                     </div>
-                    <div class="input-group form-group">
+                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">Descripcion</span>
                         </div>
-                        <input required type="text"   v-model="proveedor.descripcion"  class="form-control" placeholder="Ingrese Descripcion" >
+                        <input  type="text"  v-model="proveedor.descripcion"  class="form-control" placeholder="Ingrese Descripcion">
+                        
                     </div>
                     <br>
                     <div class="d-flex justify-content-end">
-                        <router-link to="/HomeProveedor" tag="button" class="btn"  title="Volver a Home Proveedor" >
-                            <i class="fas fa-arrow-left"></i>
-                              Volver
-                        </router-link>
-                        <button type="submit" class="btn"  title="Guardar Proveedor" >
-                              <i class="far fa-save fa-1x"></i>
-                              Guardar
-                        </button>
+                      <router-link to="/HomeProveedor" tag="button" class="btn btn-volver"  title="Volver a HomeProveedor" >
+                          <i class="fas fa-arrow-left"></i>
+                            Volver
+                      </router-link>
+                      <div style="width:3px;"></div>
+                      <button type="submit" class="btn btn-guardar"  title="Guardar Proveedor"  >
+                            <i class="far fa-save fa-1x"></i>
+                            Guardar
+                      </button>
                     </div>
-                  </form>
+                </form>
                 </div>
             </div>
         </div>
@@ -86,8 +112,9 @@
 <script>
 
 import axios from 'axios'
-import { alertSucessProveedor,alertCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertSuccess } from '../../assets/sweetAlert.js'
 import Proveedor from '../../models/Proveedor';
+import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/validators";
 
 
 export default {
@@ -97,64 +124,70 @@ export default {
   data () {
     return {
       proveedor: new Proveedor(),
-      errors: []
+      errors: [],
+      submit: false
 		}
   },
-  mounted(){
-
-
-  },
-  methods: {
-    nuevoProveedor(){
-      this.errors = [];
-      if (!this.proveedor.dni){
-        this.errors.push('Dni Vacio');
-      }
-      if (!this.proveedor.nombre){
-        this.errors.push('Nombre Vacio');
-      }
-      if (!this.proveedor.apellido){
-        this.errors.push('Apellido Vacio');
-      }
-      if (!this.proveedor.direccion){
-        this.errors.push('Direccion Vacia');
-      }
-      if (!this.proveedor.telefono){
-        this.errors.push('Telefono Vacio');
-      }
-      if (!this.proveedor.mail){
-        this.errors.push('Mail Vacio');
-      }
-      if (!this.proveedor.descripcion){
-        this.errors.push('Descripcion Vacia');
-      }
-      var _this = this;
-      if(this.errors.length == 0 ){
-              console.log(this.proveedor);
-              axios.post('http://localhost:3000/proveedor',
-              this.proveedor,
-              { headers: {
-                'Content-Type': 'application/json',
-              },
-              }).then(function(response){
-                  console.log(response);
-                  if (response.data == "OK"){
-                     alertSucessProveedor();
-                    _this.proveedor = new Proveedor();
-                  }else {
-                     if (response.data.length > 0) {
-                       for (var i = 0; i < response.data.length ; i++) {
-                              _this.errors.push(response.data[i].msg);
-                        }
-                     }else {
-                         _this.errors.push(response.data.msg);
-                     }
-                  }
-                }).catch(error=>{
-                  console.log(error);
-                });
-            }
+  validations: {
+          proveedor: {
+                dni: { 
+                  required,
+                  maxLength: maxLength(10)  
+                },
+                nombre:{
+                   required,
+                   maxLength: maxLength(50)  
+                },
+                apellido:{
+                   required,
+                   maxLength: maxLength(50)  
+                },
+                direccion:{
+                   required,
+                   maxLength: maxLength(50)
+                },
+                 telefono:{
+                   required,
+                   maxLength: maxLength(50)
+                },
+                mail:{
+                  required,
+                  email
+                },
+                descripcion:{
+                  required
+                }
+          }
+    },
+    methods: {
+      nuevoProveedor(){
+        this.errors = [];
+        var _this = this;
+        this.submitted = true;
+        this.$v.$touch();
+        var _this = this;
+        if (this.$v.$invalid) {
+            return;
         }
+        console.log(this.proveedor);
+        axios.post('http://localhost:3000/proveedor',
+        this.proveedor,
+        { headers: {
+          'Content-Type': 'application/json',
+        },
+        }).then(function(response){
+            console.log(response);
+            if (response.data == "OK"){
+              alertSuccess();
+              _this.proveedor = new Proveedor();
+            }else {
+              _this.errors.push(response.data.msg);
+            }
+          }).catch(error=>{
+            console.log(error);
+          });
+      }
+          
 
     }
 

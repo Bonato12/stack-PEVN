@@ -39,7 +39,7 @@
                   <span v-if="props.column.field == 'opciones'">
                     <button @click="verMas(props.row)" class="btn btn-info" style="width:150px;"  title="Ver Mas" >
                         <i class="fas fa-clipboard-list"></i>
-                        Ver Mas
+                        Detalles
                     </button>
                   </span>
                 </template>
