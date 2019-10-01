@@ -1,8 +1,5 @@
 var express = require('express');
-var router = express.Router();
-var app = express();
 const pg = require('pg')
-const {check, validationResult} = require('express-validator');
 var config = require('../database');
 
 module.exports = {

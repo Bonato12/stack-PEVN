@@ -166,7 +166,7 @@ export default {
                       return;
                   }
                   if  (this.editCliente == false){
-                      axios.post('http://localhost:3000/cliente',
+                      axios.post('https://telnovo2000.herokuapp.com/cliente',
                       this.cliente,
                       { headers: {
                         'Content-Type': 'application/json',

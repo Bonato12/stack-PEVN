@@ -74,5 +74,8 @@
     "vue-template-compiler": "^2.6.10",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.11.5"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }

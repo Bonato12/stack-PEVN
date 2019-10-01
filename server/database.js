@@ -11,6 +11,7 @@ config= {
 }
 
 
+
 var pool = new pg.Pool(config);
 pool.query('SELECT NOW()', (err, res) => {
   console.log("Conexion Exitosa")
