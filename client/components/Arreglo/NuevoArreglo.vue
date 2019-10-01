@@ -30,9 +30,13 @@
                                 <model-list-select class="form-control" :list="cliente"
                                                    v-model="arreglo.cliente"
                                                    option-value="id_cliente"
-                                                   :custom-text="textCliente"
+                                                   :custom-text="textoCliente"
+                                                   :class="{ 'is-invalid': submitted && $v.arreglo.cliente.$error }"
                                                    >
                                 </model-list-select>
+                                <div v-if="submitted && !$v.arreglo.cliente.required.$error" class="invalid-feedback">
+                                  <span v-if="!$v.arreglo.cliente.required">El Cliente no puede ser vacio</span>
+                               </div>
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend" style="border-right: 5px solid white">
@@ -41,15 +45,22 @@
                                 <model-list-select class="form-control" :list="producto"
                                                    v-model="arreglo.producto"
                                                    option-value="id_producto"
-                                                   :custom-text="codeAndNameAndDesc"
+                                                   :custom-text="textoProducto"
+                                                   :class="{ 'is-invalid': submitted && $v.arreglo.producto.$error }"
                                                    >
                                 </model-list-select>
+                                 <div v-if="submitted && !$v.arreglo.producto.required.$error" class="invalid-feedback">
+                                  <span v-if="!$v.arreglo.producto.required">El Producto no puede ser vacio</span>
+                               </div>
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">Observacion</span>
                                 </div>
-                                <textarea required type="text" v-model="arreglo.observacion" class="form-control" placeholder="Ingrese Observacion"></textarea>
+                                <textarea type="text" v-model="arreglo.observacion" class="form-control" placeholder="Ingrese Observacion" :class="{ 'is-invalid': submitted && $v.arreglo.observacion.$error }"></textarea>
+                                 <div v-if="submitted && !$v.arreglo.observacion.required.$error" class="invalid-feedback">
+                                  <span v-if="!$v.arreglo.observacion.required">La Observacion no puede ser vacia</span>
+                               </div>
                             </div>
                             <br>
                             <div class="d-flex justify-content-end">
@@ -77,6 +88,8 @@ import { ModelSelect } from 'vue-search-select'
 import { ModelListSelect } from 'vue-search-select'
 import { alertSuccess } from '../../assets/sweetAlert.js'
 import Arreglo from '../../models/Arreglo';
+import { required, minLength,maxLength } from "vuelidate/lib/validators";
+
 
 export default {
   name: 'NuevoArreglo',
@@ -88,16 +101,30 @@ export default {
     return {
       cliente:[],
       producto:[],
+      submitted: false,
       errors: [],
       arreglo : new Arreglo()
 		}
   },
- 
+  validations: {
+          arreglo: {
+                cliente: { 
+                  required,
+                },
+                producto:{
+                   required,
+                },
+                observacion:{
+                   required,
+                   maxLength: maxLength(200)  
+                }
+          }
+    },
   methods: {
-      codeAndNameAndDesc (item) {
+      textoProducto (item) {
         return `${item.modelo} ${item.marca} ${item.precio}`
       },
-      textCliente(item){
+      textoCliente(item){
         return `${item.dni} ${item.nombre} ${item.apellido}`
       },
       getCliente(){
@@ -111,29 +138,33 @@ export default {
         });
       },
       nuevoArreglo(){
-          this.arreglo.condicion = 'EN ESPERA DE PRESUPUESTO';
           this.errors = [];
           var _this = this;
-          if (this.errors.length == 0){
-                axios.post('http://localhost:3000/arreglo',
-                {
-                arreglo: this.arreglo
-                },
-                { headers: {
-                  'Content-Type': 'application/json',
-                },
-              }).then(function(response){
-                  console.log(response);
-                  if (response.data == "OK"){
-                     alertSucessArreglo();
-                    _this.arreglo = new Arreglo();
-                  }else {
-                    _this.errors.push(response.data.msg);
-                  }
-                }).catch(error=>{
-                  console.log(error);
-                })
-           }
+          this.submitted = true;
+          this.$v.$touch();
+          var _this = this;
+          if (this.$v.$invalid) {
+              return;
+          }
+          axios.post('http://localhost:3000/arreglo',
+          {
+          arreglo: this.arreglo
+          },
+          { headers: {
+            'Content-Type': 'application/json',
+          }
+          }).then(function(response){
+            console.log(response);
+            if (response.data == "OK"){
+              _this.arreglo = new Arreglo();
+              alertSuccess();
+              _this.submitted = false;
+            }else {
+              _this.errors.push(response.data.msg);
+            }
+          }).catch(error=>{
+            console.log(error);
+          })
       }
     },
     components: {

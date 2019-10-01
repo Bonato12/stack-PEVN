@@ -16,10 +16,10 @@ module.exports = {
                   res.json(response.rows);
                 })
                 .catch(error => {
-                  pool.end()
-                  console.log(error.stack)
+                  pool.end();
+                  console.log(error.stack);
                 })
-              done()
+              done();
             })
           },
 
@@ -55,25 +55,27 @@ module.exports = {
           },
 
         postArreglo(req, res){
-             const errors = validationResult(req);
-             if (!errors.isEmpty()) {
-                    return res.json(errors.array());
-             } else {
-                     var pool = new pg.Pool(config)
-                     pool.connect(function(err, client, done) {
-                       client.query('INSERT INTO arreglo(cliente,producto,fecha,observacion,condicion) VALUES($1,$2,$3,$4,$5)',[req.body.arreglo.cliente,req.body.arreglo.producto,req.body.arreglo.fecha,req.body.arreglo.observacion,req.body.arreglo.condicion])
-                         .then(response => {
-                           pool.end()
-                           res.sendStatus(200);
-                         })
-                         .catch(error => {
-                           pool.end()
-                           console.log(error)
-                           res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
-                         })
-                       done()
-                     })
-             }
+              const arreglo = {
+                cliente: req.body.arreglo.cliente,
+                producto: req.body.arreglo.producto,
+                fecha: new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear(),
+                observacion: req.body.arreglo.observacion,
+                condicion: 'EN ESPERA DE PRESUPUESTO'
+              }
+              var pool = new pg.Pool(config)
+              pool.connect(function(err, client, done) {
+                client.query('INSERT INTO arreglo(cliente,producto,fecha,observacion,condicion) VALUES($1,$2,$3,$4,$5)',[arreglo.cliente,arreglo.producto,arreglo.fecha,arreglo.observacion,arreglo.condicion])
+                  .then(response => {
+                    pool.end()
+                    res.sendStatus(200);
+                  })
+                  .catch(error => {
+                    pool.end()
+                    console.log(error)
+                    res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
+                  })
+                done()
+              })
         },
 
         deleteArreglo(req,res){
