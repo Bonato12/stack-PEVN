@@ -50,9 +50,7 @@
 <script>
 
 import axios from 'axios'
-import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
-import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertEditSucessCompra } from '../../assets/sweetAlert.js'
+import { alertEditSuccess } from '../../assets/sweetAlert.js'
 import Compra from '../../models/Compra';
 import moment from 'moment';
 

@@ -87,7 +87,7 @@
 
 import axios from 'axios'
 import Proveedor from '../../models/Proveedor';
-import { alertEdit,alertEditSucessProveedor,alertCompletarCampos } from '../../assets/sweetAlert.js';
+import { alertEditSuccess, } from '../../assets/sweetAlert.js';
 
 export default {
   name: 'app',

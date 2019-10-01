@@ -49,9 +49,7 @@
 <script>
 
 import axios from 'axios'
-import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
-import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertEditSucessVenta } from '../../assets/sweetAlert.js'
+import { alertEditSuccess } from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 import moment from 'moment';
 import {en, es} from 'vuejs-datepicker/dist/locale'

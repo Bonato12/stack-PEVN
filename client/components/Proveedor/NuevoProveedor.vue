@@ -11,7 +11,7 @@
                   Nuevo Proveedor
                </h2>
             </div>
-            </hr style="color:black;">
+            <hr style="color:black;">
             <div class="card-body" >
                   <p v-if="errors.length">
                     <ul  class="list-group" v-for="error in errors">

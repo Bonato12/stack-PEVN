@@ -12,7 +12,7 @@
                        Nuevo Arreglo
                      </h2>
                   </div>
-                    </hr style="color:black;">
+                  <hr style="color:black;">
                   <div class="card-body">
                     <p v-if="errors.length">
                       <ul  class="list-group" v-for="error in errors">
@@ -75,8 +75,7 @@
 import axios from 'axios'
 import { ModelSelect } from 'vue-search-select'
 import { ModelListSelect } from 'vue-search-select'
-import { alertCompletarCampos } from '../../assets/sweetAlert.js'
-import { alertSucessArreglo } from '../../assets/sweetAlert.js'
+import { alertSuccess } from '../../assets/sweetAlert.js'
 import Arreglo from '../../models/Arreglo';
 
 export default {
@@ -93,12 +92,7 @@ export default {
       arreglo : new Arreglo()
 		}
   },
-  computed:{
-
-  },
-  mounted(){
-
-  },
+ 
   methods: {
       codeAndNameAndDesc (item) {
         return `${item.modelo} ${item.marca} ${item.precio}`
@@ -119,18 +113,6 @@ export default {
       nuevoArreglo(){
           this.arreglo.condicion = 'EN ESPERA DE PRESUPUESTO';
           this.errors = [];
-          if (!this.arreglo.cliente){
-            this.errors.push('El Cliente no puede ser vacio');
-          }
-          if (!this.arreglo.producto){
-            this.errors.push('El Producto no puede ser vacio');
-          }
-          if (!this.arreglo.observacion){
-            this.errors.push('La Observacion no puede ser vacia');
-          }
-          if (!this.arreglo.condicion){
-            this.errors.push('La Condicion No puede ser vacia');
-          }
           var _this = this;
           if (this.errors.length == 0){
                 axios.post('http://localhost:3000/arreglo',
@@ -146,13 +128,7 @@ export default {
                      alertSucessArreglo();
                     _this.arreglo = new Arreglo();
                   }else {
-                     if (response.data.length > 0) {
-                       for (var i = 0; i < response.data.length ; i++) {
-                              _this.errors.push(response.data[i].msg);
-                        }
-                     }else {
-                         _this.errors.push(response.data.msg);
-                     }
+                    _this.errors.push(response.data.msg);
                   }
                 }).catch(error=>{
                   console.log(error);

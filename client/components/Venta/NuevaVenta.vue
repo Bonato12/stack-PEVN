@@ -12,7 +12,7 @@
                       Nueva Venta
                     </h2>
                 </div>
-                  </hr style="color:black;">
+                <hr style="color:black;">
                 <div class="card-body">
                   <p v-if="errors.length">
                     <ul  class="list-group" v-for="error in errors">
@@ -159,9 +159,9 @@
 import axios from 'axios'
 import { ModelSelect } from 'vue-search-select'
 import { ModelListSelect } from 'vue-search-select'
-import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
+import { alertWarningLimiteStock} from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertSuccess} from '../../assets/sweetAlert.js'
+import { alertSuccess } from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 import VentaProducto from '../../models/VentaProducto';
 import { required,between,minLength,maxLength, sameAs } from "vuelidate/lib/validators";

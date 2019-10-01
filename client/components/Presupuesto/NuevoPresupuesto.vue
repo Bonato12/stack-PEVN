@@ -152,12 +152,13 @@ import { ModelSelect } from 'vue-search-select'
 import { ModelListSelect } from 'vue-search-select'
 import { alertWarningLimiteStock, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertSucessPresupuesto} from '../../assets/sweetAlert.js'
+import { alertSuccess } from '../../assets/sweetAlert.js'
 import Presupuesto from '../../models/Presupuesto';
 import PresupuestoProducto from '../../models/VentaProducto';
 import Arreglo from '../../models/Arreglo'
+
 export default {
-  name: 'NuevaVenta',
+  name: 'NuevoPresupuesto',
   created(){
       this.getArreglo();
       this.getProducto();

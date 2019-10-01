@@ -159,7 +159,7 @@ import { ModelSelect } from 'vue-search-select'
 import { ModelListSelect } from 'vue-search-select'
 import { alertWarningLimiteStock } from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertSucessCompra,alertCompletarCampos} from '../../assets/sweetAlert.js'
+import { alertSuccess,alertCompletarCampos} from '../../assets/sweetAlert.js'
 import Compra from '../../models/Compra';
 import CompraProducto from '../../models/CompraProducto';
 

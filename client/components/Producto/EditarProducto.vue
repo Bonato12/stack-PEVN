@@ -83,7 +83,7 @@
 <script>
 
 import axios from 'axios'
-import { alertEdit,alertEditSucessProducto,alertCompletarCampos } from '../../assets/sweetAlert.js';
+import { alertEditSuccess } from '../../assets/sweetAlert.js';
 import Producto from '../../models/Producto';
 
 
