@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="login">
     <div class="container">
         <br>
         <br>
@@ -41,9 +41,13 @@
             				</div>
         			</div>
       		</div>
+          <br>
       	</div>
       </div>
-  </br>
+  <br>
+  <br>
+  <br>
+  <br>
   </div>
 </template>
 <script>
@@ -115,8 +119,8 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Numans');
-body,html{
-  background-color:  #2A363B;
+#login{
+  background-image:  url('http://www.fondosni.com/images/2013-02-09/Barra%20de%20colores-934760.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
