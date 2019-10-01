@@ -45,9 +45,6 @@
                                                   :class="{ 'is-invalid': submitted && $v.productoSelected.$error }"
                                                   >
                               </model-list-select>
-                              <div v-if="submitted && !$v.productoSelected.required.$error" class="invalid-feedback">
-                                  <span v-if="!$v.productoSelected.required">Producto es requerido</span>
-                              </div>
                           </div>
                           <div class="row">
                               <div class="col">
@@ -85,6 +82,10 @@
                           </div>
                   </form>
                   <br>
+                    <h3 :class="{ 'is-invalid': submitted && $v.Lista.minLength.$error }"></h3>
+                    <div v-if="submitted && !$v.Lista.minLength.$error" class="invalid-feedback">
+                      <span v-if="!$v.Lista.minLength">El Carrito no puede ser vacio</span>
+                    </div>
                     <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin:0 auto; width:780px;">
                               <div>
                                   <div class="card-header" style="background-color:#FFD700; ">
@@ -186,7 +187,6 @@ export default {
       num: '',
       id_venta: '',
       errors: [],
-      modalOpen: false,
       submitted: false,
       }
 
@@ -198,17 +198,15 @@ export default {
           num:{
             required,
             between:between(1,100000)
+          },
+          Lista:{
+            minLength: minLength(1)
+
           }
     },
 
   methods: {
      
-      textProducto(item) {
-        return `${item.modelo} - ${item.marca} - ${item.precio}`
-      },
-      textCliente(item){
-        return `${item.dni} - ${item.nombre} - ${item.apellido}`
-      },
       getCliente(){
         axios.get('http://localhost:3000/cliente').then((response) =>{
           this.cliente = response.data;
@@ -220,12 +218,6 @@ export default {
         });
       },
       guardarLista(){
-              this.submitted = true;
-              this.$v.$touch();
-              var _this = this;
-              if (this.$v.$invalid) {
-                  return;
-              }
               console.log(JSON.stringify(this.productoSelected));
               //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
               if(this.productoSelected && this.precio > 0 && this.num > 0){
@@ -239,7 +231,6 @@ export default {
                   if (index > -1) {
                     this.producto[index].stock = this.producto[index].stock - this.num;
                   }
-
                   //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
                   this.productoSelected = {};
                   this.num = '';
@@ -291,6 +282,12 @@ export default {
               //Vamos a Vender no es Vacia
               this.errors = [];
               var _this = this;
+              this.submitted = true;
+              this.$v.$touch();
+              var _this = this;
+              if (this.$v.$invalid) {
+                  return;
+              }
               if (this.Lista.length > 0){
                   if (!this.venta.cliente){
                       this.errors.push('El Cliente no puede ser vacio');
@@ -341,7 +338,12 @@ export default {
                       })
               }
           },
-
+          textProducto(item) {
+            return `${item.modelo} - ${item.marca} - ${item.precio}`
+          },
+          textCliente(item){
+            return `${item.dni} - ${item.nombre} - ${item.apellido}`
+          },
       },
       components: {
         ModelSelect,
