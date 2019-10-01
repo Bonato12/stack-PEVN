@@ -53,10 +53,18 @@ module.exports = {
         },
 
       postProducto(req, res){
+          const producto = {
+            modelo:req.body.modelo,
+            marca:req.body.marca,
+            descripcion:req.body.descripcion,
+            tipoProducto:req.body.tipoProducto,
+            stock:req.body.stock,
+            precio:req.body.precio
+          }
           var pool = new pg.Pool(config)
           pool.connect(function(err, client, done) {
-            client.query("INSERT INTO producto(modelo,marca,descripcion,tipo_producto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,
-            req.body.stock,req.body.precio])
+            client.query("INSERT INTO producto(modelo,marca,descripcion,tipo_producto,stock,precio) VALUES($1,$2,$3,$4,$5,$6) RETURNING id_producto",[producto.modelo,producto.marca,producto.descripcion,producto.tipoProducto,
+            producto.stock,producto.precio])
               .then(response => {
                 pool.end();
                 res.sendStatus(200);
@@ -104,10 +112,17 @@ module.exports = {
     },
 
   updateProducto(req,res){
+        const productoAct = {
+          modelo:req.body.modelo,
+          marca:req.body.marca,
+          descripcion:req.body.descripcion,
+          tipoProducto:req.body.tipoProducto,
+          stock:req.body.stock,
+          precio:req.body.precio
+        }
         var pool = new pg.Pool(config)
-        pool.connect()
-        .then(client => {
-          return client.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipo_producto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[req.body.modelo,req.body.marca,req.body.descripcion,req.body.tipoProducto,req.body.stock,req.body.precio, req.params.id_producto])
+        pool.connect().then(client => {
+          return client.query("UPDATE producto SET modelo=($1), marca=($2), descripcion=($3), tipo_producto=($4), stock=($5), precio=($6) WHERE id_producto=($7)",[productoAct.modelo,productoAct.marca,productoAct.descripcion,productoAct.tipoProducto,productoAct.stock,productoAct.precio, req.params.id_producto])
           .then(response => {
             pool.end();
             res.sendStatus(200);

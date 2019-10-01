@@ -107,7 +107,7 @@
 
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete,alertSucessEstado} from '../../assets/sweetAlert.js';
+import { alertSucessDelete} from '../../assets/sweetAlert.js';
 import moment from 'moment';
 
 export default {
@@ -185,7 +185,7 @@ export default {
           { headers: {
             'Content-Type': 'application/json',
           }
-      }).then(alertSucessEstado());
+      });
     }
 
 
