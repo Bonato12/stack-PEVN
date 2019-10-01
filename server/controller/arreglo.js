@@ -1,7 +1,5 @@
 var express = require('express');
-var router = express.Router();
 var app = express();
-const {check, validationResult} = require('express-validator');
 var pg = require('pg');
 var config = require('../database');
 
@@ -62,7 +60,7 @@ module.exports = {
                 observacion: req.body.arreglo.observacion,
                 condicion: 'EN ESPERA DE PRESUPUESTO'
               }
-              var pool = new pg.Pool(config)
+              var pool = new pg.Pool(config);
               pool.connect(function(err, client, done) {
                 client.query('INSERT INTO arreglo(cliente,producto,fecha,observacion,condicion) VALUES($1,$2,$3,$4,$5)',[arreglo.cliente,arreglo.producto,arreglo.fecha,arreglo.observacion,arreglo.condicion])
                   .then(response => {
