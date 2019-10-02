@@ -35,6 +35,10 @@ module.exports = {
             },
 
             postVentaProducto(req,res){
+                      const errors = validationResult(req);
+                      if (!errors.isEmpty()) {
+                            return res.json(errors.array());
+                      }else{
                         for (var i=0 ; i < req.body.venta.length ; i++) {
                             var pool = new pg.Pool(config)
                             pool.query("INSERT INTO venta_producto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
@@ -45,6 +49,7 @@ module.exports = {
                                   console.log(error);
                             });
                         }
+                      }  
             },
 
         deleteVenta(req,res){

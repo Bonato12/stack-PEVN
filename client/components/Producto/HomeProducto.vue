@@ -222,7 +222,7 @@ export default {
   methods: {
     getProducto() {
       console.log(this.productos)
-      axios.get('http://localhost:3000/producto').then(response => {
+      axios.get('https://telnovo2000.herokuapp.com/producto').then(response => {
         this.productos = response.data;
       }).catch((error) => {
         console.log(error);
@@ -241,7 +241,7 @@ export default {
               confirmButtonText: 'Si, Borrar!'
               }).then((result) => {
               if (result.value) {
-                axios.delete('http://localhost:3000/producto/' + id).then((response) => {
+                axios.delete('https://localhost:3000/' + id).then((response) => {
                   console.log(response);
                   if (response.data == "OK"){
                       this.hideModal();

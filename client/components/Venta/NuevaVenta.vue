@@ -48,9 +48,9 @@
                           </div>
                           <div class="row">
                               <div class="col">
-                                <div class="input-group form-group" :class="{ 'is-invalid': submitted && $v.num.$error }">
+                                <div class="input-group form-group" :class="{ 'is-invalid': submitted && $v.cantidad.$error }">
                                   <b-input-group prepend="Cantidad">
-                                    <b-form-input v-model="num" min="0" readonly></b-form-input>
+                                    <b-form-input v-model="cantidad" min="0" readonly></b-form-input>
                                     <b-input-group-append>
                                       <b-button variant="info" @click="decrementarCantidad()">
                                             <i class="fas fa-minus"></i>
@@ -60,8 +60,8 @@
                                       </b-button>
                                     </b-input-group-append>
                                   </b-input-group>
-                                  <div v-if="submitted && !$v.num.between.$error" class="invalid-feedback">
-                                      <span v-if="!$v.num.between">Cantidad tiene que ser mayor o igual que 1</span>
+                                  <div v-if="submitted && !$v.cantidad.between.$error" class="invalid-feedback">
+                                      <span v-if="!$v.cantidad.between">Cantidad tiene que ser mayor o igual que 1</span>
                                   </div>
                                 </div>
                               </div>
@@ -70,7 +70,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Precio</span>
                                     </div>
-                                    <input  type="number" min="0"  v-model="precio"  class="form-control" readonly>
+                                    <input  type="text" min="0"  v-model="precio"  class="form-control">
                                 </div>
                               </div>
                           </div>
@@ -143,16 +143,6 @@
             </div>
           </div>
           <br>
-          <transition v-if="modalOpen" class="animation fadeInLeft" name="modal">
-            <div class="modal-mask">
-              <button class="modal-default-button" @click="hide()">
-                      <i class="far fa-times-circle"></i>
-              </button>
-              <div class="modal-wrapper">
-                  <ModalCliente v-if="modalOpen" ></ModalCliente>
-              </div>
-            </div>
-          </transition>
       </div>
   </div>
 </template>
@@ -162,7 +152,7 @@ import { ModelSelect } from 'vue-search-select'
 import { ModelListSelect } from 'vue-search-select'
 import { alertWarningLimiteStock} from '../../assets/sweetAlert.js'
 import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertSuccess } from '../../assets/sweetAlert.js'
+import { alertSuccess, alertWarningCompletarCampos } from '../../assets/sweetAlert.js'
 import Venta from '../../models/Venta';
 import VentaProducto from '../../models/VentaProducto';
 import { required,between,minLength,maxLength, sameAs } from "vuelidate/lib/validators";
@@ -184,7 +174,7 @@ export default {
       precio: '',
       precioTotal: 0,
       productoSelected: {},
-      num: '',
+      cantidad: '',
       id_venta: '',
       errors: [],
       submitted: false,
@@ -195,13 +185,12 @@ export default {
           productoSelected:{
             required
           },
-          num:{
+          cantidad:{
             required,
             between:between(1,100000)
           },
           Lista:{
             minLength: minLength(1)
-
           }
     },
 
@@ -220,7 +209,7 @@ export default {
       guardarLista(){
               console.log(JSON.stringify(this.productoSelected));
               //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
-              if(this.productoSelected && this.precio > 0 && this.num > 0){
+              if(this.productoSelected && this.precio > 0 && this.cantidad > 0){
                   this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
                   this.ventaProducto.producto = this.productoSelected;
                   this.ventaProducto.cantidad = this.num;
@@ -232,6 +221,7 @@ export default {
                     this.producto[index].stock = this.producto[index].stock - this.num;
                   }
                   //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
+                  this.errors = [];
                   this.productoSelected = {};
                   this.num = '';
                   this.precio = '';
@@ -239,29 +229,29 @@ export default {
                   this.submitted = false;
 
               }else {
-                alert("Completar los Campos");
+                alertWarningCompletarCampos();
               }
       },
       incrementarCantidad(){
           console.log(this.productoSelected);
           //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
           if(this.productoSelected.precio){
-              if (this.num ==  this.productoSelected.stock){
+              if (this.cantidad ==  this.productoSelected.stock){
                   alertWarningLimiteStock();
               }else{
-                  this.num++;
-                  this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+                  this.cantidad++;
+                  this.precio = parseInt(this.productoSelected.precio) * parseInt(this.cantidad);
                 }
           }
       },
       decrementarCantidad() {
         //Funcion Que al icrementar la cantidad, multiplica la cantidad por el precio del producto seleccionado
         if(this.productoSelected){
-            if (this.num == 0) {
+            if (this.cantidad == 0) {
               alertWarningLimiteOne();
             } else {
-              this.num--;
-              this.precio = parseInt(this.productoSelected.precio) * parseInt(this.num)
+              this.cantidad--;
+              this.precio = parseInt(this.productoSelected.precio) * parseInt(this.cantidad);
             }
         }
       },
@@ -283,11 +273,6 @@ export default {
               this.errors = [];
               var _this = this;
               this.submitted = true;
-              this.$v.$touch();
-              var _this = this;
-              if (this.$v.$invalid) {
-                  return;
-              }
               if (this.Lista.length > 0){
                   if (!this.venta.cliente){
                       this.errors.push('El Cliente no puede ser vacio');
@@ -302,7 +287,7 @@ export default {
               if (this.errors.length == 0){
                   //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
                   this.venta.total = this.precioTotal;
-                  axios.post('http://localhost:3000/venta',
+                  axios.post('https://localhost:3000/venta',
                       {
                         venta: this.venta
                       },
@@ -313,7 +298,7 @@ export default {
                   }).then(response=>{
                           console.log(response.data);
                           this.id_venta = response.data[0].id_venta
-                          axios.post('http://localhost:3000/ventaProducto',
+                          axios.post('https://telnovo2000.herokuapp.com/ventaProducto',
                               {
                               id_venta: this.id_venta,
                               venta: this.Lista
@@ -353,10 +338,10 @@ export default {
         productoSelected:{
           handler () {
             if (this.productoSelected.stock > 0){
-                this.num = 1;
+                this.cantidad = 1;
                 this.precio = this.productoSelected.precio;
             }else{
-                 this.num = 0;
+                 this.cantidad = 0;
                  this.precio = 0;
             }
           },

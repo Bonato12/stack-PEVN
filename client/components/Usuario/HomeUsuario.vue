@@ -40,7 +40,7 @@
                 <button @click="editarUsuario(props.row)" class="btn btn-warning" title="Editar Cliente">
                       <i class="fas fa-edit"></i>
                 </button>
-                <button @click="editarUsuario(props.row)" class="btn btn-danger" title="Editar Cliente">
+                <button @click="editarUsuario(props.row)" class="btn btn-danger" title="Borrar Usuario">
                       <i class="fas fa-trash"></i>
                 </button>
               </span>
@@ -58,27 +58,13 @@
 <script>
 
 import axios from 'axios'
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
-import XLSX from 'xlsx'
-import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete,alertError,alertWarningFK,alertSucessMail } from '../../assets/sweetAlert.js';
-import firebase from 'firebase'
-//import * as admin from "firebase-admin";
-
 
 export default {
   created(){
         this.getUsuario();
-
-
   },
   data () {
     return {
-      showModal: false,
-      showModalMail: false,
-      destinatario: '',
-      mensaje: '',
         datos: [],
         columns: [
         {
@@ -102,10 +88,13 @@ export default {
         axios.get('http://localhost:3000/usuario').then((response) =>{
           this.datos = response.data;
           console.log(this.datos);
-        });
+        }).catch(error=>{
+          console.log(error);
+        })
     },
     editarUsuario(usuario){
-
+        console.log(usuario.uuid);
+        this.$router.push('/EditarUsuario/'+usuario.uuid);
     }
   }
 }

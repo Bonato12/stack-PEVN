@@ -52,7 +52,7 @@ const rutas = new VueRouter({
               component: NuevoUsuario,
             },
             {
-              path:'/EditarUsuario',
+              path:'/EditarUsuario/:id',
               name:'EditarUsuario',
               component: EditarUsuario
             },

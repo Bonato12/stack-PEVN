@@ -149,7 +149,7 @@ export default {
   methods: {
         rellenarCliente(){
           this.editCliente = true;
-          axios.get('http://localhost:3000/cliente/'+this.idc).then((response) =>{
+          axios.get('https://localhost:3000/'+this.idc).then((response) =>{
             console.log(response.data);
           this.cliente = new Cliente(this.idc,response.data[0].dni,response.data[0].nombre,response.data[0].apellido,response.data[0].direccion,response.data[0].telefono,response.data[0].mail);
             }).catch(error=>{
@@ -166,7 +166,7 @@ export default {
                       return;
                   }
                   if  (this.editCliente == false){
-                      axios.post('https://telnovo2000.herokuapp.com/cliente',
+                      axios.post('http://localhost:3000cliente',
                       this.cliente,
                       { headers: {
                         'Content-Type': 'application/json',

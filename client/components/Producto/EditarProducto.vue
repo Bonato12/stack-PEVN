@@ -150,11 +150,7 @@ export default {
                alertEditSucessProducto();
              }else {
                 if (response.data.length > 0) {
-                  for (var i = 0; i < response.data.length ; i++) {
-                         _this.errors.push(response.data[i].msg);
-                   }
-                }else {
-                    _this.errors.push(response.data.msg);
+                  _this.errors.push(response.data.msg);
                 }
              }
            }).catch(error=>{

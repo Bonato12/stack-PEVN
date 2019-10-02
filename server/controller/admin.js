@@ -15,36 +15,33 @@ administrador = admin.initializeApp({
 module.exports = {
 
   getUsuario(req,res){
-     var pool = new pg.Pool(config);
-     pool.connect(function(err, client, done) {
+     var client = new pg.Client(config);
+     client.connect();
        client.query("SELECT US.id_usuario,US.uuid, US.mail, RO.perfil FROM usuario US, rol RO WHERE US.rol = RO.id_rol")
          .then(response => {
-           pool.end()
-           res.json(response.rows)
+          client.end()
+          res.json(response.rows)
          })
          .catch(error => {
-           pool.end()
+          client.end();
            console.log(error.stack)
          })
-       done()
-     })
+    
 },
 
 getIdUsuario(req,res){
-    var pool = new pg.Pool(config);
-    pool.connect(function(err, client, done) {
+    var client = new pg.Client(config);
+    client.connect();
      client.query("SELECT US.id_usuario,US.uuid, US.mail, RO.perfil FROM usuario US, rol RO WHERE US.rol = RO.id_rol AND US.uuid = ($1)",[req.params.uuid])
        .then(response => {
-         pool.end()
+        client.end();
          console.log(response.rows);
          res.json(response.rows);
        })
        .catch(error => {
-         pool.end()
+         client.end();
          console.log(error.stack)
        })
-     done()
-   })
   },
   postUsuario(req, res){
         console.log("Peticion POST");
@@ -59,20 +56,19 @@ getIdUsuario(req,res){
         })
         .then(function(userRecord) {
           console.log(userRecord);
-          var pool = new pg.Pool(config)
-          pool.connect(function(err, client, done) {
+          var client = new pg.Client(config)
+          client.connect();
             client.query("INSERT INTO usuario(uuid,mail,contraseña,rol) VALUES($1,$2,$3,$4)",[userRecord.uid,req.body.mail,req.body.password,req.body.rol])
               .then(response => {
-                pool.end()
+                client.end()
                 res.sendStatus(200);
               })
               .catch(error => {
-                pool.end()
+                client.end()
                 console.log(error)
                 res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
               })
-            done()
-          })
+          
         })
         .catch(function(error) {
           console.log('Error creating new user:', error);

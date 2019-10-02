@@ -196,7 +196,7 @@ export default {
             confirmButtonText: 'Si, Borrar!'
             }).then((result) => {
             if (result.value) {
-              axios.delete('http://localhost:3000/cliente/' + cliente.id_cliente).then((response)=>{
+              axios.delete('http://telnovo2000.herokuapp.com/cliente/' + cliente.id_cliente).then((response)=>{
                console.log(response);
                if (response.data == "OK"){
                  this.$swal(
@@ -259,8 +259,7 @@ export default {
       this.showModalMail = false;
     },
     editar(params){
-      console.log(JSON.stringify(params));
-      this.$router.push('/NuevoCliente/'+params.id_cliente)
+       this.$router.push('/NuevoCliente/'+params.id_cliente);
     },
     modalMail(cliente){
       console.log(cliente);
@@ -268,7 +267,7 @@ export default {
       this.destinatario = cliente.mail
     },
     enviarMail() {
-          axios.post('http://localhost:3000/email',
+          axios.post('https://telnovo2000.herokuapp.com/email',
             {
               mensaje: this.mensaje,
               destinatario : this.destinatario

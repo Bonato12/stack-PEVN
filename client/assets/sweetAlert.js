@@ -42,7 +42,7 @@ export function alertWarningArregloFK(){
 }
 
 export function alertWarningCompletarCampos(){
-  Swal.fire('','Completar los Campos','warning');
+  Swal.fire('','Completar los Campos Correctamente','warning');
 }
 
 export function alertWarningLimiteOne(){
