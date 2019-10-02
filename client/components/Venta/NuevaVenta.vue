@@ -287,7 +287,7 @@ export default {
               if (this.errors.length == 0){
                   //Asignamos a this.venta total el precioTotal acumulado es decir la sumatorio de todos los precios de los productos que vamos a vender
                   this.venta.total = this.precioTotal;
-                  axios.post('https://localhost:3000/venta',
+                  axios.post('http://localhost:3000/venta',
                       {
                         venta: this.venta
                       },
@@ -298,7 +298,7 @@ export default {
                   }).then(response=>{
                           console.log(response.data);
                           this.id_venta = response.data[0].id_venta
-                          axios.post('https://telnovo2000.herokuapp.com/ventaProducto',
+                          axios.post('http://localhost:3000/ventaProducto',
                               {
                               id_venta: this.id_venta,
                               venta: this.Lista

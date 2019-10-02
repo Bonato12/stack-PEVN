@@ -210,7 +210,7 @@ export default {
           confirmButtonText: 'Si, Borrar!'
           }).then((result) => {
           if (result.value) {
-              axios.delete('https://telnovo2000.herokuapp.com/venta/'+this.idv).then((response) => {
+              axios.delete('http://localhost:3000/venta/'+this.idv).then((response) => {
               console.log(response);
               if (response.data == "OK"){
                   this.hideModal();
@@ -229,7 +229,7 @@ export default {
         this.showModal = true;
         console.log(venta.id_venta);
         this.idv = venta.id_venta
-        axios.get('https://telnovo2000.herokuapp.com/ventaProducto/'+ venta.id_venta).then((response) =>{
+        axios.get('http://localhost:3000/ventaProducto/'+ venta.id_venta).then((response) =>{
             this.ventasProducto = response.data;
             this.fecha = moment(response.data[0].fecha).format("D/M/YYYY");
             console.log(this.fecha);

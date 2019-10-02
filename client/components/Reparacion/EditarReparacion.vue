@@ -34,7 +34,7 @@
                       <br>
                       <div>
                           <div class="d-flex justify-content-end" style="margin:0 auto; width:500px;">
-                              <router-link to="/HomeReparacion" tag="button" class="btn btn-info">
+                              <router-link to="/HomeArreglo" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
