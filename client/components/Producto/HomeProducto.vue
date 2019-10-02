@@ -252,11 +252,7 @@ export default {
                       );
                       this.getProducto();
                   }else {
-                      if(response.data == 23503){
-                          alertWarningFK()
-                      }else{
-                          alertError();
-                      }
+                     this.$swal('',response.data.msg,'warning');
                   }
                 }).catch(error=>{
                     console.log(error);

@@ -196,7 +196,7 @@ export default {
             confirmButtonText: 'Si, Borrar!'
             }).then((result) => {
             if (result.value) {
-              axios.delete('http://telnovo2000.herokuapp.com/cliente/' + cliente.id_cliente).then((response)=>{
+              axios.delete('http://localhost:3000/cliente/' + cliente.id_cliente).then((response)=>{
                console.log(response);
                if (response.data == "OK"){
                  this.$swal(
@@ -206,11 +206,8 @@ export default {
                  );
                  this.getCliente();
                }else {
-                 if(response.data == 23503){
-                   alertWarningFK()
-                 }else{
-                   alertError();
-                 }
+                    console.log(response.data);
+                    this.$swal('',response.data.msg,'warning');
                }
              })
              }
@@ -267,17 +264,20 @@ export default {
       this.destinatario = cliente.mail
     },
     enviarMail() {
-          axios.post('https://telnovo2000.herokuapp.com/email',
+          axios.post('http://localhost:3000/mail',
             {
               mensaje: this.mensaje,
               destinatario : this.destinatario
             },
             {
             headers:{
-            'Access-Control-Allow-Origin': 'http://localhost:3000/mail',
             'Content-Type': 'application/json'
              }
-        }).then(this.showModalMail = false, alertSucessMail());
+        }).then(
+            this.showModalMail = false, 
+            alertSucessMail()).catch(error=>{
+            console.log(error)
+            })
     },
   }
 }

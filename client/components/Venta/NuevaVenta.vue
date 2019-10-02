@@ -212,18 +212,18 @@ export default {
               if(this.productoSelected && this.precio > 0 && this.cantidad > 0){
                   this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
                   this.ventaProducto.producto = this.productoSelected;
-                  this.ventaProducto.cantidad = this.num;
+                  this.ventaProducto.cantidad = this.cantidad;
                   this.ventaProducto.precio = this.precio;
                   this.Lista.push(this.ventaProducto);
                   //Una Vez añadido al carrito Actializamos el Stock de la Lista Productos
                   var index = this.producto.indexOf(this.productoSelected);
                   if (index > -1) {
-                    this.producto[index].stock = this.producto[index].stock - this.num;
+                    this.producto[index].stock = this.producto[index].stock - this.cantidad;
                   }
                   //Una Vez Añadido al Carrito, inicializamos en Vacio los Inputs
                   this.errors = [];
                   this.productoSelected = {};
-                  this.num = '';
+                  this.cantidad = '';
                   this.precio = '';
                   this.ventaProducto = new VentaProducto();
                   this.submitted = false;

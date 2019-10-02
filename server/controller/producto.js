@@ -95,6 +95,7 @@ module.exports = {
     },
 
   deleteProducto(req,res){
+          console.log("Hola");
           var pool = new pg.Pool(config)
           pool.connect()
           .then(client => {
@@ -106,7 +107,11 @@ module.exports = {
              .catch(error => {
                 pool.end();
                 console.log(error);
-                res.json(error.code);
+                if (error.code == 23503){
+                  res.send({ msg:"No se puede eliminar ya que el producto esta en una venta o una compra"});
+                }else{
+                  res.send({ msg: "Error de servidor no se pueden actualizar los datos"});
+                }
              })
          })
     },

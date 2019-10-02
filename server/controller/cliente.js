@@ -72,9 +72,13 @@ module.exports = {
                      res.sendStatus(200);
                    })
                    .catch(error => {
-                     pool.end()
-                     console.log(error)
-                     res.json(error.code);
+                     pool.end();
+                     console.log(error);
+                     if (error.code == 23503){
+                       res.send({ msg:"No se puede eliminar ya que el cliente pose una venta o una compra"});
+                     }else{
+                       res.send({ msg: "Error de servidor no se pueden guardar los datos"});
+                     }
                    })
                  done()
                })
