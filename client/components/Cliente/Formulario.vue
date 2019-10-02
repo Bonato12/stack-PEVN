@@ -166,7 +166,7 @@ export default {
                       return;
                   }
                   if  (this.editCliente == false){
-                      axios.post('http://localhost:3000cliente',
+                      axios.post('http://localhost:3000/cliente',
                       this.cliente,
                       { headers: {
                         'Content-Type': 'application/json',
