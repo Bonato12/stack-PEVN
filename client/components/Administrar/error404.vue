@@ -1,9 +1,8 @@
 <template>
   <div id="app404">
-      <h1 style="text-align:center; color:black;">.</h1>
       <h2 style="text-align:center; color:white;"> ERROR 404 </h2>
       <h3 style="text-align:center; color:white;"> PAGINA NO ENCONTRADA</h3>
-  </br>
+  <br>
   </div>
 </template>
 
@@ -38,14 +37,8 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 #app404{
-background-image: url('http://www.hdfondos.eu/pictures/2014/0219/1/orig_232602.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-background-color: #0C94F5;
-background-blend-mode: multiply;
-height: 660px;
-margin-top: -78px;
+    width: 100%;    
+    height: 100%;
 }
 
 
