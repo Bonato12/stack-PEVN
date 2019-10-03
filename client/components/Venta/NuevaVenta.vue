@@ -277,11 +277,9 @@ export default {
                   if (!this.venta.cliente){
                       this.errors.push('El Cliente no puede ser vacio');
                   }
-                  /*
                   if (!this.precioTotal){
                       this.errors.push('El PrecioTotal no puede ser vacio');
                   }
-                  */
               }else {
                   this.errors.push('Carrito de venta Vacio');
               }

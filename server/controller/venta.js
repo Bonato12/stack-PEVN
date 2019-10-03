@@ -27,11 +27,11 @@ module.exports = {
                   pool.connect((err, client, done) => {
                   const shouldAbort = err => {
                   if (err) {
-                    console.error('Error in transaction', err.stack)
+                    console.error('ERROR EN LA TRANSACCION', err.stack)
                     res.send({status:'500'})
                     client.query('ROLLBACK', err => {
                       if (err) {
-                        console.error('Error rolling back client', err.stack)
+                        console.error('ERROR EN LA TRANSACCION', err.stack)
                       }
                       done()
                     })
@@ -47,7 +47,7 @@ module.exports = {
                         if (shouldAbort(err)) return
                         client.query('COMMIT', err => {
                           if (err) {
-                            console.error('ERROR COMMIT TRANSACCION', err.stack)
+                            console.error('ERROR EN COMMIT DE LA TRANSACCION', err.stack)
                           }
                           res.send({status:'200'})
                           done();
@@ -59,23 +59,6 @@ module.exports = {
                 })
             },
 
-            postVentaProducto(req,res){
-                      const errors = validationResult(req);
-                      if (!errors.isEmpty()) {
-                            return res.json(errors.array());
-                      }else{
-                        for (var i=0 ; i < req.body.venta.length ; i++) {
-                            var pool = new pg.Pool(config)
-                            pool.query("INSERT INTO venta_producto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[req.body.id_venta,req.body.venta[i].producto.id_producto,req.body.venta[i].cantidad,req.body.venta[i].precio]).then(response=> {
-                                  pool.end();
-                                  res.sendStatus(200);
-                            }).catch((error) =>{
-                                  pool.end();
-                                  console.log(error);
-                            });
-                        }
-                      }  
-            },
 
         deleteVenta(req,res){
                 console.log("Peticion DELETE");
