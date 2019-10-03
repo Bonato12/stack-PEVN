@@ -23,15 +23,40 @@ module.exports = {
           },
 
           postVenta(req, res){
-                  console.log(req.body)
-                  var pool = new pg.Pool(config)
-                  pool.query("INSERT INTO venta(id_cliente,fecha,total) VALUES($1,$2,$3) RETURNING id_venta",[req.body.venta.cliente,req.body.venta.fecha,req.body.venta.total]).then(response=> {
-                      pool.end();
-                      res.json(response.rows);
-                  }).catch((error) =>{
-                      pool.end();
-                      console.log(error);
-                  });
+                  const pool = new pg.Pool(config)
+                  pool.connect((err, client, done) => {
+                  const shouldAbort = err => {
+                  if (err) {
+                    console.error('Error in transaction', err.stack)
+                    res.send({status:'500'})
+                    client.query('ROLLBACK', err => {
+                      if (err) {
+                        console.error('Error rolling back client', err.stack)
+                      }
+                      done()
+                    })
+                  }
+                  return !!err
+                  }
+                  client.query('BEGIN', err => {
+                  if (shouldAbort(err)) return
+                  client.query("INSERT INTO venta(id_cliente,fecha,total) VALUES($1,$2,$3) RETURNING id_venta",[req.body.venta.cliente,req.body.venta.fecha,req.body.venta.total], (err, response) => {
+                    if (shouldAbort(err)) return
+                    for (var i=0 ; i < req.body.carritoVenta.length ; i++) {
+                      client.query("INSERT INTO venta_producto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[response.rows[0].id_venta,req.body.carritoVenta[i].producto.id_producto,req.body.carritoVenta[i].cantidad,req.body.carritoVenta[i].precio], (err, response) => {
+                        if (shouldAbort(err)) return
+                        client.query('COMMIT', err => {
+                          if (err) {
+                            console.error('ERROR COMMIT TRANSACCION', err.stack)
+                          }
+                          res.send({status:'200'})
+                          done();
+                        })
+                      })
+                    }
+                    })
+                  })
+                })
             },
 
             postVentaProducto(req,res){

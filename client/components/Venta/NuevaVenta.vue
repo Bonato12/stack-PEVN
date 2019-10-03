@@ -209,7 +209,7 @@ export default {
       guardarLista(){
               console.log(JSON.stringify(this.productoSelected));
               //Funcion Que Guarda Los Productos Seleccionados a vender en una Lista Dinamica
-              if(this.productoSelected && this.precio > 0 && this.cantidad > 0){
+              if(this.productoSelected){
                   this.precioTotal = parseInt(this.precioTotal) + parseInt(this.precio);
                   this.ventaProducto.producto = this.productoSelected;
                   this.ventaProducto.cantidad = this.cantidad;
@@ -277,9 +277,11 @@ export default {
                   if (!this.venta.cliente){
                       this.errors.push('El Cliente no puede ser vacio');
                   }
+                  /*
                   if (!this.precioTotal){
                       this.errors.push('El PrecioTotal no puede ser vacio');
                   }
+                  */
               }else {
                   this.errors.push('Carrito de venta Vacio');
               }
@@ -289,35 +291,22 @@ export default {
                   this.venta.total = this.precioTotal;
                   axios.post('http://localhost:3000/venta',
                       {
-                        venta: this.venta
+                        venta: this.venta,
+                        carritoVenta: this.Lista
                       },
                       {
                       headers:{
                         'Content-Type': 'application/json'
                       }
                   }).then(response=>{
-                          console.log(response.data);
-                          this.id_venta = response.data[0].id_venta
-                          axios.post('http://localhost:3000/ventaProducto',
-                              {
-                              id_venta: this.id_venta,
-                              venta: this.Lista
-                              },
-                              {
-                                headers:{
-                                'Content-Type': 'application/json'
-                                 }
-                              }).then(function(response){
-                                if (response.data == "OK"){
-                                    alertSuccess();
-                                    _this.venta = new Venta();
-                                    _this.Lista = [];
-                                }else {
-                                    _this.errors.push(response.data.msg);
-                                }
-                              }).catch(error =>{
-                                console.log(error);
-                              })
+                          console.log(response);
+                          if (response.data.status == "500"){
+                            _this.errors.push("ERROR INTERNO DEL SERVIDOR");
+                          }else {
+                            alertSuccess();
+                            _this.venta = new Venta();
+                            _this.Lista = [];
+                          }
                       }).catch(error=>{
                         console.log(error);
                       })
