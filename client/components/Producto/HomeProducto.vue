@@ -282,12 +282,8 @@ export default {
           dataKey: "marca"
         },
         {
-          title: "DESCRIPCION",
-          dataKey: "descripcion"
-        },
-        {
           title: "TIPOPRODUCTO",
-          dataKey: "tipoproducto"
+          dataKey: "tipo_producto"
         },
         {
           title: "STOCK",

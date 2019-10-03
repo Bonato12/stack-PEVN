@@ -284,7 +284,7 @@ export default {
                               }
                             }).catch(error=>{
                               console.log(error);
-                              _this.errors.push("ERROR NO SE HAN PODIDO GUARDAR LOS DATOS");
+                              _this.errors.push("ERROR NO SE PUEDIERON GUARDAR LOS DATOS");
                             })
 
                   }

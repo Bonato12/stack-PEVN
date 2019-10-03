@@ -1,10 +1,10 @@
 var express = require('express');
-var router = express.Router();
 var app = express();
 var nodemailer = require('nodemailer');
 
 module.exports = {
           enviarMail(req,res){
+            console.log(req);
             var transporter = nodemailer.createTransport({
               host: "smtp.gmail.com",
               port: 587,

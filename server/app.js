@@ -3,8 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var app = express();
 
-//var indexRouter = require('./routes/index');
 var clienteRouter = require('./routes/cliente');
 var productoRouter = require('./routes/producto');
 var ventaRouter = require('./routes/venta');
@@ -19,7 +19,6 @@ var presupuestoRouter = require('./routes/presupuesto');
 var presupuestoProductoRouter = require('./routes/presupuestoProducto');
 var reparacionRouter = require('./routes/reparacion');
 
-var app = express();
 
 const allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -47,11 +46,6 @@ app.use('/', presupuestoRouter);
 app.use('/', presupuestoProductoRouter);
 app.use('/', reparacionRouter);
 
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -1,7 +1,9 @@
 <template>
   <div id="app404">
-      <h2 style="text-align:center; color:white;"> ERROR 404 </h2>
-      <h3 style="text-align:center; color:white;"> PAGINA NO ENCONTRADA</h3>
+    <br>
+    <br>
+    <br>
+      <img src="../../assets/404.png" class="img">
   <br>
   </div>
 </template>
@@ -37,10 +39,19 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 #app404{
-    width: 100%;    
-    height: 100%;
+  height: 500px;
+  width: 600px;  
 }
 
+.img{
+display:block;
+margin:auto;
+margin-top:400px;
+height: 400px;
+width: 600px;  
+ margin: 0 auto; 
+ margin-left: 360px;
+}
 
  h2 {
   font-weight: normal;

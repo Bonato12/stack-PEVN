@@ -263,7 +263,7 @@ export default {
       this.destinatario = cliente.mail
     },
     enviarMail() {
-          axios.post('http://localhost:3000/mail',
+          axios.post('http://localhost:3000/email',
             {
               mensaje: this.mensaje,
               destinatario : this.destinatario

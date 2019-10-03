@@ -70,7 +70,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Precio</span>
                                     </div>
-                                    <input  type="text" min="0"  v-model="precio"  class="form-control">
+                                    <input required  type="number" min="0"  v-model="precio"  class="form-control">
                                 </div>
                               </div>
                           </div>
@@ -273,15 +273,15 @@ export default {
               this.errors = [];
               var _this = this;
               this.submitted = true;
-              if (this.Lista.length > 0){
+              if (this.Lista.length > 0 ){
                   if (!this.venta.cliente){
-                      this.errors.push('El Cliente no puede ser vacio');
+                      this.errors.push('EL CLIENTE NO PUEDE SER VACIO');
                   }
                   if (!this.precioTotal){
-                      this.errors.push('El PrecioTotal no puede ser vacio');
+                      this.errors.push('EL PRECIO TOTAL NO PUEDE SER VACIO');
                   }
               }else {
-                  this.errors.push('Carrito de venta Vacio');
+                  this.errors.push('CARRITO DE VENTA VACIO');
               }
 
               if (this.errors.length == 0){
@@ -304,7 +304,7 @@ export default {
                           }
                       }).catch(error=>{
                         console.log(error);
-                        _this.errors.push("ERROR INTERNO DEL SERVIDOR");
+                        _this.errors.push("ERROR NO SE PUEDIERON GUARDAR LOS DATOS");
                       })
               }
           },

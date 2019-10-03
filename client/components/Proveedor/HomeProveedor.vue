@@ -258,10 +258,7 @@ export default {
         {title: "NOMBRE", dataKey:"nombre"},
         {title: "APELLIDO", dataKey:"apellido"},
         {title: "TELEFONO", dataKey:"telefono"},
-        {title: "MAIL", dataKey:"mail"},
-        {title: "DESCRIPCION", dataKey:"descripcion"}
-
-        ]
+        {title: "MAIL", dataKey:"mail"}];
         var doc = new jsPDF();
         var fecha = new Date();
         var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
