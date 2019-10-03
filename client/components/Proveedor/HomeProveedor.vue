@@ -244,11 +244,7 @@ export default {
                 alertSucessDelete();
                 this.getProveedor();
             }else {
-                if(response.data == 23503){
-                    alertWarningFK()
-                }else{
-                    alertError();
-                }
+                this.$swal('',response.data.msg,'warning');
             }
           })
         }

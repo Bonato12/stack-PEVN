@@ -206,7 +206,6 @@ export default {
                  );
                  this.getCliente();
                }else {
-                    console.log(response.data);
                     this.$swal('',response.data.msg,'warning');
                }
              })

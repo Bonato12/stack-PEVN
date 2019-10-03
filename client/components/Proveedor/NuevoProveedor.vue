@@ -115,7 +115,7 @@
 import axios from 'axios'
 import { alertSuccess } from '../../assets/sweetAlert.js'
 import Proveedor from '../../models/Proveedor';
-import { required, email, minLength,maxLength, sameAs } from "vuelidate/lib/validators";
+import { required, email, minLength,maxLength  } from "vuelidate/lib/validators";
 
 
 export default {
@@ -181,6 +181,7 @@ export default {
             if (response.data == "OK"){
               alertSuccess();
               _this.proveedor = new Proveedor();
+              _this.submitted = false;
             }else {
               _this.errors.push(response.data.msg);
             }

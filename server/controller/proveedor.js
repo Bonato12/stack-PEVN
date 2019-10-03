@@ -51,21 +51,25 @@ module.exports = {
               done()
             })
           },
+
         deleteProveedor(req,res){
-                var pool = new pg.Pool(config)
-                pool.connect(function(err, client, done) {
+                var client = new pg.Client(config)
+                client.connect();
                   client.query("DELETE FROM proveedor WHERE id_proveedor=($1)",[req.params.id_proveedor])
                     .then(response => {
-                      pool.end();
+                      client.end();
                       res.sendStatus(200);
                     })
                     .catch(error => {
-                      pool.end();
+                      client.end();
                       console.log(error);
-                      res.json(error.code);
+                      if (error.code == 23503){
+                        res.send({ msg:"No se puede eliminar ya que el cliente pose una venta o una compra"});
+                      }else{
+                        res.send({ msg: "Error de servidor no se pueden guardar los datos"});
+                      }
                     })
-                  done()
-                })
+          
         },
         updateProveedor(req,res){
               var pool = new pg.Pool(config)
