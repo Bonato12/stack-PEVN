@@ -297,16 +297,14 @@ export default {
                         'Content-Type': 'application/json'
                       }
                   }).then(response=>{
-                          console.log(response);
-                          if (response.data.status == "500"){
-                            _this.errors.push("ERROR INTERNO DEL SERVIDOR");
-                          }else {
-                            alertSuccess();
+                          if (response.data == "OK"){
+                             alertSuccess();
                             _this.venta = new Venta();
                             _this.Lista = [];
                           }
                       }).catch(error=>{
                         console.log(error);
+                        _this.errors.push("ERROR INTERNO DEL SERVIDOR");
                       })
               }
           },

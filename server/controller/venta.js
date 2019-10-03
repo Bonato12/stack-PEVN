@@ -27,11 +27,11 @@ module.exports = {
                   pool.connect((err, client, done) => {
                   const shouldAbort = err => {
                   if (err) {
+                    res.sendStatus(500);
                     console.error('ERROR EN LA TRANSACCION', err.stack)
-                    res.send({status:'500'})
                     client.query('ROLLBACK', err => {
                       if (err) {
-                        console.error('ERROR EN LA TRANSACCION', err.stack)
+                        console.error('ERROR EN ROLLBACK TRANSACCION', err.stack)
                       }
                       done()
                     })
@@ -42,18 +42,17 @@ module.exports = {
                   if (shouldAbort(err)) return
                   client.query("INSERT INTO venta(id_cliente,fecha,total) VALUES($1,$2,$3) RETURNING id_venta",[req.body.venta.cliente,req.body.venta.fecha,req.body.venta.total], (err, response) => {
                     if (shouldAbort(err)) return
-                    for (var i=0 ; i < req.body.carritoVenta.length ; i++) {
-                      client.query("INSERT INTO venta_producto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[response.rows[0].id_venta,req.body.carritoVenta[i].producto.id_producto,req.body.carritoVenta[i].cantidad,req.body.carritoVenta[i].precio], (err, response) => {
-                        if (shouldAbort(err)) return
-                        client.query('COMMIT', err => {
-                          if (err) {
-                            console.error('ERROR EN COMMIT DE LA TRANSACCION', err.stack)
-                          }
-                          res.send({status:'200'})
-                          done();
-                        })
-                      })
-                    }
+                      for (var i=0 ; i < req.body.carritoVenta.length ; i++) {
+                        client.query("INSERTS INTO venta_producto(id_venta,id_producto,cantidad,precio) VALUES($1,$2,$3,$4)",[response.rows[0].id_venta,req.body.carritoVenta[i].producto.id_producto,req.body.carritoVenta[i].cantidad,req.body.carritoVenta[i].precio], (err, response) => {
+                          if (shouldAbort(err)) return
+                          client.query('COMMIT') .then(response=>{
+                            res.sendStatus(200);
+                          }).catch(error=>{
+                            console.log(error);
+                          })
+                            done();
+                          })
+                      }
                     })
                   })
                 })

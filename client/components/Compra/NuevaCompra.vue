@@ -270,30 +270,22 @@ export default {
                   if (this.errors.length == 0){
                       this.compra.proveedor = this.proveedorSelected;
                       this.compra.total = this.precioTotal;
+                      var _this = this;
                       axios.post('http://localhost:3000/compra',
                           {
-                          compra: this.compra
+                          compra: this.compra,
+                          carritoCompra: this.Lista
                           }).then(response=>{
-                                  console.log(response.data);
-                                  this.id_compra = response.data[0].id_compra
-                                  axios.post('http://localhost:3000/compraProducto',
-                                      {
-                                        id_compra: this.id_compra,
-                                        compra: this.Lista
-                                      })
-                                  .then(response=>{
-                                  console.log(response.data);
-                                  if (response.data == "OK"){
-                                    alertSucessCompra();
-                                    this.compra = new Compra();
-                                    this.Lista = []
-                                  }else {
-                                    alert("ERROR");
-                                  }
+                              if (response.data == "OK"){
+                                console.log(response);
+                                alertSuccess();
+                                _this.venta = new Compra();
+                                _this.Lista = [];
+                              }
                             }).catch(error=>{
-                              console.log(error)
+                              console.log(error);
+                              _this.errors.push("ERROR NO SE HAN PODIDO GUARDAR LOS DATOS");
                             })
-                        })
 
                   }
     }
