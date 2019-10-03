@@ -10,7 +10,6 @@
                   Editar Proveedor
                </h2>
             </div>
-            <hr style="color:black;">
             <div class="card-body" >
                   <p v-if="errors.length">
                     <ul  class="list-group" v-for="error in errors">
@@ -65,11 +64,11 @@
                     </div>
                     <br>
                     <div class="d-flex justify-content-end">
-                      <router-link to="/HomeProveedor" tag="button" class="btn btn-info"  title="Volver a HomeProveedor" >
+                      <router-link to="/HomeProveedor" tag="button" class="btn btn-volver"  title="Volver a HomeProveedor" >
                           <i class="fas fa-arrow-left"></i>
                             Volver
                       </router-link>
-                      <button type="submit" class="btn btn-success"  title="Editar Proveedor" >
+                      <button type="submit" class="btn btn-guardar"  title="Editar Proveedor" >
                             <i class="far fa-save fa-1x"></i>
                             Guardar
                       </button>
@@ -147,16 +146,10 @@ export default {
                 }).then(function(response){
                     console.log(response);
                     if (response.data == "OK"){
-                         alertEditSucessProveedor();
+                         alertEditSuccess();
                          _this.$router.push('/HomeProveedor');
                     }else {
-                         if (response.data.length > 0) {
-                             for (var i = 0; i < response.data.length ; i++) {
-                                    _this.errors.push(response.data[i].msg);
-                              }
-                         }else {
-                             _this.errors.push(response.data.msg);
-                         }
+                         _this.errors.push(response.data.msg);
                     }
                 })
         }
@@ -204,7 +197,7 @@ height: auto;
 margin-top: 50px;
 margin-bottom: auto;
 width: 1650px;
-background-color: rgb(70,90,101);
+background-color: #2A363B;
 border-radius: 5px;
 border:1px solid;
 margin:0 auto;
@@ -220,6 +213,38 @@ margin:0 auto;
   margin-top:-10px;
   border:none;
   /*background-color: #FFD700  !important;*/
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black;
+}
+
+.btn-guardar{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #FFD700  !important;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: 5px;
+  color: black;
+}
+
+.btn-volver{
+  margin-left: 2px;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  width:120px;
+  height:40px;
+  margin-top:-10px;
+  border:none;
+  background-color: #5bc0de;
   -webkit-transition:.5s;
   transition:.5s;
   border-radius: 5px;

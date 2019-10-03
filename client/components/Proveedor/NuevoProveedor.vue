@@ -11,8 +11,7 @@
                   Nuevo Proveedor
                </h2>
             </div>
-            <hr style="color:black;">
-            <div class="card-body" >
+            <div class="card-body">
                   <p v-if="errors.length">
                     <ul  class="list-group" v-for="error in errors">
                         <li class="alert alert-danger" style="width:700px; margin:0 auto;" role="alert">

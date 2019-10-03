@@ -21,20 +21,19 @@ module.exports = {
           })
         },
         postProveedor(req, res){
-                  var pool = new pg.Pool(config)
-                  pool.connect(function(err, client, done) {
+                  var client = new pg.Client(config)
+                  client.connect();
                   client.query("INSERT INTO proveedor (dni,nombre,apellido,direccion,telefono,mail,descripcion) VALUES($1,$2,$3,$4,$5,$6,$7)",[req.body.dni,req.body.nombre,req.body.apellido,
                   req.body.direccion,req.body.telefono,req.body.mail,req.body.descripcion]).then(response => {
-                      pool.end();
+                      client.end();
                       res.sendStatus(200);
                     })
                     .catch(error => {
-                      pool.end();
+                      client.end();
                       console.log(error)
                       res.send({ msg: 'Error del Servidor No se pudieron guardar los datos!' });
                     })
-                  done()
-                 })
+               
         },
         getIdProveedor(req,res){
             var pool = new pg.Pool(config)

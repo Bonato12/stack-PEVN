@@ -128,7 +128,9 @@
   <br>
   <br>
   <br>
+  <!--
   <Estadistica></Estadistica>
+  -->
   <br>
   <br>
 </div>
