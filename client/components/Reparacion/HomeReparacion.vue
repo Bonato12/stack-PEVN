@@ -42,84 +42,6 @@
                 </template>
          </vue-good-table>
        </div>
-       <transition v-if="showModal" class="animation fadeInLeft" name="modal">
-         <div class="modal-mask">
-           <div class="modal-wrapper">
-             <div class="modal-container animated fadeInLeft">
-               <div class="modal-header" style="background-color:#424242;">
-                 <slot name="header">
-                   <h2 style="color:white; text-align:left;">
-                     <i class="fas fa-id-card"></i>
-                     Detalles
-                   </h2>
-                   <button class="modal-default-button" @click="hideModal()">
-                    <i class="far fa-times-circle"></i>
-                   </button>
-                 </slot>
-               </div>
-               <div class="modal-body" style="background-color:#f1f8e9;">
-                 <slot name="body">
-                   <b-row class="mb-1">
-                      <b-col cols="3">ID:</b-col>
-                        <b-col></b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Dni:</b-col>
-                        <b-col></b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Nombre:</b-col>
-                        <b-col></b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Apellido:</b-col>
-                        <b-col></b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Direccion:</b-col>
-                        <b-col></b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Telefono:</b-col>
-                        <b-col></b-col>
-                    </b-row>
-                    <hr>
-                    <b-row class="mb-1">
-                      <b-col cols="3">Mail:</b-col>
-                        <b-col></b-col>
-                    </b-row>
-                 </slot>
-               </div>
-               <div class="modal-header" style="background-color:#FEC404;" >
-                 <h2 class="opciones" style="color:white;">Opciones</h2>
-                 <div class="row" style="float:right; padding-right:15px;">
-
-                      <div>
-                        <button class="btn btn-danger" v-on:click="eliminarReparacion()" title="Eliminar Reparacion">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                      </div>
-                      <div style="width:5px;">
-                      </div>
-                      <div>
-                        <router-link class="btn btn-dark" :to="/EditarReparacion/+reparacion.id_reparacion" tag="button" title="Editar Reparacion">
-                            <i class="fas fa-edit fa-1x"></i>
-
-                        </router-link>
-                      </div>
-                      <div style="width:5px;">
-                      </div>
-                  </div>
-              </div>
-             </div>
-           </div>
-         </div>
-       </transition>
        <br>
        <div class="row" style="float:right; padding-right:15px;">
          <button type="button" class="btn btn-danger" v-on:click="exportarPdf()" style="float:right;">
@@ -218,7 +140,7 @@
             {title: "PRODUCTO", dataKey:"id_producto"},
             {title: "FECHA INICIAL", dataKey:"fecha_ini"},
             {title: "FECHA FINAL", dataKey:"fecha_fin"},
-            {title: "TOTAL", dataKey:"preciototal"}
+            {title: "TOTAL", dataKey:"precio_total"}
             ]
           var doc = new jsPDF();
           var fecha = new Date();

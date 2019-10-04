@@ -84,6 +84,9 @@ import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete,alertError,alertWarningArregloFK } from '../../assets/sweetAlert.js';
 import TablaReparacion from '../Reparacion/HomeReparacion.vue'
 import moment from 'moment';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import XLSX from 'xlsx'
 
 export default {
   name: 'HomeVenta',
@@ -188,7 +191,46 @@ export default {
     },
     hide(){
       this.showModal = false;
-    }
+    },
+    exportarPdf(){
+          var columnas = [
+            {title: "CLIENTE", dataKey:"cliente"},
+            {title: "PRODUCTO", dataKey:"producto"},
+            {title: "FECHA", dataKey:"fecha"},
+            {title: "OBSERVACIÓN", dataKey:"observacion"},
+            {title: "CONDICIÓN", dataKey:"condicion"}
+            ]
+          var doc = new jsPDF();
+          var fecha = new Date();
+          var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+          doc.addImage(imgData, 'JPEG', 15, 5, 80, 40);
+          doc.text(15,60,'Lista Arreglos')
+          doc.text(15, 70, 'Fecha: '+fecha.getDate()+'/'+fecha.getMonth()+'/'+fecha.getFullYear());
+          doc.text(65, 70, 'Hora: '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds());
+          doc.autoTable(columnas,this.arreglo, {
+                          theme : 'grid',
+                          margin : {
+                              top : 75
+                          }
+                });
+          doc.save(now+'-arreglo.pdf');
+        },
+    exportarXls() {
+      var fecha = new Date();
+      var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+      var arreglos = XLSX.utils.json_to_sheet(this.arreglo)
+      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      XLSX.utils.book_append_sheet(wb, arreglos, this.arreglo)
+      XLSX.writeFile(wb,now+'-arreglos.xlsx');
+    },
+    exportarCsv() {
+      var fecha = new Date();
+      var now = fecha.getDate()+'-'+fecha.getMonth()+'-'+fecha.getFullYear()+':'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+      var arreglos = XLSX.utils.json_to_sheet(this.arreglo)
+      var wb = XLSX.utils.book_new() // make Workbook of Excel
+      XLSX.utils.book_append_sheet(wb, arreglos, this.arreglo)
+      XLSX.writeFile(wb,now+'-arreglos.csv');
+    },
 
 
 
