@@ -55,7 +55,8 @@ getIdUsuario(req,res){
             disabled: false
         })
         .then(function(userRecord) {
-          console.log(userRecord);
+          //console.log(userRecord);
+          console.log(req.body);
           var client = new pg.Client(config)
           client.connect();
             client.query("INSERT INTO usuario(uuid,mail,contraseña,rol) VALUES($1,$2,$3,$4)",[userRecord.uid,req.body.mail,req.body.password,req.body.rol])
