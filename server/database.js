@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 
+
 config= {
   user: 'postgres',
   host: '127.0.0.1',

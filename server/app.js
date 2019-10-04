@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
 
+
+
 var clienteRouter = require('./routes/cliente');
 var productoRouter = require('./routes/producto');
 var ventaRouter = require('./routes/venta');
@@ -19,15 +21,15 @@ var presupuestoRouter = require('./routes/presupuesto');
 var presupuestoProductoRouter = require('./routes/presupuestoProducto');
 var reparacionRouter = require('./routes/reparacion');
 
-
 const allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', '*');
     res.header('Access-Control-Allow-Headers', '*');
     next();
 }
-
 app.use(allowCrossDomain);
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

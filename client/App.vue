@@ -164,7 +164,7 @@ export default {
 /* Show the dropdown menu on hover */
 .nav-item:hover .dropdown-content {display: block;}
 body,html{
-  background-color: rgb(205,205,205);
+  background-color: #2A363B;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
