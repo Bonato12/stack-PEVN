@@ -27,7 +27,7 @@
                                     <span class="input-group-text">Proveedor</span>
                                 </div>
                                 <model-list-select class="form-control" :list="proveedor"
-                                                   v-model="compra.proveedor"
+                                                   v-model="proveedorSelected"
                                                    option-value="id_proveedor"
                                                    :custom-text="textCliente"
                                                   >
@@ -283,6 +283,9 @@ export default {
                                 _this.compraProducto = new CompraProducto(),
                                 _this.precioTotal = 0;
                                 _this.Lista = [];
+                                _this.proveedorSelected = {}
+                              }else{
+                                _this.errors.push("ERROR NO SE PUEDIERON GUARDAR LOS DATOS");
                               }
                             }).catch(error=>{
                               console.log(error);
