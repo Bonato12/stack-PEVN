@@ -29,7 +29,7 @@
                       <br>
                       <div>
                           <div class="d-flex justify-content-end" style="margin:0 auto; width:500px;">
-                              <router-link to="/HomeVenta" tag="button" class="btn btn-info">
+                              <router-link to="/HomeCompra" tag="button" class="btn btn-info">
                                   <i class="fas fa-arrow-left"></i>
                                       Volver
                               </router-link>
@@ -63,25 +63,15 @@ export default {
     return {
       idc: this.$route.params.id,
       compra: new Compra(),
-      producto: [],
       fecha: '',
       date: '',
 		}
   },
-  computed:{
-
-  },
-  mounted(){
-
-  },
+  
   methods: {
     getIdCompra(){
-      console.log(this.idv);
-      axios.get('http://localhost:3000/compra/'+this.idc).then((response) =>{
-          var dia =  moment(response.data[0].fecha).format("D");;
-          var mes =  moment(response.data[0].fecha).format("M");;
-          var anio =  moment(response.data[0].fecha).format("YYYY");;
-          this.date = new Date(anio,mes-1,dia);
+      axios.get('http://localhost:3000/compraFecha/'+this.idc).then((response) =>{
+          this.date = new Date(response.data[0].fecha);
       })
     },
     editarCompra(){
@@ -93,7 +83,7 @@ export default {
                             headers:{
                             'Content-Type': 'application/json'
                              }
-                        }).then(alertEditSucessCompra());
+                        }).then(alertEditSuccess());
                       }else {
                         alertCompletarCampos();
                       }

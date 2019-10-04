@@ -118,6 +118,21 @@ module.exports = {
 
             },
 
+            getFechaCompra(req,res){
+              var client = new pg.Client(config);
+              client.connect();
+              client.query('SELECT  V.fecha FROM compra V WHERE V.id_compra=($1)', [req.params.id_compra])
+                .then(response => {
+                  client.end()
+                  res.json(response.rows)
+                })
+                .catch(error => {
+                  client.end()
+                  console.log(error.stack)
+                })
+               
+            },    
+
           updateCompra(req, res){
                 var pool = new pg.Pool(config)
                 pool.connect(function(err, client, done) {

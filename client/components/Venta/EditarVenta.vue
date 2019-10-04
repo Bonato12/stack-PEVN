@@ -58,41 +58,23 @@ import {en, es} from 'vuejs-datepicker/dist/locale'
 export default {
   name: 'EditarVenta',
   created(){
-      this.getCliente();
       this.getIdVenta();
   },
   data () {
     return {
       idv: this.$route.params.id,
       venta: new Venta(),
-      num: '',
       fecha: '',
       date: '',
       en: en,
       es: es
 		}
   },
-  computed:{
-
-  },
-  mounted(){
-
-  },
+  
   methods: {
-    getCliente(){
-      axios.get('http://localhost:3000/cliente').then((response) =>{
-        this.clienteS = response.data;
-      });
-    },
     getIdVenta(){
-      console.log(this.idv);
-      axios.get('http://localhost:3000/venta/'+this.idv).then((response) =>{
-          this.cliente = response.data[0].id_cliente;
-          console.log(this.cliente);
-          var dia =  moment(response.data[0].fecha).format("D");;
-          var mes =  moment(response.data[0].fecha).format("M");;
-          var anio =  moment(response.data[0].fecha).format("YYYY");;
-          this.date = new Date(anio,mes-1,dia);
+      axios.get('http://localhost:3000/ventaFecha/'+this.idv).then((response) =>{
+          this.date = new Date(response.data[0].fecha);
       });
     },
     editarVenta(){
@@ -102,10 +84,9 @@ export default {
                           this.venta,
                           {
                             headers:{
-                            'Access-Control-Allow-Origin': 'http://localhost:3000/venta/'+this.idv,
                             'Content-Type': 'application/json'
                              }
-                        }).then(alertEditSucessVenta());
+                        }).then(alertEditSuccess());
                   }else {
                     alert("Completar Los Campos");
                   }

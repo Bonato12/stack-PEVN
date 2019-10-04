@@ -90,20 +90,35 @@ module.exports = {
                 done()
               })
             },
+
+            getFechaVenta(req,res){
+              var client = new pg.Client(config);
+              client.connect();
+              client.query('SELECT  V.fecha FROM venta V WHERE V.id_venta=($1)', [req.params.id_venta])
+                .then(response => {
+                  client.end()
+                  res.json(response.rows)
+                })
+                .catch(error => {
+                  client.end()
+                  console.log(error.stack)
+                })
+               
+            },  
+
           updateVenta(req, res){
-                var pool = new pg.Pool(config)
-                pool.connect(function(err, client, done) {
+                var client = new pg.Client(config)
+                client.connect();
                   client.query("UPDATE venta SET fecha = ($1) WHERE id_venta = ($2)",[req.body.fecha,req.params.id_venta])
                     .then(response => {
-                      pool.end()
-                      //res.json(response.rows)
+                      client.end();
+                      res.sendStatus(200);
                     })
                     .catch(error => {
-                      pool.end()
+                      client.end()
                       console.log(error.stack)
                     })
-                  done()
-                })
+              
           },
 
 

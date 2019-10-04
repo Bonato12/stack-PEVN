@@ -10,6 +10,7 @@ router.post('/compraProducto',compraController.postCompraProducto);
 */
 router.delete('/compra/:id_compra',compraController.deleteCompra);
 router.get('/compra/:id_compra', compraController.getIdCompra);
+router.get('/compraFecha/:id_compra', compraController.getFechaCompra);
 router.put('/compra/:id_compra', compraController.updateCompra);
 
 

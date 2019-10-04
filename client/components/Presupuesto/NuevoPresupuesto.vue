@@ -24,36 +24,38 @@
                                                    >
                                 </model-list-select>
                             </div>
-                            <div class="row">
-                              <div class="col">
-                                <div class="input-group form-group">
-                                  <b-input-group prepend="Cantidad">
-                                    <b-form-input v-model="num" min="0" readonly></b-form-input>
-                                    <b-input-group-append>
-                                      <b-button variant="info" @click="decrementarCantidad()">
-                                            <i class="fas fa-minus"></i>
-                                      </b-button>
-                                      <b-button variant="info" @click="incrementarCantidad()">
-                                            <i class="fas fa-plus"></i>
-                                      </b-button>
-                                    </b-input-group-append>
-                                  </b-input-group>
+                            <div v-show="repuestoSelected.modelo">
+                              <div class="row">
+                                <div class="col">
+                                  <div class="input-group form-group">
+                                    <b-input-group prepend="Cantidad">
+                                      <b-form-input v-model="num" min="0" readonly></b-form-input>
+                                      <b-input-group-append>
+                                        <b-button variant="info" @click="decrementarCantidad()">
+                                              <i class="fas fa-minus"></i>
+                                        </b-button>
+                                        <b-button variant="info" @click="incrementarCantidad()">
+                                              <i class="fas fa-plus"></i>
+                                        </b-button>
+                                      </b-input-group-append>
+                                    </b-input-group>
+                                  </div>
+                                </div>
+                                <div class="col">
+                                  <div class="input-group form-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text">Precio</span>
+                                      </div>
+                                      <input  type="number" min="0"  v-model="precio"  class="form-control" readonly>
+                                  </div>
                                 </div>
                               </div>
-                              <div class="col">
-                                <div class="input-group form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Precio</span>
-                                    </div>
-                                    <input  type="number" min="0"  v-model="precio"  class="form-control" readonly>
-                                </div>
+                              <div>
+                                  <button class="btn" type="submit"  style="width:110px; border-radius:5px; background-color:#FFD700;" title="Ingrese Observacion">
+                                    <i class="fas fa-tools fa"></i>
+                                    Añadir
+                                  </button>
                               </div>
-                            </div>
-                            <div>
-                                <button class="btn" type="submit"  style="width:110px; border-radius:5px; background-color:#FFD700;" title="Ingrese Observacion">
-                                  <i class="fas fa-tools fa"></i>
-                                  Añadir
-                                </button>
                             </div>
                     </form>
                       <div v-if="this.Lista.length > 0" class="animated fadeIn" style="margin: 0 auto; width:780px; border-radius: 5px;">
