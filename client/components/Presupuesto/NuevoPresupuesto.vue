@@ -15,7 +15,7 @@
                     <form @submit.prevent="guardarLista()" style="margin: 0 auto; width:780px; margin-top:10px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend" style="border-right: 5px solid white">
-                                    <span class="input-group-text">Producto</span>
+                                    <span class="input-group-text">Repuesto</span>
                                 </div>
                                 <model-list-select class="form-control is-invalid" :list="producto"
                                                    v-model="repuestoSelected"

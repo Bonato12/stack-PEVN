@@ -201,7 +201,7 @@ export default {
       });
     },
     getProducto(){
-      axios.get('http://localhost:3000/producto').then(response=>{
+      axios.get('http://localhost:3000/productoCompra').then(response=>{
         this.producto = response.data;
       });
     },

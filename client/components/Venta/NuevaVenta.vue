@@ -202,7 +202,7 @@ export default {
         });
       },
       getProducto(){
-        axios.get('http://localhost:3000/productoStock').then(response=>{
+        axios.get('http://localhost:3000/productoVenta').then(response=>{
           this.producto = response.data;
         });
       },

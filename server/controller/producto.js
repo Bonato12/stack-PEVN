@@ -52,6 +52,38 @@ module.exports = {
            })
         },
 
+        getProductoCompra(req,res){
+          var pool = new pg.Pool(config)
+          pool.connect()
+          .then(client => {
+           return client.query("SELECT  * FROM producto WHERE  tipo_producto <>'Para Reparacion' ")
+             .then(response => {
+               pool.end();
+               res.json(response.rows)
+             })
+             .catch(error => {
+               pool.end();
+               console.log(error.stack)
+             })
+         })
+      },
+
+      getProductoVenta(req,res){
+        var pool = new pg.Pool(config)
+        pool.connect()
+        .then(client => {
+         return client.query("SELECT  * FROM producto WHERE stock >= 1 AND tipo_producto <>'Para Reparacion' ")
+           .then(response => {
+             pool.end();
+             res.json(response.rows)
+           })
+           .catch(error => {
+             pool.end();
+             console.log(error.stack)
+           })
+       })
+    },
+
         getProductoReparar(req,res){
           var pool = new pg.Pool(config)
           pool.connect()
