@@ -133,7 +133,7 @@ export default {
         });
       },
       getProducto(){
-        axios.get('http://localhost:3000/productoStock').then(response=>{
+        axios.get('http://localhost:3000/productoReparacion').then(response=>{
           this.producto = response.data;
         });
       },

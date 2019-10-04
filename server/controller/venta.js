@@ -23,6 +23,10 @@ module.exports = {
           },
 
           postVenta(req, res){
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                  return res.json(errors.array());
+            } else {
                   const pool = new pg.Pool(config)
                   pool.connect((err, client, done) => {
                   const shouldAbort = err => {
@@ -56,6 +60,7 @@ module.exports = {
                     })
                   })
                 })
+              }  
             },
 
 

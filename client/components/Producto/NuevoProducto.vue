@@ -120,9 +120,8 @@ export default {
       editProducto: false,
       tipoProductos : [{name:"Celular"},
                        {name:"Tablet"},
-                       {name:"Accesorio"},
-                       {name:"Laptop"},
                        {name:"Repuesto"},
+                       {name:"Para Reparacion"},
                        {name:"Otros"}]
 		}
 

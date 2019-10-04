@@ -76,14 +76,43 @@ getIdUsuario(req,res){
         });
   },
 
-  deleteUser(req,res){
-    admin.auth().deleteUser(uid)
+  deleteUsuario(req,res){
+    //var client = new pg.Client(config)
+    console.log(req.body);
+    /*
+    administrador.auth().deleteUser(req.params.uuid)
           .then(function() {
             console.log('Successfully deleted user');
           })
+          */
+
+
+          administrador.auth().deleteUser(req.params.uuid)
+            .then(function() {
+              console.log('Successfully deleted user');
+            })
+            .catch(function(error) {
+              console.log('Error deleting user:', error);
+            });
+
+          /*
+          .then(
+          client.connect(),
+            client.query("DELETE FROM cliente WHERE uuid=($1)",[req.params.uuid])
+              .then(response => {
+                client.end()
+                res.sendStatus(200);
+              })
+              .catch(error => {
+                client.end();
+                console.log(error);
+                  res.send({ msg: "Error de servidor no se pueden guardar los datos"});          
+              })
+      
           .catch(function(error) {
             console.log('Error deleting user:', error);
-          });
+          }));
+          */
   }
 
 }

@@ -1,5 +1,4 @@
 var express = require('express');
-var router = express.Router();
 var app = express();
 var pg = require('pg');
 var config = require('../database');
@@ -42,11 +41,11 @@ var config = require('../database');
                     client.query("UPDATE reparacion SET  fecha_ini = ($1), fecha_fin = ($2) WHERE id_reparacion = ($3)",[req.body.fecha_ini,req.body.fecha_fin,req.params.id_reparacion])
                       .then(response => {
                         pool.end();
-                        res.json(response.rows);
+                        res.sendStatus(200);
                       })
                       .catch(error => {
                         pool.end();
-                        console.log(error.stack);
+                        res.send({msg:'ERROR NO SE PUDIERON GUARDAR LOS DATOS'})
                       })
                     done()
                   })

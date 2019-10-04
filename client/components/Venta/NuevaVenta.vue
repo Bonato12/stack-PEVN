@@ -297,10 +297,13 @@ export default {
                         'Content-Type': 'application/json'
                       }
                   }).then(response=>{
+                          console.log(response.data);
                           if (response.data == "OK"){
                              alertSuccess();
                             _this.venta = new Venta();
                             _this.Lista = [];
+                          }else{
+                            _this.errors.push("ERROR NO SE PUEDIERON GUARDAR LOS DATOS");
                           }
                       }).catch(error=>{
                         console.log(error);

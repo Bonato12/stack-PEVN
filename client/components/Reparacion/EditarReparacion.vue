@@ -13,6 +13,14 @@
                      </h2>
                   </div>
                   <div class="card-body">
+                    <p v-if="errors.length">
+                      <ul class="list-group" v-for="error in errors">
+                          <li class="alert alert-danger" style="width:780px; margin:0 auto;" role="alert">
+                            {{ error }}
+                          </li>
+                          <br>
+                      </ul>
+                    </p>
                     <form @submit.prevent="editarReparacion()" style="margin-left: 30px; margin-top:30px; width:500px;">
                       <div class="form-group row">
                         <label  class="col" style="color:white;">Fecha Inicial</label>
@@ -55,14 +63,11 @@
 <script>
 
 import axios from 'axios'
-import { alertWarningLimiteStock,alertCompletarCampos } from '../../assets/sweetAlert.js'
-import { alertWarningLimiteOne,alertWarningLimite } from '../../assets/sweetAlert.js'
-import { alertEditSucessReparacion } from '../../assets/sweetAlert.js'
+import { alertEditSuccess } from '../../assets/sweetAlert.js'
 import Reparacion from '../../models/Reparacion';
 import moment from 'moment';
 
 export default {
-  name: 'EditarCompra',
   created(){
       this.getIdReparacion();
   },
@@ -73,15 +78,11 @@ export default {
       fecha: '',
       dateIni: '',
       dateFin: '',
-      mail: ''
+      mail: '',
+      errors: []
 		}
   },
-  computed:{
-
-  },
-  mounted(){
-
-  },
+ 
   methods: {
     getIdReparacion(){
       console.log(this.idr);
@@ -111,8 +112,18 @@ export default {
                             headers:{
                             'Content-Type': 'application/json'
                              }
-                        }).then(alertEditSucessReparacion(),
-                        this.enviarMail());
+                        }).then(response=>{
+                          if (response.data == "OK"){
+                             alertEditSuccess(),
+                             this.enviarMail()
+                          }else{
+                            _this.errors.push("ERROR NO SE PUEDIERON GUARDAR LOS DATOS");
+                          }
+                        }).catch(error=>{
+                          console.log(error);
+                        })
+                        
+                      
                       }else {
                         alertCompletarCampos();
                       }

@@ -77,6 +77,7 @@
 import axios from 'axios'
 import firebase from 'firebase'
 import Usuario from '../../models/Usuario';
+import { alertSuccess } from '../../assets/sweetAlert.js'
 
 export default {
   created(){
@@ -109,7 +110,7 @@ export default {
                     this.usuario.rol = this.rol
                     axios.post('http://localhost:3000/usuario',this.usuario).then(response=>{
                       if (response.data == "OK"){
-                        alert("Registro Exitoso");
+                        alertSuccess();
                       }
                     })
               .catch((error)=> {

@@ -7,6 +7,8 @@ const productoController = require('../controller/producto');
 router.get('/producto', productoController.getProducto);
 router.get('/productoRepuesto', productoController.getProductoRepuesto);
 router.get('/productoStock', productoController.getProductoStock);
+router.get('/productoReparacion', productoController.getProductoReparar);
+
 router.post('/producto',productoController.postProducto);
 router.get('/producto/:id_producto',productoController.getIdProducto);
 router.delete('/producto/:id_producto',productoController.deleteProducto);

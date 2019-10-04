@@ -37,10 +37,7 @@
             theme="default">
             <template slot="table-row" slot-scope="props">
               <span v-if="props.column.field == 'opciones'">
-                <button @click="editarUsuario(props.row)" class="btn btn-warning" title="Editar Cliente">
-                      <i class="fas fa-edit"></i>
-                </button>
-                <button @click="editarUsuario(props.row)" class="btn btn-danger" title="Borrar Usuario">
+                <button @click="eliminarUsuario(props.row)" class="btn btn-danger" title="Borrar Usuario">
                       <i class="fas fa-trash"></i>
                 </button>
               </span>
@@ -92,9 +89,30 @@ export default {
           console.log(error);
         })
     },
-    editarUsuario(usuario){
+    eliminarUsuario(usuario){
         console.log(usuario.uuid);
-        this.$router.push('/EditarUsuario/'+usuario.uuid);
+         this.$swal({
+        title: 'Estas Seguro?',
+        text: "No se podran recuperar los datos!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Borrar!'
+        }).then((result) => {
+        if (result.value) {
+          axios.delete('http://localhost:3000/usuario/'+usuario.uuid).then((response) => {
+            console.log(response);
+            if (response.data == "OK"){
+                alertSucessDelete();
+            }else {
+                this.$swal('',response.data.msg,'warning');
+            }
+          })
+        }
+        }).catch(error=>{
+           console.log(error);
+        })
     }
   }
 }

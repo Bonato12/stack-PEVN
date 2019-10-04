@@ -8,7 +8,7 @@ module.exports = {
           getArreglo(req,res){
             var pool = new pg.Pool(config)
             pool.connect(function(err, client, done) {
-              client.query("SELECT id_arreglo, cliente, producto, to_char( fecha, 'DD-MM-YYYY') as fecha, observacion, condicion FROM arreglo")
+              client.query("SELECT id_arreglo, cliente.dni as cliente , producto.modelo as producto, to_char( fecha, 'DD-MM-YYYY') as fecha, observacion, condicion FROM arreglo,cliente,producto WHERE arreglo.cliente = cliente.id_cliente AND arreglo.producto = producto.id_producto")
                 .then(response => {
                   pool.end()
                   res.json(response.rows);

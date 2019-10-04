@@ -52,6 +52,22 @@ module.exports = {
            })
         },
 
+        getProductoReparar(req,res){
+          var pool = new pg.Pool(config)
+          pool.connect()
+          .then(client => {
+           return client.query("SELECT  * FROM producto WHERE tipo_producto = 'Para Reparacion' ")
+             .then(response => {
+               pool.end();
+               res.json(response.rows)
+             })
+             .catch(error => {
+               pool.end();
+               console.log(error.stack)
+             })
+         })
+      },  
+
       postProducto(req, res){
           const producto = {
             modelo:req.body.modelo,
