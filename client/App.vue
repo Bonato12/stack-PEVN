@@ -99,7 +99,7 @@ export default {
           return this.$route.matched.some(route => route.name === 'NuevaCompra' ||  route.name === 'EditarCompra' )
       },
       isActiveArreglo() {
-          return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto')
+          return this.$route.matched.some(route => route.name === 'NuevoArreglo' ||  route.name === 'NuevoPresupuesto' || route.name === 'VerPresupuesto')
       },
       isActiveUsuario() {
           return this.$route.matched.some(route => route.name === 'NuevoUsuario' ||  route.name === 'HomeUsuario')

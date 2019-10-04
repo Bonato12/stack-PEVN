@@ -18,7 +18,7 @@
                         </div>
                         <input  type="number"  v-model="cliente.dni"  class="form-control" placeholder="Ingrese Dni" :class="{ 'is-invalid': submitted && $v.cliente.dni.$error }" >
                         <div v-if="submitted && !$v.cliente.dni.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.cliente.dni.required">El dni es requerido</span>
+                              <span v-if="!$v.cliente.dni.required">El Dni del cliente es requerido</span>
                               <span v-if="!$v.cliente.dni.maxLength">El Dni no puede tener mas de 10 digitos</span>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         </div>
                         <input   type="text"  v-model="cliente.nombre"  class="form-control" placeholder="Ingrese Nombre" :class="{ 'is-invalid': submitted && $v.cliente.nombre.$error }" >
                         <div v-if="submitted && !$v.cliente.nombre.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.cliente.nombre.required">Nombre is required</span>
+                              <span v-if="!$v.cliente.nombre.required">El nombre del cliente es requerido</span>
                               <span v-if="!$v.cliente.nombre.maxLength">El Nombre no puede tener mas de 50 digitos</span>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         </div>
                         <input  type="text"  v-model="cliente.apellido"  class="form-control" placeholder="Ingrese Apellido" :class="{ 'is-invalid': submitted && $v.cliente.apellido.$error }" >
                         <div v-if="submitted && !$v.cliente.apellido.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.cliente.apellido.required">Apellido is required</span>
+                              <span v-if="!$v.cliente.apellido.required">El Apellido del cliente es requerido</span>
                               <span v-if="!$v.cliente.apellido.maxLength">El Apellido no puede tener mas de 50 digitos</span>
                         </div>
                     </div>
@@ -48,8 +48,8 @@
                         </div>
                         <input  type="text" v-model="cliente.direccion"  class="form-control" placeholder="Ingrese Direccion" :class="{ 'is-invalid': submitted && $v.cliente.direccion.$error }" >
                         <div v-if="submitted && !$v.cliente.direccion.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.cliente.direccion.required">Telefono is required</span>
-                              <span v-if="!$v.cliente.direccion.maxLength">El Telefono no puede tener mas de 10 digitos</span>
+                              <span v-if="!$v.cliente.direccion.required">La Direccion del cliente es requerido</span>
+                              <span v-if="!$v.cliente.direccion.maxLength">La direccion no puede tener mas de 10 digitos</span>
                         </div>
                     </div>
                     <div class="input-group form-group">
@@ -58,7 +58,7 @@
                         </div>
                         <input  type="number"  v-model="cliente.telefono"  class="form-control" placeholder="Ingrese Telefono" :class="{ 'is-invalid': submitted && $v.cliente.telefono.$error }" >
                         <div v-if="submitted && !$v.cliente.telefono.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.cliente.telefono.required">Telefono is required</span>
+                              <span v-if="!$v.cliente.telefono.required">El telefono del cliente es requerido</span>
                               <span v-if="!$v.cliente.telefono.maxLength">El Telefono no puede tener mas de 10 digitos</span>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         </div>
                         <input  type="email"  v-model="cliente.mail"  class="form-control" placeholder="Ingrese Mail" :class="{ 'is-invalid': submitted && $v.cliente.mail.$error }">
                         <div v-if="submitted && !$v.cliente.telefono.required.$error" class="invalid-feedback">
-                              <span v-if="!$v.cliente.mail.required">Mail is required</span>
+                              <span v-if="!$v.cliente.mail.required">El Mail del cliente es requerido</span>
                               <span v-if="!$v.cliente.mail.email">El Mail no tiene formato</span>
                         </div>
                     </div>

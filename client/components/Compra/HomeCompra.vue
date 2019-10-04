@@ -1,6 +1,6 @@
 <template>
   <div id="HomeCompra">
-    <div class="container">
+    <div class="container animated zoomIn">
       <br>
       <br>
       <div>

@@ -156,6 +156,7 @@ const rutas = new VueRouter({
             },
             {
               path:'/VerPresupuesto/:id',
+              name:'VerPresupuesto',
               component: VerPresupuesto
             },
             {
@@ -164,6 +165,7 @@ const rutas = new VueRouter({
             },
             {
               path:'/EditarReparacion/:id',
+              name:'EditarReparacion',
               component: EditarReparacion
             },
             {

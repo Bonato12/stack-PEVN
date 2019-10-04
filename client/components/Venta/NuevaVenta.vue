@@ -312,7 +312,7 @@ export default {
               }
           },
           textProducto(item) {
-            return `${item.modelo} - ${item.marca} - ${item.precio}`
+            return `ID${item.id_producto}-${item.modelo} - ${item.marca} - ${item.precio}`
           },
           textCliente(item){
             return `${item.dni} - ${item.nombre} - ${item.apellido}`
