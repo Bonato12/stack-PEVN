@@ -35,10 +35,9 @@
                 theme="default">
                 <template slot="table-row" slot-scope="props" >
                   <span v-if="props.column.field == 'opciones'">
-                    <button @click="verMas(props.row)" class="btn btn-info" style="width:150px;"  title="Ver Mas" >
-                        <i class="fas fa-clipboard-list"></i>
-                        Detalles
-                    </button>
+                    <router-link class="btn btn-warning" :to="/EditarReparacion/+props.row.id_reparacion" tag="button" title="Editar Reparacion">
+                          <i class="fas fa-edit fa-1x"></i>
+                    </router-link>
                   </span>
                 </template>
          </vue-good-table>

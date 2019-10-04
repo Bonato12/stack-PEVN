@@ -81,7 +81,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Estado</span>
                   </div>
-                  <select required class="form-control" v-model="estado" placeholder="Elige un Tipo Producto">
+                  <select required class="form-control" v-model="estado" placeholder="Elige un Tipo Producto" :disabled="guardado == true">
                     <option value=""  disabled selected>Elige un Tipo Producto</option>
                     <option  v-for="item in estadoP">{{ item.name }}</option>
                  </select>
@@ -107,19 +107,21 @@
 
 import axios from 'axios'
 import { imgData } from '../../assets/imagenPDF';
-import { alertSucessDelete} from '../../assets/sweetAlert.js';
+import { alertSucessDelete, alertEditSuccess} from '../../assets/sweetAlert.js';
 import moment from 'moment';
 
 export default {
   name: 'HomeVenta',
   created(){
     this.getPresupuesto();
+    
   },
   data () {
     return {
       idp: this.$route.params.id,
       showModal: false,
       presupuesto:'',
+      guardado: false,
       presupuestoProducto: '',
       estado: '',
       estadoP : [{name:"EN ESPERA"},
@@ -147,6 +149,7 @@ export default {
           console.log(error);
         });
     },
+ 
     eliminarPresupuesto(){
         var _this = this;        
         this.$swal({
@@ -177,15 +180,19 @@ export default {
         
         
     cambiarEstado(){
-      axios.put('http://localhost:3000/presupuesto/'+ this.idp,
-          {
-          estado: this.estado
-          }
-          ,
-          { headers: {
-            'Content-Type': 'application/json',
-          }
-      });
+        axios.put('http://localhost:3000/presupuesto/'+ this.idp,
+            {
+            estado: this.estado
+            }
+            ,
+            { headers: {
+              'Content-Type': 'application/json',
+            }
+        }).then(response=>{
+          alertEditSuccess();
+        }).catch(error=>{
+          console.log(error);
+        })
     }
 
 

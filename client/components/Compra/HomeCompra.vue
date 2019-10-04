@@ -18,7 +18,7 @@
               :search-options="{
                 enabled: true,
                 skipDiacritics: true,
-                placeholder: 'Buscar Producto',
+                placeholder: 'Buscar Compra',
               }"
               :pagination-options="{
                   enabled: true,

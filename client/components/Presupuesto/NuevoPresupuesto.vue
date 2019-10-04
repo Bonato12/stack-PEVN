@@ -17,12 +17,15 @@
                                 <div class="input-group-prepend" style="border-right: 5px solid white">
                                     <span class="input-group-text">Producto</span>
                                 </div>
-                                <model-list-select class="form-control" :list="producto"
+                                <model-list-select class="form-control is-invalid" :list="producto"
                                                    v-model="repuestoSelected"
                                                    option-value="id_producto"
                                                    :custom-text="codeAndNameAndDesc"
                                                    >
                                 </model-list-select>
+                                <div class="invalid-feedback">
+                                    <span style="color:white;">*El Producto es opcional</span>
+                              </div>
                             </div>
                             <div v-show="repuestoSelected.modelo">
                               <div class="row">
@@ -99,7 +102,7 @@
                                   <div class="input-group-prepend">
                                     <span class="input-group-text">Observaciones</span>
                                   </div>
-                                  <textarea required type="text" class="form-control" v-model="presupuesto.observacion" placeholder="Ingrese Descripcion"></textarea>
+                                  <textarea required type="text" class="form-control" v-model="presupuesto.observacion" placeholder="Ingrese Descripcion" :disabled="guardado == true"></textarea>
                               </div>
                               <div class="row">
                                 <div class="col">
@@ -109,7 +112,7 @@
                                              Precio Mano Obra
                                           </span>
                                       </div>
-                                      <input type="number" min="0"  v-model="precioManoObra"  class="form-control">
+                                      <input type="number" min="0"  v-model="precioManoObra"  class="form-control" :disabled="guardado == true">
                                   </div>
                                 </div>
                                 <div class="col">
@@ -135,7 +138,7 @@
                                           Volver
                                   </router-link>
                                   <div style="width:3px;"></div>
-                                  <button v-on:click="nuevoPresupuesto()" class="btn btn-guardar" title="Guardar Nuevo Repuesto">
+                                  <button v-on:click="nuevoPresupuesto()" class="btn btn-guardar" title="Guardar Nuevo Repuesto" :disabled="guardado == true">
                                     <i class="far fa-save fa-1x"></i>
                                           Guardar
                                   </button>
@@ -179,7 +182,8 @@ export default {
       precioTotal: 0,
       repuestoSelected: {},
       num: 0,
-      id_presupuesto:''
+      id_presupuesto:'',
+      guardado: false
 
 		}
   },
@@ -299,11 +303,16 @@ export default {
                               }).then(response=>{
                                 console.log(response.data)
                                 if (response.data == "OK"){
-                                  alert("exito")
+                                  alertSuccess();
+                                 // _this.$router.push('/HomeArreglo');
+                                     this.guardado = true;
                                 }else {
                                   alert("ERROR")
                                 }
                               });
+                          }else{
+                            this.guardado = true;
+                            alertSuccess();
                           }
                         }).catch(error=>{
                           console.log(error);
