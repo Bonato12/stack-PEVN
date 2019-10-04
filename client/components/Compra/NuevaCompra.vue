@@ -27,7 +27,7 @@
                                     <span class="input-group-text">Proveedor</span>
                                 </div>
                                 <model-list-select class="form-control" :list="proveedor"
-                                                   v-model="proveedorSelected"
+                                                   v-model="compra.proveedor"
                                                    option-value="id_proveedor"
                                                    :custom-text="textCliente"
                                                   >
@@ -259,13 +259,13 @@ export default {
                   this.errors = [];
                   if (this.Lista.length > 0){
                       if (!this.proveedorSelected){
-                          this.errors.push('El Proveedor no puede ser vacio');
+                          this.errors.push('EL PROVEEDOR NO PUEDE SER VACIO');
                       }
                       if (!this.precioTotal){
-                          this.errors.push('El PrecioTotal no puede ser vacio');
+                          this.errors.push('EL PRECIO TOTAL NO PUEDE SER VACIO');
                       }
                   }else {
-                      this.errors.push('Carrito de venta Vacio');
+                      this.errors.push('CARRITO DE COMPRA VACIO');
                   }
                   if (this.errors.length == 0){
                       this.compra.proveedor = this.proveedorSelected;
@@ -279,7 +279,9 @@ export default {
                               if (response.data == "OK"){
                                 console.log(response);
                                 alertSuccess();
-                                _this.venta = new Compra();
+                                _this.compra = new Compra();
+                                _this.compraProducto = new CompraProducto(),
+                                _this.precioTotal = 0;
                                 _this.Lista = [];
                               }
                             }).catch(error=>{
