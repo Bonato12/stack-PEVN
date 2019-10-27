@@ -1,15 +1,18 @@
-Aplicacion Final para Analista de Sistemas.
+Aplicacion Final para la carrera de Analista de Sistemas.
 Tecnologia Utilizadas:
 Vue.js Para Frontend.
 Node.js y Express.js Para Backend.
 PostgreSQL Para la Base de Datos Relacional.
 Firebase Para la Autentificaciones.
 
-<!--
+
 Capturas de Pantalla
 
 Login
 ![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/login.png)
+
+Home
+![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/home.png)
 
 Home Cliente
 ![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/homecliente.png)
@@ -17,12 +20,8 @@ Home Cliente
 Formulario
 ![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/formulario.png)
 
-Alert
-![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/sweetalert.png)
 
-Detalles
-![alt text](https://github.com/Bonato12/stack-PEVN/blob/master/client/assets/detalles.png)
--->
+
 
 ## Build Setup
 

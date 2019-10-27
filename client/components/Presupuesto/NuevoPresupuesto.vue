@@ -12,6 +12,14 @@
                      </h2>
                   </div>
                   <div class="card-body">
+                    <p v-if="errors.length">
+                    <ul  class="list-group" v-for="error in errors">
+                          <li class="alert alert-danger" style="width:780px; margin:0 auto;" role="alert">
+                            {{ error }}
+                          </li>
+                          <br>
+                      </ul>
+                    </p>
                     <form @submit.prevent="guardarLista()" style="margin: 0 auto; width:780px; margin-top:10px;">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend" style="border-right: 5px solid white">
@@ -183,7 +191,8 @@ export default {
       repuestoSelected: {},
       num: 0,
       id_presupuesto:'',
-      guardado: false
+      guardado: false,
+      errors: []
 
 		}
   },
@@ -304,10 +313,10 @@ export default {
                                 console.log(response.data)
                                 if (response.data == "OK"){
                                   alertSuccess();
-                                 // _this.$router.push('/HomeArreglo');
                                      this.guardado = true;
+                                     this.Lista = [];
                                 }else {
-                                  alert("ERROR")
+                                     this.errors.push("ERROR NO SE PUEDIERON GUARDAR LOS DATOS");
                                 }
                               });
                           }else{

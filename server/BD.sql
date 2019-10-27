@@ -43,11 +43,11 @@ CREATE TABLE producto(
 	id_producto SERIAL NOT NULL,
 	modelo VARCHAR(30) NOT NULL,
 	marca VARCHAR(30) NOT NULL,
-	descripcion VARCHAR(30) NOT NULL,
+	descripcion VARCHAR(200) NOT NULL,
 	tipo_producto VARCHAR(30) NOT NULL,
 	stock INTEGER NOT NULL,
 	precio INTEGER NOT NULL,
-	check(stock>=0),
+	CHECK(stock>=0),
 	CONSTRAINT pk_id_producto PRIMARY KEY(id_producto)
 );
 
@@ -139,7 +139,7 @@ CREATE  TABLE reparacion(
 );
 
 
-/* TRIGGER DE ACTUALIZAR STOCK DESPUES DE LA VENTA*/
+/* TRIGGER DE ACTUALIZAR STOCK*/
 
 /*TRIGGER 1 */
 
@@ -153,11 +153,25 @@ $funcemp$ LANGUAGE plpgsql;
 CREATE TRIGGER trigger_pagar_deuda AFTER INSERT ON venta_producto
 FOR each row execute procedure trigger_stock()
 
-/* TRIGGER 2 */
+/*TRIGGER 2 */
+
+
+CREATE OR REPLACE FUNCTION trigger_stock_presupuesto() RETURNS TRIGGER AS $funcemp$
+BEGIN
+		UPDATE producto SET stock = stock - new.cantidad WHERE id_producto = new.producto ;
+RETURN NEW;
+END;
+$funcemp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_stock_presupuesto AFTER INSERT ON presupuesto_producto
+FOR each row execute procedure trigger_stock_presupuesto()
+
+
+/* TRIGGER 3 */
 
 CREATE OR REPLACE FUNCTION trigger_eliminar_venta() RETURNS TRIGGER AS $funcemp$
 BEGIN
-		UPDATE producto SET stock = stock + OLD.cantidad WHERE id_producto = old.id_producto ;
+		UPDATE producto SET stock = stock + OLD.cantidad WHERE id_producto = old.id_producto;
 RETURN NEW;
 END;
 $funcemp$ LANGUAGE plpgsql;
@@ -165,17 +179,35 @@ $funcemp$ LANGUAGE plpgsql;
 CREATE TRIGGER trigger_eliminar_venta AFTER DELETE ON venta_producto
 FOR each row execute procedure trigger_eliminar_venta()
 
+
+
+
 /* TRIGGER DE ACTUALIZAR STOCK DESPUES DE LA COMPRA*/
 
 CREATE OR REPLACE FUNCTION trigger_compra_stock() RETURNS TRIGGER AS $funcemp$
 BEGIN
 		UPDATE producto SET stock = stock + new.cantidad WHERE id_producto = new.id_producto ;
+		UPDATE producto SET precio = new.precio_unitario WHERE id_producto = new.id_producto ;
+
 RETURN NEW;
 END;
 $funcemp$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trigger_stock_compra AFTER INSERT ON compra_producto
 FOR each row execute procedure trigger_compra_stock()
+
+
+CREATE OR REPLACE FUNCTION trigger_compra_delete_stock() RETURNS TRIGGER AS $funcemp$
+BEGIN
+		UPDATE producto SET stock = stock - OLD.cantidad WHERE id_producto = OLD.id_producto ;
+		UPDATE producto SET precio = OLD.precio_unitario WHERE id_producto = OLD.id_producto ;
+
+RETURN OLD;
+END;
+$funcemp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_stock_delete_compra AFTER DELETE ON compra_producto
+FOR each row execute procedure trigger_compra_delete_stock()
 
 
 /* TRIGGER DE ESTADOS DE ARREGLOS */
@@ -244,9 +276,34 @@ FOR EACH ROW EXECUTE PROCEDURE func_R();
 /* INSERTAR EL ROL Y EL USUARIO PARA PODER LOGUEARSE CORRECTAMENTE */
 
 INSERT INTO rol VALUES(DEFAULT,'ADMINISTRADOR');
-INSERT INTO usuario VALUES(DEFAULT,'vUprTUCcPshg7o4excvfTyTIa1j2','papita@gmail.com',123456,1)
+INSERT INTO rol VALUES(DEFAULT,'REPARADOR');
 
+INSERT INTO usuario VALUES(DEFAULT,'vUprTUCcPshg7o4excvfTyTIa1j2','papita@gmail.com',123456,1);
+INSERT INTO usuario VALUES(DEFAULT,'vA2jJdEQicayznaiWJ0ouH2opGu2','seba-bonato@hotmail.com',123456,1);
+INSERT INTO usuario VALUES(DEFAULT,'pds9O1LOaoaYhImGzxSqrXFGrTf2','sebabonato12@gmail.com',123456,1);
 
+INSERT INTO cliente VALUES(DEFAULT,39261832,'Sebastian','Bonato','Herrera',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261833,'Alexis','Santos','CDU',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261834,'German','Bonzi','Tala',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261835,'Walter','Bel','CDU',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261836,'Matias','Nuñez','San Jose',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261837,'Joaquin','Garin','Colon',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261838,'Juan','Ponichan','San Jose',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261839,'Lucas','Areguati','San Jose',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261840,'Pablo','Papes','CDU',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261841,'Ivan','Pianeti','CDU',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261842,'Ernesto','Ledesma','CDU',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261843,'Mateo','Rogatky','CDU',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261844,'Marcial','Sartori','La Roque',3442507780,'sebabonato12@gmail.com');
+INSERT INTO cliente VALUES(DEFAULT,39261845,'Matias','Koch','Colonia Elia',3442507780,'sebabonato12@gmail.com');
+
+INSERT INTO producto VALUES(DEFAULT,'J7','Samsung','Pantalla de 5,5, Procesador Exynos 7870 de 8 Nucleos de 1,7GHz, 2GB de RAM LPDDR3,16GB de Memoria Interna 13 Mpx de cámara trasera, 5 Mpx de cámara frontal, Android 6.0.1 Conectividad 4G/LTE','Celular',5,11500);
+INSERT INTO producto VALUES(DEFAULT,'Bateria J7','Samsung','Modelo: EB-BJ700BBC- Carga: 3000 mAh- Voltaje: 3.85 V','Repuesto',5,700);
+INSERT INTO producto VALUES(DEFAULT,'Pantalla Display J7','Samsung','AMOLED/Touch Tamaño de la pantalla 5.5 pulgadas','Repuesto',2,3999);
+INSERT INTO producto VALUES(DEFAULT,'Pin De Carga J7','Samsung','Pin de carga para modelos con 6mm entre patas','Repuesto',3,60);
+INSERT INTO producto VALUES(DEFAULT,'J7','Samsung','Pantalla de 5,5, Procesador Exynos 7870 de 8 Nucleos de 1,7GHz, 2GB de RAM LPDDR3,16GB de Memoria Interna 13 Mpx de cámara trasera, 5 Mpx de cámara frontal, Android 6.0.1 Conectividad 4G/LTE','Celular',5,11500);
+INSERT INTO producto VALUES(DEFAULT,'J7','Samsung','Pantalla de 5,5, Procesador Exynos 7870 de 8 Nucleos de 1,7GHz, 2GB de RAM LPDDR3,16GB de Memoria Interna 13 Mpx de cámara trasera, 5 Mpx de cámara frontal, Android 6.0.1 Conectividad 4G/LTE','Celular',5,11500);
+INSERT INTO producto VALUES(DEFAULT,'J7','Samsung','Pantalla de 5,5, Procesador Exynos 7870 de 8 Nucleos de 1,7GHz, 2GB de RAM LPDDR3,16GB de Memoria Interna 13 Mpx de cámara trasera, 5 Mpx de cámara frontal, Android 6.0.1 Conectividad 4G/LTE','Celular',5,11500);
 
 
 SELECT * FROM usuario;
@@ -264,3 +321,26 @@ and(arreglo.cliente=cliente.id_cliente)and(arreglo.producto=producto.id_producto
 
 SELECT * FROM presupuesto
 
+SELECT * FROM usuario;
+
+SELECT * FROM venta_producto;
+
+SELECT venta.id_venta FROM venta, venta_producto WHERE venta.id_venta = venta_producto.id_venta;
+
+
+CREATE OR REPLACE FUNCTION func_control() RETURNS TRIGGER AS $funcemp$
+DECLARE 
+BEGIN 
+	IF (SELECT venta.id_venta FROM venta, venta_producto WHERE new.id_venta = venta_producto.id_venta) THEN
+		DELETE FROM venta WHERE venta.id_venta = new.id_venta;
+	END IF;
+RETURN NEW;
+END; $funcemp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_delete AFTER INSERT ON venta
+FOR EACH ROW EXECUTE PROCEDURE func_control();
+
+5 NOT IN (SELECT venta.id_venta FROM venta, venta_producto WHERE venta.id_venta = venta_producto.id_venta) THEN
+
+
+select * from reparacion;

@@ -62,7 +62,6 @@
                 </div>
             </nav>
         <router-view>
-          <vue-snotify></vue-snotify>
         </router-view>
   </div>
 </template>
