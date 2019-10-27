@@ -10,8 +10,8 @@ module.exports = {
               port: 587,
               secure: false,
                 auth: {
-                    user: 'sebabonato12@gmail.com',
-                    pass: 'BOCAJUNIORS2000'
+                    user: 'XXXXXXXX',
+                    pass: 'XXXXXXXX'
                   }
             })
             var mailOptions = {
