@@ -156,8 +156,8 @@
 <script>
 import axios from 'axios'
 import Producto from '../../models/Producto';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
+//import * as jsPDF from 'jspdf';
+//import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete,alertWarningFK } from '../../assets/sweetAlert.js';
@@ -271,6 +271,7 @@ export default {
     },
 
     exportarPdf() {
+      /*
       var columnas = [{
           title: "MODELO",
           dataKey: "modelo"
@@ -307,6 +308,7 @@ export default {
         }
       });
       doc.save(now + '-productos.pdf');
+      */
     },
     exportarXls() {
       var fecha = new Date();

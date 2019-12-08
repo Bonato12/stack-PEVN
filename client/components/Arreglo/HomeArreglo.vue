@@ -84,8 +84,8 @@ import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete,alertError,alertWarningArregloFK } from '../../assets/sweetAlert.js';
 import TablaReparacion from '../Reparacion/HomeReparacion.vue'
 import moment from 'moment';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
+//import * as jsPDF from 'jspdf';
+//import 'jspdf-autotable';
 import XLSX from 'xlsx'
 
 export default {
@@ -193,6 +193,7 @@ export default {
       this.showModal = false;
     },
     exportarPdf(){
+      /*
           var columnas = [
             {title: "CLIENTE", dataKey:"cliente"},
             {title: "PRODUCTO", dataKey:"producto"},
@@ -214,6 +215,7 @@ export default {
                           }
                 });
           doc.save(now+'-arreglo.pdf');
+          */
         },
     exportarXls() {
       var fecha = new Date();

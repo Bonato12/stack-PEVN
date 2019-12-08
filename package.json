@@ -31,8 +31,6 @@
     "html-pdf": "^2.2.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
-    "jspdf": "^1.5.3",
-    "jspdf-autotable": "^3.1.1",
     "moment": "^2.24.0",
     "morgan": "~1.9.0",
     "nodemailer": "^5.1.1",
@@ -42,13 +40,9 @@
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",
     "vue-good-table": "^2.16.5",
-    "vue-json-excel": "^0.2.98",
-    "vue-json-to-excel": "0.0.8",
     "vue-router": "^3.0.6",
     "vue-search-select": "^2.8.3",
     "vue-select": "^2.6.4",
-    "vue-snotify": "^3.2.1",
-    "vue-spinner": "^1.0.3",
     "vue-sweetalert2": "^1.6.4",
     "vuejs-datepicker": "^1.6.2",
     "vuelidate": "^0.7.4",
@@ -74,8 +68,5 @@
     "vue-template-compiler": "^2.6.10",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.11.5"
-  },
-  "engines": {
-    "node": "10.x"
   }
 }

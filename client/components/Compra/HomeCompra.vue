@@ -139,8 +139,8 @@
 <script>
 
 import axios from 'axios'
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
+//import * as jsPDF from 'jspdf';
+//import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete } from '../../assets/sweetAlert.js';
@@ -233,6 +233,7 @@ export default {
 
     },
     exportarPdf(){
+      /*
           var columnas = [
             {title: "NOMBRE", dataKey:"nombre"},
             {title: "APELLIDO", dataKey:"apellido"},
@@ -253,6 +254,7 @@ export default {
           				}
                 });
           doc.save(now+'-compras.pdf');
+          */
         },
 
     exportarXls() {

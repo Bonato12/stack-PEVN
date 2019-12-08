@@ -66,8 +66,8 @@
 
 <script>
   import axios from 'axios'
-  import * as jsPDF from 'jspdf';
-  import 'jspdf-autotable';
+  //import * as jsPDF from 'jspdf';
+  //import 'jspdf-autotable';
   import XLSX from 'xlsx'
   import { imgData } from '../../assets/imagenPDF';
   import { alertSucessDelete,alertError,alertWarningArregloFK } from '../../assets/sweetAlert.js';
@@ -135,6 +135,7 @@
     },
 
     exportarPdf(){
+          /*
           var columnas = [
             {title: "CLIENTE", dataKey:"dni"},
             {title: "PRODUCTO", dataKey:"id_producto"},
@@ -156,6 +157,7 @@
           				}
                 });
           doc.save(now+'-reparacion.pdf');
+          */
         },
 
     exportarXls() {

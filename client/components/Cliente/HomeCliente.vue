@@ -116,8 +116,8 @@
 <script>
 
 import axios from 'axios'
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
+//import * as jsPDF from 'jspdf';
+//import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import Cliente from '../../models/Cliente';
 import { imgData } from '../../assets/imagenPDF';
@@ -213,6 +213,7 @@ export default {
             })
     },
     exportarPdf(){
+      /*
         var columnas = [
           {title: "DNI", dataKey:"dni"},
           {title: "NOMBRE", dataKey:"nombre"},
@@ -233,6 +234,7 @@ export default {
         				}
               });
         doc.save(now+'-clientes.pdf');
+        */
       },
     exportarXls() {
       var fecha = new Date();

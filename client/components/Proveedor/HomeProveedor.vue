@@ -162,8 +162,8 @@
 
 import axios from 'axios'
 import Proveedor from '../../models/Proveedor';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
+//import * as jsPDF from 'jspdf';
+//import 'jspdf-autotable';
 import XLSX from 'xlsx'
 import { imgData } from '../../assets/imagenPDF';
 import { alertSucessDelete, alertWarningFK } from '../../assets/sweetAlert.js';
@@ -253,6 +253,7 @@ export default {
         })
   },
   exportarPdf(){
+      /*
       var columnas = [
         {title: "DNI", dataKey:"dni"},
         {title: "NOMBRE", dataKey:"nombre"},
@@ -273,6 +274,7 @@ export default {
             }
         });
         doc.save(now+'-proveedores.pdf');
+        */
     },
     exportarXls() {
       var proveedores = XLSX.utils.json_to_sheet(this.datos)
