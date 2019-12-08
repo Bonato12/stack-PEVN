@@ -5,6 +5,8 @@ Node.js y Express.js Para Backend.
 PostgreSQL Para la Base de Datos Relacional.
 Firebase Para la Autentificaciones.
 
+Link en Heroku: https://telnovo10.herokuapp.com/#/Home
+
 
 Capturas de Pantalla
 
