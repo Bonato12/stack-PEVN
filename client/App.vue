@@ -27,7 +27,7 @@
                         <li class="nav-item">
                             <router-link class="item" :class="{ 'router-link-active': isActiveCompra }" tag="a" active-class="activo"   to="/HomeCompra">
                               <i class="fas fa-coins"></i>
-                              Compra
+                              Buy
                             </router-link>
                         </li>
                         <li class="nav-item">
